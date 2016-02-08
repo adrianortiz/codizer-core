@@ -1,0 +1,12 @@
+.error-val {
+  border: solid 2px $red-200 !important;
+}
+
+.msg-val {
+  width: auto;
+  height: auto;
+  margin: 6px 0 6px 10px;
+  font-size: 13px;
+  color: $red-200;
+  display: block;
+}

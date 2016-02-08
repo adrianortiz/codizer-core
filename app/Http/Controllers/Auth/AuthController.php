@@ -1,10 +1,10 @@
 <?php
 
-namespace CodizerCore\Http\Controllers\Auth;
+namespace App\Http\Controllers\Auth;
 
-use CodizerCore\User;
+use App\User;
 use Validator;
-use CodizerCore\Http\Controllers\Controller;
+use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
@@ -24,20 +24,13 @@ class AuthController extends Controller
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
     /**
-     * Where to redirect users after login / registration.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/home';
-
-    /**
      * Create a new authentication controller instance.
      *
      * @return void
      */
     public function __construct()
     {
-        $this->middleware('guest', ['except' => 'logout']);
+        $this->middleware('guest', ['except' => 'getLogout']);
     }
 
     /**
@@ -58,15 +51,58 @@ class AuthController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
+     * Recibir todos los datos del formulario
+     * return User::create(\HttpRequest::all());
+     *
      * @param  array  $data
      * @return User
      */
     protected function create(array $data)
     {
-        return User::create([
+        // Nuevo modelo de usuario sin persistir
+        $user = new User([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+
+        $user->role = 'user';
+        $user->save();
+
+        return $user;
     }
+
+
+    /**
+     * Get the path to the login route.
+     *
+     * @return string
+     */
+    public function loginPath()
+    {
+        return route('login');
+    }
+
+
+    /**
+     * Get the post register / login redirect path.
+     *
+     * @return string
+     */
+    public function redirectPath()
+    {
+        return route('panel');
+    }
+
+
+    /**
+     * Get the failed login message.
+     *
+     * @return string
+     */
+    protected function getFailedLoginMessage()
+    {
+        return trans('validation.login');
+    }
+
 }

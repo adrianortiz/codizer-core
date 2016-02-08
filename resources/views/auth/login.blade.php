@@ -1,66 +1,60 @@
-@extends('layouts.app')
+@extends('layout')
+
+@section('title', @trans('title.login'))
+
+@section('msn-boton')
+    <p>¿Aun sin cuenta? Registrate</p>
+    <a href="{{ route('register') }}" class="btn btn-login">@lang('auth.register_button')</a>
+@endsection
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Login</div>
-                <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
-                        {!! csrf_field() !!}
+<div id="container-panel-right">
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">E-Mail Address</label>
 
-                            <div class="col-md-6">
-                                <input type="email" class="form-control" name="email" value="{{ old('email') }}">
+    @include('partials/errors')
 
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
+    <div id="login-container">
+        <div class="login-left">
 
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">Password</label>
+        </div>
 
-                            <div class="col-md-6">
-                                <input type="password" class="form-control" name="password">
+        <div class="login-right">
 
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
+            {!! Form::open(['route' => ['login'], 'method' => 'POST']) !!}
+            <div class="form-group txt-center">
+                <h1>@lang('auth.login_title')</h1>
+            </div>
 
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember"> Remember Me
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
+            <div class="form-group">
+                <label for="email">@lang('validation.attributes.email')</label>
+                {!! Form::text('email', null, ['id' => 'email', 'class' => 'form-control', 'type' => 'email']) !!}
+            </div>
 
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="fa fa-btn fa-sign-in"></i>Login
-                                </button>
+            <div class="form-group">
+                <label for="password">@lang('validation.attributes.password')</label>
+                {!! Form::password('password', ['id' => 'password', 'class' => 'form-control']) !!}
+            </div>
 
-                                <a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot Your Password?</a>
-                            </div>
-                        </div>
-                    </form>
+            <div class="form-group">
+                <div class="checkbox">
+                        @lang('auth.remember') {!! Form::checkbox('remember') !!}
                 </div>
             </div>
+
+            <!--
+                <input type="checkbox" name="remember" class="checkbox">
+                <div class="switch"></div>
+                -->
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">
+                    @lang('auth.login_button')
+                </button>
+            </div>
+            {!! Form::close() !!}
         </div>
     </div>
 </div>
+
+
+
 @endsection

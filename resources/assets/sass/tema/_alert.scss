@@ -1,0 +1,132 @@
+.close-alert-codizer {
+  opacity: 1;
+  span {
+    opacity: 1;
+    color: $blanco;
+    padding: 0px 8px;
+    border-radius: 20px;
+    border: solid 2px $blanco;
+    margin-left: 10px;
+  }
+}
+
+.notificacion-text-fondo {
+  position: fixed;
+  z-index: 99999;
+  width: 100%;
+  height: 100%;
+  background: rgba(9,9,9,0.92);
+  @include box-sizing(border-box);
+
+    .notificacion-text {
+      margin: 0 auto;
+      padding: 0 auto;
+      margin-top: 20%;
+      width: 320px;
+      height: 200px;
+      text-align: center;
+
+      div {
+
+        p:nth-child(1) {
+          color: $azul-100;
+          text-transform: uppercase;
+          font-weight: bold;
+          font-size: 16px;
+          text-align: center;
+        }
+
+        p:nth-child(2) {
+          color: $blanco;
+          text-align: center;
+          margin-top: 20px;
+          margin-bottom: 40px;
+        }
+
+        #si, #no {
+          width: 96px;
+          height: 36px;
+          border-radius: $border-5;
+          border: solid 0 transparent;
+          font-weight: bold;
+        }
+
+        #si {
+          background-color: $azul-100;
+          color: $blanco;
+          margin-right: 10px;
+        }
+
+        #no {
+          background-color: $blanco;
+          color: $azul-100;
+          margin-left: 10px;
+        }
+      }
+    }
+}
+
+
+
+.alert {
+  position: fixed;
+  z-index: 99999;
+  top:5px;
+  right: 0px;
+  padding: 15px 26px;
+  margin-bottom: 20px;
+  border: 1px solid rgba(0,0,0,0.26);
+  border-radius: 0px !important;
+  @include transition(.3s ease);
+
+  &:target {
+    display: none;
+  }
+}
+
+.alert-title-danger {
+  width: 100%;
+  padding: 10px 6px;
+  margin-bottom: 15px;
+  color: $red-200;
+  border-bottom: 1px solid rgba(0,0,0,0.26);
+}
+
+.alert-danger {
+  color: $blanco;
+  background: rgba(35,35,35,0.91);
+  box-shadow: 0px 9px 15px 0px rgba(0,0,0,0.26);
+  border-left: solid 4px $red-200;
+}
+
+
+/*
+* Alert success
+*/
+
+.alert-title-success {
+  width: 100%;
+  padding: 10px 6px;
+  margin-bottom: 15px;
+  color: $azul-50;
+  border-bottom: 1px solid rgba(0,0,0,0.26);
+}
+
+.alert-success {
+  color: $blanco;
+  background: rgba(35, 35, 35, 0.91);
+  box-shadow: 0px 9px 15px 0px rgba(0, 0, 0, 0.26);
+  border-left: solid 4px $azul-50;
+}
+
+.input-base {
+  width: auto !important;
+  border: solid 2px transparent !important;
+  cursor: pointer;
+  @include transition(.3s ease);
+
+  &:focus {
+    background-color: $gris-100 !important;
+    border-bottom-color: transparent !important;
+  }
+}

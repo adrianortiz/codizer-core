@@ -1,0 +1,76 @@
+// Varibles
+$blanco: #FFFFFF;
+$gris-50: #FAFAFA;
+$gris-100: #F2F3F3;
+$gris-200: #F2F2F2;
+$gris-line: #272727;
+$gris-background: #1E1E1E;
+$gris-label: #9A9A9A;
+$gris-input: #2C2C2C;
+$gris-input-text: #999999;
+$gris-input-placeholder: #2C2C2C;
+
+$azul-50: #54C8FC;
+$azul-100: #1A91F2;
+$azul-400: #3F454C;
+
+$red-200: #FF435A;
+
+$border-5: 5px;
+
+$sombra-max: 5px 9px 13px 0px rgba(0,0,0,0.15);
+$sombra-min: 0px 1px 3px 0px rgba(0,0,0,0.15);
+
+
+// vARIABLES CORE
+$gris-150: #E6E6E6;
+
+$purple-05: #F5F1F8;
+$purple-10: #F6EDFB;
+
+
+
+
+// clase helper
+// Extend
+%transition-box{
+  // Cuando hay muchos valores que se repiten
+}
+
+body {
+  font-family: 'Open Sans', sans-serif !important;
+}
+
+
+
+
+
+// MIXINS
+
+@mixin prefixer($property, $value, $prefixes: webkit moz ms o) {
+  #{$property}: #{$value};
+  @each $prefix in $prefixes {
+    #{'-' + $prefix + '-' + $property}: #{$value};
+  }
+}
+
+@mixin transition($value: .3s ease) {
+  @include prefixer(transition, $value);
+}
+
+@mixin box-sizing($value: border-box) {
+  @include prefixer(box-sizing, $value);
+}
+
+@mixin centrarXY(){
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  @include prefixer(transform, translate(-50%, -50%));
+}
+/*
+    @include box-sizing(border-box);
+    @include transition(.3s ease);
+
+    @include prefixer(width, calc(100% - 214px));
+*/

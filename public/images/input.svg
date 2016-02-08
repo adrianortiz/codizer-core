@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" xmlns="http://www.w3.org/2000/svg" height="18px" width="30px" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 30 18"><!-- Generator: Sketch 3.3.2 (12043) - http://www.bohemiancoding.com/sketch -->
+ <title>Slice 1</title>
+ <desc>Created with Sketch.</desc>
+ <g id="Page-1" fill-rule="evenodd" sketch:type="MSPage" fill="none">
+  <g id="icon" stroke="#3F454C" transform="translate(1 1)" sketch:type="MSLayerGroup">
+   <rect id="Rectangle-62" rx="2" sketch:type="MSShapeGroup" height="8" width="28" y="4" x="0" stroke-width="2" fill="#fff"/>
+   <path id="Line" sketch:type="MSShapeGroup" stroke-linecap="square" d="m8.5 1.5h-4"/>
+   <path id="Line-Copy-10" sketch:type="MSShapeGroup" stroke-linecap="square" d="m8.5 14.5h-4"/>
+   <path id="Line" sketch:type="MSShapeGroup" stroke-linecap="square" d="m6.5 1.5v12"/>
+  </g>
+ </g>
+</svg>

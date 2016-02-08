@@ -1,0 +1,270 @@
+h1 {
+  font-size: 20px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.collection-list-new {
+  width: 230px;
+  height: 130px;
+  background-color: $blanco;
+  border-radius: $border-5;
+  border: solid 2px $gris-100;
+  padding: 4px;
+  margin: 10px 10px 10px 10px;
+  float:left;
+  @include box-sizing(border-box);
+  @include transition(.3s ease);
+  
+
+  &:hover {
+    background-color: $gris-200;
+    box-shadow: $sombra-max;
+  }
+
+  &:hover > .collection-new-icon a div {
+    transform: scale(1.5, 1.5);
+  }
+
+
+  .collection-new-text {
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    text-transform: uppercase;
+    padding-top: 38px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+    color: $azul-400;
+    border-right: 2px solid $azul-100;
+    float: left;
+  }
+
+  .collection-new-icon  {
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    padding: 13px 0px 0px 10px;
+    font-size: 12px;
+    color: $azul-400;
+    float: left;
+
+    a {
+      div {
+        width: 53px;
+        height: 53px;
+        margin-top: 20px;
+        margin-left: 20px;
+        border-radius: 50px;
+        background-color: $azul-100;
+        @include box-sizing(border-box);
+        @include transition(.3s ease);
+        background-image: url("../images/new.svg");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 60%;
+      }
+    }
+  }
+}
+
+.collection-list {
+  width: 230px;
+  height: 130px;
+  background-color: $blanco;
+  border-radius: $border-5;
+  border: solid 2px $gris-100;
+  padding: 4px;
+  margin: 10px 10px 10px 10px;
+  float:left;
+  @include box-sizing(border-box);
+  @include transition(.3s ease);
+
+  &:hover {
+    background-color: $gris-200;
+    box-shadow: $sombra-max;
+  }
+
+  .collection-menu {
+    width: 133px;
+    height: 112px;
+    background-color: $blanco;
+    padding: 5px;
+    box-shadow: $sombra-min;
+    position: relative;
+    top: -105px;
+    right: -105px;
+    opacity: 0;
+    @include box-sizing(border-box);
+    @include transition(.3s ease);
+
+      ul {
+        width: 100%;
+          li {
+            list-style: none;
+            text-align: center;
+            margin-left: -40px;
+
+              a {
+                display: block;
+                top: 0;
+                left: -50px;
+                width: 100%;
+                height: 50px;
+                padding-top: 18px;
+                font-weight: bold;
+                color: $azul-400;
+                @include transition(.3s ease);
+
+                &:hover {
+                  color: $azul-100;
+                  text-decoration: none;
+                }
+              }
+
+              &:nth-child(1) {
+                border-bottom: solid 1px $gris-200;
+              }
+          }
+      }
+  }
+
+  &:hover > .collection-menu {
+    opacity: 1;
+    transform: translateY(-5px);
+  }
+
+  .collection-litle {
+    width: 100%;
+    height: 45px;
+    overflow: hidden;
+    text-transform: uppercase;
+    padding: 13px 0px 0px 10px;
+    font-size: 12px;
+    font-weight: bold;
+    color: $azul-400;
+    border-bottom: 2px solid $azul-100;
+  }
+
+  .collection-info {
+    width: 100%;
+    height: 66px;
+    overflow: hidden;
+    padding: 13px 0px 0px 10px;
+    font-size: 12px;
+    color: $azul-400;
+  }
+}
+
+.head-fixed {
+  @include prefixer(width, calc(100% - 214px));
+  height: auto;
+  position: fixed;
+  top: 68px;
+  right: 0;
+  background-color: $blanco;
+  z-index: 99;
+}
+
+.head-menu {
+  width: 100%;
+  height: 63px;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-bottom: solid 2px $gris-100;
+
+
+
+  h1 {
+    float: left;
+
+    span:nth-child(2){
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+  }
+
+  .menu-global-collection {
+    float: right;
+    margin-bottom: 20px;
+  }
+}
+
+.icon-button {
+  margin-right: 10px;
+}
+
+
+/**
+  CONTENEDOR DE LOS FORMULARIOS BASE
+*/
+
+.container-form {
+  padding: 16px;
+  padding-bottom: 60px;
+  margin-bottom: 30px;
+  border: solid 2px $gris-200;
+  border-radius: 10px;
+
+  .container-form-titulo {
+    height: 60px;
+    width: 100%;
+    border-bottom: solid 2px $gris-200;
+    margin-bottom: 36px;
+
+    .container-form-icon {
+      width: 44px;
+      height: 44px;
+      border: solid 2px $gris-200;
+      border-radius: 100px;
+    }
+
+    div {
+      float: left;
+
+      h3 {
+        margin-top: 12px;
+        margin-left: 12px;
+        font-size: 18px;
+        font-weight: bold;
+      }
+    }
+
+  }
+}
+
+.min-top {
+  margin-top: 40px !important;
+}
+
+#container-form-icon-collection {
+  background-image: url("../images/icon-complements.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 50%;
+}
+
+.float-izq {
+  float: left;
+  margin-left: 10px;
+}
+
+.float-der {
+  float: right;
+  margin-right: 10px;
+}
+
+#new-register, #new-register-import {
+  float: left;
+  width: 49%;
+  margin-right: 1%;
+}
+
+@media (max-width: 1024px) {
+  #new-register, #new-register-import {
+    float: left;
+    width: 100%;
+    margin-right: 0;
+  }
+}

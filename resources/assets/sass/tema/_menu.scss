@@ -1,0 +1,123 @@
+.user-menu-top {
+  padding: 22px 23px 0 23px !important;
+  height: 68px;
+  color: $azul-400;
+  @include transition(.3s ease);
+
+  &:nth-child(1) {
+    border-right: solid 1px $gris-200;
+  }
+
+  &:hover {
+    color: $azul-100 !important;
+  }
+
+  .icon-button {
+    background-color: $gris-200;
+    padding: 2px 7px 8px 7px;
+    border-radius: 20px;
+  }
+}
+
+.admin-menu-top {
+  background-color: $blanco;
+  box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.15);;
+  height: 68px;
+}
+
+.admin-menu-left {
+  padding-top: 95px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 186px;
+  height: 100%;
+  min-height: 660px;
+  background-color: $gris-200;
+}
+
+.admin-menu-left-list {
+  padding-top: 95px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 214px;
+  height: 100%;
+  min-height: 660px;
+
+  ul {
+    list-style: none;
+    margin-left: -40px;
+    li {
+      margin-bottom: 9px;
+      p {
+        padding-left: 20px;
+        font-size: 12px;
+        color: $azul-400;
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+
+      a {
+        font-size: 14px;
+        color: $azul-400;
+
+        &:hover {
+          text-decoration: none;
+          color: $azul-100;
+        }
+
+        div {
+          padding: 7px 0 0 26px;
+          width: 198px;
+          height: 35px;
+          @include transition(.3s ease);
+
+          &:hover {
+            box-shadow: $sombra-max;
+            background-color: $blanco;
+          }
+        }
+      }
+    }
+  }
+}
+
+.admin-contanier-global {
+  padding-top: 95px;
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  @include prefixer(width, calc(100% - 214px));
+
+  height: 100%;
+  min-height: 660px;
+  background-color: $blanco;
+  overflow-y: auto;
+}
+
+.listar-data {
+  float: left;
+  width: 100%;
+  height: 40px;
+
+  .pagination {
+
+    li {
+      a, span {
+        border-radius: 50px;
+        margin-left: 15px;
+      }
+
+      a {
+        color: $azul-100;
+      }
+    }
+
+    .active span {
+      background-color: $azul-400;
+      border: solid 1px $azul-400;
+    }
+  }
+}

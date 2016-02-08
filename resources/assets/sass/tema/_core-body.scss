@@ -1,0 +1,104 @@
+html,body{
+  margin: 0;
+  height: 100%;
+}
+
+#main {
+  width: 214px;
+  background: $gris-50;
+}
+
+
+#content {
+  @include prefixer(width, calc(100% - 214px));
+  background-color: $blanco;
+  border-left: solid 1px $gris-150;
+}
+
+#main, #content {
+  height: 100%;
+  @include transition(.3s ease);
+  float: left;
+  overflow: auto;
+  @include box-sizing(border-box);
+}
+
+
+header {
+  width: 100%;
+  height: 82px;
+  @include box-sizing(border-box);
+  position: fixed;
+
+  #options-core {
+    width: 100%;
+    height: 40px;
+    background-color: $blanco;
+    border-bottom: solid 1px $gris-150;
+  }
+
+  #options-tools {
+    width: 100%;
+    height: 42px;
+    background-color: rgba($blanco, 0.9);
+    border-bottom: solid 1px $gris-150;
+  }
+}
+
+
+// Animaciones de entrada y salida de menú
+.hideShowMain {
+  width: 0px !important;
+}
+
+.hideShowContent {
+  width: 100% !important;
+}
+
+#article-content {
+  margin: 0 auto;
+  padding: 0 auto;
+  margin-top: 100px;
+  padding: 15px;
+  width: 98%;
+  background-color: deepskyblue;
+}
+
+
+
+/*
+MODIFICACIONES PARA EL MENÚ E INFO DE LA APP
+*/
+
+#main-header {
+  width: 214px;
+  height: 82px;
+  @include box-sizing(border-box);
+  position: fixed;
+
+  #main-header-app {
+    width: 100%;
+    height: 40px;
+    background-color: $purple-10;
+    border-bottom: solid 1px $gris-150;
+  }
+
+  #main-header-info-app {
+    width: 100%;
+    height: 42px;
+    background-color: $purple-05;
+    border-bottom: solid 1px $gris-150;
+
+    p {
+      text-align: center;
+    }
+  }
+}
+
+#main-header-options-app {
+  margin: 0 auto;
+  padding: 0 auto;
+  margin-top: 100px;
+  width: 96%;
+  background-color: greenyellow;
+}

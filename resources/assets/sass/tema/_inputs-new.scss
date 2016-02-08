@@ -1,0 +1,127 @@
+.container-builder {
+  background-color: $blanco;
+  padding: 12px;
+  border-radius: 10px;
+  width: 99%;
+  height: 98%;
+  @include box-sizing(border-box);
+  @include centrarXY();
+  background-color: rgba($gris-background, 0.5);
+
+  .builder-form-option {
+    float: left;
+    @include prefixer(height, calc(100% - 10px));
+    width: 289px;
+    padding-left: 15px;
+    padding-right: 15px;
+    @include box-sizing(border-box);
+    overflow: hidden;
+
+    label {
+      color: $gris-label;
+    }
+
+    input, select, textarea {
+      border: solid 2px $gris-input !important;
+      background-color: $gris-input !important;
+      color: $gris-input-text !important;
+      &:focus {
+        border-bottom: solid 2px $azul-100 !important;
+      }
+
+      &::-webkit-input-placeholder {
+        color: rgba($gris-input-placeholder, 0.4) !important;
+      }
+    }
+
+  }
+
+  .builder-form-preview {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+    @include prefixer(width, calc(100% - 289px));
+    @include box-sizing(border-box);
+    overflow: auto;
+    background-color: $blanco;
+
+    .form-group {
+      width: 300px;
+      height: auto;
+      position: absolute;
+      left: 55%;
+      top: 50%;
+      @include prefixer(transform, translate(-50%, -50%));
+
+      input {
+        border-bottom: solid 2px $azul-100 !important;
+      }
+    }
+  }
+
+}
+
+.title-input-txt {
+
+  display: block;
+  width: 100%;
+  height: 90px;
+  margin-bottom: 24px;
+  @include box-sizing(border-box);
+
+  h2 {
+    float: left;
+    text-transform: uppercase;
+    font-size: 17px;
+    margin-top: 30px;
+    margin-left: 14px;
+    color: $blanco;
+  }
+
+  span {
+    float: left;
+    margin-top: 12px;
+    width: 50px;
+    height: 50px;
+    background-image: url("../images/input-white.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 56%;
+    border: solid 2px $gris-200;
+    border-radius: 100px;
+
+  }
+}
+
+#nav {
+  padding: 34px;
+  border-bottom: solid 1px $gris-200;
+}
+
+.btn-input-txt {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 999;
+  @include prefixer(width, calc(100% - 320px));
+  margin-right: 10px;
+  margin-right: 10px;
+  height: 62px;
+  border-top: solid 1px $gris-200;
+
+  p {
+    margin-top: 20px;
+    float: left;
+  }
+
+  button {
+    margin-top: 15px;
+    margin-right: 20px;
+    float: right;
+  }
+}
+
+

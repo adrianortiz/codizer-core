@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" xmlns="http://www.w3.org/2000/svg" height="20px" width="18px" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 18 20"><!-- Generator: Sketch 3.3.2 (12043) - http://www.bohemiancoding.com/sketch -->
+ <title>Untitled 2</title>
+ <desc>Created with Sketch.</desc>
+ <g id="Page-1" fill-rule="evenodd" sketch:type="MSPage" fill="#fff">
+  <path id="Shape" sketch:type="MSShapeGroup" d="m17 20h-16c-0.6 0-1-0.4-1-1s0.4-1 1-1h16c0.6 0 1 0.4 1 1s-0.4 1-1 1z"/>
+  <path id="Shape" sketch:type="MSShapeGroup" d="m6 16h-4c-0.6 0-1-0.4-1-1v-4c0-0.3 0.1-0.5 0.3-0.7l10-10c0.4-0.4 1-0.4 1.4 0l4 4c0.4 0.4 0.4 1 0 1.4l-10 10c-0.2 0.2-0.4 0.3-0.7 0.3zm-3-2h2.6l9-9-2.6-2.6-9 9v2.6z"/>
+ </g>
+</svg>

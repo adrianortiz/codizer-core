@@ -11,11 +11,22 @@
 |
 */
 
-$factory->define(CodizerCore\User::class, function (Faker\Generator $faker) {
+$factory->define(App\User::class, function (Faker\Generator $faker) {
     return [
+        // User
         'name' => $faker->name,
         'email' => $faker->email,
         'password' => bcrypt(str_random(10)),
         'remember_token' => str_random(10),
+        'role' => $faker->randomElement(['user', 'admin'])
+    ];
+});
+
+$factory->define(App\Form::class, function (Faker\Generator $faker) {
+    return [
+        // Form
+        'name' => $faker->name,
+        'description' => $faker->email,
+        'user_id' => bcrypt(str_random(10)),
     ];
 });

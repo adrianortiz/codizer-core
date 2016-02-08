@@ -1,6 +1,6 @@
 <?php
 
-namespace CodizerCore\Events;
+namespace App\Events;
 
 abstract class Event
 {

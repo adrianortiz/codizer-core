@@ -1,0 +1,40 @@
+#modal-stats-extra {
+  padding-top: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+
+  position: absolute;
+  top: 0;
+  left: -320px;
+  width: 300px;
+  height: 100%;
+  background-color: $gris-background;
+  box-shadow: $sombra-max;
+  z-index: 99999;
+
+  .title-input-txt {
+    padding-left: 20px;
+  }
+
+  .form-config-statistic {
+    table {
+      thead {
+        color: $gris-label;
+        border-bottom: solid 3px $gris-input;
+      }
+      th, td {
+        color: $gris-input-text;
+        border-bottom: solid 2px $gris-input;
+      }
+    }
+  }
+}
+
+#close-modal-stats-extra {
+  margin-top: 20px;
+  width: 250px !important;
+}
+
+#loading-codizer {
+  @include centrarXY();
+}

@@ -1,0 +1,160 @@
+#container-panel-left {
+  padding-top: 14%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 442px;
+  height: 100%;
+  min-height: 660px;
+  background-image: url('../images/bg-login.png');
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+  background-color: rgba($azul-100, 0.6);
+
+  color: $blanco;
+  text-align: center;
+
+  h1 {
+    margin: 26px;
+    font-size: 24px;
+    text-transform: uppercase;
+    font-weight: 100;
+  }
+
+  .btn-login {
+    margin: 10px;
+    color: $azul-400;
+    width: 200px;
+    height: 36px;
+    background-color: $blanco;
+    border-radius: $border-5;
+    border: solid 2px $blanco;
+    @include transition(.3s ease);
+
+    &:hover {
+      background-color: transparent;
+      border: solid 2px $blanco;
+      color: $blanco;
+    }
+  }
+
+
+
+}
+
+#container-panel-right {
+  position: absolute;
+  top: 0;
+  right: 0;
+  @include prefixer(width, calc(100% - 442px));
+  height: 100%;
+  min-height: 660px;
+  background-color: $blanco;
+
+  /*
+    CONTENEDOR DEL FORMULARIO DE REGISTRO
+  */
+  #container-form-register {
+    padding: 10px;
+    width: 310px;
+    height: auto;
+    @include centrarXY();
+
+    input {
+      width: 100% !important;
+    }
+
+    h1 {
+      text-transform: uppercase;
+      text-decoration: overline;
+    }
+  }
+
+}
+
+.codizer {
+  position: absolute;
+  bottom: 5px;
+  left: 160px;
+  color: $blanco;
+  border: solid 2px transparent;
+  @include transition(.3s ease);
+
+  &:hover {
+    background-color: transparent;
+    border: solid 2px $blanco;
+    color: $blanco;
+  }
+}
+
+
+
+
+.alert {
+  position: fixed;
+  top:5px;
+  right: 0px;
+  padding: 15px 26px;
+  margin-bottom: 20px;
+  border: 1px solid rgba(0,0,0,0.26);
+  border-radius: 0px !important;
+}
+
+.alert-title {
+  width: 100%;
+  padding: 10px 6px;
+  margin-bottom: 15px;
+  color: #FF435A;
+  border-bottom: 1px solid rgba(0,0,0,0.26);
+}
+
+.alert-danger {
+  color: #ffffff;
+  background: rgba(35,35,35,0.91);
+  box-shadow: 0px 9px 15px 0px rgba(0,0,0,0.26);
+  border-left: solid 4px #FF435A;
+}
+
+#login-container {
+  @include centrarXY();
+  width: 564px;
+  height: 335px;
+  box-sizing: content-box !important;
+  border: solid 2px #F2F2F2;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+
+
+.login-left {
+  float: left;
+  width: 250px;
+  height: 100%;
+  background: url("../images/codizer-logo.png")no-repeat center / 60%;
+  background-color: #F2F2F2;
+}
+
+.login-right {
+  float: left;
+  width: 314px;
+  height: 100%;
+  background-color: #FFFFFF;
+
+  .form-group {
+    margin: auto !important;
+    padding: auto !important;
+    width: 225px !important;
+    margin-top: 18px !important;
+    margin-bottom: 18px !important;
+  }
+
+}
+
+.txt-center {
+
+  h1 {
+    text-align: center;
+  }
+}
+
