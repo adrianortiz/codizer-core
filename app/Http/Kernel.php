@@ -38,5 +38,10 @@ class Kernel extends HttpKernel
         // Si ya inicio sesión se usa...
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
 
+        /**
+         * Comprobar el role de usuario para el acceso
+         */
+        'role' => \App\Http\Middleware\RoleMiddleware::class,
+
     ];
 }

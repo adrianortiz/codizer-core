@@ -25,15 +25,6 @@ Route::get('lang/{lang}', function($lang) {
 ]);
 
 
-/*
- * Contacts - Agenda
- */
-Route::get('contacts', [
-    'uses'  => 'Contacts\ContactsController@index',
-    'as'    => 'contacts'
-]);
-
-
 
 Route::get('/', function() {
     // return view('auth.login');
@@ -80,6 +71,17 @@ Route::post('password/reset', 'Auth\PasswordController@postReset');
  */
 
 Route::group(['middleware' => 'auth'], function () {
+
+    // Para acceder tengo que tener el role "core"
+    Route::group(['middleware' => 'role'], function () {
+        /*
+         * Contacts - Agenda
+         */
+        Route::get('contacts', [
+            'uses'  => 'Contacts\ContactsController@index',
+            'as'    => 'contacts'
+        ]);
+    });
 
     /*
      * ADMIN
