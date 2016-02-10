@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Session;
 
 class RoleMiddleware
 {
@@ -19,8 +20,8 @@ class RoleMiddleware
             return $next($request);
         }
 
-
-        // return route('logout');
+        // Session::flash('flash_message', "Hola");
+        \Auth::logout();
         return \Redirect::back();
 
     }

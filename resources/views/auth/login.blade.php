@@ -3,15 +3,23 @@
 @section('title', @trans('title.login'))
 
 @section('msn-boton')
-    <p>¿Aun sin cuenta? Registrate</p>
+    <p>¿Aun sin cuenta? Registrate 123</p>
     <a href="{{ route('register') }}" class="btn btn-login">@lang('auth.register_button')</a>
 @endsection
+
+
 
 @section('content')
 <div id="container-panel-right">
 
 
     @include('partials/errors')
+
+    <!--
+    @if(Session::has('flash_message'))
+        {{Session::get('flash_message')}}
+    @endif
+    -->
 
     <div id="login-container">
         <div class="login-left">
