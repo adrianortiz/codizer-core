@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Perfil;
 use App\User;
+use App\UserHasPerfil;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -61,12 +63,11 @@ class AuthController extends Controller
     {
         // Nuevo modelo de usuario sin persistir
         $user = new User([
-            'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
 
-        $user->role = 'user';
+        $user->role = 'core';
         $user->save();
 
         return $user;
@@ -91,7 +92,11 @@ class AuthController extends Controller
      */
     public function redirectPath()
     {
-        return route('panel');
+        // Identificamos el id del usuario y buscamos su rut de perfil
+        $perfilId = UserHasPerfil::where('users_id',\Auth::user()->id)->value('perfil_id');
+        $perfilRoute = Perfil::where('id', $perfilId)->value('perfil_route');
+
+        return route('perfil', array('nick' => $perfilRoute));
     }
 
 

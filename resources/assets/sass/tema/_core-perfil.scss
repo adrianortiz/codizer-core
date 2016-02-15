@@ -1,0 +1,122 @@
+/**
+Contenido del menu lateral
+**/
+#main-header-options-app {
+  margin: 0 auto;
+  padding: 0 auto;
+  margin-top: 300px;
+  margin-bottom: 30px;
+  width: 96%;
+}
+
+#main-header-info-app-perfil {
+  width: 100%;
+  height: 230px;
+  background-color: $blanco;
+  border-bottom: solid 1px $gris-150;
+  overflow: auto;
+  @include transition(.3s ease);
+  p {
+    text-align: center;
+  }
+
+
+  #contact-photo-perfil {
+
+    padding: 14px;
+    padding-top: 30px;
+    width: 100%;
+    height: 155px;
+    overflow: hidden;
+
+    img {
+      float: left;
+      width: 120px;
+      height: 120px;
+      border-radius: 100px;
+      border: solid 1px $gris-100;
+    }
+
+    div {
+      float: right;
+      width: 45px;
+      height: 130px;
+      padding-top: 10px;
+
+      a {
+        padding-bottom: 30px;
+        float: left;
+        #chat-icon-perfil, #more-icon-perfil {
+          width: 36px;
+          height: 36px;
+          border-radius: 36px;
+          @include transition(.3s ease);
+
+          &:hover {
+            transform: scale(1.2, 1.2);
+          }
+        }
+
+        #more-icon-perfil {
+          padding-top: 9px;
+          background: $blanco;
+          box-shadow: $shadown-gray-min;
+          padding-left: 10px;
+          color: $gris-label;
+        }
+
+        #chat-icon-perfil {
+          padding-top: 7px;
+          background: $green-chat;
+          box-shadow: $shadown-green-min;
+          padding-left: 7px;
+          color: $blanco;
+        }
+      }
+    }
+  }
+}
+
+#info-contact-perfil {
+  margin-top: 14px;
+
+  a {
+    text-decoration: none;
+    div {
+      padding-left: 15px;
+      width: 214px;
+      height: 36px;
+      font-weight: 300;
+      font-size: 12px;
+      color: $black-core;
+      @include transition(.3s ease);
+
+      &:hover {
+        color: $azul-100;
+      }
+    }
+
+    #name-perfil {
+      height: 24px;
+      font-size: 15px;
+      font-weight: 400;
+      color: $azul-100;
+    }
+  }
+}
+
+
+
+#container-video {
+  width: 100%;
+  height: 450px;
+  overflow: hidden;
+  background-color: #F1EFED;
+  video {
+    text-align: center;
+  }
+}
+
+#article-content {
+  margin-top: 0px;
+}

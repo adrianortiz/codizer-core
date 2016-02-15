@@ -74,6 +74,16 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Para acceder tengo que tener el role "core"
     Route::group(['middleware' => 'role'], function () {
+
+        /**
+         *  Social - Perfil
+         */
+        Route::get('perfil/{nameFirstName}/', [
+            'uses'  => 'Admin\Social\PerfilController@index',
+            'as'    => 'perfil'
+        ]);
+
+
         /*
          * Contacts - Agenda
          */

@@ -10,6 +10,7 @@
             $('#hide-show-main').click(function() {
                 $('#main').toggleClass('hideShowMain');
                 $('#content').toggleClass('hideShowContent');
+                $('#main-header-info-app-perfil').toggleClass('hideShowMain');
             });
         },
 
