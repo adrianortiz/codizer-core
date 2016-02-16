@@ -5,5 +5,15 @@
 @import "librerias/normalize";
 // @import "librerias/ed-grid/ed-grid";
 
+
+// Core base teme
 @import "tema/core-body";
+
+//Form style
+@import "base/form";
+@import "tema/inputs-list";
+@import "tema/inputs-new";
+@import "tema/input-modal-statistic";
+
+// Perfil teme
 @import "tema/core-perfil";

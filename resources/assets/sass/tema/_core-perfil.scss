@@ -110,14 +110,154 @@ Contenido del menu lateral
 #container-video {
   margin-top: 30px;
   width: 100%;
-  height: 450px;
+  height: 430px;
   overflow: hidden;
   background-color: #F1EFED;
+  z-index: 10;
   video {
     text-align: center;
   }
 }
 
 #article-content {
-  margin-top: 0px;
+  margin-top: 40px;
 }
+
+
+
+
+
+/**
+ Menu posts
+**/
+
+.active {
+  background-color: $blanco !important;
+  color: $azul-100 !important;
+  border: solid 0px $blanco !important;
+}
+
+#menu-posts-perfil-container {
+  margin: 0 auto;
+  padding: 0 auto;
+  max-width: 815px;
+  height: auto;
+  margin-top: -20px;
+
+  #options-menu-post-container, #options-menu-seguir, #options-menu-amigo {
+    text-align: center;
+    float: left;
+    border-radius: 42px;
+    background-color: $blanco;
+    position: relative;
+    z-index: 2;
+    box-shadow: $sombra-max;
+    padding-top: 4px;
+
+    a, button {
+      color: $black-core;
+      @include transition(.3s ease);
+
+      &:hover {
+        color: $azul-100;
+      }
+    }
+
+  }
+
+  #options-menu-post-container {
+    width: 526px;
+    height: 42px;
+
+  }
+
+  #options-menu-seguir, #options-menu-amigo {
+    width: 108px;
+    height: 42px;
+    margin-left: 36px;
+
+    button {
+      background-color: $blanco;
+    }
+  }
+}
+
+/**
+  Form Create post container button
+**/
+#box-create-post {
+  width: 100%;
+  height: 40px;
+  margin-top: 2px;
+  background-color: $gris-100;
+  border-radius: 6px;
+
+  select {
+    width: auto !important;
+    color: $azul-100;
+    height: 28px !important;
+    background-color: $blanco !important;
+    border-bottom: solid 0 $gris-100 !important;
+    border-radius: 100% !important;
+    font-size: 12px;
+    margin-top: 4px;
+    margin-left: 5px;
+
+    &:focus {
+      border-bottom: solid 0px $gris-100 !important;
+    }
+  }
+
+  button {
+    margin-top: 5px;
+    margin-right: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    float: right;
+    font-size: 12px;
+    height: 28px;
+    border-radius: 28px;
+    border: solid 0px transparent;
+    color: $blanco;
+    background-color: $azul-100;
+
+    box-shadow: 0px 2px 4px 0px rgba(36,145,255,0.50);
+  }
+}
+
+/**
+  POSTS
+**/
+#posts-perfil {
+  margin: 0 auto;
+  padding: 0 auto;
+  max-width: 815px;
+  min-height: 200px;
+  background-color: $blanco;
+
+  // Contenido posts
+  #content-post-perfil-and-form {
+    float: left;
+    width: 526px;
+    min-height: 20px;
+
+    #form-posts-add {
+      textarea {
+        width: 100% !important;
+      }
+
+    }
+  }
+
+  // Contenido Tags
+  #content-candidate-and-tags {
+    float: right;
+    @include prefixer(width, calc(100% - 526px));
+    min-height: 20px;
+    background-color: #0000C2;
+  }
+
+}
+
+
+
