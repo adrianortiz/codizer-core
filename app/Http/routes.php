@@ -87,8 +87,8 @@ Route::group(['middleware' => 'auth'], function () {
         /*
          * Contacts - Agenda
          */
-        Route::get('contacts', [
-            'uses'  => 'Contacts\ContactsController@index',
+        Route::get('perfil/{nameFirstName}/contacts', [
+            'uses'  => 'Admin\Contacts\ContactsController@index',
             'as'    => 'contacts'
         ]);
     });

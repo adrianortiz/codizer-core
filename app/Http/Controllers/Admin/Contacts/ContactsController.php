@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Contacts;
+namespace App\Http\Controllers\Admin\Contacts;
 
+use App\Core;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -14,9 +15,17 @@ class ContactsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($nameFirstName)
     {
-        return view('admin.contacts');
+        Core::isRouteValid($nameFirstName);
+
+        $perfil = Core::getPerfil($nameFirstName);
+        $contacto = Core::getContact($perfil);
+
+        $userPerfil = Core::getUserPerfil();
+        $userContacto = Core::getUserContact();
+
+        return view('admin.contacts.contacts', compact('perfil', 'contacto', 'userPerfil', 'userContacto'));
     }
 
     /**

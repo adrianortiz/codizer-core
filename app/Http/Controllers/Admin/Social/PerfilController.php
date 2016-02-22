@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Social;
 
 use App\Contacto;
+use App\Core;
 use App\Perfil;
 use App\User;
 use App\UserHasPerfil;
@@ -20,23 +21,15 @@ class PerfilController extends Controller
      */
     public function index($nameFirstName)
     {
+        Core::isRouteValid($nameFirstName);
 
-        $existeRuta = Perfil::where('perfil_route', $nameFirstName)->count();
+        $perfil = Core::getPerfil($nameFirstName);
+        $contacto = Core::getContact($perfil);
 
-        if (!$existeRuta == 1) {
-            abort(404);
-        }
+        $userPerfil = Core::getUserPerfil();
+        $userContacto = Core::getUserContact();
 
-        $perfil = Perfil::where('perfil_route', $nameFirstName)->get();
-        $userHasPerfil = UserHasPerfil::where('perfil_id', $perfil[0]->id)->get();
-        $contacto = Contacto::where('id', $userHasPerfil[0]->users_id)->get();
-
-        $userContacto = Contacto::where('id', \Auth::user()->id)->get();
-
-        // dd($ruta->toArray());
-        // dd($ruta[0]->perfil_route);
-        return view('admin.social.perfil', compact('userContacto', 'perfil', 'contacto'));
-
+        return view('admin.social.perfil', compact('perfil', 'contacto', 'userPerfil', 'userContacto'));
     }
 
     /**
