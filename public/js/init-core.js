@@ -1,14 +1,5 @@
 /** Created by Ortiz on 13/07/15. */
 
-function cambiosUI() {
-    var articleContent = $('#article-content').width();
-    // $('.left-content-list').css('width', articleContent / 3);
-    $('.left-content-list').css('height', $( document ).height() - 81);
-
-    // $('.right-content-list').css('width', (articleContent / 3) * 2);
-    $('.right-content-list').css('height', $( document ).height() - 81);
-}
-
 (function($){
 
     var App = { init: function() {
@@ -34,7 +25,26 @@ function cambiosUI() {
         },
 
         SetSizeLists: function() {
-            $( window ).resize(function() { cambiosUI(); });
+            $( window ).resize(function() {
+                var articleContent = $('#article-content').width();
+                // $('.left-content-list').css('width', articleContent / 3);
+                $('.left-content-list').css('height', $( document ).height() - 81);
+
+                // $('.right-content-list').css('width', (articleContent / 3) * 2);
+                $('.right-content-list').css('height', $( document ).height() - 81);
+
+                if ( $( document ).width() <= 1050) {
+                    $('#main').addClass('hideShowMain');
+                    $('#content').addClass('hideShowContent');
+                    $('header').addClass('hideShowContent');
+                    $('#main-header-info-app-perfil').addClass('hideShowMain');
+                } else {
+                    $('#main').removeClass('hideShowMain');
+                    $('#content').removeClass('hideShowContent');
+                    $('header').removeClass('hideShowContent');
+                    $('#main-header-info-app-perfil').removeClass('hideShowMain');
+                }
+            });
         }
     };
 
