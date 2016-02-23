@@ -17,6 +17,17 @@
 
 <body>
 
+<div class="core-search-container">
+    <div class="core-search">
+        <input class="input-dark" type="text" name="searh" placeholder="Buscar">
+        <button>OK</button>
+    </div>
+    <div class="core-search-suggestions">
+
+    </div>
+</div>
+
+
 <section id="main">
 
     <div id="main-header">
