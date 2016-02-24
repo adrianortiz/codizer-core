@@ -41,6 +41,9 @@ html,body{
 .tool-margin-left-button {
   margin-top: 15px;
   margin-left: 10px;
+  &:focus {
+    outline: none;
+  }
 }
 
 #img-user-admin {

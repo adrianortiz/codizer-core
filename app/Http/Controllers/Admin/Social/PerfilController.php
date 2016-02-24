@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers\Admin\Social;
 
-use App\Contacto;
 use App\Core;
-use App\Perfil;
 use App\User;
-use App\UserHasPerfil;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;

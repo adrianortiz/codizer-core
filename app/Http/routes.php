@@ -91,6 +91,12 @@ Route::group(['middleware' => 'auth'], function () {
             'uses'  => 'Admin\Contacts\ContactsController@index',
             'as'    => 'contacts'
         ]);
+
+
+        Route::get('search-global/', [
+            'uses'  => 'Admin\Search\SearchController@searchGlobal',
+            'as'    => 'core.searchGlobal'
+        ]);
     });
 
     /*

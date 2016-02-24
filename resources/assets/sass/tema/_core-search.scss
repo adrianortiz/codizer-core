@@ -1,23 +1,60 @@
-.input-dark {
-  width: 600px !important;
-  background-color: rgba($gris-background, 0.1) !important;
+#btn-search-ui, #btn-global-search, #btn-close-modal-search {
+  &:focus { outline:none; }
+  &:active { outline: none }
+}
+
+#btn-search-ui {
+  width: 546px !important;
+  background-color: $gris-250 !important;
   border: solid 0 !important;
-  border-radius: 6px;
+  border-radius: 8px;
   padding: 5px;
   padding-left: 16px;
 
-  &:focus {
-    border: solid 0 !important;
+  height: 36px;
+  margin: 0 5px;
+}
+
+#btn-close-modal-search {
+  float: right;
+  width: 36px;
+  height: 36px;
+  background-color: $blanco;
+  border-radius: 36px;
+  margin-top: -36px;
+  margin-right: 10px;
+  border: solid 1px $gris-300;
+  color: $gris-300;
+  @include transition(.3s ease);
+
+  &:hover {
+    border: solid 1px $black-core;
+    color: $black-core;
   }
 }
 
+#btn-global-search {
+  width: 82px;
+  height: 36px;
+  padding: 0;
+  background-color: #979797;
+  border: solid 0;
+  border-radius: 8px;
+  color: $blanco;
+
+  &:hover { background-color: $morado; }
+  &:focus { background-color: $morado; }
+  @include transition(.3s ease);
+}
+
 .core-search-container {
+  display: none;
   width: 100%;
   height: 100%;
   position: absolute;
   top: 0;
   left: 0;
-  background-color: rgba($gris-background, 0.8);
+  background-color: rgba(#000, 0.8);
   z-index: 1000;
 
   .core-search {
@@ -25,8 +62,6 @@
     height: 54px;
     background-color: #FAFAFA;
     position: fixed;
-
-    animation: search-slide-in 0.3s;
 
     text-align: center;
     @include box-sizing(border-box);
@@ -36,18 +71,38 @@
   .core-search-suggestions {
     margin: 0 auto;
     padding: 0 auto;
-    width: 70%;
-    height: 400px;
+    width: 674px;
+    height: 322px;
+    overflow: auto;
     background-color: $blanco;
     margin-top: 54px;
     border-radius: 0 0 10px 10px;
-
-    transform-origin: center top;
-    animation: suggestions-3d-rotation-in 0.5s 0.3s;
-    animation-fill-mode: backwards;
-
     box-shadow: $sombra-max;
+    @include transition(.3s ease);
+
   }
+}
+
+.search-ui-in {
+  animation: search-slide-in 0.3s;
+}
+
+.search-result-ui-in {
+  transform-origin: center top;
+  animation: suggestions-3d-rotation-in 0.5s 0.3s;
+  animation-fill-mode: backwards;
+}
+
+
+.search-ui-out {
+  animation: search-slide-out 0.3s;
+  animation-fill-mode: backwards;
+}
+
+.search-result-ui-out {
+  transform-origin: center top;
+  animation: suggestions-3d-rotation-out 0.5s 0.3s;
+  animation-fill-mode: backwards;
 }
 
 @keyframes search-slide-in {
@@ -66,4 +121,125 @@
   100% {
     transform: perspective(1000px) translateY(0);
   }
+}
+
+@keyframes search-slide-out {
+  0% {
+    transform: translateY(0);
+
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes suggestions-3d-rotation-out {
+  0% {
+    transform: perspective(1000px) translateY(0);
+  }
+  100% {
+    transform: perspective(1000px) rotateX(-90deg);
+  }
+}
+
+#search-suggestions-a {
+  width: 490px;
+  height: auto;
+  border-right: solid 1px $gris-250;
+  float: left;
+  margin-top: 20px;
+  padding: 0 30px;
+
+  h3 {
+    font-size: 18px;
+    margin-top: 10px;
+  }
+
+  #container-store-suggestions,
+  #container-user-suggestions,
+  #container-product-suggestions {
+    margin-bottom: 20px;
+  }
+}
+
+#search-suggestions-b {
+  width: 184px;
+  height: auto;
+  float: left;
+  text-align: center;
+
+  h3 {
+    margin-top: 36px;
+    font-size: 18px;
+  }
+
+  a {
+    padding: 15px 30px;
+    margin-top: 24px;
+    display: inline-block;
+    font-size: 14px;
+    width: 100%;
+    text-decoration: none;
+    color: $black-core;
+
+    &:hover {
+      background-color: $gris-50;
+    }
+  }
+}
+
+.suggestion {
+  width: 100%;
+  height: 60px;
+  border-bottom: solid 1px $gris-250;
+
+  a {
+    color: $black-core;
+    @include transition(.3s ease);
+    &:hover {
+      color: $morado;
+    }
+
+    img {
+      width: 42px;
+      height: 42px;
+      border-radius: 42px;
+      border: solid 1px $gris-200;
+      float: left;
+      margin-top: 7px;
+      margin-right: 10px;
+    }
+
+    div {
+      width: auto;
+      height: auto;
+      float: left;
+
+      h4 {
+        font-size: 14px;
+        margin-top: 16px;
+        margin-bottom: 2px;
+      }
+      h5 {
+        font-size: 10px;
+        margin-top: 2px;
+        span {
+          color: $red-200;
+        }
+      }
+    }
+
+  }
+
+}
+
+.btn-suggestions-go {
+  float: right;
+  padding: 6px 26px;
+  border-radius: 16px;
+  background-color: $morado;
+  font-size: 12px;
+  color: $blanco !important;
+  text-decoration: none !important;
+  margin-top: 17px;
 }
