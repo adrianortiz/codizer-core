@@ -26,9 +26,7 @@ class Search
             ->join('contacto', 'users.id', '=', 'contacto.id')
             ->join('users_has_perfil', 'users.id', '=', 'users_has_perfil.users_id')
             ->join('perfil', 'users_has_perfil.perfil_id', '=', 'perfil.id')
-            ->where('contacto.nombre', 'LIKE', '%'.$searh.'%')
-            ->orwhere('contacto.ap_paterno', 'LIKE', '%'.$searh.'%')
-            ->orwhere('contacto.ap_materno', 'LIKE', '%'.$searh.'%')
+            ->where(DB::raw('concat(nombre, " ", ap_paterno, " ", ap_materno)'), 'LIKE', '%'.$searh.'%')
             ->select('contacto.*', 'perfil.perfil_route')
             ->get();
     }
