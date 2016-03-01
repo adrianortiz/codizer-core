@@ -11,6 +11,8 @@ class SearchController extends Controller
 {
 
     /**
+     * Busqueda global para usuarios, productos y tiendas
+     *
      * @param $searh
      */
     public function searchGlobal(Request $request) {
@@ -18,6 +20,7 @@ class SearchController extends Controller
         $users = Search::searchGlobal($request->input('searh-global'));
         $message = "Great search ;)";
 
+        // Petición AJAX
         if ($request->ajax()) {
             return response()->json([
                 'message' => $message,
@@ -25,7 +28,8 @@ class SearchController extends Controller
             ]);
         }
 
-        return "Ups! :(";
+        // Petición normal
+        return $users;
 
     }
 

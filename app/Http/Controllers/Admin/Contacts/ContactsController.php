@@ -22,8 +22,10 @@ class ContactsController extends Controller
         $perfil = Core::getPerfil($nameFirstName);
         $contacto = Core::getContact($perfil);
 
+        // User son los datos del usuario Logueado
         $userPerfil = Core::getUserPerfil();
         $userContacto = Core::getUserContact();
+
 
         return view('admin.contacts.contacts', compact('perfil', 'contacto', 'userPerfil', 'userContacto'));
     }

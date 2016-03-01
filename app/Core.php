@@ -49,14 +49,17 @@ class Core
     }
 
 
+    /**
+     * Getter para obtener el perfil de un usuario logueado
+     * @return mixed
+     */
     static function  getUserPerfil() {
         $userHasPerfil = UserHasPerfil::where('users_id', \Auth::user()->id)->get();
         return Perfil::where('id', $userHasPerfil[0]->perfil_id)->get();
     }
 
     /**
-     * Getter para obtener los datos de mi cuenta
-     *
+     * Getter para obtener los datos de un usuario logueado
      * @return mixed
      */
     static function getUserContact() {
