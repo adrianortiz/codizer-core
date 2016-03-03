@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers\Admin\Social;
 
-use App\Core;
-use App\User;
-use Illuminate\Http\Request;
-
+use App\Facades\Core;
 use App\Http\Requests;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class PerfilController extends Controller

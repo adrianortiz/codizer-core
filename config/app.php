@@ -151,6 +151,10 @@ return [
 
         Collective\Html\HtmlServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+
+        // Provider de CoreGeneratorServiceProvider
+        App\Providers\CoreServiceProvider::class,
     ],
 
     /*
@@ -207,6 +211,9 @@ return [
         'Form'      => Collective\Html\FormFacade::class,
         'Html'      => Collective\Html\HtmlFacade::class,
         'Excel'     => Maatwebsite\Excel\Facades\Excel::class,
+
+        // Facade de CoreGenerator
+        'Core'     => App\Facades\Core::class,
 
     ],
 

@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Search;
 
-use App\Search;
-
+use App\Facades\Core;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -17,7 +16,7 @@ class SearchController extends Controller
      */
     public function searchGlobal(Request $request) {
 
-        $users = Search::searchGlobal($request->input('searh-global'));
+        $users = Core::searchGlobal($request->input('searh-global'));
         $message = "Great search ;)";
 
         // Petición AJAX

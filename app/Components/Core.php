@@ -2,14 +2,16 @@
 /**
  * Created by PhpStorm.
  * User: Codizer
- * Date: 2/22/16
- * Time: 6:00 AM
+ * Date: 3/3/16
+ * Time: 9:53 AM
  */
 
-namespace App;
+namespace App\Components;
 
-// dd($ruta->toArray());
-// dd($ruta[0]->perfil_route);
+use App\Perfil;
+use App\Contacto;
+use App\UserHasPerfil;
+use Illuminate\Support\Facades\DB;
 
 class Core
 {
@@ -20,7 +22,8 @@ class Core
      * @param $nameFirstName
      * @return mixed
      */
-    static  function isRouteValid($nameFirstName) {
+    public function isRouteValid($nameFirstName)
+    {
         $existeRuta = Perfil::where('perfil_route', $nameFirstName)->count();
         if (!$existeRuta == 1) {
             abort(404);
@@ -33,7 +36,8 @@ class Core
      * @param $nameFirstName
      * @return mixed
      */
-    static function getPerfil($nameFirstName) {
+    public function getPerfil($nameFirstName)
+    {
         return Perfil::where('perfil_route', $nameFirstName)->get();
     }
 
@@ -43,17 +47,18 @@ class Core
      * @param $perfil
      * @return mixed
      */
-    static function getContact($perfil) {
+    public function getContact($perfil)
+    {
         $userHasPerfil = UserHasPerfil::where('perfil_id', $perfil[0]->id)->get();
         return Contacto::where('id', $userHasPerfil[0]->users_id)->get();
     }
-
 
     /**
      * Getter para obtener el perfil de un usuario logueado
      * @return mixed
      */
-    static function  getUserPerfil() {
+    public function  getUserPerfil()
+    {
         $userHasPerfil = UserHasPerfil::where('users_id', \Auth::user()->id)->get();
         return Perfil::where('id', $userHasPerfil[0]->perfil_id)->get();
     }
@@ -62,9 +67,27 @@ class Core
      * Getter para obtener los datos de un usuario logueado
      * @return mixed
      */
-    static function getUserContact() {
+    public function getUserContact()
+    {
         return Contacto::where('id', \Auth::user()->id)->get();
     }
 
+    /**
+     * Get all users, profiles and contacts
+     * Where the name or last-name is
+     * equals to $searh
+     *
+     * @param $searh String
+     * @return mixed
+     */
+    public function searchGlobal($searh) {
+        return DB::table('users')
+            ->join('contacto', 'users.id', '=', 'contacto.id')
+            ->join('users_has_perfil', 'users.id', '=', 'users_has_perfil.users_id')
+            ->join('perfil', 'users_has_perfil.perfil_id', '=', 'perfil.id')
+            ->where(DB::raw('concat(nombre, " ", ap_paterno, " ", ap_materno)'), 'LIKE', '%'.$searh.'%')
+            ->select('contacto.*', 'perfil.perfil_route')
+            ->get();
+    }
 
 }

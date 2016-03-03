@@ -11,8 +11,6 @@
 |
 */
 
-
-
 /*
  * Ruta que captura la petición de lenguaje
  * para  asignar el idioma en la sesión

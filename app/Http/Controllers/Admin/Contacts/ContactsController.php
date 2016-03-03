@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\Admin\Contacts;
 
-use App\Core;
-use Illuminate\Http\Request;
-
+use App\Facades\Core;
 use App\Http\Requests;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class ContactsController extends Controller
@@ -25,7 +24,6 @@ class ContactsController extends Controller
         // User son los datos del usuario Logueado
         $userPerfil = Core::getUserPerfil();
         $userContacto = Core::getUserContact();
-
 
         return view('admin.contacts.contacts', compact('perfil', 'contacto', 'userPerfil', 'userContacto'));
     }
