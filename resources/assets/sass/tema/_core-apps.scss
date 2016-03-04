@@ -1,0 +1,64 @@
+.core-apps-background-a {
+  display: none;
+  width: 100%;
+  @include prefixer(height, calc(100% - 40px));
+  position: absolute;
+
+  left: 0;
+  bottom: 0;
+  background-color: $blanco;
+  z-index: 100;
+}
+
+.core-apps-container {
+  display: none;
+  width: 60%;
+  @include prefixer(height, calc(100% - 45px));
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 101;
+  padding-top: 60px;
+  @include centrarXY();
+  @include prefixer(transform, translate(-50%, -47%));
+  text-align: center;
+  overflow: auto;
+}
+
+// Format apps
+.app-option {
+  text-align: center;
+  display: inline-block;
+  width: 130px;
+  height: 186px;
+  margin: 10px 40px;
+
+  .app-icon {
+    margin: 0 auto;
+    width: 110px;
+    height: 110px;
+    border-radius: 115px;
+    border: solid 1px $gris-300;
+    margin-bottom: 20px;
+    @include transition(.3s ease);
+  }
+
+  a {
+    margin-top: 20px;
+    text-align: center;
+    color: $black-core;
+    text-decoration: none;
+    @include transition(.3s ease);
+  }
+
+  &:hover {
+    .app-icon {
+      border: solid 1px $morado;
+    }
+
+    a {
+      color: $morado;
+    }
+  }
+}
+

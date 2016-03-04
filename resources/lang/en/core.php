@@ -12,7 +12,7 @@ return [
     */
 
     'codizer'           => 'Codizer',
-    'version'           => 'Core [0.05]',
+    'version'           => 'Core [0.07]',
 
     'login'             => 'Login',
     'register'          => 'Register',

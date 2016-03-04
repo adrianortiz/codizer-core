@@ -130,6 +130,9 @@ header {
     height: 40px;
     background-color: $blanco;
     border-bottom: solid 1px $gris-150;
+    nav {
+      z-index: 110;
+    }
   }
 
   #options-tools {
@@ -138,6 +141,7 @@ header {
     height: 42px;
     background-color: rgba($blanco, 0.9);
     border-bottom: solid 1px $gris-150;
+    z-index: 30;
   }
 }
 
