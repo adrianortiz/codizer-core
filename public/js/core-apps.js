@@ -1,12 +1,14 @@
 /** Created by Ortiz on 04/03/16. */
 
 var appsControl = 0;
-
+var nameApp;
 function showModalAppsUI() {
     $('.core-apps-background-a').fadeIn(300);
     $('.core-apps-container').fadeIn(300);
     $('#main-header-app').css('color', '#FFF');
     $('#main-header-app').css('background', '#7B52FB');
+    nameApp = $('#main-header-app div').html();
+    $('#main-header-app div').html("Aplicaciones <span class='fa fa-angle-down fa-lg' style='margin-top: 5px;'></span>");
     $('#main-header-app div span').addClass('fa-rotate-180');
     appsControl = 1;
 }
@@ -16,6 +18,7 @@ function hideModalAppsUI() {
     $('.core-apps-container').fadeOut(300);
     $('#main-header-app').css('color', '#4A4A4A');
     $('#main-header-app').css('background', '#FAFAFA');
+    $('#main-header-app div').html(nameApp);
     $('#main-header-app div span').removeClass('fa-rotate-180');
     appsControl = 0;
 }
