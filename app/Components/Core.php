@@ -1,6 +1,5 @@
 <?php
 /**
- * Created by PhpStorm.
  * User: Codizer
  * Date: 3/3/16
  * Time: 9:53 AM

@@ -1,8 +1,8 @@
 <?php
 /**
  * User: Codizer
- * Date: 3/3/16
- * Time: 10:06 AM
+ * Date: 3/4/16
+ * Time: 1:03 PM
  */
 
 namespace App\Facades;
@@ -10,16 +10,15 @@ namespace App\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-class Core extends Facade
+class Data extends Facade
 {
     /**
      * Devuelve una instancia de la
-     * clase Core (Components)
-     *
+     * clase Data (Components)
      * @return string
      */
     protected static function getFacadeAccessor()
     {
-        return 'core';
+        return 'data';
     }
 }
