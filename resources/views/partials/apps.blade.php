@@ -3,8 +3,10 @@
 <div class="core-apps-container">
     <a href="#">
         <div class="app-option">
-            <div class="app-icon"></div>
-            <a href="#">Name App</a>
+            <div class="app-icon">
+                <img src="{{asset('/media/apps/contacts.svg')}}" />
+            </div>
+            <a href="#">Contacts</a>
         </div>
     </a>
     <a href="#">

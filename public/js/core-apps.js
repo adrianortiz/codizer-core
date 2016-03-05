@@ -40,7 +40,8 @@ function logicModalAppUI() {
             });
 
             var ctrlDown = false;
-            var ctrlKey = 17, vKey = 86, cKey = 67, escKey = 27, altkey = 18;
+            var ctrlKey = 17, vKey = 86, cKey = 67, escKey = 27, altkey = 18, mKey = 77,
+                bKey = 66;
 
             // Indentificar Si la tecla control está precionada
             $(document).keydown(function(e)
@@ -55,12 +56,21 @@ function logicModalAppUI() {
 
             $(document).keydown(function(e)
             {
-                if (ctrlDown && (e.keyCode == altkey)){
+                // Hide/Show Apps menu
+                if (ctrlDown && (e.keyCode == altkey))
                     logicModalAppUI();
-                }
 
-                if(event.which == escKey)
+                // Hide left menu
+                if (ctrlDown && (e.keyCode == mKey))
+                    $('#hide-show-main').click();
+
+                // Hide modal
+                if(e.keyCode == escKey)
                     hideModalAppsUI();
+
+                // Show search
+                if (ctrlDown && (e.keyCode == bKey))
+                    $('#call-seach').click();
             });
         }
     };

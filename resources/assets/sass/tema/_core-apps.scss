@@ -41,6 +41,16 @@
     border: solid 1px $gris-300;
     margin-bottom: 20px;
     @include transition(.3s ease);
+
+    img {
+      width: 65px;
+      height: auto;
+      position: relative;
+      left: 30%;
+      top: 50%;
+      @include prefixer(transform, translate(-50%, -50%));
+
+    }
   }
 
   a {
@@ -62,3 +72,9 @@
   }
 }
 
+
+svg {
+  #Line-Copy-9 {
+    stroke: #E74F56;
+  }
+}
