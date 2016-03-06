@@ -4,6 +4,16 @@
         </div>
 
         <div class="form-group">
+            <label for="name">@lang('validation.attributes.paterno')</label>
+            {!! Form::text('paterno', old('paterno'), ['id' => 'paterno', 'class' => 'form-control']) !!}
+        </div>
+
+        <div class="form-group">
+            <label for="name">@lang('validation.attributes.materno')</label>
+            {!! Form::text('materno', old('materno'), ['id' => 'materno', 'class' => 'form-control']) !!}
+        </div>
+
+        <div class="form-group">
             <label for="email">@lang('validation.attributes.email')</label>
             {!! Form::email('email', old('email'), ['id' => 'email', 'class' => 'form-control']) !!}
         </div>

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Contacto;
 use App\Perfil;
 use App\User;
+use Carbon\Carbon;
 use App\UserHasPerfil;
 use Validator;
 use App\Http\Controllers\Controller;
@@ -45,6 +47,8 @@ class AuthController extends Controller
     {
         return Validator::make($data, [
             'name' => 'required|max:255',
+            'paterno' => 'required|max:255',
+            'materno' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|confirmed|min:6',
         ]);
@@ -61,14 +65,38 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
+        // Contacto a registrar
+        $contact = new Contacto([
+            'foto'          => 'unknow.png',
+            'nombre'        => $data['name'],
+            'ap_paterno'    => $data['paterno'],
+            'ap_materno'    => $data['materno'],
+            'estado'        => 'iniciado',
+            'profesion'     => '-'
+        ]);
+        $contact->save();
+
+
         // Nuevo modelo de usuario sin persistir
         $user = new User([
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
+            'email'         => $data['email'],
+            'password'      => $data['password'],
+            'contacto_id'   => $contact->id
         ]);
-
         $user->role = 'core';
         $user->save();
+
+        $perfil = new Perfil([
+            'rol'           => 'normal',
+            'perfil_route'  => $data['name'] . '-' .Carbon::createFromTimestamp(0)->diffInSeconds() . '-' . str_random(10)//.random_bytes(5)
+        ]);
+        $perfil->save();
+
+        $userHasPerfil = new UserHasPerfil([
+            'users_id'  => $user->id,
+            'perfil_id' => $perfil->id
+        ]);
+        $userHasPerfil->save();
 
         return $user;
     }
@@ -92,7 +120,7 @@ class AuthController extends Controller
      */
     public function redirectPath()
     {
-        // Identificamos el id del usuario y buscamos su rut de perfil
+        // Identificamos el id del usuario y buscamos su ruta de perfil
         $perfilId = UserHasPerfil::where('users_id',\Auth::user()->id)->value('perfil_id');
         $perfilRoute = Perfil::where('id', $perfilId)->value('perfil_route');
 

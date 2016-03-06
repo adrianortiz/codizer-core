@@ -1,68 +1,53 @@
-@extends('layout')
-
-@section('title', @trans('title.login'))
-
-@section('msn-boton')
-    <p>¿Aun sin cuenta? Registrate 123</p>
-    <a href="{{ route('register') }}" class="btn btn-login">@lang('auth.register_button')</a>
-@endsection
-
-
+@extends('app')
 
 @section('content')
-<div id="container-panel-right">
-
 
     @include('partials/errors')
 
-    <!--
-    @if(Session::has('flash_message'))
-        {{Session::get('flash_message')}}
-    @endif
-    -->
+    <div class="row"></div>
+    <div class="container-login center-block">
+        <div class="card" id="card-codizer-1">
+            <div class="card-content">
 
-    <div id="login-container">
-        <div class="login-left">
+                <div class="section ">
 
-        </div>
+                    <span class="card-title black-text">@lang('auth.login_title')</span>
 
-        <div class="login-right">
+                    <div class="row">
+                        <div class="col s12 m12 l12">
 
-            {!! Form::open(['route' => ['login'], 'method' => 'POST']) !!}
-            <div class="form-group txt-center">
-                <h1>@lang('auth.login_title')</h1>
-            </div>
+                                {!! Form::open(['route' => ['login'], 'method' => 'POST', 'class' => 'form-horizontal', 'role' => 'form']) !!}
 
-            <div class="form-group">
-                <label for="email">@lang('validation.attributes.email')</label>
-                {!! Form::text('email', null, ['id' => 'email', 'class' => 'form-control', 'type' => 'email']) !!}
-            </div>
+                                    <div class="input-field col s12 m12 l12">
+                                        <label for="email">@lang('validation.attributes.email')</label>
+                                        {!! Form::text('email', null, ['class' => 'form-control validate', 'type' => 'email']) !!}
+                                    </div>
 
-            <div class="form-group">
-                <label for="password">@lang('validation.attributes.password')</label>
-                {!! Form::password('password', ['id' => 'password', 'class' => 'form-control']) !!}
-            </div>
+                                    <div class="input-field col s12 m12 l12">
+                                        <label for="password">@lang('validation.attributes.password')</label>
+                                        {!! Form::password('password', null, ['class' => 'form-control']) !!}
+                                    </div>
 
-            <div class="form-group">
-                <div class="checkbox">
-                        @lang('auth.remember') {!! Form::checkbox('remember') !!}
+
+                                    <div class="row input-field col s12 m12 l12">
+                                        <input name="remember" type="checkbox" id="remember" />
+                                        <label for="remember">@lang('auth.remember')</label>
+                                    </div>
+
+                                    <div class="input-field col s12 m12 l2">
+                                        <button type="submit" class="btn waves-effect waves-light deep-purple text-lighten-1 light">@lang('auth.login_button')</button>
+                                    </div>
+
+                                    <div class="input-field col s12 m12 l12">
+                                        <a class="btn waves-effect waves-light blue light" href="{{ url('/password/email') }}">Forgot Your Password?</a>
+                                    </div>
+
+                                {!! Form::close() !!}
+                        </div>
+                    </div>
                 </div>
             </div>
-
-            <!--
-                <input type="checkbox" name="remember" class="checkbox">
-                <div class="switch"></div>
-                -->
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary">
-                    @lang('auth.login_button')
-                </button>
-            </div>
-            {!! Form::close() !!}
         </div>
     </div>
-</div>
-
-
-
 @endsection
+

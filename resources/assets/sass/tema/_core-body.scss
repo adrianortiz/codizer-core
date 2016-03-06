@@ -235,12 +235,13 @@ MODIFICACIONES PARA EL MENÚ E INFO DE LA APP
 .core-menu-list {
   text-decoration: none !important;
   color: $black-core;
+  font-size: 13px;
   div {
     margin: 0 auto;
     padding: 0 auto;
     padding: 8px 15px;
     margin-top: 20px;
-    margin-bottom: 16px;
+    margin-bottom: 10px;
     width: 190px;
     height: 36px;
     border-bottom: solid 1px $gris-150;
