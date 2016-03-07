@@ -1,4 +1,6 @@
 /** Created by Ortiz on 13/07/15. */
+$('.left-content-list').css('height', 400);
+$('.right-content-list').css('height', 400);
 
 (function($){
 
@@ -8,7 +10,6 @@
         App.SetSizeLists();
     },
         HideShowMain: function() {
-
             $('#hide-show-main').click(function() {
                 $('#main').toggleClass('hideShowMain');
                 $('#content').toggleClass('hideShowContent');
@@ -18,20 +19,21 @@
         },
 
         AddContentFake: function() {
-            // for (var i = 0; i<100; i++) {
-                // $('#article-content').append('<h3>Contenido: ' + i +'</h3>');
-                // $('#main-header-options-app ul').append('<li><a href="#!">Opction '+ i +'</a></li>');
-            //}
+            /* for (var i = 0; i<100; i++) {
+                $('#article-content').append('<h3>Contenido: ' + i +'</h3>');
+                $('#main-header-options-app ul').append('<li><a href="#!">Opction '+ i +'</a></li>');
+            } */
         },
 
         SetSizeLists: function() {
             $( window ).resize(function() {
-                var articleContent = $('#article-content').width();
+                // var articleContent = $('#article-content').width();
                 // $('.left-content-list').css('width', articleContent / 3);
-                $('.left-content-list').css('height', $( document ).height() - 81);
+                $('.left-content-list').css('height', $( document ).height() - 98);
+                $('#main-header-options-app').css('height', $( document ).height() - 290);
 
                 // $('.right-content-list').css('width', (articleContent / 3) * 2);
-                $('.right-content-list').css('height', $( document ).height() - 81);
+                $('.right-content-list').css('height', $( document ).height() - 98);
 
                 if ( $( document ).width() <= 1050) {
                     $('#main').addClass('hideShowMain');

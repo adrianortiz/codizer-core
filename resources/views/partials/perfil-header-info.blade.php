@@ -8,11 +8,11 @@
         </div>
     </div>
     <div id="info-contact-perfil">
-        <a href="">
+        <a href="{{ route('perfil', $perfil[0]->perfil_route) }}">
             <div id="name-perfil">{{ $contacto[0]->nombre . ' ' . $contacto[0]->ap_paterno }}</div>
         </a>
-        <a href="">
-            <div>{{ $contacto[0]->profesion }}</div>
+        <a href="{{ route('perfil', $perfil[0]->perfil_route) }}">
+            <div id="proffessio-perfil">{{ $contacto[0]->profesion }}</div>
         </a>
     </div>
 </div>

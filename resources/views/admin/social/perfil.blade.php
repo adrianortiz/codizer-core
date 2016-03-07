@@ -33,16 +33,21 @@
 
 
 @section('options-tools')
-    <div id="options-tools"></div>
+    <!-- <div id="options-tools"></div>-->
 @endsection
 
 
 @section('extra-content')
+    <!--
     <div id="container-video">
-        <video width="100%" height="100%"> <!-- autoplay -->
+        <video width="100%" height="100%" autoplay>
             <source src="{{ asset('/media/video-perfil/chanel123.mp4') }}" type="video/mp4">
             Your browser does not support the video tag.
         </video>
+    </div>
+    -->
+    <div id="container-img-perfils">
+        <img src="{{ asset('/media/photo-perfil-perfil/ford.jpg') }}">
     </div>
 
     <div id="menu-posts-perfil-container">
@@ -99,7 +104,25 @@
         </div>
 
         <div id="content-candidate-and-tags">
+            <!-- Title menu -->
+            <a href="#" class="core-menu-list"><div style="color: red">Posibles candidatos</div></a>
 
+            <!-- list menu with img -->
+            <a href="#" class="core-menu-list menu-list-option menu-lis-img">
+                <img src="{{ asset('/media/photo-perfil/' . $contacto[0]->foto) }}">
+                <div>Karen Olvera</div>
+            </a>
+
+            <!-- list menu with img -->
+            <a href="#" class="core-menu-list menu-list-option menu-lis-img">
+                <img src="{{ asset('/media/photo-perfil/' . $contacto[0]->foto) }}">
+                <div>Karen Olvera</div>
+            </a>
+
+            <a href="#" class="core-menu-list"><div style="color: red">Tendencias</div></a>
+
+            <a href="#" class="core-menu-list menu-list-option"><div>#ZapatosRosas</div></a>
+            <a href="#" class="core-menu-list menu-list-option"><div>#Globos</div></a>
         </div>
     </div>
 @endsection

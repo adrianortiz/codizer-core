@@ -1,5 +1,4 @@
 .options-tools-list, .left-content-list, .left-content-list-tool, .right-content-list, .right-content-list-tool {
-  float: left;
   overflow: auto;
 }
 
@@ -7,16 +6,20 @@
   background-color: $blanco;
   width: 300px;
   border-right: solid 1px $gris-150;
+  float: left;
+}
+
+
+.left-content-list {
+  height: 100%;
 }
 
 .right-content-list, .right-content-list-tool {
-  background-color: $gris-50;
+  background-color: $gris-100;
   @include prefixer(width, calc(100% - 300px));
+  float: left;
 }
 
- .left-content-list, .right-content-list {
-   margin-top: 43px;
- }
 
  .options-tools-list {
    width: 100%;

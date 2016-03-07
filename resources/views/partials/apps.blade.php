@@ -1,18 +1,18 @@
 <!-- Apps -->
 <div class="core-apps-background-a"></div>
 <div class="core-apps-container">
-    <a href="#">
+    <a href="{{ route('contacts', $userPerfil[0]->perfil_route) }}">
         <div class="app-option">
             <div class="app-icon">
                 <img src="{{asset('/media/apps/contacts.svg')}}" />
             </div>
-            <a href="#">Contacts</a>
+            <a href="">Contacts</a>
         </div>
     </a>
-    <a href="#">
+    <a href="{{ route('events', $userPerfil[0]->perfil_route) }}">
         <div class="app-option">
             <div class="app-icon"></div>
-            <a href="#">Name App</a>
+            <a href="">Eventos</a>
         </div>
     </a>
     <a href="#">

@@ -3,24 +3,24 @@
 var appsControl = 0;
 var nameApp;
 function showModalAppsUI() {
+    appsControl = 1;
     $('.core-apps-background-a').fadeIn(300);
     $('.core-apps-container').fadeIn(300);
-    $('#main-header-app').css('color', '#FFF');
     $('#main-header-app').css('background', '#7B52FB');
-    nameApp = $('#main-header-app div').html();
-    $('#main-header-app div').html("Aplicaciones <span class='fa fa-angle-down fa-lg' style='margin-top: 5px;'></span>");
-    $('#main-header-app div span').addClass('fa-rotate-180');
-    appsControl = 1;
+    nameApp = $('#name-app-select').html();
+    $('#name-app-select').html("Aplicaciones");
+    $('#apps-flecha span').removeClass('fa-rotate-180');
+
 }
 
 function hideModalAppsUI() {
+    appsControl = 0;
     $('.core-apps-background-a').fadeOut(300);
     $('.core-apps-container').fadeOut(300);
-    $('#main-header-app').css('color', '#4A4A4A');
-    $('#main-header-app').css('background', '#FAFAFA');
-    $('#main-header-app div').html(nameApp);
-    $('#main-header-app div span').removeClass('fa-rotate-180');
-    appsControl = 0;
+    $('#main-header-app').css('background', '#3B99FB');
+    $('#name-app-select').html(nameApp);
+    $('#apps-flecha span').addClass('fa-rotate-180');
+
 }
 
 function logicModalAppUI() {

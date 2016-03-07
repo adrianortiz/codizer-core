@@ -21,31 +21,29 @@
 @endsection
 
 
-
+@section('options-tools')
+    <div class="options-tools-list">
+        <div class="left-content-list-tool"></div>
+        <div class="right-content-list-tool"></div>
+    </div>
+@endsection
 
 
 
 @section('article-content')
 
-    @section('extra-content')
-        <div class="options-tools-list">
-            <div class="left-content-list-tool"></div>
-            <div class="right-content-list-tool"></div>
-        </div>
-    @endsection
-
     <div class="left-content-list">
         <table class="table table-hover">
             <tbody>
             @foreach($friends as $friend)
-            <tr>
-                <td>
-                    <a href="#" class="core-menu-list menu-list-option menu-lis-img list-contacts-table">
-                        <img src="{{ asset('/media/photo-perfil/' . $friend -> foto) }}">
-                        <div class="dropdown">{{ $friend -> nombre, ' ' .$friend -> ap_paterno }}</div>
-                    </a>
-                </td>
-            </tr>
+                <tr>
+                    <td>
+                        <a href="#" class="core-menu-list menu-list-option menu-lis-img list-contacts-table">
+                            <img src="{{ asset('/media/photo-perfil/' . $friend -> foto) }}">
+                            <div class="dropdown">{{ $friend -> nombre, ' ' .$friend -> ap_paterno }}</div>
+                        </a>
+                    </td>
+                </tr>
             @endforeach
             </tbody>
         </table>

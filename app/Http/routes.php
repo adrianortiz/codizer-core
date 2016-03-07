@@ -22,7 +22,6 @@ Route::get('lang/{lang}', function($lang) {
     'lang' => 'en|es'
 ]);
 
-
 Route::get('/', function() {
     // return view('auth.login');
     return view('welcome');
@@ -87,6 +86,15 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('perfil/{nameFirstName}/contacts', [
             'uses'  => 'Admin\Contacts\ContactsController@index',
             'as'    => 'contacts'
+        ]);
+
+
+        /*
+         * Events
+         */
+        Route::get('perfil/{nameFirstName}/events', [
+            'uses'  => 'Admin\Events\EventsController@index',
+            'as'    => 'events'
         ]);
 
 
