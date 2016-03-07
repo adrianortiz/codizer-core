@@ -25,7 +25,9 @@ class ContactsController extends Controller
         $userPerfil = Core::getUserPerfil();
         $userContacto = Core::getUserContact();
 
-        return view('admin.contacts.contacts', compact('perfil', 'contacto', 'userPerfil', 'userContacto'));
+        $friends = Core::getContactos($contacto);
+
+        return view('admin.contacts.contacts', compact('perfil', 'contacto', 'userPerfil', 'userContacto', 'friends'));
     }
 
     /**

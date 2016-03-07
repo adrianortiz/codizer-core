@@ -35,16 +35,16 @@
     <div class="left-content-list">
         <table class="table table-hover">
             <tbody>
-            @for($i = 0; $i<= 20; $i++)
+            @foreach($friends as $friend)
             <tr>
                 <td>
                     <a href="#" class="core-menu-list menu-list-option menu-lis-img list-contacts-table">
-                        <img src="{{ asset('/media/photo-perfil/' . $contacto[0]->foto) }}">
-                        <div class="dropdown">Alejandro Ortiz</div>
+                        <img src="{{ asset('/media/photo-perfil/' . $friend -> foto) }}">
+                        <div class="dropdown">{{ $friend -> nombre, ' ' .$friend -> ap_paterno }}</div>
                     </a>
                 </td>
             </tr>
-            @endfor
+            @endforeach
             </tbody>
         </table>
     </div>
