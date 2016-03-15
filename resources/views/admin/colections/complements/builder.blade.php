@@ -122,7 +122,7 @@
 
 @endsection
 
-@include('admin.colections.complements.partials.alert-delete')
+@include('partials.alert-delete')
 @include('partials.errors')
 
 

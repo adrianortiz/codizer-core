@@ -71,7 +71,7 @@
 @include('partials.alert-ajax')
 @endsection
 
-@include('admin.colections.complements.partials.alert-delete')
+@include('partials.alert-delete')
 
 {!! Form::open(['route' => ['admin.colecciones.form.data.list.destroy', ':USER_ID'], 'method' => 'DELETE', 'id' => 'form-delete']) !!}
 {!! Form::close() !!}

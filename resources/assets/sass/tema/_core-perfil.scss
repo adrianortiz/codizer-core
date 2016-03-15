@@ -7,79 +7,73 @@ Contenido del menu lateral
   width: 100%;
   height: 214px;
   background-color: $blanco;
-  overflow: auto;
+  box-shadow: $sombra-gris-object;
+  margin-bottom: 10px;
   @include transition(.3s ease);
 
-  margin-bottom: 10px;
   p {
     text-align: center;
   }
 
 
   #contact-photo-perfil {
-
     padding: 14px;
     padding-top: 18px;
     width: 100%;
     height: 155px;
-    overflow: hidden;
 
     img {
-      float: left;
       width: 110px;
       height: 110px;
       border-radius: 100px;
       border: solid 6px $gris-100;
-    }
-
-    div {
-      float: right;
-      width: 45px;
-      height: 130px;
-      padding-top: 10px;
-
-      a {
-        padding-bottom: 30px;
-        float: left;
-        #chat-icon-perfil, #more-icon-perfil {
-          width: 36px;
-          height: 36px;
-          border-radius: 36px;
-          @include transition(.3s ease);
-
-          &:hover {
-            transform: scale(1.2, 1.2);
-          }
-        }
-
-        #more-icon-perfil {
-          padding-top: 9px;
-          background: $blanco;
-          box-shadow: $shadown-gray-min;
-          padding-left: 10px;
-          color: $gris-label;
-        }
-
-        #chat-icon-perfil {
-          padding-top: 7px;
-          background: $green-chat;
-          box-shadow: $shadown-green-min;
-          padding-left: 7px;
-          color: $blanco;
-        }
-      }
+      margin-left: 5px;
+      margin-right: 20px;
     }
   }
 }
 
-#info-contact-perfil {
-  margin-top: 6px;
 
+// Icons share
+#chat-icon-perfil, #more-icon-perfil {
+  width: 36px;
+  height: 36px;
+  border-radius: 36px;
+  border-width: 0;
+  @include transition(.3s ease);
+
+  &:hover {
+    transform: scale(1.2, 1.2);
+  }
+}
+
+#chat-icon-perfil {
+  padding-top: 7px;
+  background: $green-chat;
+  box-shadow: $shadown-green-min;
+  padding-left: 7px;
+  color: $blanco;
+  margin-bottom: 20px;
+}
+
+#more-icon-perfil {
+  padding-top: 9px;
+  background: $blanco;
+  box-shadow: $shadown-gray-min;
+  padding-left: 10px;
+  color: $gris-label;
+}
+
+
+
+#info-contact-perfil {
+  margin-top: 2px;
+  width: 100%;
   a {
     text-decoration: none;
     div {
       padding-left: 15px;
-      width: 214px;
+      width: 100%;
       height: 36px;
       font-weight: 300;
       font-size: 12px;
@@ -92,7 +86,7 @@ Contenido del menu lateral
     }
 
     #name-perfil {
-      height: 24px;
+      height: 22px;
       font-size: 15px;
       font-weight: 400;
       color: $azul-100;
@@ -101,9 +95,9 @@ Contenido del menu lateral
 }
 
 #proffessio-perfil {
+  width: 100%;
   background-color: $gris-50;
-  height: 27px;
-  padding-top: 5px;
+  padding-top: 6px;
 }
 
 

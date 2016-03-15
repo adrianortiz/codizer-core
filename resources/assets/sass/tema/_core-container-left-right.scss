@@ -1,0 +1,108 @@
+#article-content {
+  float: left;
+  height: auto;
+  @include transition(.3s ease);
+}
+
+.left-content-list {
+  overflow: auto;
+  height: 600px;
+  @include transition(.3s ease);
+}
+
+.right-content-list {
+  overflow: auto;
+  height: 600px;
+  @include transition(.3s ease);
+}
+
+
+.left-content-list, .left-content-list-tool {
+  background-color: $blanco;
+  width: 300px;
+  border-right: solid 1px $gris-150;
+  float: left;
+}
+
+.right-content-list, .right-content-list-tool {
+  background-color: $gris-100;
+  @include prefixer(width, calc(100% - 300px));
+  float: left;
+}
+
+ .options-tools-list {
+   width: 100%;
+ }
+
+.options-tools-list, .left-content-list-tool, .right-content-list-tool {
+  height: 46px;
+  background-color: rgba($blanco, 0.9) !important;
+  border-bottom: solid 1px $gris-150 !important;
+}
+
+.left-content-list-tool, .right-content-list-tool {
+  padding-top: 5px;
+  text-align: center;
+
+  // ESTILOS EXTRA DE PRUEBA
+  background-color: #4A4A4A !important;
+  border-right: solid 1px #323636;
+  padding-top: 9px;
+
+  button {
+    @include transition(.3s ease);
+    border: none;
+    background-color: #666666;
+    color: #E6E6E6;
+    border-radius: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
+.list-contacts-table {
+  div {
+    margin-top: -0px;
+  }
+
+  img {
+    margin-right: 10px;
+    border-radius: 3px;
+    width: 40px;
+    height: 40px;
+  }
+}
+
+// Container
+.block-content-info {
+  margin: 0 auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  @include prefixer(width, calc(100% - 20px));
+  padding: 30px 15px;
+  // background-color: $blanco;
+  height: auto;
+  @include box-sizing(border-box);
+  // box-shadow: $sombra-gris-object;
+}
+
+#msg-vacio {
+  text-align: center;
+  width: 90%;
+  height: 100px;
+  position: relative;
+  left: 50%;
+  top: 50%;
+  @include prefixer(transform, translate(-50%, -50%));
+}
+
+
+// FILA ACTIVA PARA LA LISTA
+.activarFila {
+  background-color: $gris-100 !important;
+  td {
+    a {
+      color: $azul-200 !important;
+    }
+  }
+}

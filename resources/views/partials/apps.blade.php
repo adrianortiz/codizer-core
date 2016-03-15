@@ -15,10 +15,10 @@
             <a href="">Eventos</a>
         </div>
     </a>
-    <a href="#">
+    <a href="{{ route('notes', $userPerfil[0]->perfil_route) }}">
         <div class="app-option">
             <div class="app-icon"></div>
-            <a href="#">Name App</a>
+            <a href="">Notas</a>
         </div>
     </a>
     <a href="#">

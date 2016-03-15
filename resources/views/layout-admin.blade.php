@@ -80,7 +80,7 @@
 
 </div>
 
-@include('admin.colections.complements.partials.alert-delete')
+@include('partials.alert-delete')
 
 @yield('complements-builder')
 

@@ -1,0 +1,41 @@
+.modal {
+  background-color: rgba(#000, 0.7);
+}
+
+.modal-dialog {
+  z-index: 999999;
+}
+
+.modal-content {
+  box-shadow: $sombra-gris-object;
+  border: solid 0 transparent;
+  background-color: $blanco;
+  border-radius: 10px;
+}
+
+.modal-header {
+  text-align: center;
+  background-color: transparent;
+  border-bottom: solid 2px $gris-200;
+  margin: 0 20px;
+}
+
+.modal-body {
+  background-color: $blanco;
+  margin-top: 6px;
+  margin-bottom: 6px;
+  border: solid 0;
+
+  textarea {
+    height: 200px !important;
+  }
+}
+
+.modal-footer {
+  border-top: solid 2px $gris-200;
+  margin: 0 20px;
+}
+
+.form-with-100 {
+  width: 100% !important;
+}

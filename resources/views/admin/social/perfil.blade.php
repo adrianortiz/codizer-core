@@ -9,12 +9,16 @@
     @include('partials.perfil-header-info')
 @endsection
 
+@section('extra-css')
+    <link type="text/css" rel="stylesheet" href="{{ asset('/css/core.container.ui.css') }}">
+@endsection
 
-@section('main-header-options-app')
 
-        @include('partials.perfil-link')
+    @section('main-header-options-app')
 
-        <!-- Title menu -->
+            @include('partials.perfil-link')
+
+            <!-- Title menu -->
         <a href="#" class="core-menu-list"><div>Información</div></a>
 
         <!-- list menu with img -->

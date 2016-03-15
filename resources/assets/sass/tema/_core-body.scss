@@ -1,7 +1,7 @@
 html,body{
   margin: 0;
   height: 100%;
-  background-color: $gris-50;
+  background-color: #F2F2F2;
 }
 
 #container-ui {
@@ -9,7 +9,6 @@ html,body{
   padding: 0 auto;
   width: 1024px;
   height: auto;
-  background-color: blueviolet;
 }
 
 .core-logo-global {
@@ -97,26 +96,13 @@ html,body{
 
 
 
-#main {
-  width: 214px;
-  @include prefixer(height, calc(100% - 800px));
-  @include transition(.3s ease);
-  float: left;
-  @include box-sizing(border-box);
-}
 
-#content {
-  width: 801px;
-  height: 100%;
-  @include transition(.3s ease);
-  float: right;
-  @include box-sizing(border-box);
-}
 
-#main, #content {
+
+
+#main, #content-body-ui {
   margin-top: 50px;
 }
-
 
 header {
   width: 100%;
@@ -124,7 +110,6 @@ header {
   @include box-sizing(border-box);
   position: fixed;
   z-index: 100;
-  @include transition(.3s ease);
   background-color: $blanco;
   border-bottom: solid 1px $gris-150;
 
@@ -134,7 +119,6 @@ header {
     width: 1024px;
     min-height: 40px;
     height: 40px;
-    background-color: red;
 
     nav {
       z-index: 110;
@@ -147,16 +131,6 @@ header {
     background-color: rgba($blanco, 0.9);
     border-bottom: solid 1px $gris-150;
   }
-}
-
-
-// Animaciones de entrada y salida de menú
-.hideShowMain {
-  width: 0px !important;
-}
-
-.hideShowContent {
-  width: 100% !important;
 }
 
 #article-content {
@@ -256,7 +230,8 @@ MODIFICACIONES PARA EL MENÚ E INFO DE LA APP
 }
 
 #main nav {
-  overflow: hidden;
+  box-shadow: $sombra-gris-object;
+  @include transition(.3s ease);
 }
 
 
@@ -279,7 +254,6 @@ MODIFICACIONES PARA EL MENÚ E INFO DE LA APP
     width: 190px;
     height: 36px;
     border-bottom: solid 1px $gris-150;
-    @include transition(.3s ease);
 
     &:hover {
       color: $azul-100;
@@ -321,3 +295,90 @@ MODIFICACIONES PARA EL MENÚ E INFO DE LA APP
 #content-candidate-and-tags {
   @include prefixer(box-shadow, $sombra-gris-object);
 }
+
+.btn-sm-radius {
+  padding: 6px 26px;
+  border-radius: 16px;
+  font-size: 12px;
+  text-decoration: none !important;
+}
+
+
+
+// ======== Responsive for all GUI ====
+
+/**
+  Menú global
+**/
+#options-core {
+  @include transition(.3s ease);
+  @include desde-hasta(1200px, 1600px) {
+    width: 90% !important;
+  }
+
+  @include desde(1440px) {
+    width: 1420px !important;
+  }
+}
+
+/**
+  Contenedor del menú izquierdo
+  y contenedor derecho de información
+**/
+#container-ui {
+  @include transition(.3s ease);
+  @include desde-hasta(1200px, 1440px) {
+    width: 90%;
+  }
+
+  @include desde(1440px) {
+    width: 1420px;
+  }
+}
+
+/**
+  Menú izquierdo
+  Información del contacto, foto
+  y links para navegar
+**/
+#main {
+  width: 214px;
+  @include prefixer(height, calc(100% - 800px));
+  float: left;
+  @include box-sizing(border-box);
+  @include transition(.3s ease);
+}
+
+
+#content-body-ui {
+  width: 801px;
+  float: right;
+  box-shadow: $sombra-gris-object;
+  @include box-sizing(border-box);
+  @include transition(.3s ease);
+
+  // content-body-ui
+  @include desde-hasta(1200px, 1600px) {
+    @include prefixer(width, calc(100% - 224px));
+  }
+
+  @include desde(1440px) {
+    @include prefixer(width, calc(100% - 224px));
+  }
+
+}
+
+
+// ==== Animaciones de entrada y salida de menú ====
+
+.hideShowContent {
+  width: 100% !important;
+}
+
+.decrementarAnimation {
+  transform-origin: top right;
+  transform: perspective(1000px) rotateY(-90deg);
+  animation-fill-mode: backwards;
+  width: 0 !important;
+}
+

@@ -88,6 +88,38 @@ Route::group(['middleware' => 'auth'], function () {
             'as'    => 'contacts'
         ]);
 
+        /*
+         * Notes
+         * List notes
+         */
+        Route::get('perfil/{nameFirstName}/notes', [
+            'uses'  => 'Admin\Notes\NotesController@index',
+            'as'    => 'notes'
+        ]);
+
+        // Store note
+        Route::post('perfil/{nameFirstName}/notes/store', [
+            'uses'  => 'Admin\Notes\NotesController@store',
+            'as'    => 'notes.store'
+        ]);
+
+        // Get note
+        Route::get('perfil/{nameFirstName}/notes/show', [
+            'uses'  => 'Admin\Notes\NotesController@show',
+            'as'    => 'notes.show'
+        ]);
+
+        // Update note
+        Route::put('perfil/{nameFirstName}/notes/show', [
+            'uses'  => 'Admin\Notes\NotesController@update',
+            'as'    =>  'notes.update'
+        ]);
+
+        // Delete note
+        Route::delete('perfil/note/delete', [
+           'uses'   => 'Admin\Notes\NotesController@destroy',
+            'as'    => 'notes.delete'
+        ]);
 
         /*
          * Events

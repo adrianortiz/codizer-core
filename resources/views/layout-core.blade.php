@@ -107,7 +107,7 @@
         </nav>
     </section>
 
-    <section id="content">
+    <section id="content-body-ui">
 
         @yield('extra-content')
 
@@ -120,14 +120,21 @@
 
 </div>
 
+
 @include('partials.search')
 @include('partials.apps')
+@include('partials.alert-ajax')
+@include('partials.alert-delete')
+
+@yield('modals')
 
 <script src="{{ asset('/js/jquery.min.js') }}"></script>
 <script src="{{ asset('/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('/js/init-core.js') }}"></script>
+<script src="{{ asset('/js/codizer-alert.js') }}"></script>
 <script src="{{ asset('/js/core-apps.js') }}"></script>
 <script src="{{ asset('/js/core-search.js') }}"></script>
+
 @yield('extra-js')
 
 </body>
