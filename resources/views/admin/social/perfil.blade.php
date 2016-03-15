@@ -51,6 +51,18 @@
     </div>
     -->
     <div id="container-img-perfils">
+        <div id="form-cover-perfil-store">
+            <!-- FORMULARIO DE SELECCIÓN NOTA -->
+            {!! Form::open(['route' => 'cover.store', 'method' => 'POST', 'id' => 'form-cover-to-store', 'class' => 'form-inline', 'accept-charset' => 'UTF-8', 'enctype' => 'multipart/form-data']) !!}
+
+                <div class="form-group">
+                    {!! Form::file('file', ['class'=>'form-control', 'required']) !!}
+                </div>
+                <div class="form-group">
+                    {!! Form::submit('Click Me!', ['id' => 'btn-new-cover', 'class'=>'btn btn-default']) !!}
+                </div>
+            {!! Form::close() !!}
+        </div>
         <img src="{{ asset('/media/photo-perfil-perfil/ford.jpg') }}">
     </div>
 
@@ -129,4 +141,8 @@
             <a href="#" class="core-menu-list menu-list-option"><div>#Globos</div></a>
         </div>
     </div>
+@endsection
+
+@section('extra-js')
+    <script src="{{ asset('/js/core-social-cover-perfil.js') }}"></script>
 @endsection

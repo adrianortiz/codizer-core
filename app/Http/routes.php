@@ -79,6 +79,12 @@ Route::group(['middleware' => 'auth'], function () {
             'as'    => 'perfil'
         ]);
 
+        // Store cover perfil
+        Route::post('perfil/{nameFirstName}/cover/store', [
+            'uses'  => 'Admin\Social\CoverController@store',
+            'as'    => 'cover.store'
+        ]);
+
 
         /*
          * Contacts - Agenda

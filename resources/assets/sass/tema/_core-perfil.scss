@@ -155,7 +155,7 @@ Contenido del menu lateral
     border-radius: 42px;
     background-color: $blanco;
     position: relative;
-    z-index: 2;
+    z-index: 10;
     box-shadow: $sombra-max;
     padding-top: 2px;
 
@@ -268,6 +268,40 @@ Contenido del menu lateral
   }
 
 }
+
+
+// FORMULARIO PARA SUBIR UN NUEVO COVER DE PERFIL
+#form-cover-perfil-store {
+  padding: 1px 20px;
+  border-radius: 100px;
+  background-color: #4A4A4A;
+  @include centrarXY();
+  @include transition(.3s ease);
+  opacity: 0;
+
+  input {
+    @include transition(.3s ease);
+    width: 110px !important;
+    border: none !important;
+    background-color: #666666 !important;
+    color: #E6E6E6 !important;
+    border-radius: 20px !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+  }
+}
+
+#container-img-perfils {
+  position: relative;
+  z-index: 10;
+
+  &:hover {
+    #form-cover-perfil-store {
+      opacity: 1;
+    }
+  }
+}
+
 
 
 
