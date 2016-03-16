@@ -43,10 +43,23 @@ return [
 
     'disks' => [
 
+        // Ruta donde se almacenan los archivos de excel
         'local' => [
             'driver' => 'local',
             // 'root'   => storage_path('app'),
             'root'   => public_path('documents'),
+        ],
+
+        // Ruta donde se almacenan las fotos de perfil de un usuario
+        'photo' => [
+            'driver' => 'local',
+            'root'   => public_path('media/photo-perfil'),
+        ],
+
+        // Ruta donde se almacenan las fotos cover de un perfil
+        'cover' => [
+            'driver' => 'local',
+            'root'   => public_path('media/photo-perfil-perfil'),
         ],
 
         'ftp' => [

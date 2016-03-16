@@ -79,10 +79,16 @@ Route::group(['middleware' => 'auth'], function () {
             'as'    => 'perfil'
         ]);
 
-        // Store cover perfil
-        Route::post('perfil/{nameFirstName}/cover/store', [
+        // Update cover perfil
+        Route::post('perfil/{nameFirstName}/cover/update', [
             'uses'  => 'Admin\Social\CoverController@store',
             'as'    => 'cover.store'
+        ]);
+
+        // Update photo user perfil
+        Route::post('perfil/{nameFirstName}/photo/user/update', [
+           'uses'   => 'Admin\Social\PerfilController@updatePhotoUser',
+            'as'    => 'contact.photo.store'
         ]);
 
 

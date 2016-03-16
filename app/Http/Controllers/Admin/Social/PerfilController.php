@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Admin\Social;
 
+use App\Contacto;
 use App\Facades\Core;
 use App\Http\Requests;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\URL;
 
 class PerfilController extends Controller
 {
@@ -91,5 +94,30 @@ class PerfilController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function updatePhotoUser(Request $request)
+    {
+        if ($request->ajax()) {
+            // Campo file definido en el formulario
+            $file = $request->file('file');
+
+            // Nombre del archivo
+            $nombre = 'photo-' .\Auth::user()->id . Carbon::now()->second . $file->getClientOriginalName();
+
+            // Guardar archivo en el disco local
+            \Storage::disk('photo')->put($nombre,  \File::get($file));
+
+            // Guardar el nombre de la imagen en el perfil de usuario logueado
+            Contacto::where('id', $request['id'])
+                ->update(['foto' => $nombre]);
+
+            // Devolver una respuesta JSON que contenga
+            // la ruta de la imagen que se acaba de subir
+            return response()->json([
+                'cover' => URL::to('/') . '/media/photo-perfil/' . $nombre
+            ]);
+        }
+        abort(404);
     }
 }

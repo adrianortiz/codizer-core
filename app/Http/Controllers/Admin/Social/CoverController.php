@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Admin\Social;
 
+use App\Perfil;
 use Illuminate\Http\Request;
 
 use Carbon\Carbon;
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\URL;
 
 
 class CoverController extends Controller
@@ -39,31 +40,27 @@ class CoverController extends Controller
      */
     public function store(Request $request)
     {
-        //obtenemos el campo file definido en el formulario
-        $file = $request->file('file');
+        if ($request->ajax()) {
+            // Campo file definido en el formulario
+            $file = $request->file('file');
 
-        //obtenemos el nombre del archivo
-        $nombre = 'cover-'.Carbon::now()->second . $file->getClientOriginalName();
+            // Nombre del archivo
+            $nombre = 'cover-' .\Auth::user()->id . Carbon::now()->second . $file->getClientOriginalName();
 
-        //indicamos que queremos guardar un nuevo archivo en el disco local
-        \Storage::disk('local')->put($nombre,  \File::get($file));
+            // Guardar archivo en el disco local
+            \Storage::disk('cover')->put($nombre,  \File::get($file));
 
-        /*
-         * OBTENER ARCHIVO
-         */
-        $public_path = public_path();
-        $url = $public_path.'/documents/'.$nombre;
+            // Guardar el nombre de la imagen en el perfil de usuario logueado
+            Perfil::where('id', $request['id'])
+                ->update(['cover' => $nombre]);
 
-        /*
-        //si no se encuentra lanzamos un error 404.
-        if ( !(\Storage::exists($nombre)) )
-        {
-            abort(404);
-            // return response()->download($url);
-        }*/
-
-        echo $nombre;
-
+            // Devolver una respuesta JSON que contenga
+            // la ruta de la imagen que se acaba de subir
+            return response()->json([
+                'cover' => URL::to('/') . '/media/photo-perfil-perfil/' . $nombre
+            ]);
+        }
+        abort(404);
     }
 
     /**

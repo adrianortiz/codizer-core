@@ -89,6 +89,10 @@ class Core
             ->get();
     }
 
+    /**
+     * @param $contacto
+     * @return mixed
+     */
     public function getContactos($contacto){
         return Contacto::join('users_has_friend_users', 'users_has_friend_users.users_id_friend', '=', 'contacto.id')
             ->where('users_id', '=', $contacto[0]->id)

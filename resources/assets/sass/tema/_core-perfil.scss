@@ -270,24 +270,51 @@ Contenido del menu lateral
 }
 
 
+
+
+
+
 // FORMULARIO PARA SUBIR UN NUEVO COVER DE PERFIL
+
+#view-subiendo-cover {
+  @include centrarXY();
+  @include transition(.3s ease);
+  display: none;
+
+  div {
+    width: 90px;
+    height: 90px;
+    background-color: rgba($blanco, 0.95);
+    padding: 5px;
+    border-radius: 90px;
+  }
+}
+
 #form-cover-perfil-store {
-  padding: 1px 20px;
-  border-radius: 100px;
-  background-color: #4A4A4A;
   @include centrarXY();
   @include transition(.3s ease);
   opacity: 0;
 
-  input {
+  .upload-cover {
+    width: 90px;
+    height: 90px;
+    background: url('../media/icon/upload-icon.png');
+    background-size: 90px;
+    background-position: center center;
+    overflow: hidden;
+  }
+
+  input#btn-file-cover-store {
     @include transition(.3s ease);
-    width: 110px !important;
-    border: none !important;
-    background-color: #666666 !important;
-    color: #E6E6E6 !important;
-    border-radius: 20px !important;
-    padding-left: 15px !important;
-    padding-right: 15px !important;
+    display: block !important;
+    width: 90px !important;
+    height: 90px !important;
+    opacity: 0 !important;
+    overflow: hidden !important;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 }
 
@@ -297,6 +324,83 @@ Contenido del menu lateral
 
   &:hover {
     #form-cover-perfil-store {
+      opacity: 1;
+    }
+  }
+}
+
+
+
+
+
+// FOTO PERFIL
+// PARA SUBIR UNA NUEVA FOTO DE USUARIO
+
+
+#container-foto-perfil-user {
+  width: 120px;
+  height: auto;
+  z-index: 10;
+  margin-right: 16px;
+  display: inline-block;
+}
+
+
+#view-subiendo-foto {
+  position: absolute;
+  left: 35%;
+  top: 47%;
+  @include prefixer(transform, translate(-50%, -50%));
+  @include transition(.3s ease);
+  display: none;
+
+  div {
+    width: 90px;
+    height: 90px;
+    background-color: rgba($blanco, 0.95);
+    padding: 5px;
+    border-radius: 90px;
+  }
+}
+
+#form-foto-perfil-store {
+  // @include centrarXY();
+  position: absolute;
+  left: 35%;
+  top: 47%;
+  @include prefixer(transform, translate(-50%, -50%));
+  @include transition(.3s ease);
+  opacity: 0;
+
+  .upload-foto {
+    width: 90px;
+    height: 90px;
+    background: url('../media/icon/upload-icon.png');
+    background-size: 90px;
+    background-position: center center;
+    overflow: hidden;
+  }
+
+  input#btn-file-foto-store {
+    @include transition(.3s ease);
+    display: block !important;
+    width: 90px !important;
+    height: 90px !important;
+    opacity: 0 !important;
+    overflow: hidden !important;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+#contact-photo-perfil {
+  position: relative;
+  z-index: 10;
+
+  &:hover {
+    #form-foto-perfil-store {
       opacity: 1;
     }
   }
