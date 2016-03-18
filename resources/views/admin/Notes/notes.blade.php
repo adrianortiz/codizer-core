@@ -30,7 +30,7 @@
             <div id="core-search-group" class="input-group input-group-sm">
                 <input type="text" class="form-control" placeholder="Buscar por...">
                 <span class="input-group-btn">
-                    <button id="core-search-group-btn" class="btn btn-default btn-sm" type="button"><i class="fa fa-search"></i></button>
+                    <button type="button" id="core-search-group-btn" class="btn btn-default btn-sm"><i class="fa fa-search"></i></button>
                 </span>
             </div>
         </div>
@@ -53,11 +53,15 @@
         <tbody id="list-notes">
 
             @foreach($notes as $note)
-            <tr class="data-note-tr" data-note="{{ $note->id }}">
+            <tr class="data-note-tr" data-note="{{ $note -> id }}">
+                <td class="container-list-point">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </td>
                 <td>
-                    <a href="#" class="core-menu-list menu-list-option menu-lis-img list-contacts-table">
-                        <div class="dropdown">{{ substr($note->content, 0, 22) . '...' }}<br/>{{ $note->updated_at }}</div>
-                    </a>
+                    <div class="list-note-content">{{ substr($note->content, 0, 41) . '...' }} </div>
+                    <span class="list-note-date-update">{{ $note->updated_at }}</span>
                 </td>
             </tr>
             @endforeach

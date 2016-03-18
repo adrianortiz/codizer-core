@@ -63,7 +63,7 @@ class NotesController extends Controller
         else
             $message = 'No se pudo crear la nota.';
 
-        $note->content = substr($note->content, 0, 18).'...';
+        $note->content = substr($note->content, 0, 41).'...';
 
         if ($request->ajax()) {
             return response()->json([
@@ -123,6 +123,8 @@ class NotesController extends Controller
             $msg = "Nota actualizada";
         else
             $msg = "Ocurrio un error";
+
+        $note->content = substr($note->content, 0, 41).'...';
 
         if ($request->ajax()) {
             return response()->json([

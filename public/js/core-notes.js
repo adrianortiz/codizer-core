@@ -9,6 +9,10 @@ var containerNotes = $('#list-notes');
 // Contenedor del lado derecho
 var continaerNoteShow = $('#continaer-note-shows');
 
+// Retorna la fila de una notra creada o actulizada
+function noteCreateUpdate(result) {
+    return '<tr class="data-note-tr" data-note="' + result.note.id + '"><td class="container-list-point"><div></div><div></div><div></div></td><td><div class="list-note-content">' + result.note.content + '</div><span class="list-note-date-update">' + result.note.created_at + '</span></td></tr>';
+}
 
 (function($){
 
@@ -46,9 +50,7 @@ var continaerNoteShow = $('#continaer-note-shows');
                         } else {
                             hideShowAlert('msj-success', result.message);
 
-                            var noteCreated = '<tr class="data-note-tr" data-note="' + result.note.id + '"><td><a href="#" class="core-menu-list menu-list-option menu-lis-img list-contacts-table"> <div class="dropdown">' + result.note.content + '<br/>' + result.note.created_at + '</div> </a></td></tr>';
-                            containerNotes.prepend(noteCreated);
-
+                            containerNotes.prepend( noteCreateUpdate(result) );
                             $('.close').click();
                             document.getElementById("form-notes-store").reset();
                         }
@@ -145,8 +147,7 @@ var continaerNoteShow = $('#continaer-note-shows');
                     {
                         console.log(result);
                         hideShowAlert('msj-success', result.message);
-                        var noteCreated = '<tr class="data-note-tr" data-note="' + result.note.id + '"><td><a href="#" class="core-menu-list menu-list-option menu-lis-img list-contacts-table"> <div class="dropdown">' + result.note.content.substring(0, 18) + '...<br/>' + result.note.created_at + '</div> </a></td></tr>';
-                        containerNotes.prepend(noteCreated);
+                        containerNotes.prepend( noteCreateUpdate(result) );
 
                         // Agregar datos de la nota consultada al contenedor derecho
                         continaerNoteShow.html('<div class="block-content-info">' + result.note.content + '</div>');

@@ -1,0 +1,49 @@
+// LISTA DE CONTACTOS
+
+.data-note-tr {
+  .container-list-point {
+    width: 10px;
+    height: auto;
+    div {
+      width: 3px;
+      height: 10px;
+      border-radius: 60px;
+      margin-top: 5px;
+      background-color: rgba($gris-300, 0.2);
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+    .list-note-content {
+      color: $azul-200;
+    }
+  }
+}
+
+.list-note-content {
+  width: 100%;
+  height: auto;
+  font-weight: 600;
+  font-size: 12px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.list-note-date-update {
+  width: auto;
+  padding-top: 2px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 2px;
+
+  font-size: 11px;
+  background-color: rgba($gris-300, 0.2);
+  border-radius: 20px;
+
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+  font-style: italic;
+
+}
