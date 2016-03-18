@@ -56,18 +56,23 @@
     <div class="left-content-list">
         <table class="table table-hover">
             <tbody>
+
             @foreach($friends as $friend)
-            <tr>
-                <td>
-                    <a href="#" class="core-menu-list menu-list-option menu-lis-img list-contacts-table">
+                <tr class="data-contacto-tr" data-contacto="{{ $friend -> id }}">
+                    <td class="container-list-photo-user">
                         <img src="{{ asset('/media/photo-perfil/' . $friend -> foto) }}">
-                        <div class="dropdown">{{ $friend -> nombre, ' ' .$friend -> ap_paterno }}</div>
-                    </a>
-                </td>
-            </tr>
+                    </td>
+                    <td>
+                        <div class="list-contact-full-name">{{ $friend -> nombre, ' ' .$friend -> ap_paterno }} </div>
+                        <span class="list-contact-mail">mi_correo@codizer.com</span><br/>
+                    </td>
+                </tr>
             @endforeach
+
             </tbody>
         </table>
     </div>
-    <div class="right-content-list"></div>
+    <div class="right-content-list">
+        <div id="msg-vacio">Ningún contacto seleccionado.</div>
+    </div>
 @endsection

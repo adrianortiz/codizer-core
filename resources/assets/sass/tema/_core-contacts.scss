@@ -1,0 +1,48 @@
+// LISTA DE CONTACTOS
+
+.data-contacto-tr {
+  .container-list-photo-user {
+    width: 10px;
+    height: auto;
+    img {
+      max-width: 60px;
+      height: auto;
+      border-radius: 60px;
+      border: solid 2px $gris-100;
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+    .list-contact-full-name {
+      color: $azul-200;
+    }
+  }
+}
+
+.list-contact-full-name {
+  width: 100%;
+  height: auto;
+  font-weight: 600;
+  font-size: 12px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.list-contact-mail {
+  width: auto;
+  padding-top: 2px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 2px;
+
+  font-size: 11px;
+  background-color: rgba($gris-300, 0.2);
+  border-radius: 20px;
+
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+  font-style: italic;
+
+}
