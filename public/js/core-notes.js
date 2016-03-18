@@ -11,7 +11,14 @@ var continaerNoteShow = $('#continaer-note-shows');
 
 // Retorna la fila de una notra creada o actulizada
 function noteCreateUpdate(result) {
-    return '<tr class="data-note-tr" data-note="' + result.note.id + '"><td class="container-list-point"><div></div><div></div><div></div></td><td><div class="list-note-content">' + result.note.content + '</div><span class="list-note-date-update">' + result.note.created_at + '</span></td></tr>';
+    return '<tr class="data-note-tr" data-note="' + result.note.id + '">' +
+        '<td class="container-list-point">' +
+        '<div></div><div></div><div></div></td>' +
+        '<td>' +
+        '<div class="list-note-content">' + result.note.content + '</div>' +
+        '<span class="list-note-date-update">' + result.note.created_at + '</span>' +
+        '</td>' +
+        '</tr>';
 }
 
 (function($){
@@ -21,6 +28,7 @@ function noteCreateUpdate(result) {
         App.SelectNote();
         App.UpdateNote();
         App.DeleteNote();
+        App.SearchAndListAllNotes();
     },
 
         /**
@@ -43,7 +51,7 @@ function noteCreateUpdate(result) {
                     data:       datos,
 
                     success: function( result ) {
-                        console.log(result);
+                        // console.log(result);
 
                         if (result.message == "No se pudo crear la nota.") {
                             hideShowAlert('msj-danger', 'Ocurrio un problema');
@@ -54,7 +62,6 @@ function noteCreateUpdate(result) {
                             $('.close').click();
                             document.getElementById("form-notes-store").reset();
                         }
-
                     }
 
                 }).fail(function( jqXHR, textStatus ) {
@@ -101,7 +108,7 @@ function noteCreateUpdate(result) {
 
                     success: function( result )
                     {
-                        console.log(result);
+                        // console.log(result);
                         // Agregar datos de la nota consultada al contenedor derecho
                         continaerNoteShow.html('<div class="block-content-info">' + result.note[0].content + '</div>');
 
@@ -145,7 +152,7 @@ function noteCreateUpdate(result) {
 
                     success: function( result )
                     {
-                        console.log(result);
+                        // console.log(result);
                         hideShowAlert('msj-success', result.message);
                         containerNotes.prepend( noteCreateUpdate(result) );
 
@@ -207,7 +214,7 @@ function noteCreateUpdate(result) {
 
                     success: function( result )
                     {
-                        console.log(result);
+                        // console.log(result);
                         // Ocultar modal global de eliminar
                         $('#modal-delete').fadeOut();
                         hideShowAlert('msj-success', result.message);
@@ -228,6 +235,61 @@ function noteCreateUpdate(result) {
 
                 });
             });
+        },
+
+        SearchAndListAllNotes: function() {
+
+            // Llama al método buscarUnoTodoNote cuando se teclea en el buscador
+            $('#core-search-group input').keyup( function() {
+                buscarUnoTodoNote();
+            });
+
+            // Llama al método buscarUnoTodoNote cuando se le da click
+            // Al estar el campo de busqueda vacio, traera toda la data
+            $('#btn-list-all-notes').click( function() {
+                $('#core-search-group input').val('');
+                buscarUnoTodoNote();
+            });
+
+            function buscarUnoTodoNote() {
+                var form = $('#form-note-to-search');
+                var datos = form.serializeArray();
+                var route = form.attr('action');
+
+                $.ajax({
+                    url:        route,
+                    type:       'GET',
+                    dataType:   'json',
+                    data:       datos + '&content=' + $('#core-search-group input').val(),
+
+                    success: function( result) {
+
+                        containerNotes.empty();
+                        var count = 0;
+                        $( result['notes']).each( function(key, value) {
+                            count++;
+                            containerNotes.prepend(
+                                '<tr class="data-note-tr" data-note="' + value.id + '">' +
+                                '<td class="container-list-point">' +
+                                '<div></div><div></div><div></div></td>' +
+                                '<td>' +
+                                '<div class="list-note-content">' + value.content.substring(0, 40) + '...</div>' +
+                                '<span class="list-note-date-update">' + value.updated_at + '</span>' +
+                                '</td>' +
+                                '</tr>'
+                            );
+                        });
+
+                        if (count == 0)
+                            containerNotes.html('<div id="msg-list-vacio">Ninguna coincidencia.</div>');
+
+                    }
+                }).fail( function( result ) {
+                    hideShowAlert('msj-danger', 'Ocurrio un problema');
+                    console.log( result )
+                });
+
+            }
         }
     };
 

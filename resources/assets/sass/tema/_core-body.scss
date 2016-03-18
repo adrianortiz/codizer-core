@@ -1,7 +1,12 @@
-html,body{
+html,body {
   margin: 0;
   height: 100%;
   background-color: #F2F2F2;
+}
+
+// Quitar el focus de todos los elementos del DOM
+*:focus {
+  outline:0 !important;
 }
 
 #container-ui {

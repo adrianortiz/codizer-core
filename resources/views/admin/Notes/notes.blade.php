@@ -15,7 +15,7 @@
     @include('partials.perfil-link')
 
     <a href="#" class="core-menu-list"><div>Notas</div></a>
-    <a href="#" class="core-menu-list menu-list-option"><div>Todas las notas</div></a>
+    <a href="#" id="btn-list-all-notes" class="core-menu-list menu-list-option"><div>Todas las notas</div></a>
     <a href="#" class="core-menu-list menu-list-option"><div>Notas compartidas</div></a>
 
 @endsection

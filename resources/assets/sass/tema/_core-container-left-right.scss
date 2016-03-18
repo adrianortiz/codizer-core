@@ -124,6 +124,16 @@
   @include prefixer(transform, translate(-50%, -50%));
 }
 
+#msg-list-vacio {
+  text-align: center;
+  width: 90%;
+  height: 100px;
+  position: relative;
+  left: 50%;
+  top: 50%;
+  @include prefixer(transform, translate(-50%, 50%));
+}
+
 
 // FILA ACTIVA PARA LA LISTA
 .activarFila {

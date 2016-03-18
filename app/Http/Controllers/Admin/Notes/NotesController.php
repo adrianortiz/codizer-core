@@ -53,19 +53,20 @@ class NotesController extends Controller
      */
     public function store(Request $request)
     {
-        $note = new Note([
-            'content' => $request['content'],
-            'users_id' => \Auth::id()
-        ]);
-
-        if ( $note->save() )
-            $message = 'Nota creada.';
-        else
-            $message = 'No se pudo crear la nota.';
-
-        $note->content = substr($note->content, 0, 41).'...';
-
         if ($request->ajax()) {
+
+            $note = new Note([
+                'content' => $request['content'],
+                'users_id' => \Auth::id()
+            ]);
+
+            if ( $note->save() )
+                $message = 'Nota creada.';
+            else
+                $message = 'No se pudo crear la nota.';
+
+            $note->content = substr($note->content, 0, 41).'...';
+
             return response()->json([
                 'message' => $message,
                 'note' => $note
@@ -84,9 +85,10 @@ class NotesController extends Controller
      */
     public function show(Request $request)
     {
-        $note = Note::where('id', $request['id'])->get();
-
         if ($request->ajax()) {
+
+            $note = Note::where('id', $request['id'])->get();
+
             return response()->json([
                 'note' => $note
             ]);
@@ -115,18 +117,19 @@ class NotesController extends Controller
      */
     public function update(Request $request)
     {
-        $note = Note::findOrFail($request['id']);
-        $note->fill($request->all());
-
-        $msg = "";
-        if( $note->save() )
-            $msg = "Nota actualizada";
-        else
-            $msg = "Ocurrio un error";
-
-        $note->content = substr($note->content, 0, 41).'...';
-
         if ($request->ajax()) {
+
+            $note = Note::findOrFail($request['id']);
+            $note->fill($request->all());
+
+            $msg = "";
+            if( $note->save() )
+                $msg = "Nota actualizada";
+            else
+                $msg = "Ocurrio un error";
+
+            $note->content = substr($note->content, 0, 41).'...';
+
             return response()->json([
                 'message' => $msg,
                 'note'    => $note
@@ -144,16 +147,35 @@ class NotesController extends Controller
      */
     public function destroy(Request $request)
     {
-        $msg = "";
-        if( Note::destroy($request['id']) )
-            $msg = "Nota eliminada";
-        else
-            $msg = "Ocurrio un error";
-
         if ($request->ajax()) {
+            $msg = "";
+            if( Note::destroy($request['id']) )
+                $msg = "Nota eliminada";
+            else
+                $msg = "Ocurrio un error";
+
             return response()->json([
                 'message' => $msg
             ]);
+        } else {
+            abort(404);
+        }
+    }
+
+    public function search(Request $request)
+    {
+        if ($request->ajax()) {
+
+            // Search all notes from connected user and note content name
+            $notes = Note::where('users_id', \Auth::id())
+                ->where('content', 'LIKE', '%'.$request['content'].'%')
+                ->orderBy('updated_at', 'asc')
+                ->get();
+
+            return response()->json([
+                'notes'    => $notes
+            ]);
+
         } else {
             abort(404);
         }

@@ -65,3 +65,7 @@
 {!! Form::open(['route' => 'notes.delete', 'method' => 'DELETE', 'id' => 'form-note-to-delete']) !!}
 {!! Form::hidden('id', 'null', ['id' => 'id-note-to-delete']) !!}
 {!! Form::close() !!}
+
+<!-- FORMULARIO DE BUSCAR NOTAS -->
+{!! Form::open(['route' => 'notes.search', 'method' => 'GET', 'id' => 'form-note-to-search']) !!}
+{!! Form::close() !!}

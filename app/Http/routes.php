@@ -133,6 +133,11 @@ Route::group(['middleware' => 'auth'], function () {
             'as'    => 'notes.delete'
         ]);
 
+        Route::get('perfil/{nameFirstName}/notes/search', [
+            'uses'  => 'Admin\Notes\NotesController@search',
+            'as'    => 'notes.search'
+        ]);
+
         /*
          * Events
          */
