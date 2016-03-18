@@ -72,7 +72,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => 'role'], function () {
 
         /**
-         *  Social - Perfil
+         *  ==== Social - Perfil =====
          */
         Route::get('perfil/{nameFirstName}/', [
             'uses'  => 'Admin\Social\PerfilController@index',
@@ -101,7 +101,7 @@ Route::group(['middleware' => 'auth'], function () {
         ]);
 
         /*
-         * Notes
+         * ======= Notes ======
          * List notes
          */
         Route::get('perfil/{nameFirstName}/notes', [
@@ -142,9 +142,22 @@ Route::group(['middleware' => 'auth'], function () {
         ]);
 
 
+        /**
+         * === Busquedas ====
+         */
         Route::get('search-global/', [
             'uses'  => 'Admin\Search\SearchController@searchGlobal',
             'as'    => 'core.searchGlobal'
+        ]);
+
+
+        /*
+         * ======= Productos ======
+         * List products
+         */
+        Route::get('perfil/{nameFirstName}/products', [
+            'uses'  => 'Admin\Products\ProductsController@index',
+            'as'    => 'products'
         ]);
     });
 

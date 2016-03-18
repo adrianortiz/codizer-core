@@ -21,10 +21,10 @@
             <a href="">Notas</a>
         </div>
     </a>
-    <a href="#">
+    <a href="{{ route('products', $userPerfil[0]->perfil_route) }}">
         <div class="app-option">
             <div class="app-icon"></div>
-            <a href="#">Name App</a>
+            <a href="">Productos</a>
         </div>
     </a>
     <a href="#">
