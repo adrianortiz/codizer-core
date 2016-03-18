@@ -1,3 +1,33 @@
+// SEARCH GROUP
+#core-search-group {
+  input {
+    width: 280px !important;
+    height: 28px !important;
+    border: none !important;
+    background-color: #666666 !important;
+    color: #E6E6E6 !important;
+    border-radius: 20px !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+
+  }
+}
+
+#core-search-group-btn {
+  background-color: #4A4A4A;
+  border-radius: 20px !important;
+  transform: translateX(-26px);
+  width: 24px;
+  height: 24px;
+  padding: 1px;
+
+  &:hover {
+    background-color: $gris-250;
+  }
+}
+
+
+// CONTAINERS
 #article-content {
   float: left;
   height: auto;
@@ -37,17 +67,15 @@
 .options-tools-list, .left-content-list-tool, .right-content-list-tool {
   height: 46px;
   background-color: rgba($blanco, 0.9) !important;
-  border-bottom: solid 1px $gris-150 !important;
+  border-bottom: solid 1px #333636 !important;
 }
 
 .left-content-list-tool, .right-content-list-tool {
-  padding-top: 5px;
-  text-align: center;
 
   // ESTILOS EXTRA DE PRUEBA
   background-color: #4A4A4A !important;
   border-right: solid 1px #323636;
-  padding-top: 9px;
+  padding: 9px;
 
   button {
     @include transition(.3s ease);

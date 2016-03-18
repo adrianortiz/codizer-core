@@ -35,28 +35,21 @@
 
 @section('extra-content')
     <div class="options-tools-list">
+
         <div class="left-content-list-tool">
-            <div class="btn-group" role="group" aria-label="...">
-                <button type="button" class="btn btn-default btn-sm">1</button>
-                <button type="button" class="btn btn-default btn-sm">2</button>
-
-                <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Dropdown
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Dropdown link</a></li>
-                        <li><a href="#">Dropdown link</a></li>
-                    </ul>
-                </div>
+            <div id="core-search-group" class="input-group input-group-sm">
+                <input type="text" class="form-control" placeholder="Search for...">
+                <span class="input-group-btn">
+                    <button id="core-search-group-btn" class="btn btn-default btn-sm" type="button"><i class="fa fa-search"></i></button>
+                </span>
             </div>
-
         </div>
 
         <div class="right-content-list-tool">
-
-            <div id="btn-group-to-product" class="btn-group" role="group" aria-label="...">
+            <div id="btn-group-to-product" class="btn-group left" role="group" aria-label="...">
+                <button type="button" id="btn-new-product" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modalNewProduct">Nuevo producto</button>
+            </div>
+            <div id="btn-group-to-product" class="btn-group right" role="group" aria-label="...">
                 <button type="button" id="btn-edit-product" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modalUpdateProduct">Editar</button>
                 <button type="button" id="btn-delete-product" class="btn btn-default btn-sm">Eliminar</button>
             </div>

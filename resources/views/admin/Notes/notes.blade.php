@@ -15,7 +15,7 @@
     @include('partials.perfil-link')
 
     <a href="#" class="core-menu-list"><div>Notas</div></a>
-    <a href="#" class="core-menu-list menu-list-option" data-toggle="modal" data-target="#modalNewNote"><div>Nueva nota</div></a>
+    <a href="#" class="core-menu-list menu-list-option"><div>Todas las notas</div></a>
     <a href="#" class="core-menu-list menu-list-option"><div>Notas compartidas</div></a>
 
 @endsection
@@ -25,28 +25,21 @@
 
 @section('extra-content')
     <div class="options-tools-list">
+
         <div class="left-content-list-tool">
-            <div class="btn-group" role="group" aria-label="...">
-                <button type="button" class="btn btn-default btn-sm">1</button>
-                <button type="button" class="btn btn-default btn-sm">2</button>
-
-                <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Dropdown
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Dropdown link</a></li>
-                        <li><a href="#">Dropdown link</a></li>
-                    </ul>
-                </div>
+            <div id="core-search-group" class="input-group input-group-sm">
+                <input type="text" class="form-control" placeholder="Buscar por...">
+                <span class="input-group-btn">
+                    <button id="core-search-group-btn" class="btn btn-default btn-sm" type="button"><i class="fa fa-search"></i></button>
+                </span>
             </div>
-
         </div>
 
         <div class="right-content-list-tool">
-
-            <div id="btn-group-to-note" style="display:  none" class="btn-group" role="group" aria-label="...">
+            <div id="btn-group-to-product" class="btn-group left" role="group" aria-label="...">
+                <button type="button" id="btn-new-product" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modalNewNote">Nueva nota</button>
+            </div>
+            <div id="btn-group-to-note" style="display:  none" class="btn-group right" role="group" aria-label="...">
                 <button type="button" id="btn-edit-note" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modalUpdateNote">Editar</button>
                 <button type="button" id="btn-delete-note" class="btn btn-default btn-sm">Eliminar</button>
             </div>

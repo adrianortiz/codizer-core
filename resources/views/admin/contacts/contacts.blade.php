@@ -29,8 +29,27 @@
 
     @section('extra-content')
         <div class="options-tools-list">
-            <div class="left-content-list-tool"></div>
-            <div class="right-content-list-tool"></div>
+            <div class="left-content-list-tool">
+
+                <div id="core-search-group" class="input-group input-group-sm">
+                    <input type="text" class="form-control" placeholder="Search for...">
+                <span class="input-group-btn">
+                    <button id="core-search-group-btn" class="btn btn-default btn-sm" type="button"><i class="fa fa-search"></i></button>
+                </span>
+                </div>
+
+            </div>
+
+            <div class="right-content-list-tool">
+                <div id="btn-group-to-product" class="btn-group left" role="group" aria-label="...">
+                    <button type="button" id="btn-new-contact" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modalNewContact">Nuevo contacto</button>
+                </div>
+                <div id="btn-group-to-product" class="btn-group right" role="group" aria-label="...">
+                    <button type="button" id="btn-edit-contact" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modalUpdateContact">Editar</button>
+                    <button type="button" id="btn-delete-contact" class="btn btn-default btn-sm">Eliminar</button>
+                </div>
+
+            </div>
         </div>
     @endsection
 
