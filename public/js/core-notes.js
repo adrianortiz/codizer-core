@@ -203,6 +203,10 @@ function noteCreateUpdate(result) {
 
             // Eliminar nota
             $('#si').click( function() {
+
+                $('.notificacion-text').removeClass('in');
+                $('#modal-delete').fadeOut();
+
                 var form = $('#form-note-to-delete');
                 var datos = form.serializeArray();
                 var route = form.attr('action');
@@ -211,15 +215,16 @@ function noteCreateUpdate(result) {
                     url:        route,
                     type:       'DELETE',
                     dataType:   'json',
-                    async:      false,
+                    // async:      false,
                     data:       datos,
 
                     success: function( result )
                     {
                         // console.log(result);
-                        // Ocultar modal global de eliminar
-                        $('#modal-delete').fadeOut();
+
+                        // Mensaje de alerta
                         hideShowAlert('msj-success', result.message);
+
                         // Quitar nota de la vista
                         tableTrTouched.fadeOut();
                         $('#btn-group-to-note').hide();
