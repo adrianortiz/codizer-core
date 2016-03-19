@@ -87,8 +87,8 @@
             <a class="btn" href="#" role="button">+ Seguir</a>
         </div>
         <div id="options-menu-amigo" class="dropdown">
-            <button class="btn dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                + Amigo
+            <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                + Contacto
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
@@ -117,7 +117,7 @@
                             <option>Como Empresa</option>
                         </select>
 
-                        <button>Publicar</button>
+                        <button class="btn-shadow-blue">Publicar</button>
                     </div>
                     {!! Form::close() !!}
                 </div>
@@ -153,5 +153,4 @@
 @endsection
 
 @section('extra-js')
-    <script src="{{ asset('/js/core-social-cover-perfil.js') }}"></script>
 @endsection

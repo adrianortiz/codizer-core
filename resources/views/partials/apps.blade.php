@@ -1,5 +1,5 @@
 <!-- Apps -->
-<div class="core-apps-background-a"></div>
+<div class="core-apps-background-a">
 <div class="core-apps-container">
     <a href="{{ route('contacts', $userPerfil[0]->perfil_route) }}">
         <div class="app-option">
@@ -53,3 +53,4 @@
     </a>
 </div>
 <!-- End Apps -->
+</div>

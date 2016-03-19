@@ -134,6 +134,7 @@
 <script src="{{ asset('/js/codizer-alert.js') }}"></script>
 <script src="{{ asset('/js/core-apps.js') }}"></script>
 <script src="{{ asset('/js/core-search.js') }}"></script>
+<script src="{{ asset('/js/core-social-cover-perfil.js') }}"></script>
 
 @yield('extra-js')
 

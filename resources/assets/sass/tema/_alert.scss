@@ -26,6 +26,17 @@
       height: 200px;
       text-align: center;
 
+      -webkit-transform: scale(1.6);
+      -moz-transform: scale(1.6);
+      -ms-transform: scale(1.6);
+      transform: scale(1.6);
+      top: 100px;
+      opacity: 0;
+
+      -webkit-transition: all 0.6s;
+      -moz-transition: all 0.6s;
+      transition: all 0.6s;
+
       div {
 
         p:nth-child(1) {
@@ -46,7 +57,7 @@
         #si, #no {
           width: 96px;
           height: 36px;
-          border-radius: $border-5;
+          border-radius: 20px;
           border: solid 0 transparent;
           font-weight: bold;
         }
@@ -64,6 +75,16 @@
         }
       }
     }
+}
+
+.notificacion-text.in {
+
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+
+  opacity: 1;
 }
 
 

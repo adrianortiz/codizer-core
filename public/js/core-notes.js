@@ -192,10 +192,12 @@ function noteCreateUpdate(result) {
             // Mostrar modal global de eliminar
             $('#btn-delete-note').click( function() {
                 $('#modal-delete').fadeIn();
+                $('.notificacion-text').addClass('in');
             });
 
             // Ocultar modal global de eliminar
             $('#no').click( function() {
+                $('.notificacion-text').removeClass('in');
                 $('#modal-delete').fadeOut();
             });
 

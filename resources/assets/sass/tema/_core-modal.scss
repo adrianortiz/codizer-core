@@ -1,5 +1,8 @@
+
+
+// MODAL
 .modal {
-  background-color: rgba(#000, 0.7);
+  background-color: rgba(#000, 0.6);
 }
 
 .modal-dialog {
@@ -15,9 +18,8 @@
 
 .modal-header {
   text-align: center;
-  background-color: transparent;
-  border-bottom: solid 2px $gris-200;
-  margin: 0 20px;
+  background-color: $gris-280;
+  border-radius: 12px 12px 0 0;
 }
 
 .modal-body {
@@ -38,4 +40,41 @@
 
 .form-with-100 {
   width: 100% !important;
+}
+
+
+// CHANGE ANIMATION
+
+.modal.fade .modal-dialog {
+  -webkit-transform: scale(1.6);
+  -moz-transform: scale(1.6);
+  -ms-transform: scale(1.6);
+  transform: scale(1.6);
+  top: 100px;
+  opacity: 0;
+
+  -webkit-transition: all 0.6s;
+  -moz-transition: all 0.6s;
+  transition: all 0.6s;
+}
+
+.modal.fade.in .modal-dialog {
+
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+
+  opacity: 1;
+}
+
+
+// BUTTONS
+.btn-shadow-blue {
+  background: #2E7BCD !important;
+  @include prefixer(box-shadow, $sombra-azul-object);
+  @include transition(.3s ease);
+  &:hover {
+    @include prefixer(transform, scale(1.2, 1.2));
+  }
 }

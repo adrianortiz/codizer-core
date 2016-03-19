@@ -1,28 +1,21 @@
 .core-apps-background-a {
+  background-color: $blanco;
   display: none;
+  position: fixed;
+  z-index: 100;
+  top: 40px;
   width: 100%;
   @include prefixer(height, calc(100% - 40px));
-  position: absolute;
-
-  left: 0;
-  bottom: 0;
-  background-color: $blanco;
-  z-index: 100;
 }
 
 .core-apps-container {
   display: none;
-  width: 60%;
-  @include prefixer(height, calc(100% - 45px));
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  z-index: 101;
-  padding-top: 60px;
-  @include centrarXY();
-  @include prefixer(transform, translate(-50%, -47%));
+  max-width: 860px;
+  height: auto;
   text-align: center;
-  overflow: auto;
+  margin: 0 auto;
+  margin-top: 100px;
+  margin-bottom: 100px;
 }
 
 // Format apps
