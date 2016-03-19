@@ -71,10 +71,23 @@
 
 // BUTTONS
 .btn-shadow-blue {
-  background: #2E7BCD !important;
+  color: $blanco;
+  background: $azul-100 !important;
   @include prefixer(box-shadow, $sombra-azul-object);
   @include transition(.3s ease);
   &:hover {
+    color: $blanco;
+    @include prefixer(transform, scale(1.2, 1.2));
+  }
+}
+
+.btn-shadow-white {
+  color: $gris-400;
+  background: $blanco !important;
+  @include prefixer(box-shadow, $sombra-gris-white-objetct);
+  @include transition(.3s ease);
+  &:hover {
+    color: $azul-100;
     @include prefixer(transform, scale(1.2, 1.2));
   }
 }
