@@ -25,6 +25,7 @@
   width: 130px;
   height: 186px;
   margin: 10px 40px;
+  @include transition(.3s ease);
 
   .app-icon {
     margin: 0 auto;
@@ -36,17 +37,15 @@
     @include transition(.3s ease);
 
     img {
-      width: 65px;
-      height: auto;
-      position: relative;
-      left: 30%;
-      top: 50%;
-      @include prefixer(transform, translate(-50%, -50%));
-
+      margin-top: 20px;
+      width: 70px;
+      height: 70px;
+      @include  transition(.3s ease);
     }
   }
 
-  a {
+  // NOMBRE DE LA APP
+  span {
     margin-top: 20px;
     text-align: center;
     color: $black-core;
@@ -56,18 +55,16 @@
 
   &:hover {
     .app-icon {
-      border: solid 1px $morado;
+      border: solid 1px transparent;
+      @include prefixer(transform, scale(.9, .9));
+
+      img {
+        @include prefixer(transform, scale(1.8, 1.8));
+      }
     }
 
-    a {
+    span {
       color: $morado;
     }
-  }
-}
-
-
-svg {
-  #Line-Copy-9 {
-    stroke: #E74F56;
   }
 }
