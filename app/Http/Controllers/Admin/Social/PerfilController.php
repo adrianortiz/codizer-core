@@ -27,7 +27,9 @@ class PerfilController extends Controller
         $userPerfil = Core::getUserPerfil();
         $userContacto = Core::getUserContact();
 
-        return view('admin.social.perfil', compact('perfil', 'contacto', 'userPerfil', 'userContacto'));
+        $friends = Core::getContactos($contacto);
+
+        return view('admin.social.perfil', compact('perfil', 'contacto', 'userPerfil', 'userContacto', 'friends'));
     }
 
     /**

@@ -57,17 +57,23 @@
         <table class="table table-hover">
             <tbody>
 
-            @foreach($friends as $friend)
+            @forelse($friends as $friend)
                 <tr class="data-contacto-tr" data-contacto="{{ $friend -> id }}">
                     <td class="container-list-photo-user">
                         <img src="{{ asset('/media/photo-perfil/' . $friend -> foto) }}">
                     </td>
                     <td>
-                        <div class="list-contact-full-name">{{ $friend -> nombre, ' ' .$friend -> ap_paterno }} </div>
-                        <span class="list-contact-mail">mi_correo@codizer.com</span><br/>
+                        <div class="list-contact-full-name">{{ $friend -> nombre. ' ' .$friend -> ap_paterno }} </div>
+                        <span class="list-contact-mail">{{ $friend -> email }}</span><br/>
                     </td>
                 </tr>
-            @endforeach
+                @empty
+                <tr class="data-contacto-tr">
+                    <td class="list-contact-full-name">
+                        No hay contactos.
+                    </td>
+                </tr>
+            @endforelse
 
             </tbody>
         </table>

@@ -94,9 +94,10 @@ class Core
      * @return mixed
      */
     public function getContactos($contacto){
-        return Contacto::join('users_has_friend_users', 'users_has_friend_users.users_id_friend', '=', 'contacto.id')
+        return Contacto::join('users', 'users.id', '=', 'contacto.id')
+            ->join('users_has_friend_users', 'users_has_friend_users.users_id_friend', '=', 'contacto.id')
             ->where('users_id', '=', $contacto[0]->id)
-            ->select('contacto.id', 'foto', 'nombre', 'ap_paterno', 'ap_materno', 'sexo', 'f_nacimiento', 'profesion', 'estado', 'desc_origen', 'desc_contacto')
+            ->select('contacto.*', 'users.email' , 'users.password', 'users.role')
             ->get();
     }
 
