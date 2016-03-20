@@ -9,6 +9,7 @@ namespace App\Components;
 
 use App\Perfil;
 use App\Contacto;
+use App\User;
 use App\UserHasPerfil;
 use Illuminate\Support\Facades\DB;
 
@@ -100,6 +101,5 @@ class Core
             ->select('contacto.*', 'users.email' , 'users.password', 'users.role')
             ->get();
     }
-
 
 }

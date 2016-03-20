@@ -81,4 +81,8 @@
     <div class="right-content-list">
         <div id="msg-vacio">Ningún contacto seleccionado.</div>
     </div>
+    @endsection
+
+@section('extra-js')
+    <script src="{{ asset('/js/core-contacts.js') }}"></script>
 @endsection
