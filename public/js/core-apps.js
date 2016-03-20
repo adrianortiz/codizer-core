@@ -17,7 +17,7 @@ function hideModalAppsUI() {
     appsControl = 0;
     $('.core-apps-background-a').fadeOut(300);
     $('.core-apps-container').fadeOut(300);
-    $('#main-header-app').css('background', '#3B99FB');
+    $('#main-header-app').css('background', '#1E74D0');
     $('#name-app-select').html(nameApp);
     $('#apps-flecha span').addClass('fa-rotate-180');
 

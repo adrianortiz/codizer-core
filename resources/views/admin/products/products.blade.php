@@ -85,10 +85,14 @@
     <div class="block-content-info-product">
 
         <div class="container-show-info-product-a">
+
+            <!-- LOS ID EN SU MAYORIA SON PARA QUE IDENTIFIQUES A LOS ELEMENTOS CON JS Y PUEDAS MODIFICAR LA INFORMACIÓN -->
+
             <div id="show-info-product-marca">Chanel</div>
             <div id="show-info-product-title">Bolso de mano de piel rosado</div>
 
             <div class="container-show-info-product-img-b">
+                <!-- USA UN FOR PARA IMPRIMIR LAS FOTOS DE CADA PRODUCTO -->
                 <img id="principal-image-product" src="{{ asset('/media/photo-product/bolso-rosa-chanel.png') }}">
                 <img id="show-info-product-img-1" class="sub-image-product principal-image-product" src="{{ asset('/media/photo-product/bolso-rosa-chanel.png') }}">
                 <img id="show-info-product-img-2" class="sub-image-product" src="{{ asset('/media/photo-product/bolso-rosa-chanel.png') }}">
@@ -99,21 +103,23 @@
             <div class="container-show-info-product-list-c">
                 <div>
                     <div>Precio</div>
-                    <div id="show-info-product-price">$2100.00</div>
+                    <div id="show-info-product-price" class="show-info-product">$2100.00</div>
                 </div>
                 <div>
                     <div>Cantidad</div>
-                    <div id="show-info-product-cantidad">300 pz</div>
+                    <div id="show-info-product-cantidad" class="show-info-product">300 pz</div>
                 </div>
                 <div>
                     <div>Me gusta</div>
-                    <div id="show-info-product-me-gusta">603</div>
+                    <div id="show-info-product-me-gusta" class="show-info-product">603</div>
                 </div>
                 <div>
                     <div>Categorias</div>
-                    <div id="show-info-product-categorias">
+                    <div id="show-info-product-categorias" class="show-info-product">
+                        <!-- USA UN FOR PARA IMPRIMIR LAS CATEGORIAS A LAS QUE PERTENECE UN PRODUCTO -->
                         <span class="list-product-tags">Bolso</span>
                         <span class="list-product-tags">Piel</span>
+                        <span class="list-product-tags">Cafe</span>
                         <span class="list-product-tags">Cafe</span>
                         <span class="list-product-tags">Chanel</span>
                     </div>

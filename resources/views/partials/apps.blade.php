@@ -1,55 +1,64 @@
 <!-- Apps -->
-<div class="core-apps-background-a"></div>
+<div class="core-apps-background-a">
 <div class="core-apps-container">
     <a href="{{ route('contacts', $userPerfil[0]->perfil_route) }}">
         <div class="app-option">
             <div class="app-icon">
-                <img src="{{asset('/media/apps/contacts.svg')}}" />
+                <img src="{{asset('/media/apps/notes.png')}}" />
             </div>
-            <a href="">Contacts</a>
+            <span>Contacts</span>
         </div>
     </a>
     <a href="{{ route('events', $userPerfil[0]->perfil_route) }}">
         <div class="app-option">
-            <div class="app-icon"></div>
-            <a href="">Eventos</a>
+            <div class="app-icon">
+                <img src="{{asset('/media/apps/events.png')}}" />
+            </div>
+            <span>Eventos</span>
         </div>
     </a>
     <a href="{{ route('notes', $userPerfil[0]->perfil_route) }}">
         <div class="app-option">
-            <div class="app-icon"></div>
-            <a href="">Notas</a>
+            <div class="app-icon">
+                <img src="{{asset('/media/apps/contacts.png')}}" />
+            </div>
+            <span>Notas</span>
         </div>
     </a>
     <a href="{{ route('products', $userPerfil[0]->perfil_route) }}">
         <div class="app-option">
-            <div class="app-icon"></div>
-            <a href="">Productos</a>
+            <div class="app-icon">
+                <img src="{{asset('/media/apps/products.png')}}" />
+            </div>
+            <span>Productos</span>
+        </div>
+    </a>
+    <a href="{{ route('events', $userPerfil[0]->perfil_route) }}">
+        <div class="app-option">
+            <div class="app-icon">
+                <img src="{{asset('/media/apps/data.png')}}" />
+            </div>
+            <span>Data</span>
         </div>
     </a>
     <a href="#">
         <div class="app-option">
             <div class="app-icon"></div>
-            <a href="#">Name App</a>
+            <span>Name App</span>
         </div>
     </a>
     <a href="#">
         <div class="app-option">
             <div class="app-icon"></div>
-            <a href="#">Name App</a>
+            <span>Name App</span>
         </div>
     </a>
     <a href="#">
         <div class="app-option">
             <div class="app-icon"></div>
-            <a href="#">Name App</a>
-        </div>
-    </a>
-    <a href="#">
-        <div class="app-option">
-            <div class="app-icon"></div>
-            <a href="#">Name App</a>
+            <span>Name App</span>
         </div>
     </a>
 </div>
 <!-- End Apps -->
+</div>

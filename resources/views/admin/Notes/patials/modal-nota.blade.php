@@ -20,7 +20,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default btn-sm btn-sm-radius" data-dismiss="modal">Cancelar</button>
-                <button id="store-new-note" type="button" class="btn btn-primary btn-sm btn-sm-radius">Guardar</button>
+                <button id="store-new-note" type="button" class="btn btn-primary btn-sm btn-sm-radius btn-shadow-blue">Guardar</button>
             </div>
         </div>
     </div>
@@ -50,7 +50,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default btn-sm btn-sm-radius" data-dismiss="modal">Cancelar</button>
-                <button id="update-actual-note" type="button" class="btn btn-primary btn-sm btn-sm-radius">Actualizar</button>
+                <button id="update-actual-note" type="button" class="btn btn-primary btn-sm btn-sm-radius btn-shadow-blue">Actualizar</button>
             </div>
         </div>
     </div>
