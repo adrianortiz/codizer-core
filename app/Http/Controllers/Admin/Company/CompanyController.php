@@ -95,7 +95,7 @@ class CompanyController extends Controller
 
                 return response()->json([
                     'message' => 'Empresa dada de alta.',
-                    'url'       => route('companies.admin', $userPerfil[0]->perfil_route)
+                    'url'       => route('companies.index', $userPerfil[0]->perfil_route)
                 ]);
             }
         }

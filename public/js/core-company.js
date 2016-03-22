@@ -28,8 +28,12 @@ $('#btn-new-company').click();
                     contentType: false,
                     processData: false,
 
+                    beforeSend: function(){
+                        $('.core-loader').show();
+                    },
+
                     success: function (result) {
-                        console.log(result);
+                        $('.core-loader').hide();
 
                         hideShowAlert('msj-success', result.message);
                         $('.close').click();
@@ -39,6 +43,7 @@ $('#btn-new-company').click();
                     }
 
                 }).fail(function (jqXHR, textStatus) {
+                    $('.core-loader').hide();
 
                     $('#msj-danger-state').empty();
 
