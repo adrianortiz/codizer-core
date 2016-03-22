@@ -13,7 +13,12 @@ $('#btn-new-company').click();
 
         CreateCompany: function () {
 
-            $('#store-new-company').click(function () {
+            $('#store-new-company').click( function() {
+                if ( validateGroup(".form-group-validate") == -1 )
+                    initSaveCompany();
+            });
+
+            function initSaveCompany() {
                 var form = $('#form-company-store');
                 // var datos = form.serializeArray();
                 var route = form.attr('action');
@@ -52,7 +57,7 @@ $('#btn-new-company').click();
                     });
 
                 });
-            });
+            }
         }
     };
 

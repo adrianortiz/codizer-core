@@ -17,7 +17,7 @@ var config = {"validation":[
     {
         "type" : "val_text",
         "rule" : /^([a-z ñáéíóú]{1,250})$/i,
-        "msg-danger" : "Solo se acepta texto"
+        "msg-danger" : "Solo texto, max 250"
     },
     {
         "type" : "val_text_num",

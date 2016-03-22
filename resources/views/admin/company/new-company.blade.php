@@ -77,5 +77,6 @@
 @endsection
 
 @section('extra-js')
+    <script src="{{ asset('/js/codizer-validate.js') }}"></script>
     <script src="{{ asset('/js/core-company.js') }}"></script>
 @endsection
