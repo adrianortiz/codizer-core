@@ -3,8 +3,19 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
+
+                <!-- AGREGAR ESTO AL HEADER DE UN MODAL -->
+                <div class="container-menu-modal">
+                    <div class="modal-tag modal-tag-selectionated">
+                        <div class="modal-icon"></div>
+                        <div class="modal-desc">
+                            <div class="modal-title">Modal</div>
+                            <div class="modal-tittle-tag">Nueva Nota</div>
+                        </div>
+                    </div>
+                </div>
                 <button type="hidden" class="close" data-dismiss="modal" aria-label="Close"></button>
-                <h4 class="modal-title" id="myModalLabel">Nueva nota</h4>
+
             </div>
             <div class="modal-body">
                 <!-- FORMULARIO CREAR -->
@@ -32,8 +43,19 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
+
+                <!-- AGREGAR ESTO AL HEADER DE UN MODAL -->
+                <div class="container-menu-modal">
+                    <div class="modal-tag modal-tag-selectionated">
+                        <div class="modal-icon"></div>
+                        <div class="modal-desc">
+                            <div class="modal-title">Modal</div>
+                            <div class="modal-tittle-tag">Editar Nota</div>
+                        </div>
+                    </div>
+                </div>
                 <button type="hidden" class="close" data-dismiss="modal" aria-label="Close"></button>
-                <h4 class="modal-title" id="myModalLabel">Editar nota</h4>
+
             </div>
             <div class="modal-body">
                 <!-- FORMULARIO DE ACTUALIZAR NOTA -->

@@ -7,6 +7,7 @@
 
 namespace App\Components;
 
+use App\Empresa;
 use App\Perfil;
 use App\Contacto;
 use App\UserHasPerfil;
@@ -99,6 +100,16 @@ class Core
             ->where('users_id', '=', $contacto[0]->id)
             ->select('contacto.*', 'users.email' , 'users.password', 'users.role')
             ->get();
+    }
+
+    public function hasEmpresa()
+    {
+        $empresa = Empresa::where('users_id', '=', \Auth::user()->id )-get();
+
+        if ($empresa)
+            return $empresa;
+        else
+            return false;
     }
 
 

@@ -87,7 +87,7 @@
             <a class="btn" href="#" role="button">+ Seguir</a>
         </div>
         <div id="options-menu-amigo" class="dropdown">
-            <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            <button class="btn btn-sm dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                 + Contacto
                 <span class="caret"></span>
             </button>

@@ -2,7 +2,7 @@
 
 // MODAL
 .modal {
-  background-color: rgba(#000, 0.6);
+  background-color: rgba($blanco, 0.5);
 }
 
 .modal-dialog {
@@ -13,13 +13,15 @@
   box-shadow: $sombra-gris-object;
   border: solid 0 transparent;
   background-color: $blanco;
-  border-radius: 10px;
+  border-radius: 0;
 }
 
 .modal-header {
-  text-align: center;
   background-color: $gris-280;
   border-radius: 12px 12px 0 0;
+  padding: 0;
+  border-bottom: solid 0 transparent;
+
 }
 
 .modal-body {
@@ -89,5 +91,88 @@
   &:hover {
     color: $azul-100;
     @include prefixer(transform, scale(1.2, 1.2));
+  }
+}
+
+
+
+// CONTAINER MENU GENERAL FOR MODALS
+.container-menu-modal {
+  width: 100%;
+  height: 54px;
+  background-color: $black-core;
+
+  .modal-tag {
+    display: inline-block;
+    border-top: solid 2px transparent;
+    border-right: solid 1px $gris-500;
+    border-right: solid 1px $gris-500;
+    height: 54px;
+    width: auto;
+    text-decoration: none;
+    @include transition(.3s ease);
+
+    .modal-icon, .modal-desc {
+      display: inline-block;
+      color: $gris-100;
+    }
+
+    .modal-icon {
+      width: 36px;
+      height: 36px;
+      background-color: $gris-400;
+      border-radius: 36px;
+      margin: 8px;
+      margin-left: 10px;
+    }
+
+    .modal-desc {
+      margin-right: 20px;
+      @include prefixer(transform, translateY(-15px));
+    }
+
+    .modal-title {
+      font-weight: 300;
+    }
+
+    .modal-tittle-tag {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    // HOVER CUANDO ES SELECCIONADO
+    &:hover {
+      background-color: $blanco;
+      border-top: solid 2px $azul-100 !important;
+      div {
+        color: $black-core;
+      }
+
+      .modal-icon {
+        background-color: $gris-100 !important;
+      }
+    }
+
+  }
+}
+
+.modal-title {
+  font-size: 10px;
+}
+
+.modal-tittle-tag {
+  font-size: 14px;
+}
+
+// CUANDO ES SELECCIONADO
+.modal-tag-selectionated {
+  background-color: $blanco;
+  border-top: solid 2px $azul-100 !important;
+  div {
+    color: $black-core;
+  }
+
+  .modal-icon {
+    background-color: $gris-100 !important;
   }
 }

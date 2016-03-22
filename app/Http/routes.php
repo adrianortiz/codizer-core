@@ -133,6 +133,7 @@ Route::group(['middleware' => 'auth'], function () {
             'as'    => 'notes.delete'
         ]);
 
+        // Search note
         Route::get('perfil/{nameFirstName}/notes/search', [
             'uses'  => 'Admin\Notes\NotesController@search',
             'as'    => 'notes.search'
@@ -164,6 +165,25 @@ Route::group(['middleware' => 'auth'], function () {
             'uses'  => 'Admin\Products\ProductsController@index',
             'as'    => 'products'
         ]);
+
+
+
+        /**
+         * ========= EMPRESA ========
+         */
+
+        // SHOW FORM TO CREATE COMPANY OR GET DATA OF COMPANY
+        Route::get('admin/{nameFirstName}/companies', [
+            'uses'   => 'Admin\Company\CompanyController@index',
+            'as'    => 'companies.index'
+        ]);
+
+        // CREATE COMPANY
+        Route::post('admin/{nameFirstName}/companies/store', [
+            'uses'   => 'Admin\Company\CompanyController@store',
+            'as'    => 'companies.store'
+        ]);
+
     });
 
     /*

@@ -25,14 +25,6 @@
             <span>Notas</span>
         </div>
     </a>
-    <a href="{{ route('products', $userPerfil[0]->perfil_route) }}">
-        <div class="app-option">
-            <div class="app-icon">
-                <img src="{{asset('/media/apps/products.png')}}" />
-            </div>
-            <span>Productos</span>
-        </div>
-    </a>
     <a href="{{ route('events', $userPerfil[0]->perfil_route) }}">
         <div class="app-option">
             <div class="app-icon">
@@ -41,12 +33,23 @@
             <span>Data</span>
         </div>
     </a>
-    <a href="#">
+    <a href="{{ route('companies.index', $userPerfil[0]->perfil_route) }}">
         <div class="app-option">
-            <div class="app-icon"></div>
-            <span>Name App</span>
+            <div class="app-icon">
+                <img src="{{asset('/media/apps/store.png')}}" />
+            </div>
+            <span>Empresa / Tienda</span>
         </div>
     </a>
+    <a href="{{ route('products', $userPerfil[0]->perfil_route) }}">
+        <div class="app-option">
+            <div class="app-icon">
+                <img src="{{asset('/media/apps/products.png')}}" />
+            </div>
+            <span>Productos</span>
+        </div>
+    </a>
+
     <a href="#">
         <div class="app-option">
             <div class="app-icon"></div>
