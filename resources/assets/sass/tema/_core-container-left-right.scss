@@ -130,7 +130,7 @@
   height: 100px;
   position: relative;
   left: 50%;
-  top: 50%;
+  top: 35%;
   @include prefixer(transform, translate(-50%, 50%));
 }
 

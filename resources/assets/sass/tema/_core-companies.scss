@@ -9,6 +9,7 @@
     @include prefixer(transform, translateY(0px));
     background-color: $gris-100;
     margin-left: 10px;
+    border: solid 1px $gris-100;
   }
 
   .container-company-store-logo-line {

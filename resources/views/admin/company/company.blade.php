@@ -34,49 +34,49 @@
     <div class="container-list-something">
         <div class="container-company-store-logo">
             <div class="container-company-store-logo-line"></div>
-            <img src="{{ asset('/media/photo-company/adidas-company.png') }}">
+            <img src="{{ asset('/media/photo-company/' . $empresa->logo) }}">
         </div>
         <div id="show-info-contact-empresa" class="core-show-sub-title">Empresa</div>
-        <div class="core-show-title-blue">Nov Joshelyn</div>
+        <div class="core-show-title-blue">{{ $empresa->nombre }}</div>
         <div>
             <div>Giro de la empresa</div>
-            <div class="show-info-general">Moda</div>
+            <div class="show-info-general">{{ $empresa->giro_empresa }}</div>
         </div>
         <div>
             <div>RFC</div>
-            <div class="show-info-general">IOMA902343SDF23</div>
+            <div class="show-info-general">{{ $empresa->rfc }}</div>
         </div>
         <div>
             <div>Sector</div>
-            <div class="show-info-general">Privado</div>
+            <div class="show-info-general">{{ $empresa->sector }}</div>
         </div>
         <div>
             <div>Página web</div>
-            <div class="show-info-general">www.nov-joshelyn.com</div>
+            <div class="show-info-general">{{ $empresa->pagina_web }}</div>
         </div>
         <div>
             <div>Dirección</div>
-            <div class="show-info-general">Moneda no 22, Ciudad de México</div>
+            <div class="show-info-general">{{ $empresa->direccion }}</div>
         </div>
         <div>
             <div>Telefono</div>
-            <div class="show-info-general">(55) 29 26 01 08</div>
+            <div class="show-info-general">{{ $empresa->tel }}</div>
         </div>
         <div>
             <div>Fax</div>
-            <div class="show-info-general">(55) 29 26 01 08</div>
+            <div class="show-info-general">{{ $empresa->fax }}</div>
         </div>
         <div>
             <div>Correo</div>
-            <div class="show-info-general">ventas@novjoshelyn.com</div>
+            <div class="show-info-general">{{ $empresa->correo }}</div>
         </div>
         <div>
             <div>Idioma</div>
-            <div class="show-info-general">Español</div>
+            <div class="show-info-general">{{ $empresa->idioma }}</div>
         </div>
         <div>
             <div>Pais</div>
-            <div class="show-info-general">México</div>
+            <div class="show-info-general">{{ $empresa->pais }}</div>
         </div>
     </div>
 </div>

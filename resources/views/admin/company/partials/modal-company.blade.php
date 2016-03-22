@@ -22,12 +22,12 @@
                 {!! Form::open(['route' => 'companies.store', 'method' => 'POST', 'id' => 'form-company-store']) !!}
 
                 <div class="form-group">
-                    {!! Form::file('logo', ['accept' => 'image/jpg,image/png', 'class' => 'form-control form-with-100 form-group-validate val_text', 'required']) !!}
+                    {!! Form::file('logo', ['accept' => 'image/jpg,image/png', 'class' => 'form-control form-with-100 form-group-validate val_img', 'required']) !!}
                 </div>
 
                 <div class="form-group">
                     {!! Form::label('nombre', 'Empresa') !!}
-                    {!! Form::text('nombre', '', array('class'=> 'form-control form-with-100 form-group-validate val_text', 'placeholder' => 'Nombre de la empresa')) !!}
+                    {!! Form::text('nombre', '', array('class'=> 'form-control form-with-100 form-group-validate val_text_num', 'placeholder' => 'Nombre de la empresa')) !!}
                 </div>
 
                 <div class="form-group">
@@ -37,17 +37,17 @@
 
                 <div class="form-group">
                     {!! Form::label('sector', 'Sector') !!}
-                    {!! Form::text('sector', '', array('class'=> 'form-control form-with-100', 'placeholder' => 'Sector de la empresa')) !!}
+                    {!! Form::text('sector', '', array('class'=> 'form-control form-with-100 form-group-validate val_text', 'placeholder' => 'Sector de la empresa')) !!}
                 </div>
 
                 <div class="form-group">
                     {!! Form::label('rfc', 'RFC') !!}
-                    {!! Form::text('rfc', '', array('class'=> 'form-control form-with-100 form-group-validate val_text', 'placeholder' => 'RFC')) !!}
+                    {!! Form::text('rfc', '', array('class'=> 'form-control form-with-100 form-group-validate val_text_num', 'placeholder' => 'RFC')) !!}
                 </div>
 
                 <div class="form-group">
                     {!! Form::label('direccion', 'Dirección') !!}
-                    {!! Form::text('direccion', '', array('class'=> 'form-control form-with-100 form-group-validate val_text', 'placeholder' => 'Dirección de la empresa')) !!}
+                    {!! Form::text('direccion', '', array('class'=> 'form-control form-with-100 form-group-validate val_text_num', 'placeholder' => 'Dirección de la empresa')) !!}
                 </div>
 
                 <div class="form-group">
@@ -62,7 +62,7 @@
 
                 <div class="form-group">
                     {!! Form::label('correo', 'Correo') !!}
-                    {!! Form::text('correo', '', array('class'=> 'form-control form-with-100 form-group-validate val_text', 'placeholder' => 'Correo de la empresa')) !!}
+                    {!! Form::text('correo', '', array('class'=> 'form-control form-with-100 form-group-validate val_mail', 'placeholder' => 'Correo de la empresa')) !!}
                 </div>
 
                 <div class="form-group">

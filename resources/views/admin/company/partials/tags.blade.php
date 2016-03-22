@@ -3,7 +3,7 @@
         <div class="companies-icon"></div>
         <div class="companies-desc">
             <div class="companies-title">Empresa</div>
-            <div class="companies-tittle-tag">Nov Joshelyn</div>
+            <div class="companies-tittle-tag">{{ $empresa->nombre }}</div>
         </div>
     </a>
 

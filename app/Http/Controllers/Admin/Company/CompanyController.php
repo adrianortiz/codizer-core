@@ -41,7 +41,7 @@ class CompanyController extends Controller
         if ($empresa === null)
             return view('admin.company.new-company', compact('perfil', 'contacto', 'userPerfil', 'userContacto'));
         else
-            return view('admin.company.company', compact('perfil', 'contacto', 'userPerfil', 'userContacto'));
+            return view('admin.company.company', compact('perfil', 'contacto', 'userPerfil', 'userContacto', 'empresa'));
 
     }
 

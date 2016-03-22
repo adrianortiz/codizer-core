@@ -38,6 +38,17 @@ var config = {"validation":[
         "type" : "val_date",
         "rule" : /^([0][1-9]|[12][0-9]|3[01])(\/|-)([0][1-9]|[1][0-2])\2(\d{4})$/,
         "msg-danger" : "Formato de fecha es DD/MM/AAAA"
+    },
+    {
+        "type" : "val_mail",
+        "rule" : /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/,
+        "msg-danger" : "El correo no es valido"
+    },
+    {
+        "type" : "val_img",
+        "rule" : /.(jpeg|jpg|png)$/i,
+        "msg-danger" : "El formato de la imagen no es correcto"
+        //
     }
 ]};
 

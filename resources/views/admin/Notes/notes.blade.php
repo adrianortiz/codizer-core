@@ -51,20 +51,23 @@
 <div class="left-content-list">
     <table class="table table-hover">
         <tbody id="list-notes">
-
-            @foreach($notes as $note)
-            <tr class="data-note-tr" data-note="{{ $note -> id }}">
-                <td class="container-list-point">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </td>
-                <td>
-                    <div class="list-note-content">{{ substr($note->content, 0, 41) . '...' }} </div>
-                    <span class="list-note-date-update">{{ $note->updated_at }}</span>
-                </td>
-            </tr>
-            @endforeach
+            @if( count($notes) == 0)
+                <div id="msg-list-vacio">No hay notas</div>
+            @else
+                @foreach($notes as $note)
+                <tr class="data-note-tr" data-note="{{ $note -> id }}">
+                    <td class="container-list-point">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </td>
+                    <td>
+                        <div class="list-note-content">{{ substr($note->content, 0, 41) . '...' }} </div>
+                        <span class="list-note-date-update">{{ $note->updated_at }}</span>
+                    </td>
+                </tr>
+                @endforeach
+            @endif
         </tbody>
     </table>
 </div>
