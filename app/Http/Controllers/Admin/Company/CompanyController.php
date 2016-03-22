@@ -158,15 +158,9 @@ class CompanyController extends Controller
                 $nameImgToDelete = $empresa->logo;
                 $empresa->logo = $namePhotoCompany;
 
-                // Eliminar la vieja imagen del disco
-                $publicPath = public_path();
-                $url = $publicPath . '/media/photo-company/' . $nameImgToDelete;
-
-                /*if ( \Storage::exists($url) )
-                    \Storage::delete($url);*/
-
-                // \File::delete('/media/');
+                // ELIMINAR LA VIEJA IMAGEN DEL DISCO DURO
             }
+
 
             $empresa->save();
 
