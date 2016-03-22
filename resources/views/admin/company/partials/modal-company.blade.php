@@ -22,7 +22,7 @@
                 {!! Form::open(['route' => 'companies.store', 'method' => 'POST', 'id' => 'form-company-store']) !!}
 
                 <div class="form-group">
-                    {!! Form::file('logo', ['class' => 'form-control form-with-100 form-group-validate val_text', 'required']) !!}
+                    {!! Form::file('logo', ['accept' => 'image/jpg,image/png', 'class' => 'form-control form-with-100 form-group-validate val_text', 'required']) !!}
                 </div>
 
                 <div class="form-group">

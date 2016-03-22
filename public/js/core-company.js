@@ -20,7 +20,6 @@ $('#btn-new-company').click();
 
             function initSaveCompany() {
                 var form = $('#form-company-store');
-                // var datos = form.serializeArray();
                 var route = form.attr('action');
 
                 $.ajax({

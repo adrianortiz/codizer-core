@@ -59,7 +59,7 @@
                 {!! Form::open(['route' => 'cover.store', 'method' => 'POST', 'files' => true, 'id' => 'form-cover-to-store', 'class' => 'form-inline']) !!}
                     {!! Form::hidden('id', $userPerfil[0]->id) !!}
                     <div class="upload-cover">
-                        {!! Form::file('file', ['id' => 'btn-file-cover-store', 'class' => 'form-control', 'required']) !!}
+                        {!! Form::file('file', ['id' => 'btn-file-cover-store', 'class' => 'form-control', 'required', 'accept' => 'image/jpg,image/png']) !!}
                     </div>
                 {!! Form::close() !!}
             </div>
