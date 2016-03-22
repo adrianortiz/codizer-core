@@ -71,7 +71,7 @@
 
 @section('modals')
 
-    @include('admin.company.partials.modal-company')
+    @include('admin.company.partials.modal-new-company')
     @include('partials.loader')
 
 @endsection

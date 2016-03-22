@@ -16,8 +16,11 @@
     width: 100%;
     border-bottom: solid 2px $gris-100;
     @include prefixer(transform, translateY(65px));
-
   }
+}
+
+.container-list-something-50 {
+  width: 50%;
 }
 
 // CONTAINER MENU GENERAL FOR COMPANY
@@ -106,3 +109,9 @@
   background-color: $blanco;
 }
 
+
+.right-btn-company {
+  float: right;
+  margin-right: 30px;
+  @include prefixer(transform, translateY(-15px));
+}

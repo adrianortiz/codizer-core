@@ -56,7 +56,6 @@ function noteCreateUpdate(result) {
                         if (result.message == "No se pudo crear la nota.") {
                             hideShowAlert('msj-danger', 'Ocurrio un problema');
                         } else {
-                            $('#msg-list-vacio').hide();
                             hideShowAlert('msj-success', result.message);
 
                             containerNotes.prepend( noteCreateUpdate(result) );

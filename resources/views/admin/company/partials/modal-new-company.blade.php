@@ -37,7 +37,8 @@
 
                 <div class="form-group">
                     {!! Form::label('sector', 'Sector') !!}
-                    {!! Form::text('sector', '', array('class'=> 'form-control form-with-100 form-group-validate val_text', 'placeholder' => 'Sector de la empresa')) !!}
+                    {!! Form::select('sector', array('Publico' => 'Publico', 'Privado' => 'Privado'), 'Publico',
+                    array('class'=> 'form-control form-with-100 form-group-validate val_text'))  !!}
                 </div>
 
                 <div class="form-group">
@@ -51,7 +52,7 @@
                 </div>
 
                 <div class="form-group">
-                    {!! Form::label('tel', 'Telefono') !!}
+                    {!! Form::label('tel', 'Teléfono') !!}
                     {!! Form::text('tel', '', array('class'=> 'form-control form-with-100 form-group-validate val_num', 'placeholder' => 'Telefono de la empresa')) !!}
                 </div>
 
@@ -72,12 +73,15 @@
 
                 <div class="form-group">
                     {!! Form::label('idioma', 'Idioma') !!}
-                    {!! Form::text('idioma', '', array('class'=> 'form-control form-with-100', 'placeholder' => 'Idioma')) !!}
+                    {!! Form::select('idioma', array('Español' => 'Español', 'Inglés' => 'Inglés', 'Francés' => 'Francés', 'Alemán' => 'Alemán', 'Chino Mandarin' => 'Chino Mandarin'), 'Español',
+                    array('class'=> 'form-control form-with-100 form-group-validate val_text'))  !!}
+
                 </div>
 
                 <div class="form-group">
                     {!! Form::label('pais', 'País') !!}
-                    {!! Form::text('pais', '', array('class'=> 'form-control form-with-100 form-group-validate val_text', 'placeholder' => 'País')) !!}
+                    {!! Form::select('pais', array('México' => 'México', 'España' => 'España', 'Estados Unidos' => 'Estados Unidos', 'Francia' => 'Francia', 'Alemania' => 'Alemania', 'China' => 'China'), 'México',
+                    array('class'=> 'form-control form-with-100 form-group-validate val_text'))  !!}
                 </div>
 
                 {!! Form::close() !!}

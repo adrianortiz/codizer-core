@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\URL;
 
 class CompanyController extends Controller
 {
@@ -109,9 +110,16 @@ class CompanyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
-        //
+        if ($request->ajax() ) {
+
+            $empresa = Empresa::where('users_id', \Auth::user()->id)->first();
+
+            return response()->json([
+                'company' => $empresa
+            ]);
+        }
     }
 
     /**
@@ -126,15 +134,49 @@ class CompanyController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Actualizar una empresa, comprobar si la petición es AJAX y si trae
+     * una imagen para eliminar la actual y agregar la nueva
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+
+        if ($request->ajax() ) {
+
+            $empresa = Empresa::findOrFail($request['id']);
+            $empresa->fill($request->all());
+
+            if ($request->file('logo') )
+            {
+                // Guardar la nueva imagen en el disco
+                $filePhotoCompany = $request->file('logo');
+                $namePhotoCompany = 'company-'.\Auth::user()->id . Carbon::now()->second . $filePhotoCompany->getClientOriginalName();
+                \Storage::disk('photo_company')->put($namePhotoCompany, \File::get($filePhotoCompany));
+
+                $nameImgToDelete = $empresa->logo;
+                $empresa->logo = $namePhotoCompany;
+
+                // Eliminar la vieja imagen del disco
+                $publicPath = public_path();
+                $url = $publicPath . '/media/photo-company/' . $nameImgToDelete;
+
+                /*if ( \Storage::exists($url) )
+                    \Storage::delete($url);*/
+
+                // \File::delete('/media/');
+            }
+
+            $empresa->save();
+
+            // Obtener nombre y ruta del logo de la imagen
+            $empresa->logo = URL::to('/') . '/media/photo-company/' . $empresa->logo;
+
+            return response()->json([
+                'company' => $empresa
+            ]);
+        }
     }
 
     /**

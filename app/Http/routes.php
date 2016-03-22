@@ -184,6 +184,18 @@ Route::group(['middleware' => 'auth'], function () {
             'as'    => 'companies.store'
         ]);
 
+        // SHOW COMPANY
+        Route::get('admin/{nameFirstName}/companies/show', [
+            'uses'   => 'Admin\Company\CompanyController@show',
+            'as'    => 'companies.show'
+        ]);
+
+        // UPDATE COMPANY
+        Route::post('admin/{nameFirstName}/companies/update', [
+            'uses'   => 'Admin\Company\CompanyController@update',
+            'as'    => 'companies.update'
+        ]);
+
     });
 
     /*
