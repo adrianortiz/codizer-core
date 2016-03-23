@@ -92,12 +92,40 @@ class Core
     }
 
     /**
-     * @param $contacto
+     * Get all contacts that one user has inserted
+     *
      * @return mixed
      */
     public function getContactos($contacto){
+        return Contacto::join('users_has_agenda_contactos', 'users_has_agenda_contactos.contacto_id', '=', 'contacto.id')
+            ->where('users_id', '=',  $contacto[0]->id)
+            ->select('contacto.*')
+            ->get();
+    }
+
+    /**
+     * Get all friends that one user has added
+     *
+     * @param $contacto
+     * @return mixed
+     */
+    public function getAmigos($contacto){
         return Contacto::join('users', 'users.id', '=', 'contacto.id')
             ->join('users_has_friend_users', 'users_has_friend_users.users_id_friend', '=', 'contacto.id')
+            ->where('users_id', '=', $contacto[0]->id)
+            ->select('contacto.*', 'users.email' , 'users.password', 'users.role')
+            ->get();
+    }
+
+    /**
+     * Get all followers that one user has added
+     *
+     * @param $contacto
+     * @return mixed
+     */
+    public function getFollowers($contacto){
+        return Contacto::join('users', 'users.id', '=', 'contacto.id')
+            ->join('users_has_follower_users', 'users_has_follower_users.users_id_followers', '=', 'contacto.id')
             ->where('users_id', '=', $contacto[0]->id)
             ->select('contacto.*', 'users.email' , 'users.password', 'users.role')
             ->get();

@@ -56,14 +56,14 @@
         <table class="table table-hover">
             <tbody id="list-contacts">
 
-            @forelse($contacts as $contact)
-                <tr class="data-contacto-tr" data-contacto="{{ $contact -> id }}">
+            @forelse($friends as $friend)
+                <tr class="data-contacto-tr" data-contacto="{{ $friend -> id }}">
                     <td class="container-list-photo-user">
-                        <img src="{{ asset('/media/photo-perfil/' . $contact -> foto) }}">
+                        <img src="{{ asset('/media/photo-perfil/' . $friend -> foto) }}">
                     </td>
                     <td>
-                        <div class="list-contact-full-name">{{ $contact -> nombre. ' ' .$contact -> ap_paterno }} </div>
-                        <span class="list-contact-mail">{{ $contact -> profesion }}</span>
+                        <div class="list-contact-full-name">{{ $friend -> nombre. ' ' .$friend -> ap_paterno }} </div>
+                        <span class="list-contact-mail">{{ $friend -> email }}</span>
                     </td>
                 </tr>
                 @empty

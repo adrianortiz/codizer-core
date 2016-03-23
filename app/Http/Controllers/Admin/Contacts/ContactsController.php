@@ -3,14 +3,10 @@
 namespace App\Http\Controllers\Admin\Contacts;
 
 use App\Contacto;
-use App\Perfil;
 use App\User;
 use App\UserHasAgendaContactos;
-use Carbon\Carbon;
-use App\UserHasPerfil;
 use App\Facades\Core;
 use App\Http\Requests;
-use Faker\Provider\zh_TW\DateTime;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -32,9 +28,11 @@ class ContactsController extends Controller
         $userPerfil = Core::getUserPerfil();
         $userContacto = Core::getUserContact();
 
-        $friends = Core::getContactos($contacto);
+        $contacts = Core::getContactos($contacto);
+        $friends = Core::getAmigos($contacto);
+        $followers = Core::getFollowers($contacto);
 
-        return view('admin.contacts.contacts', compact('perfil', 'contacto', 'userPerfil', 'userContacto', 'friends'));
+        return view('admin.contacts.contacts', compact('perfil', 'contacto', 'userPerfil', 'userContacto', 'contacts', 'friends', 'followers'));
     }
 
     /**

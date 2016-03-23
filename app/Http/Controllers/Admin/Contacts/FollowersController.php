@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Social;
+namespace App\Http\Controllers\Admin\Contacts;
 
 use App\Contacto;
+use App\User;
+use App\UserHasAgendaContactos;
 use App\Facades\Core;
 use App\Http\Requests;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\URL;
 
-class PerfilController extends Controller
+class FollowersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -24,6 +24,7 @@ class PerfilController extends Controller
         $perfil = Core::getPerfil($nameFirstName);
         $contacto = Core::getContact($perfil);
 
+        // User son los datos del usuario Logueado
         $userPerfil = Core::getUserPerfil();
         $userContacto = Core::getUserContact();
 
@@ -31,7 +32,7 @@ class PerfilController extends Controller
         $friends = Core::getAmigos($contacto);
         $followers = Core::getFollowers($contacto);
 
-        return view('admin.social.perfil', compact('perfil', 'contacto', 'userPerfil', 'userContacto', 'contacts', 'friends', 'followers'));
+        return view('admin.contacts.followers', compact('perfil', 'contacto', 'userPerfil', 'userContacto', 'contacts', 'friends', 'followers'));
     }
 
     /**
@@ -52,7 +53,43 @@ class PerfilController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if ($request->ajax()) {
+
+            // Contacto a registrar
+            $contact = new Contacto([
+                'foto'          => 'unknow.png',
+                'nombre'        => $request['nombre'],
+                'ap_paterno'    => $request['paterno'],
+                'ap_materno'    => $request['materno'],
+                'sexo'          => $request['sexo'],
+                'f_nacimiento'  => $request['fecha'],
+                'profesion'     => $request['profesion'],
+                'estado_civil'   => $request['estado_civil'],
+                'estado'        => $request['estado'],
+                'desc_contacto' => $request['desc_contacto']
+            ]);
+            $contact -> save();
+
+            // Contacto a guardar en agenda
+            $agenda = new UserHasAgendaContactos([
+                'users_id'      => \Auth::user()->id,
+                'contacto_id'   => $contact->id
+            ]);
+
+
+
+            if ( $agenda -> save() )
+                $message = 'Contacto guardado';
+            else
+                $message = 'No se pudo guardar el contacto.';
+
+            return response()->json([
+                'message' => $message,
+                'contacto' => $contact,
+            ]);
+        } else {
+            abort(404);
+        }
     }
 
     /**
@@ -98,30 +135,5 @@ class PerfilController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function updatePhotoUser(Request $request)
-    {
-        if ($request->ajax()) {
-            // Campo file definido en el formulario
-            $file = $request->file('file');
-
-            // Nombre del archivo
-            $nombre = 'photo-' .\Auth::user()->id . Carbon::now()->second . $file->getClientOriginalName();
-
-            // Guardar archivo en el disco local
-            \Storage::disk('photo')->put($nombre,  \File::get($file));
-
-            // Guardar el nombre de la imagen en el perfil de usuario logueado
-            Contacto::where('id', $request['id'])
-                ->update(['foto' => $nombre]);
-
-            // Devolver una respuesta JSON que contenga
-            // la ruta de la imagen que se acaba de subir
-            return response()->json([
-                'cover' => URL::to('/') . '/media/photo-perfil/' . $nombre
-            ]);
-        }
-        abort(404);
     }
 }

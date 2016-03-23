@@ -92,7 +92,7 @@ Route::group(['middleware' => 'auth'], function () {
         ]);
 
 
-        /*
+        /**
          * Contacts - Agenda
          */
         Route::get('perfil/{nameFirstName}/contacts', [
@@ -100,8 +100,24 @@ Route::group(['middleware' => 'auth'], function () {
             'as'    => 'contacts'
         ]);
 
+        /**
+         * User Friends
+         */
+        Route::get('perfil/{nameFirstName}/friends',[
+            'uses'  => 'Admin\Contacts\FriendsController@index',
+            'as'    => 'friends'
+        ]);
+
+        /**
+         * User Followers
+         */
+        Route::get('perfil/{nameFirstName}/followers',[
+            'uses'  => 'Admin\Contacts\FollowersController@index',
+            'as'    => 'followers'
+        ]);
+
         /*
-         * ====== Contacto role empleado =======
+         * ====== Contactos =======
          */
 
         // Create Contact
