@@ -66,8 +66,8 @@ class ContactsController extends Controller
                 'sexo'          => $request['sexo'],
                 'f_nacimiento'  => $request['fecha'],
                 'profesion'     => $request['profesion'],
+                'estado_civil'   => $request['estado_civil'],
                 'estado'        => $request['estado'],
-                'desc_origen'   => $request['desc_origen'],
                 'desc_contacto' => $request['desc_contacto']
             ]);
             $contact -> save();

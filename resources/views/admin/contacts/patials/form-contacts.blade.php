@@ -36,11 +36,11 @@
                 <label for="profesion">Profesión</label>
                 <div class="show-info-contact">{!! Form::text('profesion', old('profesion'), ['id' => 'profesion', 'class' => 'form-control']) !!}</div>
 
+                <label for="estado_civil">Estado civil</label>
+                <div class="show-info-contact">{!! Form::text('estado_civil', old('estado_civil'), ['id' => 'estado_civil', 'class' => 'form-control']) !!}</div>
+
                 <label for="estado">Estado</label>
                 <div class="show-info-contact">{!! Form::select('estado', ['iniciado' => 'Iniciado', 'completo' => 'Completo'], null, ['placeholder' => 'Selecciona un estado', 'id' => 'estado', 'class' => 'form-control']) !!}</div>
-
-                <label for="desc_origen">Descripción origen</label>
-                <div class="show-info-contact">{!! Form::text('desc_origen', old('desc_origen'), ['id' => 'desc_origen', 'class' => 'form-control']) !!}</div>
 
                 <label for="desc_contacto">Descripción contacto</label>
                 <div class="show-info-contact">{!! Form::text('desc_contacto', old('desc_contacto'), ['id' => 'desc_contacto', 'class' => 'form-control']) !!}</div>
