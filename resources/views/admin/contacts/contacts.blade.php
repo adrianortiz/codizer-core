@@ -41,10 +41,10 @@
             </div>
 
             <div class="right-content-list-tool">
-                <div id="btn-group-to-product" class="btn-group left" role="group" aria-label="...">
-                    <button type="button" id="btn-new-contact" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modalNewContact">Nuevo contacto</button>
+                <div id="btn-group-to-contact" class="btn-group left" role="group" aria-label="...">
+                    <button type="button" id="btn-new-contact" class="btn btn-default btn-sm">Nuevo contacto</button> <!-- data-toggle="modal" data-target="#modalNewContact" -->
                 </div>
-                <div id="btn-group-to-product" class="btn-group right" role="group" aria-label="...">
+                <div id="btn-group-to-contact" class="btn-group right" role="group" aria-label="...">
                     <button type="button" id="btn-edit-contact" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modalUpdateContact">Editar</button>
                     <button type="button" id="btn-delete-contact" class="btn btn-default btn-sm">Eliminar</button>
                 </div>
@@ -55,7 +55,7 @@
 
     <div class="left-content-list">
         <table class="table table-hover">
-            <tbody>
+            <tbody id="list-contacts">
 
             @forelse($friends as $friend)
                 <tr class="data-contacto-tr" data-contacto="{{ $friend -> id }}">
@@ -64,7 +64,7 @@
                     </td>
                     <td>
                         <div class="list-contact-full-name">{{ $friend -> nombre. ' ' .$friend -> ap_paterno }} </div>
-                        <span class="list-contact-mail">{{ $friend -> email }}</span><br/>
+                        <span class="list-contact-mail">{{ $friend -> email }}</span>
                     </td>
                 </tr>
                 @empty
@@ -78,9 +78,11 @@
             </tbody>
         </table>
     </div>
+
     <div id="continer-contact-shows" class="right-content-list">
-        <!-- <div id="msg-vacio">Ningún contacto seleccionado.</div> -->
-        <div class="block-content-info-contact">
+        <div id="msg-vacio">Ningún contacto seleccionado.</div>
+
+        <div class="block-content-info-contact" id="info-contact">
             <div class="container-show-info-contact-a">
 
                 <!-- LOS ID EN SU MAYORIA SON PARA QUE IDENTIFIQUES A LOS ELEMENTOS CON JS Y PUEDAS MODIFICAR LA INFORMACIÓN -->
@@ -90,7 +92,7 @@
             </div>
 
             <div class="container-show-info-contact-img-b">
-                <img id="show-info-contact-foto" src="{{ asset('/media/photo-perfil/karen-olvera123.png') }}">
+                <img id="show-info-contact-foto" src="{{ asset('/media/photo-perfil/unknow.png') }}">
                 <a id="show-perfil-contact-link" href="#" class="btn btn-sm-radius btn-shadow-blue">Ver perfil</a>
 
                 <!-- USA UN FOR PARA IMPRIMIR LAS REDES SOCIALES QUE TIENE CADA CONTACTO -->
@@ -142,10 +144,19 @@
                     <div class="show-info-contact">(55) 044 12 45 67 89</div>
                 </div>
             </div>
+        </div>
 
+        <div id="form">
+            @include('admin.contacts.patials.form-contacts')
         </div>
     </div>
-    @endsection
+@endsection
+
+@section('modals')
+
+    @include('admin.contacts.patials.modal-contacto')
+
+@endsection
 
 @section('extra-js')
     <script src="{{ asset('/js/core-contacts.js') }}"></script>

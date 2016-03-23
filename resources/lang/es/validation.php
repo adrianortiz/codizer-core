@@ -101,9 +101,10 @@ return array(
     | of "email". This simply helps us make messages a little cleaner.
     |
     */
-
     'attributes' => array(
         'name' => 'Nombre',
+        'paterno' => 'Apellido paterno',
+        'materno' => 'Apellido materno',
         'email' => 'Correo',
         'password' => 'Contraseña',
         'password_confirmation' => 'Confirmar contraseña',

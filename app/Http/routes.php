@@ -101,6 +101,35 @@ Route::group(['middleware' => 'auth'], function () {
         ]);
 
         /*
+         * ====== Contacto role empleado =======
+         */
+
+        // Create Contact
+        Route::post('perfil/{nameFirstName}/contacts/create', [
+            'uses'  => 'Admin\Contacts\ContactsController@store',
+            'as'    => 'contact.create'
+        ]);
+
+        // Get Contact
+        Route::get('perfil/{nameFirstName}/contacts/show', [
+            'uses'  => 'Admin\Contacts\ContactsController@show',
+            'as'    => 'contact.show'
+        ]);
+
+        // Update Contact
+        Route::put('perfil/{nameFirstName}/contacts/show', [
+            'uses'  => 'Admin\Contacts\ContactsController@update',
+            'as'    =>  'contact.update'
+        ]);
+
+        // Delete Contact
+        Route::delete('perfil/{nameFirstName}/contacts/delete', [
+            'uses'   => 'Admin\Contacts\ContactsController@destroy',
+            'as'    => 'contact.delete'
+        ]);
+
+
+        /*
          * ======= Notes ======
          * List notes
          */

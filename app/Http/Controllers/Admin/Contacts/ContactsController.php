@@ -2,8 +2,15 @@
 
 namespace App\Http\Controllers\Admin\Contacts;
 
+use App\Contacto;
+use App\Perfil;
+use App\User;
+use App\UserHasAgendaContactos;
+use Carbon\Carbon;
+use App\UserHasPerfil;
 use App\Facades\Core;
 use App\Http\Requests;
+use Faker\Provider\zh_TW\DateTime;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -48,7 +55,43 @@ class ContactsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if ($request->ajax()) {
+
+            // Contacto a registrar
+            $contact = new Contacto([
+                'foto'          => 'unknow.png',
+                'nombre'        => $request['nombre'],
+                'ap_paterno'    => $request['paterno'],
+                'ap_materno'    => $request['materno'],
+                'sexo'          => $request['sexo'],
+                'f_nacimiento'  => $request['fecha'],
+                'profesion'     => $request['profesion'],
+                'estado'        => $request['estado'],
+                'desc_origen'   => $request['desc_origen'],
+                'desc_contacto' => $request['desc_contacto']
+            ]);
+            $contact -> save();
+
+            // Contacto a guardar en agenda
+            $agenda = new UserHasAgendaContactos([
+                'users_id'      => \Auth::user()->id,
+                'contacto_id'   => $contact->id
+            ]);
+
+
+
+            if ( $agenda -> save() )
+                $message = 'Contacto guardado';
+            else
+                $message = 'No se pudo guardar el contacto.';
+
+            return response()->json([
+                'message' => $message,
+                'contacto' => $contact,
+            ]);
+        } else {
+            abort(404);
+        }
     }
 
     /**
