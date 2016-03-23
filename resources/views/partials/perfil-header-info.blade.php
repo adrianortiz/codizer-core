@@ -9,7 +9,7 @@
                     {!! Form::open(['route' => 'contact.photo.store', 'method' => 'POST', 'files' => true, 'id' => 'form-foto-to-store', 'class' => 'form-inline']) !!}
                     {!! Form::hidden('id', $userContacto[0]->id) !!}
                     <div class="upload-foto">
-                        {!! Form::file('file', ['id' => 'btn-file-foto-store', 'class' => 'form-control', 'required']) !!}
+                        {!! Form::file('file', ['id' => 'btn-file-foto-store', 'class' => 'form-control', 'required', 'accept' => 'image/jpg,image/png',]) !!}
                     </div>
                     {!! Form::close() !!}
                 </div>

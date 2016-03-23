@@ -17,14 +17,18 @@ class EventsController extends Controller
      */
     public function index($nameFirstName)
     {
-        Core::isRouteValid($nameFirstName);
-
-        $perfil = Core::getPerfil($nameFirstName);
-        $contacto = Core::getContact($perfil);
-
         // User son los datos del usuario Logueado
         $userPerfil = Core::getUserPerfil();
         $userContacto = Core::getUserContact();
+
+        $perfil = $userPerfil;
+        $contacto = $userContacto;
+
+        // Nos aseguramos de que la ruta sea la del usuario logueado
+        if ( $nameFirstName != $userPerfil[0]->perfil_route)
+            return \Redirect::route('events', $userPerfil[0]->perfil_route);
+
+        Core::isRouteValid($userPerfil[0]->perfil_route);
 
         $friends = Core::getContactos($contacto);
 

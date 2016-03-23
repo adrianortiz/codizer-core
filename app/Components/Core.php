@@ -7,6 +7,7 @@
 
 namespace App\Components;
 
+use App\Empresa;
 use App\Perfil;
 use App\Contacto;
 use App\User;
@@ -102,4 +103,18 @@ class Core
             ->get();
     }
 
+<<<<<<< HEAD
+=======
+    public function hasEmpresa()
+    {
+        $empresa = Empresa::where('users_id', '=', \Auth::user()->id )-get();
+
+        if ($empresa)
+            return $empresa;
+        else
+            return false;
+    }
+
+
+>>>>>>> ac72ddbc9d52cfdc9b4f115f9683513fed366799
 }

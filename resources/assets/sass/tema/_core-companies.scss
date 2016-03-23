@@ -1,0 +1,117 @@
+// CONTAINER LOGO
+.container-company-store-logo {
+  width: 100%;
+  height: auto;
+  margin-bottom: 30px;
+  img {
+    height: 120px;
+    width: auto;
+    @include prefixer(transform, translateY(0px));
+    background-color: $gris-100;
+    margin-left: 10px;
+    border: solid 1px $gris-100;
+  }
+
+  .container-company-store-logo-line {
+    width: 100%;
+    border-bottom: solid 2px $gris-100;
+    @include prefixer(transform, translateY(65px));
+  }
+}
+
+.container-list-something-50 {
+  width: 50%;
+}
+
+// CONTAINER MENU GENERAL FOR COMPANY
+#container-menu-companies {
+  width: 100%;
+  height: 54px;
+  background-color: $black-core;
+
+  a {
+    display: inline-block;
+    border-top: solid 2px transparent;
+    border-right: solid 1px $gris-500;
+    border-right: solid 1px $gris-500;
+    height: 54px;
+    width: auto;
+    text-decoration: none;
+    @include transition(.3s ease);
+
+    .companies-icon, .companies-desc {
+      display: inline-block;
+      color: $gris-100;
+    }
+
+    .companies-icon {
+      width: 36px;
+      height: 36px;
+      background-color: $gris-400;
+      border-radius: 36px;
+      margin: 8px;
+      margin-left: 10px;
+    }
+
+    .companies-desc {
+      margin-right: 20px;
+      @include prefixer(transform, translateY(-15px));
+    }
+
+    .companies-title {
+      font-weight: 300;
+    }
+
+    .companies-tittle-tag {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    // HOVER CUANDO ES SELECCIONADO
+    &:hover {
+      background-color: $blanco;
+      border-top: solid 2px $azul-100 !important;
+      div {
+        color: $black-core;
+      }
+
+      .companies-icon {
+        background-color: $gris-100 !important;
+      }
+    }
+
+  }
+}
+
+.companies-title {
+  font-size: 10px;
+}
+
+.companies-tittle-tag {
+  font-size: 14px;
+}
+
+// CUANDO ES SELECCIONADO
+.companies-tag-selectionated {
+  background-color: $blanco;
+  border-top: solid 2px $azul-100 !important;
+  div {
+    color: $black-core;
+  }
+
+  .companies-icon {
+    background-color: $gris-100 !important;
+  }
+}
+
+.content-complete-high {
+  width: 100%;
+  background-color: $blanco;
+}
+
+
+.right-btn-company {
+  float: right;
+  margin-right: 30px;
+  @include prefixer(transform, translateY(-15px));
+}

@@ -54,4 +54,9 @@ class User extends Model implements AuthenticatableContract,
             $this->attributes['password'] = bcrypt($value);
         }
     }
+
+    public function empresaId()
+    {
+        return $this->hasOne('App\Empresa', 'users_id');
+    }
 }

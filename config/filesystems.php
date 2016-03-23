@@ -62,6 +62,12 @@ return [
             'root'   => public_path('media/photo-perfil-perfil'),
         ],
 
+        // Ruta donde se almacenan las fotos de una empresa
+        'photo_company' => [
+            'driver' => 'local',
+            'root'   => public_path('media/photo-company'),
+        ],
+
         'ftp' => [
             'driver'   => 'ftp',
             'host'     => 'ftp.example.com',

@@ -5,11 +5,11 @@
     width: 10px;
     height: auto;
     div {
-      width: 3px;
-      height: 10px;
+      width: 8px;
+      height: 8px;
       border-radius: 60px;
-      margin-top: 5px;
-      background-color: rgba($gris-300, 0.2);
+      margin-top: 6px;
+      border: solid 1px rgba($gris-300, 0.2);
     }
   }
 

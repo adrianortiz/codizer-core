@@ -24,7 +24,7 @@ function noteCreateUpdate(result) {
 (function($){
 
     var App = { init: function() {
-        App.CreateNote();
+        App.CreateContact();
         App.SelectNote();
         App.UpdateNote();
         App.DeleteNote();
@@ -35,7 +35,7 @@ function noteCreateUpdate(result) {
          * Crear una nota y agregar la nota creada a la lista de notas (Izquierda)
          * @constructor
          */
-        CreateNote: function()
+        CreateContact: function()
         {
             $('#store-new-note').click( function()
             {
