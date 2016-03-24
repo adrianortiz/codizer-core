@@ -2,8 +2,14 @@
 
 namespace App\Http\Controllers\Admin\Company;
 
+use App\Categoria;
 use App\Empresa;
+use App\EmpresaHasCategoria;
+use App\EmpresaHasFabricante;
+use App\EmpresaHasOferta;
+use App\Fabricante;
 use App\Facades\Core;
+use App\Oferta;
 use App\Tienda;
 use App\User;
 use Carbon\Carbon;
@@ -93,8 +99,48 @@ class CompanyController extends Controller
                 'pais'          => $request['pais']
             ]);
 
-            // Save company
+            // Save company and categoria, oferta y fabricante por defecto
             if ( $company->save() ) {
+
+                /**
+                 * Crear categoria, oferta y fabricante por defecto
+                 * Para asi poder llenar los combos de las vistas para asignarlas a los productos
+                 * y que mínimo exista una por defecto por seguridad
+                 *
+                 * categoria    -> nombre = Sin categoría
+                 * oferta       -> regla_porciento = 0
+                 * fabricante   -> nombre = Sin fabricante
+                 */
+
+                $categoria = new Categoria();
+                $categoria->nombre = 'Sin categoría';
+                $categoria->save();
+
+                $empresaHasCategoria = new EmpresaHasCategoria();
+                $empresaHasCategoria->empresa_id = $company->id;
+                $empresaHasCategoria->categoria_id = $categoria->id;
+                $empresaHasCategoria->save();
+
+
+                $oferta = new Oferta();
+                $oferta->regla_porciento = 0;
+                $oferta->save();
+
+                $empresaHasOferta = new EmpresaHasOferta();
+                $empresaHasOferta->empresa_id = $company->id;
+                $empresaHasOferta->oferta_id = $oferta->id;
+                $empresaHasOferta->save();
+
+
+                $fabricante =  new Fabricante();
+                $fabricante->nombre = 'Sin fabricante';
+                $fabricante->save();
+
+                $empresaHasFabricante = new EmpresaHasFabricante();
+                $empresaHasFabricante->empresa_id = $company->id;
+                $empresaHasFabricante->fabricante_id = $fabricante->id;
+                $empresaHasFabricante->save();
+
 
                 $userPerfil = Core::getUserPerfil();
 
