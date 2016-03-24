@@ -22,7 +22,7 @@
                 <!-- FORMULARIO UPDATE -->
                 {!! Form::open(['route' => 'stores.update', 'method' => 'POST', 'files' => true, 'id' => 'form-tienda-update']) !!}
 
-                {!! Form::text('id', '', ['id' => 'id-show', 'class' => 'form-control form-group-validate-update val_num']) !!}
+                {!! Form::hidden('id', '', ['id' => 'id-show', 'class' => 'form-control form-group-validate-update val_num']) !!}
 
                 <div class="row">
                     <div class="col-md-6">
