@@ -1,6 +1,6 @@
 @if(Auth::user()->id == $perfil[0]->id)
     <!-- Title menu -->
-    <a href="{{ route('contacts', $perfil[0]->perfil_route) }}" class="core-menu-list"><div>Contactos <span>{{ count($contacts) }}</span></div></a>
+    <a href="{{ route('contacts', $perfil[0]->perfil_route) }}" class="core-menu-list"><div>Contactos <span id="NContacts">{{ count($contacts) }}</span></div></a>
     <!-- list menu with img -->
     @forelse($contacts as $contact)
         <a href="#" class="core-menu-list menu-list-option menu-lis-img">

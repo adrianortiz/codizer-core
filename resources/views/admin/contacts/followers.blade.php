@@ -1,8 +1,8 @@
 @extends('layout-core')
 
-@section('title', 'Contactos')
+@section('title', 'Seguidores')
 
-@section('title-header', 'Contactos')
+@section('title-header', 'Seguidores')
 
 
 @section('main-header-info-app')
@@ -18,11 +18,6 @@
 
     <a href="#" class="core-menu-list menu-list-option"><div>Ver todos</div></a>
 @endsection
-
-
-
-
-
 
 @section('article-content')
 
@@ -40,14 +35,6 @@
             </div>
 
             <div class="right-content-list-tool">
-                <div id="btn-group-to-contact" class="btn-group left" role="group" aria-label="...">
-                    <button type="button" id="btn-new-contact" class="btn btn-default btn-sm">Nuevo contacto</button> <!-- data-toggle="modal" data-target="#modalNewContact" -->
-                </div>
-                <div id="btn-group-to-contact" class="btn-group right" role="group" aria-label="...">
-                    <button type="button" id="btn-edit-contact" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modalUpdateContact">Editar</button>
-                    <button type="button" id="btn-delete-contact" class="btn btn-default btn-sm">Eliminar</button>
-                </div>
-
             </div>
         </div>
     @endsection
@@ -62,7 +49,7 @@
                         <img src="{{ asset('/media/photo-perfil/' . $follower -> foto) }}">
                     </td>
                     <td>
-                        <div class="list-contact-full-name">{{ $follower -> nombre. ' ' .$contact -> ap_paterno }} </div>
+                        <div class="list-contact-full-name">{{ $follower -> nombre. ' ' .$follower -> ap_paterno }} </div>
                         <span class="list-contact-mail">{{ $follower -> email }}</span>
                     </td>
                 </tr>
@@ -143,10 +130,6 @@
                     <div class="show-info-contact">(55) 044 12 45 67 89</div>
                 </div>
             </div>
-        </div>
-
-        <div id="form">
-            @include('admin.contacts.patials.form-contacts')
         </div>
     </div>
 @endsection

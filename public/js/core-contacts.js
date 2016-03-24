@@ -8,6 +8,8 @@ var containerNotes = $('#list-contacts');
 // Contenedor del lado derecho
 var continaerNoteShow = $('#continaer-note-shows');
 
+var contacts = $('#NContacts');
+
 // Retorna la fila de un contacto creado o actulizado
 function noteCreateUpdate(result) {
     return '<tr class="data-contacto-tr" data-contacto="' + result.contacto.id + '">' +
@@ -15,7 +17,7 @@ function noteCreateUpdate(result) {
         '<img src="/media/photo-perfil/' + result.contacto.foto + '"></td>' +
         '<td>' +
         '<div class="list-contact-full-name">' + result.contacto.nombre + ' ' + result.contacto.ap_paterno + '</div>' +
-        '<span class="list-contact-mail">'+ result.contacto.profesion+'</span>' +
+        '<span class="list-contact-mail">' + result.contacto.profesion + '</span>' +
         '</td>' +
         '</tr>';
     }
@@ -28,15 +30,16 @@ $(document).ready(function(){
     $('#btn-delete-contact').hide();
 
     $('#btn-new-contact').click(function(){
-        $('#msg-vacio').hide();
+        $('#msg-list-vacio').hide();
         $('#form').show();
         $('#btn-new-contact').hide();
     });
 
     $('#btn-cancel-contact').click(function(){
-        $('#msg-vacio').show();
+        $('#msg-list-vacio').show();
         $('#form').hide();
         $('#btn-new-contact').show();
+        document.getElementById("form-contact-to-create").reset();
     });
 
     //$('#btn-save-contact').click(function(){
@@ -84,7 +87,7 @@ $(document).ready(function(){
 
                         containerNotes.prepend( noteCreateUpdate(result) );
                         document.getElementById("form-contact-to-create").reset();
-                        $('#msg-vacio').show();
+                        $('#msg-list-vacio').show();
                         $('#form').hide();
                         $('#btn-new-contact').show();
                     }

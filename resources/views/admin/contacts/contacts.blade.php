@@ -79,9 +79,9 @@
     </div>
 
     <div id="continer-contact-shows" class="right-content-list">
-        <div id="msg-vacio">Ningún contacto seleccionado.</div>
+       <div id="msg-list-vacio">Ningún contacto seleccionado.</div>
 
-        <div class="block-content-info-contact" id="info-contact">
+       <div class="block-content-info-contact" id="info-contact">
             <div class="container-show-info-contact-a">
 
                 <!-- LOS ID EN SU MAYORIA SON PARA QUE IDENTIFIQUES A LOS ELEMENTOS CON JS Y PUEDAS MODIFICAR LA INFORMACIÓN -->

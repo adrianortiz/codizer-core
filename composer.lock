@@ -2517,16 +2517,16 @@
         },
         {
             "name": "phpspec/phpspec",
-            "version": "2.4.1",
+            "version": "2.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/phpspec.git",
-                "reference": "5528ce1e93a1efa090c9404aba3395c329b4e6ed"
+                "reference": "385ecb015e97c13818074f1517928b24d4a26067"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/5528ce1e93a1efa090c9404aba3395c329b4e6ed",
-                "reference": "5528ce1e93a1efa090c9404aba3395c329b4e6ed",
+                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/385ecb015e97c13818074f1517928b24d4a26067",
+                "reference": "385ecb015e97c13818074f1517928b24d4a26067",
                 "shasum": ""
             },
             "require": {
@@ -2591,7 +2591,7 @@
                 "testing",
                 "tests"
             ],
-            "time": "2016-01-01 10:17:54"
+            "time": "2016-03-20 20:34:32"
         },
         {
             "name": "phpspec/prophecy",

@@ -1,8 +1,8 @@
 @extends('layout-core')
 
-@section('title', 'Contactos')
+@section('title', 'Amigos')
 
-@section('title-header', 'Contactos')
+@section('title-header', 'Amigos')
 
 
 @section('main-header-info-app')
@@ -40,14 +40,6 @@
             </div>
 
             <div class="right-content-list-tool">
-                <div id="btn-group-to-contact" class="btn-group left" role="group" aria-label="...">
-                    <button type="button" id="btn-new-contact" class="btn btn-default btn-sm">Nuevo contacto</button> <!-- data-toggle="modal" data-target="#modalNewContact" -->
-                </div>
-                <div id="btn-group-to-contact" class="btn-group right" role="group" aria-label="...">
-                    <button type="button" id="btn-edit-contact" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modalUpdateContact">Editar</button>
-                    <button type="button" id="btn-delete-contact" class="btn btn-default btn-sm">Eliminar</button>
-                </div>
-
             </div>
         </div>
     @endsection
@@ -143,10 +135,6 @@
                     <div class="show-info-contact">(55) 044 12 45 67 89</div>
                 </div>
             </div>
-        </div>
-
-        <div id="form">
-            @include('admin.contacts.patials.form-contacts')
         </div>
     </div>
 @endsection
