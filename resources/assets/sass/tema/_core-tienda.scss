@@ -1,0 +1,160 @@
+// Contenedor de tiendas
+.container-list-info-admin {
+  position: relative;
+  top: 115px;
+  right: 10px;
+  width: 100%;
+  @include prefixer(height, calc(100% - 125px));
+  background-color: $blanco;
+}
+
+.container-admin-30 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 350px;
+  height: 100%;
+  background-color: $gris-50;
+  overflow: auto;
+  // border-right: solid 1px $gris-250;
+}
+
+.container-admin-100 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  @include prefixer(width, calc(100% + 10px));
+  height: 100%;
+  background-color: $gris-50;
+  overflow: auto;
+}
+
+
+// OBJECT LIST TIENDA
+.tienda-container {
+  width: 306px;
+  height: 200px;
+  background: transparent;
+  position: relative;
+  display: inline-block;
+  margin-top: 44px;
+  margin-left: 44px;
+
+  .tienda-color-background {
+    width: 100%;
+    height: 160px;
+    background-color: $gris-250;
+    position: absolute;
+    top: 20px;
+    z-index: 10;
+  }
+
+  .tienda-img-container {
+    width: 100px;
+    height: 200px;
+    background-color: $gris-100;
+    overflow: hidden;
+    @include transition(.3s ease);
+
+    position: absolute;
+    top: 0;
+    left: 14px;
+    z-index: 11;
+    box-shadow: $sombra-gris-white-objetct;
+
+    img {
+      @include centrarXY();
+
+      height: 200px;
+      min-width: 200px;;
+    }
+
+  }
+
+  .tienda-info-container {
+    width: 180px;
+    height: 200px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 11;
+    box-shadow: $sombra-gris-object;
+    @include transition(.3s ease);
+
+    .tienda-info-container-nombre, .tienda-info-container-desc {
+      padding: 10px;
+      span {
+        font-size: 10px;
+        color: $gris-300;
+      }
+
+      h2 {
+        font-size: 12px;
+        margin: 0;
+        margin-top: 5px;
+        text-transform: uppercase;
+        color: $azul-100;
+        font-weight: 600;
+      }
+    }
+
+    .tienda-info-container-nombre {
+      width: 100%;
+      height: 78px;
+      background-color: $blanco;
+    }
+
+    .tienda-info-container-desc {
+      width: 100%;
+      height: 122px;
+      background-color: $black-core;
+
+      h2 {
+        text-transform: inherit;
+        color: $gris-50;
+        font-weight: 300;
+      }
+    }
+  }
+}
+
+.tienda-options-menu {
+  width: 36px;
+  height: 36px;
+  border-radius: 36px;
+  border-width: 0;
+  box-shadow: $sombra-gris-white-objetct;
+  background-color: $blanco;
+  color: $gris-400;
+  @include transition(.3s ease);
+}
+
+.tienda-container {
+  &:hover {
+    cursor: pointer;
+
+   .tienda-img-container {
+     transform: scale(0.9, 0.9);
+   }
+
+    .tienda-info-container {
+      transform: scale(1.1, 1.1);
+
+      .tienda-info-container-nombre {
+        border-color: $azul-100;
+      }
+    }
+
+    .tienda-options-menu {
+      transform: scale(1.1, 1.1);
+    }
+
+  }
+}
+
+.tienda-option-container {
+  position: absolute;
+  top: 59px;
+  right: 14px;
+  z-index: 11;
+}

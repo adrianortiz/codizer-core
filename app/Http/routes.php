@@ -214,7 +214,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 
         /**
-         * ========= EMPRESA ========
+         * ========= COMPANY ========
          */
 
         // SHOW FORM TO CREATE COMPANY OR GET DATA OF COMPANY
@@ -239,6 +239,35 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('admin/{nameFirstName}/companies/update', [
             'uses'   => 'Admin\Company\CompanyController@update',
             'as'    => 'companies.update'
+        ]);
+
+
+        /**
+         * ========= TIENDAS ========
+         */
+
+        // SHOW ALL TIENDAS
+        Route::get('admin/{nameFirstName}/stores', [
+           'uses'   => 'Admin\Tienda\TiendaController@index',
+            'as'    => 'stores.index'
+        ]);
+
+        // CREATE TIENDA
+        Route::post('admin/{nameFirstName}/stores/store', [
+            'uses'  => 'Admin\Tienda\TiendaController@store',
+            'as'    => 'stores.store'
+        ]);
+
+        // GET TIENDA
+        Route::get('admin/{nameFirstName}/stores/show', [
+            'uses'  => 'Admin\Tienda\TiendaController@show',
+            'as'    => 'stores.show'
+        ]);
+
+        // UPDATE TIENDA
+        Route::post('admin/{nameFirstName}/stores/update', [
+            'uses'  => 'Admin\Tienda\TiendaController@update',
+            'as'    => 'stores.update'
         ]);
 
     });

@@ -1,5 +1,5 @@
 <div id="container-menu-companies">
-    <a href="#" class="companies-tag-selectionated">
+    <a href="{{ route('companies.index', $userPerfil[0]->perfil_route) }}" id="company-tag">
         <div class="companies-icon"></div>
         <div class="companies-desc">
             <div class="companies-title">Empresa</div>
@@ -7,15 +7,15 @@
         </div>
     </a>
 
-    <a href="#">
+    <a href="{{ route('stores.index', $userPerfil[0]->perfil_route) }}" id="tienda-tag">
         <div class="companies-icon"></div>
         <div class="companies-desc">
             <div class="companies-title">Tiendas</div>
-            <div class="companies-tittle-tag">1 Tienda (s)</div>
+            <div class="companies-tittle-tag">{{ $countTiendas }} Tienda (s)</div>
         </div>
     </a>
 
-    <a href="#">
+    <a href="#" id="equipo-tag">
         <div class="companies-icon"></div>
         <div class="companies-desc">
             <div class="companies-title">Equipo</div>
@@ -23,7 +23,7 @@
         </div>
     </a>
 
-    <a href="#">
+    <a href="#" id="productos-tag">
         <div class="companies-icon"></div>
         <div class="companies-desc">
             <div class="companies-title">Productos</div>

@@ -3,6 +3,7 @@
  */
 
 $('#btn-new-company').click();
+$('#company-tag').addClass('companies-tag-selectionated');
 
 function fillFormCompany(result)
 {
@@ -59,11 +60,18 @@ function fillShowInfoCompany(result)
                     data:       datos,
                     // async:   false,
 
+                    beforeSend: function(){
+                        $('.core-loader').show();
+                    },
+
                     success: function (result) {
                         fillFormCompany(result);
+                        $('.core-loader').hide();
+
                     }
 
                 }).fail(function (jqXHR, textStatus) {
+                    $('.core-loader').hide();
 
                     $('#msj-danger-state').empty();
 
@@ -150,7 +158,6 @@ function fillShowInfoCompany(result)
 
                     success: function (result) {
                         $('.core-loader').hide();
-                        hideShowAlert('msj-success', result.message);
                         $('.close').click();
                         document.getElementById("form-company-update").reset();
                         fillShowInfoCompany(result);

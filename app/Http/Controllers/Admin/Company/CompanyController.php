@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Company;
 
 use App\Empresa;
 use App\Facades\Core;
+use App\Tienda;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -39,10 +40,13 @@ class CompanyController extends Controller
         // Saber si el usuario tiene empresa
         $empresa = Empresa::where('users_id', \Auth::user()->id)->first();
 
-        if ($empresa === null)
+        if ($empresa === null) {
             return view('admin.company.new-company', compact('perfil', 'contacto', 'userPerfil', 'userContacto'));
-        else
-            return view('admin.company.company', compact('perfil', 'contacto', 'userPerfil', 'userContacto', 'empresa'));
+
+        } else {
+            $countTiendas = Tienda::where('empresa_id', $empresa->id)->count();
+            return view('admin.company.company', compact('perfil', 'contacto', 'userPerfil', 'userContacto', 'empresa', 'countTiendas'));
+        }
 
     }
 

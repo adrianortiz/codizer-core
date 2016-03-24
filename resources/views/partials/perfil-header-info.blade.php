@@ -30,11 +30,12 @@
                 <button id="more-icon-perfil" type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-ellipsis-h fa-lg"></i>
                 </button>
-                <ul class="dropdown-menu">
-                    <li><a href="#">A</a></li>
-                    <li><a href="#">B</a></li>
-                    <li><a href="#">C</a></li>
-                    <li><a href="#">D</a></li>
+                <ul class="dropdown-menu dropdown-menu-right">
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Twetter</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">Correo</a></li>
                 </ul>
             </div>
         </div>

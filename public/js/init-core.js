@@ -5,9 +5,9 @@
  */
 function resizeContiainers() {
     $('#content-body-ui').css('height', $( window ).height() - 55);
-    $('#article-content').css('height', $( window ).height() - 100);
-    $('.left-content-list').css('height', $( window ).height() - 100);
-    $('.right-content-list').css('height', $( window ).height() - 100);
+    $('#article-content').css('height', $( window ).height() - 114);
+    $('.left-content-list').css('height', $( window ).height() - 102);
+    $('.right-content-list').css('height', $( window ).height() - 102);
 }
 
 (function($){

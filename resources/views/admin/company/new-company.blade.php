@@ -62,7 +62,7 @@
 
     <div id="msg-vacio">
         <button type="button" id="btn-new-company" class="btn btn-primary btn-sm btn-sm-radius btn-shadow-blue" data-toggle="modal" data-target="#modalNewCompany">Nueva Empresa</button>
-        <div style="margin-top: 20px;">¡Da de alta tu empresa y comienza a vender!</div>
+        <div style="margin-top: 20px;">¡Da de alta tu empresa, configura tus tiendas y comienza a vender!</div>
     </div>
 
 </div>

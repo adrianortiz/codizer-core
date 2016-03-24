@@ -4,7 +4,7 @@
   height: auto;
   margin-bottom: 30px;
   img {
-    height: 120px;
+    height: 100px;
     width: auto;
     @include prefixer(transform, translateY(0px));
     background-color: $gris-100;

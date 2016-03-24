@@ -68,6 +68,14 @@ return [
             'root'   => public_path('media/photo-company'),
         ],
 
+        // Ruta donde se almacenan las fotos de una tienda
+        'photo_store' => [
+            'driver' => 'local',
+            'root'   => public_path('media/photo-store'),
+        ],
+
+
+
         'ftp' => [
             'driver'   => 'ftp',
             'host'     => 'ftp.example.com',

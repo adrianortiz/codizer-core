@@ -57,7 +57,7 @@ function noteCreateUpdate(result) {
                             hideShowAlert('msj-danger', 'Ocurrio un problema');
                         } else {
                             hideShowAlert('msj-success', result.message);
-
+                            $('#msg-list-vacio').hide();
                             containerNotes.prepend( noteCreateUpdate(result) );
                             $('.close').click();
                             document.getElementById("form-notes-store").reset();
