@@ -124,6 +124,7 @@ class CompanyController extends Controller
 
                 $oferta = new Oferta();
                 $oferta->regla_porciento = 0;
+                $oferta->tipo_oferta = '-';
                 $oferta->save();
 
                 $empresaHasOferta = new EmpresaHasOferta();

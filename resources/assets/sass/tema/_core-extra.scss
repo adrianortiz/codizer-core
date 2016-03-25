@@ -1,0 +1,134 @@
+.extra-container-mini {
+  margin: 0 auto;
+  padding: 0 auto;
+  margin-top: 18px;
+  margin-left: 40px;
+  width: 80%;
+  height: 60px;
+  background-color: $blanco;
+  @include prefixer(box-shadow, $sombra-gris-object-extra);
+}
+
+.btn-extra-container {
+  margin: 0;
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  transform: translate(-50%, -15px);
+
+}
+
+.btn-extra, .btn-extra-new {
+  width: 36px;
+  height: 36px;
+  border-radius: 36px;
+  border-width: 0;
+  background-color: $gris-400;
+  color: $blanco;
+  font-size: 12px;
+  @include prefixer(box-shadow, $sombra-gris-object-extra);
+
+  &:hover {
+    color: $blanco;
+    background-color: $gris-400;
+    opacity: 0.9;
+  }
+}
+
+.btn-extra-new {
+  font-size: 16px;
+  transform: translate(-10px, -3px);
+}
+
+.btn-extra-blanco-bg {
+  border: solid 1px $gris-100;
+  background-color: $blanco;
+  color: $gris-400;
+
+  &:hover {
+    border: solid 1px $gris-100;
+    background-color: $gris-100;
+    color: $gris-400;
+  }
+}
+
+
+.txt-color-morado {
+  color: $morado-20;
+}
+
+.btn-extra-morado-bg {
+  border: solid 1px $morado-20;
+  background-color: $morado-20;
+  color: $blanco;
+  &:hover {
+    border: solid 1px $morado-20;
+    background-color: $morado-20;
+    color: $blanco;
+  }
+}
+
+.txt-color-azul {
+  color: $azul-20;
+}
+
+.btn-extra-azul-bg {
+  border: solid 1px $azul-20;
+  background-color: $azul-20;
+  color: $blanco;
+
+  &:hover {
+    border: solid 1px $azul-20;
+    background-color: $azul-20;
+    color: $blanco;
+  }
+}
+
+.txt-color-amarillo {
+  color: $amarillo-300;
+}
+
+.btn-extra-amarillo-bg {
+  border: solid 1px $amarillo-300;
+  background-color: $amarillo-300;
+  color: $blanco;
+  &:hover {
+    border: solid 1px $amarillo-300;
+    background-color: $amarillo-300;
+    color: $blanco;
+  }
+}
+
+.txt-color-verde {
+  color: $green-200;
+}
+
+.btn-extra-verde-bg {
+  border: solid 1px $green-200;
+  background-color: $green-200;
+  color: $blanco;
+  &:hover {
+    border: solid 1px $green-200;
+    background-color: $green-200;
+    color: $blanco;
+  }
+}
+
+.body-extra {
+  display: inline-block;
+  @include prefixer(width, calc(100% - 44px));
+  height: 80%;
+  transform: translateX(-15px);
+  padding: 5px;
+  overflow: hidden;
+
+  span {
+    font-size: 10px;
+  }
+
+  div {
+    margin-top: 4px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+}

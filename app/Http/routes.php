@@ -178,14 +178,18 @@ Route::group(['middleware' => 'auth'], function () {
             'as'    => 'notes.delete'
         ]);
 
-        // Search note
+
+        /*
+         * === Search note ====
+         */
         Route::get('perfil/{nameFirstName}/notes/search', [
             'uses'  => 'Admin\Notes\NotesController@search',
             'as'    => 'notes.search'
         ]);
 
+
         /*
-         * Events
+         * === Events ====
          */
         Route::get('perfil/{nameFirstName}/events', [
             'uses'  => 'Admin\Events\EventsController@index',
@@ -268,6 +272,76 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('admin/{nameFirstName}/stores/update', [
             'uses'  => 'Admin\Tienda\TiendaController@update',
             'as'    => 'stores.update'
+        ]);
+
+
+        /**
+         * ========= EXTRAS - Categorias, Ofertas y Fabricantes ========
+         */
+
+        Route::get('admin/{nameFirstName}/extras', [
+            'uses'  => 'Admin\OptionsExtra\OptionExtraController@index',
+            'as'    => 'extras.index'
+        ]);
+
+        ///
+        // CREATE OFERTA
+        Route::post('admin/{nameFirstName}/extras/oferta/store', [
+            'uses'  => 'Admin\OptionsExtra\OptionExtraController@storeOferta',
+            'as'    => 'oferta.store'
+        ]);
+
+        // GET OFERTA
+        Route::get('admin/{nameFirstName}/extras/oferta/show', [
+            'uses'  => 'Admin\OptionsExtra\OptionExtraController@showOferta',
+            'as'    => 'oferta.show'
+        ]);
+
+        // UPDATE OFERTA
+        Route::put('admin/{nameFirstName}/extras/oferta/update', [
+            'uses'  => 'Admin\OptionsExtra\OptionExtraController@updateOferta',
+            'as'    => 'oferta.update'
+        ]);
+
+
+        ///
+        // CREATE FABRICA
+        Route::post('admin/{nameFirstName}/extras/fabrica/store', [
+            'uses'  => 'Admin\OptionsExtra\OptionExtraController@storeFabrica',
+            'as'    => 'fabrica.store'
+        ]);
+
+        // GET FABRICA
+        Route::get('admin/{nameFirstName}/extras/fabrica/show', [
+            'uses'  => 'Admin\OptionsExtra\OptionExtraController@showFabrica',
+            'as'    => 'fabrica.show'
+        ]);
+
+        // UPDATE FABRICA
+        Route::put('admin/{nameFirstName}/extras/fabrica/update', [
+            'uses'  => 'Admin\OptionsExtra\OptionExtraController@updateFabrica',
+            'as'    => 'fabrica.update'
+        ]);
+
+
+
+        ///
+        // CREATE CATEGORIA
+        Route::post('admin/{nameFirstName}/extras/categoria/store', [
+            'uses'  => 'Admin\OptionsExtra\OptionExtraController@storeCategoria',
+            'as'    => 'categoria.store'
+        ]);
+
+        // GET CATEGORIA
+        Route::get('admin/{nameFirstName}/extras/categoria/show', [
+            'uses'  => 'Admin\OptionsExtra\OptionExtraController@showCategoria',
+            'as'    => 'categoria.show'
+        ]);
+
+        // UPDATE CATEGORIA
+        Route::put('admin/{nameFirstName}/extras/categoria/update', [
+            'uses'  => 'Admin\OptionsExtra\OptionExtraController@updateCategoria',
+            'as'    => 'categoria.update'
         ]);
 
     });

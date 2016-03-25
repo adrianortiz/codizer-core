@@ -23,7 +23,7 @@ function fillFormCompany(result)
 function fillShowInfoCompany(result)
 {
     $('#show-info-contact-logo').attr('src', result.company.logo);
-    $('#show-info-contact-nombre-tag').html(result.company.nombre);
+    $('#show-info-contact-nombre-tag').html(result.company.nombre.substring(0, 6) + '...');
     $('#show-info-contact-nombre').html(result.company.nombre);
     $('#show-info-contact-giro-empresa').html(result.company.giro_empresa);
     $('#show-info-contact-sector').html(result.company.sector);
@@ -48,7 +48,7 @@ function fillShowInfoCompany(result)
 
         GetDataCompany: function() {
 
-            $('#btn-update-company').click( function() {
+            $('#btn-modal-create-tienda').click( function() {
                 var form = $('#form-company-to-show');
                 var datos = form.serializeArray();
                 var route = form.attr('action');

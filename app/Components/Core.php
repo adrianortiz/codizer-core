@@ -140,4 +140,27 @@ class Core
         else
             return false;
     }
+
+    public function getOfertas($empresaId) {
+        return DB::table('oferta')
+            ->join('empresa_has_oferta', 'oferta.id', '=', 'empresa_has_oferta.oferta_id')
+            ->where('empresa_id', '=', $empresaId)
+            ->get();
+    }
+
+    public function getFabricantes($empresaId) {
+        return DB::table('fabricante')
+            ->join('empresa_has_fabricante', 'fabricante.id', '=', 'empresa_has_fabricante.fabricante_id')
+            ->where('empresa_id', '=', $empresaId)
+            ->get();
+    }
+
+    public function getCategorias($empresaId) {
+        return DB::table('categoria')
+            ->join('empresa_has_categoria', 'categoria.id', '=', 'empresa_has_categoria.categoria_id')
+            ->where('empresa_id', '=', $empresaId)
+            ->get();
+    }
+
+
 }

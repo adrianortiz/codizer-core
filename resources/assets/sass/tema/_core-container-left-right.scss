@@ -144,3 +144,79 @@
     }
   }
 }
+
+
+// CONTENEDORE DE ADIMINISTRACIÓN
+.container-list-info-admin {
+  position: relative;
+  top: 115px;
+  right: 10px;
+  width: 100%;
+  @include prefixer(height, calc(100% - 125px));
+  background-color: $blanco;
+}
+
+.container-list-info-admin-extra {
+  position: relative;
+  top: 90px;
+  right: 10px;
+  width: 100%;
+  @include prefixer(height, calc(100% - 90px));
+  background-color: $blanco;
+}
+
+.container-admin-30 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 350px;
+  height: 100%;
+  background-color: $gris-50;
+  overflow: auto;
+  // border-right: solid 1px $gris-250;
+}
+
+
+.container-admin-100 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  @include prefixer(width, calc(100% + 10px));
+  height: 100%;
+  background-color: $gris-50;
+  overflow: auto;
+}
+
+.container-admin-100-tittle {
+  width: 100%;
+  height: 46px;
+  background-color: $blanco;
+
+  div {
+    display: inline-block;
+    height: 100%;
+    width: 33%;
+    text-align: center;
+    border-right: solid 1px $gris-100;
+    border-bottom: solid 1px $gris-100;
+    text-transform: uppercase;
+    font-size: 12px;
+    padding-top: 3px;
+  }
+}
+
+.container-admin-100-33 {
+  position: relative;
+  width: 33%;
+  @include prefixer(height, calc(100% - 55px));
+  border-right: solid 1px $gris-150;
+  display: inline-block;
+  overflow: auto;
+}
+
+.tag-num {
+  font-weight: 600;
+  margin-right: 8px;
+  font-size: 18px;
+}
+

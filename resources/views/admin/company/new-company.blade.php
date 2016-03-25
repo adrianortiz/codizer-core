@@ -37,21 +37,21 @@
             <div class="companies-icon"></div>
             <div class="companies-desc">
                 <div class="companies-title">Tiendas</div>
-                <div class="companies-tittle-tag">0 Tienda (s)</div>
+                <div class="companies-tittle-tag">No tienes acceso</div>
             </div>
         </a>
         <a href="#">
             <div class="companies-icon"></div>
             <div class="companies-desc">
                 <div class="companies-title">Equipo</div>
-                <div class="companies-tittle-tag">0 Empleado (s)</div>
+                <div class="companies-tittle-tag">No tienes acceso</div>
             </div>
         </a>
         <a href="#">
             <div class="companies-icon"></div>
             <div class="companies-desc">
                 <div class="companies-title">Productos</div>
-                <div class="companies-tittle-tag">0 Producto (s)</div>
+                <div class="companies-tittle-tag">No tienes acceso</div>
             </div>
         </a>
     </div>

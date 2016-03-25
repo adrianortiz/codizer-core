@@ -2,11 +2,10 @@ $('#tienda-tag').addClass('companies-tag-selectionated');
 var tiendaOldContainerToHide = null;
 
 // Contenedor de tiendas
-$containerTienda = $('.container-admin-100');
+var containerTienda = $('.container-admin-100');
 
 function addTienda(result) {
-    newTienda = '<div class="tienda-container" data-id="' + result.tienda.id + '"> <div class="tienda-color-background"></div> <div class="tienda-img-container"> <img src="' + result.tienda.foto + '"> </div> <div class="tienda-info-container"> <div class="tienda-info-container-nombre"> <span>Tienda</span> <h2>' + result.tienda.nombre + '</h2> </div> <div class="tienda-info-container-desc"> <div class="tienda-option-container"> <div class="btn-group" role="group"> <button type="button" class="btn btn-default btn-sm dropdown-toggle tienda-options-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-ellipsis-h fa-lg"></i> </button> <ul class="dropdown-menu dropdown-menu-right"> <li><a href="#" >Ver tienda</a></li> <li class="divider"></li> <li><a class="btn-update-company" href="#" data-toggle="modal" data-target="#modalUpdateTienda">Editar</a></li> </ul> </div> </div> <span>Descripción</span> <h2>' + result.tienda.desc + '</h2> </div> </div> </div>';
-    $containerTienda.append(newTienda);
+    return '<div class="tienda-container" data-id="' + result.tienda.id + '"> <div class="tienda-color-background"></div> <div class="tienda-img-container"> <img src="' + result.tienda.foto + '"> </div> <div class="tienda-info-container"> <div class="tienda-info-container-nombre"> <span>Tienda</span> <h2>' + result.tienda.nombre + '</h2> </div> <div class="tienda-info-container-desc"> <div class="tienda-option-container"> <div class="btn-group" role="group"> <button type="button" class="btn btn-default btn-sm dropdown-toggle tienda-options-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-ellipsis-h fa-lg"></i> </button> <ul class="dropdown-menu dropdown-menu-right"> <li><a href="#" >Ver tienda</a></li> <li class="divider"></li> <li><a class="btn-update-company" href="#" data-toggle="modal" data-target="#modalUpdateTienda">Editar</a></li> </ul> </div> </div> <span>Descripción</span> <h2>' + result.tienda.desc + '</h2> </div> </div> </div>';
 }
 
 function fillFormTienda(result) {
@@ -104,13 +103,17 @@ function fillFormTienda(result) {
 
                     success: function (result) {
                         $('.core-loader').hide();
+                        $('#msg-vacio').hide();
 
                         console.log(result.tienda);
                         hideShowAlert('msj-success', result.tienda);
                         $('.close').click();
                         document.getElementById("form-tienda-store").reset();
 
-                        addTienda(result);
+                        // Incrementar en más 1 el contador de tiendas
+                        $('#lb-count-tiendas').html( parseInt( $('#lb-count-tiendas').html() ) + 1 );
+
+                        containerTienda.append(addTienda(result));
                     }
 
                 }).fail(function (jqXHR, textStatus) {
@@ -156,7 +159,7 @@ function fillFormTienda(result) {
                         document.getElementById("form-tienda-update").reset();
 
                         tiendaOldContainerToHide.hide();
-                        addTienda(result);
+                        tiendaOldContainerToHide.after(addTienda(result));
                     }
 
                 }).fail(function (jqXHR, textStatus) {
