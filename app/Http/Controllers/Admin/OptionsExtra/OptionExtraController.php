@@ -11,6 +11,7 @@ use App\Fabricante;
 use App\Facades\Core;
 use App\Oferta;
 use App\Tienda;
+use App\UsuarioEmpleadoInfo;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -45,12 +46,13 @@ class OptionExtraController extends Controller
         } else {
 
             $countTiendas = Tienda::where('empresa_id', $empresa->id)->count();
+            $countEmpleados = UsuarioEmpleadoInfo::where('empresa_id', $empresa->id)->count();
 
             $ofertas = Core::getOfertas($empresa->id);
             $fabricantes = Core::getFabricantes($empresa->id);
             $categorias = Core::getCategorias($empresa->id);
 
-            return view('admin.company.extras', compact('perfil', 'contacto', 'userPerfil', 'userContacto', 'empresa', 'countTiendas', 'ofertas', 'categorias', 'fabricantes'));
+            return view('admin.company.extras', compact('perfil', 'contacto', 'userPerfil', 'userContacto', 'empresa', 'countTiendas', 'ofertas', 'categorias', 'fabricantes', 'countEmpleados'));
         }
     }
 

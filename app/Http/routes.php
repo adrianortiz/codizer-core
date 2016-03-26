@@ -275,6 +275,38 @@ Route::group(['middleware' => 'auth'], function () {
         ]);
 
 
+
+        /**
+         * ========= EMPLEADOS ========
+         */
+
+        // SHOW ALL EMPLEADOS
+        Route::get('admin/{nameFirstName}/employee', [
+            'uses'   => 'Admin\Employee\EmployeeController@index',
+            'as'    => 'employee.index'
+        ]);
+
+        // NEW EMPLEADO
+        Route::post('admin/{nameFirstName}/employee/store', [
+            'uses'   => 'Admin\Employee\EmployeeController@store',
+            'as'    => 'employee.store'
+        ]);
+
+        // GET EMPLEADO
+        Route::get('admin/{nameFirstName}/employee/show', [
+            'uses'  => 'Admin\Employee\EmployeeController@show',
+            'as'    => 'employee.show'
+        ]);
+
+        // update
+        Route::put('admin/{nameFirstName}/employee/update', [
+            'uses'  => 'Admin\Employee\EmployeeController@update',
+            'as'    => 'employee.update'
+        ]);
+
+
+
+
         /**
          * ========= EXTRAS - Categorias, Ofertas y Fabricantes ========
          */

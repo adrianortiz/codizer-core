@@ -15,11 +15,11 @@
         </div>
     </a>
 
-    <a href="#" id="equipo-tag">
+    <a href="{{ route('employee.index', $userPerfil[0]->perfil_route) }}" id="equipo-tag">
         <div class="companies-icon"></div>
         <div class="companies-desc">
             <div class="companies-title">Equipo</div>
-            <div class="companies-tittle-tag">10 Empleado (s)</div>
+            <div class="companies-tittle-tag"><span id="lb-count-employee">{{ $countEmpleados }}</span> Empleado (s)</div>
         </div>
     </a>
 

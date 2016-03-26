@@ -2,7 +2,7 @@
 
 @section('title', 'Empresa / Extras')
 
-@section('title-header', 'Empresa / Tienda')
+@section('title-header', 'Empresa / Extras')
 
 
 @section('main-header-info-app')

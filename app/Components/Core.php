@@ -10,8 +10,11 @@ namespace App\Components;
 use App\Empresa;
 use App\Perfil;
 use App\Contacto;
+use App\Tienda;
 use App\User;
 use App\UserHasPerfil;
+use App\UsuarioEmpleadoInfo;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class Core
@@ -141,25 +144,91 @@ class Core
             return false;
     }
 
-    public function getOfertas($empresaId) {
+    public function getOfertas($empresaId)
+    {
         return DB::table('oferta')
             ->join('empresa_has_oferta', 'oferta.id', '=', 'empresa_has_oferta.oferta_id')
             ->where('empresa_id', '=', $empresaId)
             ->get();
     }
 
-    public function getFabricantes($empresaId) {
+    public function getFabricantes($empresaId)
+    {
         return DB::table('fabricante')
             ->join('empresa_has_fabricante', 'fabricante.id', '=', 'empresa_has_fabricante.fabricante_id')
             ->where('empresa_id', '=', $empresaId)
             ->get();
     }
 
-    public function getCategorias($empresaId) {
+    public function getCategorias($empresaId)
+    {
         return DB::table('categoria')
             ->join('empresa_has_categoria', 'categoria.id', '=', 'empresa_has_categoria.categoria_id')
             ->where('empresa_id', '=', $empresaId)
             ->get();
+    }
+
+    /**
+     * Validar que la ruta de la tienda sea unica
+     * Si es 0 significa que no existe y es valida
+     *
+     * @param $tiendaRoute
+     * @return mixed
+     */
+    public function existTiendaRoute($tiendaRoute) {
+        return Tienda::where('store_route', $tiendaRoute)->count();
+    }
+
+    /**
+     * Validar que no exista esa configuración de empleado en la BD
+     * Si es 0 significa que no existe esa configuración
+     *
+     * @param Request $request
+     * @return integer
+     */
+    public function existEmployeeConfig(Request $request)
+    {
+        return $existEmployee = UsuarioEmpleadoInfo::where('empresa_id', $request['empresa_id'])
+                ->where('tienda_id', $request['tienda_id'])
+                ->where('nivel', $request['nivel'])
+                ->where('users_id', $request['users_id'])
+                ->count();
+    }
+
+    /**
+     * @param $empresaId
+     * @return mixed
+     */
+    public function getAllEmployeesByEmpresaId( $empresaId )
+    {
+        return DB::table('usuario_empleado_info')
+            ->join('empresa', 'usuario_empleado_info.empresa_id', '=', 'empresa.id')
+            ->join('tienda', 'usuario_empleado_info.tienda_id', '=', 'tienda.id')
+            ->join('users', 'usuario_empleado_info.users_id', '=', 'users.id')
+            ->join('contacto', 'users.contacto_id', '=', 'contacto.id')
+            ->join('users_has_perfil', 'users.id', '=', 'users_has_perfil.users_id')
+            ->join('perfil', 'perfil.id', '=', 'users_has_perfil.perfil_id')
+            ->where('usuario_empleado_info.empresa_id', '=', $empresaId)
+            ->select('usuario_empleado_info.*', 'usuario_empleado_info.id AS empleado_id', 'usuario_empleado_info.estado AS empleado_estado', 'tienda.nombre AS nombre_tienda', 'tienda.foto AS foto_tienda', 'contacto.*', 'perfil_route', 'store_route')
+            ->get();
+    }
+
+    /**
+     * @param $employeeId
+     * @return mixed
+     */
+    public function getEmployeeById( $employeeId )
+    {
+        return DB::table('usuario_empleado_info')
+            ->join('empresa', 'usuario_empleado_info.empresa_id', '=', 'empresa.id')
+            ->join('tienda', 'usuario_empleado_info.tienda_id', '=', 'tienda.id')
+            ->join('users', 'usuario_empleado_info.users_id', '=', 'users.id')
+            ->join('contacto', 'users.contacto_id', '=', 'contacto.id')
+            ->join('users_has_perfil', 'users.id', '=', 'users_has_perfil.users_id')
+            ->join('perfil', 'perfil.id', '=', 'users_has_perfil.perfil_id')
+            ->where('usuario_empleado_info.id', '=', $employeeId)
+            ->select('usuario_empleado_info.*', 'usuario_empleado_info.id AS empleado_id', 'usuario_empleado_info.estado AS empleado_estado', 'tienda.nombre AS nombre_tienda', 'tienda.foto AS foto_tienda', 'contacto.*', 'perfil_route', 'store_route')
+            ->first();
     }
 
 
