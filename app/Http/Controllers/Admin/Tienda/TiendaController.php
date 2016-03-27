@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\URL;
 
 class TiendaController extends Controller
@@ -160,7 +161,17 @@ class TiendaController extends Controller
     public function verTienda($tiendaRoute) {
 
         Core::isTiendaRouteValid( $tiendaRoute );
-        dd("La tienda con ruta " . $tiendaRoute . ' existe');
+
+        if (!Auth::guest()) {
+            $userContacto = Core::getUserContact();
+            $userPerfil = Core::getUserPerfil();
+        }
+
+        $tienda = Tienda::where('store_route', $tiendaRoute)->first();
+
+        if ($tienda->store_route_platilla == 'basic') {
+            return view('plantillas.basic.index', compact('tienda', 'userContacto', 'userPerfil'));
+        }
 
     }
 }

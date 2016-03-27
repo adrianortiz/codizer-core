@@ -60,12 +60,25 @@ Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
 Route::post('password/reset', 'Auth\PasswordController@postReset');
 
 
+/**
+ * Vista index de las tiendas dadas de alta en Core
+ * No se requiere que el usuario este logueado para poder ver
+ * y navegar en los productos
+ */
+
+// Index de una tienda
+Route::get('tienda/{tiendaRoute}/', [
+    'uses'  => 'Admin\Tienda\TiendaController@verTienda',
+    'as'    => 'store.front'
+]);
+
+
+
 /*
- * PRUEBA: Indentificar si un usuario esta conectado
+ * Indentificar si un usuario esta conectado
  * Grupos de rutas de laravel
  * app/Http/Kernel.php
  */
-
 Route::group(['middleware' => 'auth'], function () {
 
     // Para acceder tengo que tener el role "core"
@@ -291,11 +304,6 @@ Route::group(['middleware' => 'auth'], function () {
         ]);
 
 
-        // ACCEDER A TIENDA
-        Route::get('tienda/{tiendaRoute}/', [
-            'uses'  => 'Admin\Tienda\TiendaController@verTienda',
-            'as'    => 'store.front'
-        ]);
 
 
 
