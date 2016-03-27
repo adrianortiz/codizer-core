@@ -32,8 +32,15 @@
 
                         <div class="col-md-6">
                             <div class="form-group">
+
                                 {!! Form::label('cantidad_disponible', 'Cantidad disponible') !!}
-                                {!! Form::text('cantidad_disponible', '', array('class'=> 'form-control form-with-100 form-group-validate val_num', 'placeholder' => 'Cantidad disponible')) !!}
+                                {!! Form::select('cantidad_disponible', array(
+                                '1' => '1','10' => '10','20' => '20','30' => '30','40' => '40','50' => '50',
+                                '60' => '60','70' => '70','80' => '80','90' => '90','100' => '100','200' => '200',
+                                '300' => '300','400' => '400','500' => '500','600' => '600','700' => '700',
+                                '800' => '800','900' => '900','1000' => '1000'
+                                ), '1',
+                                array('class'=> 'form-control form-with-100 form-group-validate val_num'))  !!}
                             </div>
                         </div>
 
@@ -57,22 +64,23 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 {!! Form::label('desc_producto', 'Descripcion del producto') !!}
-                                {!! Form::text('desc_producto', '', array('class'=> 'form-control form-with-100 form-group-validate val_text_num', 'placeholder' => 'Descripcion del producto')) !!}
+                                {!! Form::textarea('desc_producto', '',
+                                array('class'=> 'form-control form-with-100 form-group-validate val_text_num', 'placeholder' => 'Descripcion del producto')) !!}
                             </div>
                         </div>
 
                         <div class="col-md-6">
                             <div class="form-group">
                                 {!! Form::label('estado', 'Estado del producto') !!}
-                                {!! Form::select('estado', array('0' => 'Habilitado', '1' => 'Deshabilitado'), 'Elige un estado',
-                                array('class'=> 'form-control form-with-100 form-group-validate val_text'))  !!}
+                                {!! Form::select('estado', array('0' => 'Disponible para el publico', '1' => 'No disponible para el publico'),
+                                 'Elige un estado', array('class'=> 'form-control form-with-100 form-group-validate val_text'))  !!}
                             </div>
                         </div>
 
                         <div class="col-md-6">
                             <div class="form-group">
                                 {!! Form::label('fabricante_id', 'Fabricante') !!}
-                                {!! Form::select('fabricante_id', array('0' => 'Ninguno', '1' => 'Cualquiera'), 'Ninguno',
+                                {!! Form::select('fabricante_id', $fabricantesList,Input::old('fabricante_id'),
                                 array('class'=> 'form-control form-with-100 form-group-validate val_text'))  !!}
                             </div>
                         </div>
@@ -85,11 +93,10 @@
                             </div>
                         </div>
 
-
                         <div class="col-md-6">
                             <div class="form-group">
-                                {!! Form::label('users_id', 'Usuario') !!}
-                                {!! Form::select('users_id', array('0' => 'Ninguno', '1' => 'Cualquiera'), 'Ninguno',
+                                {!! Form::label('categoria', 'Categoria') !!}
+                                {!! Form::select('categoria', array('0' => 'Ninguna', '1' => 'Cualquiera'), 'Ninguna',
                                 array('class'=> 'form-control form-with-100 form-group-validate val_text'))  !!}
                             </div>
                         </div>

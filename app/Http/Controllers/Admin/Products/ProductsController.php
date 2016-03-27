@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Products;
 
+use App\Fabricante;
 use App\Facades\Core;
 use App\Product;
 use Illuminate\Http\Request;
@@ -32,13 +33,15 @@ class ProductsController extends Controller
         $perfil = $userPerfil;
         $contacto = $userContacto;
 
+        $fabricante=null;
+        $fabricantesList  = Fabricante::where('fabricante_id', $fabricante->id)->lists('nombre', 'id');
         // Nos aseguramos de que la ruta sea la del usuario logueado
         if ( $nameFirstName != $userPerfil[0]->perfil_route)
             return \Redirect::route('events', $userPerfil[0]->perfil_route);
 
         Core::isRouteValid($userPerfil[0]->perfil_route);
 
-        return view('admin.products.products', compact('perfil', 'contacto', 'userPerfil', 'userContacto'));
+        return view('admin.products.products', compact('perfil', 'contacto', 'userPerfil', 'userContacto','fabricantesList'));
     }
 
     /**
