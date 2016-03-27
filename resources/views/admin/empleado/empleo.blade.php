@@ -77,7 +77,7 @@
 
                         <div class="body-name-employee">
                             <span class="txt-color-morado">Tienda</span>
-                            <div><a href="{{ $empleo->store_route }}" target="_blank">{{ $empleo->nombre_tienda }}</a></div>
+                            <div><a href="{{ route('store.front', $empleo->store_route) }}" target="_blank">{{ $empleo->nombre_tienda }}</a></div>
                         </div>
 
                         <div class="body-tienda-employee">

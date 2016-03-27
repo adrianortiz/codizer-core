@@ -70,6 +70,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Para acceder tengo que tener el role "core"
     Route::group(['middleware' => 'role'], function () {
+        // ---
     });
 
         /**
@@ -287,6 +288,13 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('admin/{nameFirstName}/stores/update', [
             'uses'  => 'Admin\Tienda\TiendaController@update',
             'as'    => 'stores.update'
+        ]);
+
+
+        // ACCEDER A TIENDA
+        Route::get('tienda/{tiendaRoute}/', [
+            'uses'  => 'Admin\Tienda\TiendaController@verTienda',
+            'as'    => 'store.front'
         ]);
 
 

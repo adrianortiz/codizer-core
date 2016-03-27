@@ -35,6 +35,20 @@ class Core
     }
 
     /**
+     * Valida que la ruta de la tienda exista
+     * de lo contrario muestra el error 404
+     *
+     * @param $tiendaRoute
+     */
+    public function isTiendaRouteValid($tiendaRoute)
+    {
+        $existeRuta = Tienda::where('store_route', $tiendaRoute)->count();
+        if (!$existeRuta == 1) {
+            abort(404);
+        }
+    }
+
+    /**
      * Getter para obtener el perfil de una cuenta
      *
      * @param $nameFirstName
