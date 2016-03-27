@@ -215,6 +215,11 @@ Route::group(['middleware' => 'auth'], function () {
             'as'    => 'products'
         ]);
 
+        Route::post('perfil/{nameFirstName}/products/store', [
+            'uses'  => 'Admin\Products\Products@store',
+            'as'    => 'products.store'
+        ]);
+
 
 
         /**

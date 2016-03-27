@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Products;
 
 use App\Facades\Core;
+use App\Product;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -52,7 +53,34 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if ($request->ajax()) {
+
+            $producto = new Product([
+
+                'codigo_producto'=>$request['codigo_producto'],
+                'cantidad_disponible'=>$request['cantidad_disponible'],
+                'nombre'=>$request['nombre'],
+                'precio'=>$request['precio'],
+                'des_producto'=>$request['desc_producto'],
+                'estado'=>$request['estado'],
+                'fabricante_id'=>$request['fabricante_id'],
+                'oferta_id'=>$request['oferta_id'],
+                'users_id'=>$request['users_id']
+            ]);
+
+            if ( $producto->save() )
+                $message = 'Producto añadido.';
+            else
+                $message = 'No se pudo añadir el producto.';
+
+
+            return response()->json([
+                'message' => $message,
+                'producto' => $producto
+            ]);
+        } else {
+            abort(404);
+        }
     }
 
     /**

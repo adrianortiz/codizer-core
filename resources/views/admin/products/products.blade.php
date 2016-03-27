@@ -141,9 +141,11 @@
 @section('modals')
 
    <!-- Aqui vas tus modals para los formularios -->
+@include('admin.products.patials.modal-product')
 
 @endsection
 
 @section('extra-js')
     <!-- Aqui vas tus js para peticiones Ajax -->
+<script src="{{ asset('/js/core-products.js') }}"></script>
 @endsection
