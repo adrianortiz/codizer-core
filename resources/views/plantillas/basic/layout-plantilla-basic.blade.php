@@ -58,8 +58,8 @@
 
 <nav>
     <ul>
-        <li><a href="#" class="menu-selected">Home</a></li>
-        <li><a href="#">Home</a></li>
+        <li><a href="{{ route('store.front', $tienda->store_route) }}" class="menu-selected">Home</a></li>
+        <li><a href="{{ route('store.front.info', $tienda->store_route) }}">Acerca de</a></li>
         <li><a href="#">Home</a></li>
         <li><a href="#">Home</a></li>
     </ul>
@@ -70,8 +70,8 @@
 
 
 <footer>
-    <strong>Texto importante, después de los h</strong>
-    <span>Texto común</span>
+    <strong>Footer</strong>
+    <span>© Codizer - 2016 </span>
 </footer>
 
 @yield('modals')

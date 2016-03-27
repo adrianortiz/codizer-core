@@ -72,6 +72,12 @@ Route::get('tienda/{tiendaRoute}/', [
     'as'    => 'store.front'
 ]);
 
+// Información de la tienda
+Route::get('tienda/{tiendaRoute}/info', [
+    'uses'  => 'Admin\Tienda\TiendaController@verTiendaInfo',
+    'as'    => 'store.front.info'
+]);
+
 
 
 /*

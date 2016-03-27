@@ -174,4 +174,22 @@ class TiendaController extends Controller
         }
 
     }
+
+
+    public function verTiendaInfo($tiendaRoute) {
+
+        Core::isTiendaRouteValid( $tiendaRoute );
+
+        if (!Auth::guest()) {
+            $userContacto = Core::getUserContact();
+            $userPerfil = Core::getUserPerfil();
+        }
+
+        $tienda = Tienda::where('store_route', $tiendaRoute)->first();
+
+        if ($tienda->store_route_platilla == 'basic') {
+            return view('plantillas.basic.info-plantilla', compact('tienda', 'userContacto', 'userPerfil'));
+        }
+
+    }
 }
