@@ -1,5 +1,6 @@
 // Variables
 @import "../tema/varibles";
+@import "../tema/core-products";
 
 // components
 @import "../librerias/normalize";
@@ -10,11 +11,10 @@
   outline:0 !important;
 }
 
-
-$basic-negro: #2A2A2A;
+$basic-negro: #222;
 $basic-gris: #F7F7F7;
 
-$amarillo-200: #FBE001;
+$amarillo-200: #EFC439;
 
 body {
   @include box-sizing(border-box);
@@ -177,7 +177,7 @@ nav {
   }
 }
 
-.lo-nuevo {
+.container-products {
   width: 100%;
   height: auto;
   margin-top: 20px;
@@ -189,14 +189,25 @@ nav {
     margin: 0 auto;
     padding: 0 auto;
 
+    text-align: center;
+
   }
 }
 
 .product-container {
   display: inline-block;
-  width: 33%;
+  width: 32%;
   height: auto;
+  margin-bottom: 30px;
+  text-align: left;
+  padding: 10px;
 
+  &:hover {
+    img {
+      box-shadow: $sombra-gris-white-objetct;
+      opacity: 0.9;
+    }
+  }
   .lo-nuevo-info {
     width: 100%;
     height: auto;
@@ -254,7 +265,9 @@ nav {
     width: 100%;
     width: 100%;
     border-bottom: solid 4px #464748;
+    @include transition(.3s ease);
   }
+
 }
 
 
@@ -353,7 +366,7 @@ nav {
 }
 
 // BUTTONS
-.btn-shadow-blue {
+.btn-border-yellow {
   color: $basic-negro;
   border: solid 2px $amarillo-200;
   background: $blanco;
@@ -362,7 +375,7 @@ nav {
   &:hover {
     border: solid 2px $amarillo-200;
     color: $basic-negro;
-    background-color: $amarillo-200;
+    background-color: rgba($amarillo-200, 0.5);
   }
 
 }
