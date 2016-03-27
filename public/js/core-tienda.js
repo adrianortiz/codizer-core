@@ -80,7 +80,19 @@ function fillFormTienda(result) {
 
             $('#store-new-tienda').click( function() {
                 if ( validateGroup(".form-group-validate") == -1 )
-                    initSaveCompany();
+                {
+                    if ( $('#store_route').val() == "") {
+                        $('#msj-danger-state').empty();
+                        hideShowAlert('msj-danger', 'La URL de tu tienda no puede estár vacía.');
+                        $('#store_route').addClass('error-val');
+                    } else {
+                        $('#store_route').val( $('#store_route').val().replace(/\s+/g, '-').toLowerCase() );
+                        $('#store_route').removeClass('error-val');
+                        initSaveCompany();
+                    }
+
+                }
+
             });
 
             function initSaveCompany() {
@@ -103,17 +115,26 @@ function fillFormTienda(result) {
 
                     success: function (result) {
                         $('.core-loader').hide();
-                        $('#msg-vacio').hide();
 
-                        console.log(result.tienda);
-                        hideShowAlert('msj-success', result.tienda);
-                        $('.close').click();
-                        document.getElementById("form-tienda-store").reset();
+                        if (result.message) {
+                            $('#msj-danger-state').empty();
+                            hideShowAlert('msj-danger', result.message);
 
-                        // Incrementar en más 1 el contador de tiendas
-                        $('#lb-count-tiendas').html( parseInt( $('#lb-count-tiendas').html() ) + 1 );
+                        } else {
 
-                        containerTienda.append(addTienda(result));
+                            $('#msg-vacio').hide();
+
+                            console.log(result.tienda);
+                            hideShowAlert('msj-success', result.tienda);
+                            $('.close').click();
+                            document.getElementById("form-tienda-store").reset();
+
+                            // Incrementar en más 1 el contador de tiendas
+                            $('#lb-count-tiendas').html( parseInt( $('#lb-count-tiendas').html() ) + 1 );
+
+                            containerTienda.append(addTienda(result));
+                        }
+
                     }
 
                 }).fail(function (jqXHR, textStatus) {

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Tienda;
 use App\Empresa;
 use App\Facades\Core;
 use App\Tienda;
+use App\UsuarioEmpleadoInfo;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -41,7 +42,9 @@ class TiendaController extends Controller
         } else {
             $countTiendas = Tienda::where('empresa_id', $empresa->id)->count();
             $tiendas = Tienda::where('empresa_id', $empresa->id)->get();
-            return view('admin.company.stores', compact('perfil', 'contacto', 'userPerfil', 'userContacto', 'empresa', 'countTiendas', 'tiendas'));
+
+            $countEmpleados = UsuarioEmpleadoInfo::where('empresa_id', $empresa->id)->count();
+            return view('admin.company.stores', compact('perfil', 'contacto', 'userPerfil', 'userContacto', 'empresa', 'countTiendas', 'tiendas', 'countEmpleados'));
         }
 
     }
@@ -66,32 +69,40 @@ class TiendaController extends Controller
     {
         if ($request->ajax() ) {
 
-            $tienda = new Tienda();
-            $tienda->fill($request->all());
-
-            if ($request->file('foto') )
+            if (Core::existTiendaRoute($request['store_route']) === 0)
             {
-                // Guardar la nueva imagen en el disco
-                $filePhotoTienda = $request->file('foto');
-                $namePhotoTienda = 'store-'.\Auth::user()->id . Carbon::now()->second . $filePhotoTienda->getClientOriginalName();
-                \Storage::disk('photo_store')->put($namePhotoTienda, \File::get($filePhotoTienda));
+                $tienda = new Tienda();
+                $tienda->fill($request->all());
 
-                $tienda->foto = $namePhotoTienda;
+                if ($request->file('foto') )
+                {
+                    // Guardar la nueva imagen en el disco
+                    $filePhotoTienda = $request->file('foto');
+                    $namePhotoTienda = 'store-'.\Auth::user()->id . Carbon::now()->second . $filePhotoTienda->getClientOriginalName();
+                    \Storage::disk('photo_store')->put($namePhotoTienda, \File::get($filePhotoTienda));
 
-                // FALTA ELIMINAR LA VIEJA IMAGEN DEL DISCO DURO
+                    $tienda->foto = $namePhotoTienda;
+
+                    // FALTA ELIMINAR LA VIEJA IMAGEN DEL DISCO DURO
+                }
+
+                $empresa = Empresa::where('users_id', \Auth::user()->id)->first();
+
+                $tienda->empresa_id = $empresa->id;
+                $tienda->save();
+
+                // Obtener nombre y ruta de la foto de la tienda
+                $tienda->foto = URL::to('/') . '/media/photo-store/' . $tienda->foto;
+
+                return response()->json([
+                    'tienda' => $tienda
+                ]);
             }
 
-            $empresa = Empresa::where('users_id', \Auth::user()->id)->first();
-
-            $tienda->empresa_id = $empresa->id;
-            $tienda->save();
-
-            // Obtener nombre y ruta de la foto de la tienda
-            $tienda->foto = URL::to('/') . '/media/photo-store/' . $tienda->foto;
-
             return response()->json([
-                'tienda' => $tienda
+                'message' => 'La ruta ya existe, por favor elige otra.'
             ]);
+
         }
     }
 

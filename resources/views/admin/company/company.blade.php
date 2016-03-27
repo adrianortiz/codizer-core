@@ -37,7 +37,6 @@
         <div class="container-company-store-logo">
             <div class="container-company-store-logo-line">
                 <button type="button" id="btn-update-company" class="btn btn-primary btn-sm btn-sm-radius right-btn-company" data-toggle="modal" data-target="#modalUpdateCompany">Editar Empresa</button>
-                <button type="button" id="btn-down-company" class="btn btn-default btn-sm btn-sm-radius right-btn-company">Desactivar Empresa</button>
             </div>
             <img id="show-info-contact-logo" src="{{ asset('/media/photo-company/' . $empresa->logo) }}">
         </div>

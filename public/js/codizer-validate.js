@@ -17,22 +17,22 @@ var config = {"validation":[
     {
         "type" : "val_text",
         "rule" : /^([a-z ñáéíóú]{1,250})$/i,
-        "msg-danger" : "Solo texto, max 250"
+        "msg-danger" : "Solo texto."
     },
     {
         "type" : "val_text_num",
         "rule" : /^([a-z ñáéíóú 0-9 ,]{1,250})$/i,
-        "msg-danger" : "No caracteres especiales ( - .  )"
+        "msg-danger" : "Solo texto y números, no carateres especiales."
     },
     {
         "type" : "val_num",
         "rule" : /^([0-9]{1,250})$/i,
-        "msg-danger" : "Solo se acepta números"
+        "msg-danger" : "Solo números enteros."
     },
     {
         "type" : "val_double",
         "rule" : /^\d+(\.\d+)?$/,
-        "msg-danger" : "Solo números o números decimales"
+        "msg-danger" : "Solo números con o sin decimales."
     },
     {
         "type" : "val_date",
@@ -42,12 +42,12 @@ var config = {"validation":[
     {
         "type" : "val_mail",
         "rule" : /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/,
-        "msg-danger" : "El correo no es valido"
+        "msg-danger" : "Formato de correo no válido."
     },
     {
         "type" : "val_img",
         "rule" : /.(jpeg|jpg|png)$/i,
-        "msg-danger" : "El formato de la imagen no es correcto"
+        "msg-danger" : "Solo imagenes en formato .png o .jpg"
         //
     }
 ]};
@@ -66,6 +66,10 @@ function validateItem( item )
     $( config['validation'] ).each(function(val_key, val_element) {
 
         if ($(item).hasClass( val_element['type'] )) {
+
+            if (val_element['type'] != 'val_img') {
+                $(item).val( $.trim( $(item).val().replace(/\s+/g, ' ') ) );
+            }
 
             if( val_element['rule'].test( $(item).val() ) ) {
 

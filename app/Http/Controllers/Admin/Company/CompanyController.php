@@ -12,6 +12,7 @@ use App\Facades\Core;
 use App\Oferta;
 use App\Tienda;
 use App\User;
+use App\UsuarioEmpleadoInfo;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -51,7 +52,9 @@ class CompanyController extends Controller
 
         } else {
             $countTiendas = Tienda::where('empresa_id', $empresa->id)->count();
-            return view('admin.company.company', compact('perfil', 'contacto', 'userPerfil', 'userContacto', 'empresa', 'countTiendas'));
+            $countEmpleados = UsuarioEmpleadoInfo::where('empresa_id', $empresa->id)->count();
+
+            return view('admin.company.company', compact('perfil', 'contacto', 'userPerfil', 'userContacto', 'empresa', 'countTiendas', 'countEmpleados'));
         }
 
     }
