@@ -85,6 +85,7 @@ class CompanyController extends Controller
             \Storage::disk('photo_company')->put($namePhotoCompany, \File::get($filePhotoCompany));
 
             // Generte data
+            /*
             $company = new Empresa([
                 'users_id'       => \Auth::user()->id,
                 'estado'        => '1',
@@ -101,6 +102,14 @@ class CompanyController extends Controller
                 'idioma'        => $request['idioma'],
                 'pais'          => $request['pais']
             ]);
+            */
+
+            $company = new Empresa();
+            $company->fill($request->all());
+            $company->users_id = \Auth::user()->id;
+            $company->estado = '1';
+            $company->logo = $namePhotoCompany;
+
 
             // Save company and categoria, oferta y fabricante por defecto
             if ( $company->save() ) {

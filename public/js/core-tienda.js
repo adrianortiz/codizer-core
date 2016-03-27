@@ -88,14 +88,16 @@ function fillFormTienda(result) {
                     } else {
                         $('#store_route').val( $('#store_route').val().replace(/\s+/g, '-').toLowerCase() );
                         $('#store_route').removeClass('error-val');
-                        initSaveCompany();
+
+                        initSaveTienda();
                     }
 
                 }
 
             });
 
-            function initSaveCompany() {
+            // Método de guardar tienda
+            function initSaveTienda() {
                 var form = $('#form-tienda-store');
                 var route = form.attr('action');
 

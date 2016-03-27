@@ -33,8 +33,9 @@ class ProductsController extends Controller
         $perfil = $userPerfil;
         $contacto = $userContacto;
 
-        $fabricante=null;
-        $fabricantesList  = Fabricante::where('fabricante_id', $fabricante->id)->lists('nombre', 'id');
+        // Obtener todos los fabricantes de la empresa N
+        $fabricantesList  = Core::getFabricantesByIdEmpresa( $idEmpresa );
+
         // Nos aseguramos de que la ruta sea la del usuario logueado
         if ( $nameFirstName != $userPerfil[0]->perfil_route)
             return \Redirect::route('events', $userPerfil[0]->perfil_route);

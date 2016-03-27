@@ -276,4 +276,20 @@ class Core
     }
 
 
+    /**
+     * Obtener Fabricantes de una empresa
+     *
+     * @param $empresaId
+     * @return mixed
+     */
+    public function getFabricantesByIdEmpresa( $empresaId ) {
+
+        return DB::table('empresa')
+            ->join('empresa_has_fabricante', 'empresa.id', '=', 'empresa_has_fabricante.empresa_id')
+            ->join('fabricante', 'empresa_has_fabricante.fabricante_id', '=', 'fabricante.id')
+            ->where('empresa.id', $empresaId)
+            ->lists('fabricante.nombre', 'fabricante.id');
+    }
+
+
 }

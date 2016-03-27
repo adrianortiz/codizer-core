@@ -32,15 +32,8 @@
 
                         <div class="col-md-6">
                             <div class="form-group">
-
                                 {!! Form::label('cantidad_disponible', 'Cantidad disponible') !!}
-                                {!! Form::select('cantidad_disponible', array(
-                                '1' => '1','10' => '10','20' => '20','30' => '30','40' => '40','50' => '50',
-                                '60' => '60','70' => '70','80' => '80','90' => '90','100' => '100','200' => '200',
-                                '300' => '300','400' => '400','500' => '500','600' => '600','700' => '700',
-                                '800' => '800','900' => '900','1000' => '1000'
-                                ), '1',
-                                array('class'=> 'form-control form-with-100 form-group-validate val_num'))  !!}
+                                {!!  Form::number('cantidad_disponible', '0', ['class'=> 'form-control form-with-100 form-group-validate val_num'])  !!}
                             </div>
                         </div>
 
