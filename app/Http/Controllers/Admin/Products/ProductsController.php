@@ -16,8 +16,14 @@ class ProductsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($nameFirstName)
+    public function index($nameFirstName, $idEmpresa, $idTienda)
     {
+
+        /**
+         * Con los id $idEmpresa, $idTienda
+         * Puedes realizar consultas de la tabla de empres o tienda
+         * y obtener su data
+         */
 
         // User son los datos del usuario Logueado
         $userPerfil = Core::getUserPerfil();
@@ -69,9 +75,9 @@ class ProductsController extends Controller
             ]);
 
             if ( $producto->save() )
-                $message = 'Producto añadido.';
+                $message = 'Producto aï¿½adido.';
             else
-                $message = 'No se pudo añadir el producto.';
+                $message = 'No se pudo aï¿½adir el producto.';
 
 
             return response()->json([

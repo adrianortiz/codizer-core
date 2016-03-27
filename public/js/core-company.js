@@ -48,7 +48,7 @@ function fillShowInfoCompany(result)
 
         GetDataCompany: function() {
 
-            $('#btn-modal-create-tienda').click( function() {
+            $('#btn-update-company').click( function() {
                 var form = $('#form-company-to-show');
                 var datos = form.serializeArray();
                 var route = form.attr('action');

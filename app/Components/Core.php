@@ -192,10 +192,14 @@ class Core
                 ->where('tienda_id', $request['tienda_id'])
                 ->where('nivel', $request['nivel'])
                 ->where('users_id', $request['users_id'])
+                ->where('estado', $request['estado'])
                 ->count();
     }
 
     /**
+     * Obtener todos los empleados de una empresa
+     * en base al id de la empresa
+     *
      * @param $empresaId
      * @return mixed
      */
@@ -214,6 +218,8 @@ class Core
     }
 
     /**
+     * Obtener un empleado especifico, en base al id del empleado
+     *
      * @param $employeeId
      * @return mixed
      */
@@ -229,6 +235,30 @@ class Core
             ->where('usuario_empleado_info.id', '=', $employeeId)
             ->select('usuario_empleado_info.*', 'usuario_empleado_info.id AS empleado_id', 'usuario_empleado_info.estado AS empleado_estado', 'tienda.nombre AS nombre_tienda', 'tienda.foto AS foto_tienda', 'contacto.*', 'perfil_route', 'store_route')
             ->first();
+    }
+
+
+    /**
+     * Obtener los empleos que tiene asignado un empleado
+     * en base al id de usuario
+     *
+     * @param $userId
+     * @return mixed
+     */
+    public function getAllEmpleosDeEmpleadoByUserId( $userId )
+    {
+        // Extra 'empresa.nombre AS nombre_empresa'
+        return DB::table('usuario_empleado_info')
+            ->join('empresa', 'usuario_empleado_info.empresa_id', '=', 'empresa.id')
+            ->join('tienda', 'usuario_empleado_info.tienda_id', '=', 'tienda.id')
+            ->join('users', 'usuario_empleado_info.users_id', '=', 'users.id')
+            ->join('contacto', 'users.contacto_id', '=', 'contacto.id')
+            ->join('users_has_perfil', 'users.id', '=', 'users_has_perfil.users_id')
+            ->join('perfil', 'perfil.id', '=', 'users_has_perfil.perfil_id')
+            ->where('usuario_empleado_info.users_id', '=', $userId)
+            ->where('usuario_empleado_info.estado', '1')
+            ->select('logo', 'empresa.nombre AS nombre_empresa', 'usuario_empleado_info.*', 'usuario_empleado_info.id AS empleado_id', 'usuario_empleado_info.estado AS empleado_estado', 'tienda.nombre AS nombre_tienda', 'tienda.foto AS foto_tienda', 'contacto.*', 'perfil_route', 'store_route')
+            ->get();
     }
 
 

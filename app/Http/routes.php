@@ -70,6 +70,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Para acceder tengo que tener el role "core"
     Route::group(['middleware' => 'role'], function () {
+    });
 
         /**
          *  ==== Social - Perfil =====
@@ -206,14 +207,23 @@ Route::group(['middleware' => 'auth'], function () {
         ]);
 
 
-        /*
-         * ======= Productos ======
-         * List products
-         */
-        Route::get('perfil/{nameFirstName}/products', [
-            'uses'  => 'Admin\Products\ProductsController@index',
-            'as'    => 'products'
+        // ========   SECCION EMPLEADO   ==========
+
+        Route::get('perfil/{nameFirstName}/empleado/tiendas', [
+            'uses'  => 'Admin\Employee\EmployeeController@listEmployeeByUser',
+            'as'    => 'empleado.tienda.index'
         ]);
+
+        /*
+         * ======= EMPLEADO PRODUCTOS ======
+         */
+
+        // LIST PRODUCTS
+        Route::get('perfil/{nameFirstName}/tienda/{idEmpresa}/{idTienda}/products', [
+            'uses'  => 'Admin\Products\ProductsController@index',
+            'as'    => 'empleado.products.index'
+        ]);
+
 
         Route::post('perfil/{nameFirstName}/products/store', [
             'uses'  => 'Admin\Products\Products@store',
@@ -381,7 +391,6 @@ Route::group(['middleware' => 'auth'], function () {
             'as'    => 'categoria.update'
         ]);
 
-    });
 
     /*
      * ADMIN

@@ -185,4 +185,23 @@ class EmployeeController extends Controller
     {
         //
     }
+
+    public function listEmployeeByUser($nameFirstName) {
+
+        $userPerfil = Core::getUserPerfil();
+        $userContacto = Core::getUserContact();
+        $perfil = $userPerfil;
+        $contacto = $userContacto;
+
+        // Nos aseguramos de que la ruta sea la del usuario logueado
+        if ( $nameFirstName != $userPerfil[0]->perfil_route)
+            return \Redirect::route('stores.index', $userPerfil[0]->perfil_route);
+
+        Core::isRouteValid($userPerfil[0]->perfil_route);
+        $empleos = Core::getAllEmpleosDeEmpleadoByUserId( \Auth::user()->id );
+
+        return view('admin.empleado.empleo',
+            compact('perfil', 'contacto', 'userPerfil', 'userContacto', 'empleos'));
+
+    }
 }
