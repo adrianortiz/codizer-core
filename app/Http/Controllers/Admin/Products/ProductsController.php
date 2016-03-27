@@ -35,6 +35,8 @@ class ProductsController extends Controller
 
         // Obtener todos los fabricantes de la empresa N
         $fabricantesList  = Core::getFabricantesByIdEmpresa( $idEmpresa );
+        $ofertasList    =   Core::getOfertasByIdEmpresa($idEmpresa);
+        $categoriasList =   Core::getCategoriasByIdEmpresa($idEmpresa);
 
         // Nos aseguramos de que la ruta sea la del usuario logueado
         if ( $nameFirstName != $userPerfil[0]->perfil_route)
@@ -42,7 +44,7 @@ class ProductsController extends Controller
 
         Core::isRouteValid($userPerfil[0]->perfil_route);
 
-        return view('admin.products.products', compact('perfil', 'contacto', 'userPerfil', 'userContacto','fabricantesList'));
+        return view('admin.products.products', compact('perfil', 'contacto', 'userPerfil', 'userContacto','fabricantesList','ofertasList','categoriasList'));
     }
 
     /**
@@ -79,9 +81,9 @@ class ProductsController extends Controller
             ]);
 
             if ( $producto->save() )
-                $message = 'Producto a�adido.';
+                $message = 'Producto agregado.';
             else
-                $message = 'No se pudo a�adir el producto.';
+                $message = 'No se pudo agregar el producto.';
 
 
             return response()->json([

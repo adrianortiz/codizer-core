@@ -25,6 +25,13 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
+                                {!! Form::label('foto', 'Foto del producto') !!}
+                                {!! Form::file('foto', ['accept' => 'image/jpg,image/png', 'class' => 'form-control form-with-100 form-group-validate val_img', 'required']) !!}
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
                                 {!! Form::label('codigo_producto', 'Codigo producto') !!}
                                 {!! Form::text('codigo_producto','', array('class'=> 'form-control form-with-100 form-group-validate val_text_num', 'placeholder' => 'Codigo del producto')) !!}
                             </div>
@@ -81,7 +88,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 {!! Form::label('oferta_id', 'Oferta del producto') !!}
-                                {!! Form::select('oferta_id', array('0' => 'Ninguna', '1' => 'Cualquiera'), 'Ninguna',
+                                {!! Form::select('oferta_id', $ofertasList,Input::old('oferta_id'),
                                 array('class'=> 'form-control form-with-100 form-group-validate val_text'))  !!}
                             </div>
                         </div>
@@ -89,7 +96,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 {!! Form::label('categoria', 'Categoria') !!}
-                                {!! Form::select('categoria', array('0' => 'Ninguna', '1' => 'Cualquiera'), 'Ninguna',
+                                {!! Form::select('categoria', $categoriasList,Input::old('categoria'),
                                 array('class'=> 'form-control form-with-100 form-group-validate val_text'))  !!}
                             </div>
                         </div>

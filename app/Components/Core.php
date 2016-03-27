@@ -292,4 +292,30 @@ class Core
     }
 
 
+    /**
+     * @param $empresaId
+     * @return mixed
+     */
+    public function getOfertasByIdEmpresa( $empresaId ) {
+
+        return DB::table('empresa')
+            ->join('empresa_has_oferta', 'empresa.id', '=', 'empresa_has_oferta.empresa_id')
+            ->join('oferta', 'empresa_has_oferta.oferta_id', '=', 'oferta.id')
+            ->where('empresa.id', $empresaId)
+            ->lists('oferta.regla_porciento', 'oferta.id');
+    }
+
+    /**
+     * @param $empresaId
+     * @return mixed
+     */
+    public function getCategoriasByIdEmpresa( $empresaId ) {
+
+        return DB::table('empresa')
+            ->join('empresa_has_categoria', 'empresa.id', '=', 'empresa_has_categoria.empresa_id')
+            ->join('categoria', 'empresa_has_categoria.categoria_id', '=', 'categoria.id')
+            ->where('empresa.id', $empresaId)
+            ->lists('categoria.nombre', 'categoria.id');
+    }
+
 }
