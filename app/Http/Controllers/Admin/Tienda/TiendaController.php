@@ -158,6 +158,13 @@ class TiendaController extends Controller
     }
 
 
+    /**
+     * Este método es para ver la página web de una tienda, sus productos etc
+     * También controlamos la plantilla que tendra la tienda
+     *
+     * @param $tiendaRoute
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function verTienda($tiendaRoute) {
 
         Core::isTiendaRouteValid( $tiendaRoute );
@@ -168,9 +175,10 @@ class TiendaController extends Controller
         }
 
         $tienda = Tienda::where('store_route', $tiendaRoute)->first();
+        $productos = Core::getAllProductosByTiendaRoute($tiendaRoute, '1');
 
         if ($tienda->store_route_platilla == 'basic') {
-            return view('plantillas.basic.index', compact('tienda', 'userContacto', 'userPerfil'));
+            return view('plantillas.basic.index', compact('tienda', 'userContacto', 'userPerfil', 'productos'));
         }
 
     }

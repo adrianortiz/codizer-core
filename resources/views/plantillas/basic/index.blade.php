@@ -12,6 +12,16 @@
         </article>
     </section>
 
+    @if( count($productos) == 0)
+        <section class="title-basic-section">
+            <article>
+                <h3>No hay productos</h3>
+            </article>
+        </section>
+    @else
+
+    @if( count($productos) >= 3)
+
     <section class="title-basic-section">
         <article>
             <h3>Lo nuevo</h3>
@@ -25,12 +35,12 @@
 
                 <div class="product-container">
                     <a href="#">
-                        <img src="{{ asset('/media/photo-product/sudadera-cat.png') }}">
+                        <img src="{{ asset('/media/photo-product/' . $productos[$i]->img) }}">
                     </a>
 
                     <div class="lo-nuevo-info">
-                        <div><a href="#">Ropa para dama asdasdasd asdas dasdadad asdasd asdads</a></div>
-                        <div><a href="#">$144.50 <span>-10%</span></a></div>
+                        <div><a href="#">{{ $productos[$i]->nombre }}</a></div>
+                        <div><a href="#">${{ $productos[$i]->precio }} <span>{{ $productos[$i]->tipo_oferta .' '.$productos[$i]->regla_porciento }}%</span></a></div>
                         <div><a href="#" id="btn-view-modal" class="btn btn-sm" data-toggle="modal" data-target="#modalView">Ver producto</a> <a href="#" class="btn btn-sm">Agregar al carrito</a></div>
                     </div>
                 </div>
@@ -39,6 +49,9 @@
 
         </article>
     </section>
+
+    @endif
+
 
 
     <section class="title-basic-section">
@@ -51,24 +64,26 @@
     <section class="container-products">
         <article>
 
-            @for($i = 0; $i < 100; $i++)
+            @foreach( $productos as $producto )
 
                 <div class="product-container">
                     <a href="#">
-                        <img src="{{ asset('/media/photo-product/sudadera-cat.png') }}">
+                        <img src="{{ asset('/media/photo-product/' . $producto->img) }}">
                     </a>
 
                     <div class="lo-nuevo-info">
-                        <div><a href="#">Ropa para dama asdasdasd asdas dasdadad asdasd asdads</a></div>
-                        <div><a href="#">$144.50 <span>-10%</span></a></div>
+                        <div><a href="#">{{ $producto->nombre }}</a></div>
+                        <div><a href="#">${{ $producto->precio }} <span>{{ $producto->tipo_oferta .' '.$producto->regla_porciento }}%</span></a></div>
                         <div><a href="#" id="btn-view-modal" class="btn btn-sm" data-toggle="modal" data-target="#modalView">Ver producto</a> <a href="#" class="btn btn-sm">Agregar al carrito</a></div>
                     </div>
                 </div>
 
-            @endfor
+            @endforeach
 
         </article>
     </section>
+
+    @endif
 
 @endsection
 
@@ -80,7 +95,8 @@
 @section('extra-js')
 
     <script>
-        $('#btn-view-modal').click();
+        // $('#btn-view-modal').click();
+        $('#tag-home').addClass('menu-selected');
     </script>
 
 @endsection

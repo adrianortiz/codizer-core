@@ -331,4 +331,26 @@ class Core
             ->lists('categoria.nombre', 'categoria.id');
     }
 
+    /**
+     * Permite obtener los productos de una tienda en base a su store_route
+     * Los productos solo pueden ser productos activos o inactivos
+     *
+     * @param $storeRoute
+     * @param $estadoProduct
+     * @return mixed
+     */
+    public function getAllProductosByTiendaRoute( $storeRoute, $estadoProduct ) {
+
+        return DB::table('tienda')
+            ->join('tienda_has_producto', 'tienda.id', '=', 'tienda_has_producto.tienda_id')
+            ->join('producto', 'producto.id', '=', 'tienda_has_producto.producto_id')
+            ->join('oferta', 'producto.oferta_id', '=', 'oferta.id')
+            ->join('img_producto', 'producto.id', '=', 'img_producto.producto_id')
+            ->where('tienda.store_route', $storeRoute)
+            ->where('producto.estado', $estadoProduct)
+            ->where('img_producto.principal', '1')
+            ->select('producto.*', 'oferta.*', 'img_producto.*')
+            ->get();
+    }
+
 }

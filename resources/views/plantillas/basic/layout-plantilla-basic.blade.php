@@ -58,8 +58,8 @@
 
 <nav>
     <ul>
-        <li><a href="{{ route('store.front', $tienda->store_route) }}" class="menu-selected">Home</a></li>
-        <li><a href="{{ route('store.front.info', $tienda->store_route) }}">Acerca de</a></li>
+        <li><a id="tag-home" href="{{ route('store.front', $tienda->store_route) }}">Home</a></li>
+        <li><a id="tag-info" href="{{ route('store.front.info', $tienda->store_route) }}">Acerca de</a></li>
         <li><a href="#">Home</a></li>
         <li><a href="#">Home</a></li>
     </ul>
