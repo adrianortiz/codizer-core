@@ -74,6 +74,12 @@ return [
             'root'   => public_path('media/photo-store'),
         ],
 
+        'photo_product' => [
+            'driver' => 'local',
+            'root'   => public_path('media/photo-product'),
+        ],
+
+
 
 
         'ftp' => [

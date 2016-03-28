@@ -36,23 +36,40 @@ function productCreateUpdate(result) {
          */
         CreateProduct: function()
         {
-            $('#store-new-product').click( function()
-            {
+            $('#store-new-product').click( function() {
+                if ( validateGroup('.form-group-validate') == -1 )
+                    initSaveProduct();
+            });
+
+            function initSaveProduct() {
                 var form = $('#form-products-store');
                 var datos = form.serializeArray();
                 var route = form.attr('action');
 
                 $.ajax({
+
                     url:        route,
                     type:       'POST',
                     dataType:   'json',
-                    async:      false,
-                    data:       datos,
+                    // async:   false,
+
+                    data:new FormData( $('#form-products-store')[0] ),
+                    contentType: false,
+                    processData: false,
+
+                    beforeSend: function(){
+                        $('.core-loader').show();
+                    },
 
                     success: function( result ) {
                         // console.log(result);
 
-                        if (result.message == "No se pudo crear la nota.") {
+                        $('.core-loader').hide();
+
+                        console.log(result.message);
+                        console.log(result.producto);
+
+                        if (result.message == "No se pudo agregar el producto.") {
                             hideShowAlert('msj-danger', 'Ocurrio un problema');
                         } else {
                             hideShowAlert('msj-success', result.message);
@@ -64,6 +81,7 @@ function productCreateUpdate(result) {
                     }
 
                 }).fail(function( jqXHR, textStatus ) {
+                    $('.core-loader').hide();
                     $('#msj-danger-state').empty();
 
                     $(jqXHR).each(function(key,error)
@@ -72,12 +90,12 @@ function productCreateUpdate(result) {
                     });
 
                 });
-            });
+            }
         },
 
         /**
          * Seleccionar una nota de la lista de notas y mostrar su
-         * infomación en la vista lateral (Derecha)
+         * infomaciï¿½n en la vista lateral (Derecha)
          * @constructor
          */
         SelectNote: function()
@@ -111,7 +129,7 @@ function productCreateUpdate(result) {
                         // Agregar datos de la nota consultada al contenedor derecho
                         continaerNoteShow.html('<div class="block-content-info">' + result.note[0].content + '</div>');
 
-                        // Agregar datos de la nota seleccionada al formulario de actualización
+                        // Agregar datos de la nota seleccionada al formulario de actualizaciï¿½n
                         $('#id-note-to-update').val(result.note[0].id);
                         $('#content-note-to-update').val(result.note[0].content);
 
@@ -158,7 +176,7 @@ function productCreateUpdate(result) {
                         // Agregar datos de la nota consultada al contenedor derecho
                         continaerNoteShow.html('<div class="block-content-info">' + result.note.content + '</div>');
 
-                        // Agregar datos de la nota seleccionada al formulario de actualización
+                        // Agregar datos de la nota seleccionada al formulario de actualizaciï¿½n
                         $('#id-note-to-update').val(result.note.id);
                         $('#content-note-to-update').val(result.note.content);
 
@@ -245,12 +263,12 @@ function productCreateUpdate(result) {
 
         SearchAndListAllNotes: function() {
 
-            // Llama al método buscarUnoTodoNote cuando se teclea en el buscador
+            // Llama al mï¿½todo buscarUnoTodoNote cuando se teclea en el buscador
             $('#core-search-group input').keyup( function() {
                 buscarUnoTodoNote();
             });
 
-            // Llama al método buscarUnoTodoNote cuando se le da click
+            // Llama al mï¿½todo buscarUnoTodoNote cuando se le da click
             // Al estar el campo de busqueda vacio, traera toda la data
             $('#btn-list-all-notes').click( function() {
                 $('#core-search-group input').val('');

@@ -21,12 +21,14 @@
                 {!! Form::open(['route' => 'products.store', 'method' => 'POST', 'id' => 'form-products-store']) !!}
                 <div class="form-group">
 
+                    {!! Form::hidden('empresa_id', $idEmpresa, ['id' => 'empresa_id_new', 'class' => 'form-group-validate val_num']) !!}
+                    {!! Form::hidden('tienda_id', $idTienda, ['id' => 'tienda_id_new', 'class' => 'form-group-validate val_num']) !!}
 
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                {!! Form::label('foto', 'Foto del producto') !!}
-                                {!! Form::file('foto', ['accept' => 'image/jpg,image/png', 'class' => 'form-control form-with-100 form-group-validate val_img', 'required']) !!}
+                                {!! Form::label('img', 'Foto del producto') !!}
+                                {!! Form::file('img', ['accept' => 'image/jpg,image/png', 'class' => 'form-control form-with-100 form-group-validate val_img', 'required']) !!}
                             </div>
                         </div>
 
@@ -54,7 +56,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 {!! Form::label('precio', 'Precio') !!}
-                                {!! Form::text('precio', '', array('class'=> 'form-control form-with-100 form-group-validate val_num', 'placeholder' => 'Precio')) !!}
+                                {!! Form::text('precio', '', array('class'=> 'form-control form-with-100 form-group-validate val_double', 'placeholder' => 'Precio')) !!}
                             </div>
                         </div>
                     </div>
@@ -65,8 +67,8 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 {!! Form::label('estado', 'Estado del producto') !!}
-                                {!! Form::select('estado', array('0' => 'Disponible para el publico', '1' => 'No disponible para el publico'),
-                                 'Elige un estado', array('class'=> 'form-control form-with-100 form-group-validate val_text'))  !!}
+                                {!! Form::select('estado', array('1' => 'Disponible para el publico', '0' => 'No disponible para el publico'),
+                                 'Elige un estado', array('class'=> 'form-control form-with-100 form-group-validate val_num'))  !!}
                             </div>
                         </div>
 
@@ -74,7 +76,7 @@
                             <div class="form-group">
                                 {!! Form::label('fabricante_id', 'Fabricante') !!}
                                 {!! Form::select('fabricante_id', $fabricantesList,Input::old('fabricante_id'),
-                                array('class'=> 'form-control form-with-100 form-group-validate val_text'))  !!}
+                                array('class'=> 'form-control form-with-100 form-group-validate val_num'))  !!}
                             </div>
                         </div>
 
@@ -82,7 +84,7 @@
                             <div class="form-group">
                                 {!! Form::label('oferta_id', 'Oferta del producto') !!}
                                 {!! Form::select('oferta_id', $ofertasList,Input::old('oferta_id'),
-                                array('class'=> 'form-control form-with-100 form-group-validate val_text'))  !!}
+                                array('class'=> 'form-control form-with-100 form-group-validate val_num'))  !!}
                             </div>
                         </div>
 
@@ -90,7 +92,7 @@
                             <div class="form-group">
                                 {!! Form::label('categoria', 'Categoria') !!}
                                 {!! Form::select('categoria', $categoriasList,Input::old('categoria'),
-                                array('class'=> 'form-control form-with-100 form-group-validate val_text'))  !!}
+                                array('class'=> 'form-control form-with-100 form-group-validate val_num'))  !!}
                             </div>
                         </div>
 
