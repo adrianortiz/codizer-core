@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Products;
 
+use App\Fabricante;
 use App\Facades\Core;
 use App\Product;
 use Illuminate\Http\Request;
@@ -16,8 +17,14 @@ class ProductsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($nameFirstName)
+    public function index($nameFirstName, $idEmpresa, $idTienda)
     {
+
+        /**
+         * Con los id $idEmpresa, $idTienda
+         * Puedes realizar consultas de la tabla de empres o tienda
+         * y obtener su data
+         */
 
         // User son los datos del usuario Logueado
         $userPerfil = Core::getUserPerfil();
@@ -26,13 +33,18 @@ class ProductsController extends Controller
         $perfil = $userPerfil;
         $contacto = $userContacto;
 
+        // Obtener todos los fabricantes de la empresa N
+        $fabricantesList  = Core::getFabricantesByIdEmpresa( $idEmpresa );
+        $ofertasList    =   Core::getOfertasByIdEmpresa($idEmpresa);
+        $categoriasList =   Core::getCategoriasByIdEmpresa($idEmpresa);
+
         // Nos aseguramos de que la ruta sea la del usuario logueado
         if ( $nameFirstName != $userPerfil[0]->perfil_route)
             return \Redirect::route('events', $userPerfil[0]->perfil_route);
 
         Core::isRouteValid($userPerfil[0]->perfil_route);
 
-        return view('admin.products.products', compact('perfil', 'contacto', 'userPerfil', 'userContacto'));
+        return view('admin.products.products', compact('perfil', 'contacto', 'userPerfil', 'userContacto','fabricantesList','ofertasList','categoriasList'));
     }
 
     /**
@@ -69,9 +81,9 @@ class ProductsController extends Controller
             ]);
 
             if ( $producto->save() )
-                $message = 'Producto añadido.';
+                $message = 'Producto agregado.';
             else
-                $message = 'No se pudo añadir el producto.';
+                $message = 'No se pudo agregar el producto.';
 
 
             return response()->json([

@@ -60,16 +60,37 @@ Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
 Route::post('password/reset', 'Auth\PasswordController@postReset');
 
 
+/**
+ * Vista index de las tiendas dadas de alta en Core
+ * No se requiere que el usuario este logueado para poder ver
+ * y navegar en los productos
+ */
+
+// Index de una tienda
+Route::get('tienda/{tiendaRoute}/', [
+    'uses'  => 'Admin\Tienda\TiendaController@verTienda',
+    'as'    => 'store.front'
+]);
+
+// Información de la tienda
+Route::get('tienda/{tiendaRoute}/info', [
+    'uses'  => 'Admin\Tienda\TiendaController@verTiendaInfo',
+    'as'    => 'store.front.info'
+]);
+
+
+
 /*
- * PRUEBA: Indentificar si un usuario esta conectado
+ * Indentificar si un usuario esta conectado
  * Grupos de rutas de laravel
  * app/Http/Kernel.php
  */
-
 Route::group(['middleware' => 'auth'], function () {
 
     // Para acceder tengo que tener el role "core"
     Route::group(['middleware' => 'role'], function () {
+        // ---
+    });
 
         /**
          *  ==== Social - Perfil =====
@@ -206,14 +227,23 @@ Route::group(['middleware' => 'auth'], function () {
         ]);
 
 
-        /*
-         * ======= Productos ======
-         * List products
-         */
-        Route::get('perfil/{nameFirstName}/products', [
-            'uses'  => 'Admin\Products\ProductsController@index',
-            'as'    => 'products'
+        // ========   SECCION EMPLEADO   ==========
+
+        Route::get('perfil/{nameFirstName}/empleado/tiendas', [
+            'uses'  => 'Admin\Employee\EmployeeController@listEmployeeByUser',
+            'as'    => 'empleado.tienda.index'
         ]);
+
+        /*
+         * ======= EMPLEADO PRODUCTOS ======
+         */
+
+        // LIST PRODUCTS
+        Route::get('perfil/{nameFirstName}/tienda/{idEmpresa}/{idTienda}/products', [
+            'uses'  => 'Admin\Products\ProductsController@index',
+            'as'    => 'empleado.products.index'
+        ]);
+
 
         Route::post('perfil/{nameFirstName}/products/store', [
             'uses'  => 'Admin\Products\Products@store',
@@ -278,6 +308,8 @@ Route::group(['middleware' => 'auth'], function () {
             'uses'  => 'Admin\Tienda\TiendaController@update',
             'as'    => 'stores.update'
         ]);
+
+
 
 
 
@@ -381,7 +413,6 @@ Route::group(['middleware' => 'auth'], function () {
             'as'    => 'categoria.update'
         ]);
 
-    });
 
     /*
      * ADMIN

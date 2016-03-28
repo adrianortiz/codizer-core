@@ -25,6 +25,13 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
+                                {!! Form::label('foto', 'Foto del producto') !!}
+                                {!! Form::file('foto', ['accept' => 'image/jpg,image/png', 'class' => 'form-control form-with-100 form-group-validate val_img', 'required']) !!}
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
                                 {!! Form::label('codigo_producto', 'Codigo producto') !!}
                                 {!! Form::text('codigo_producto','', array('class'=> 'form-control form-with-100 form-group-validate val_text_num', 'placeholder' => 'Codigo del producto')) !!}
                             </div>
@@ -33,7 +40,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 {!! Form::label('cantidad_disponible', 'Cantidad disponible') !!}
-                                {!! Form::text('cantidad_disponible', '', array('class'=> 'form-control form-with-100 form-group-validate val_num', 'placeholder' => 'Cantidad disponible')) !!}
+                                {!!  Form::number('cantidad_disponible', '0', ['class'=> 'form-control form-with-100 form-group-validate val_num'])  !!}
                             </div>
                         </div>
 
@@ -57,22 +64,23 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 {!! Form::label('desc_producto', 'Descripcion del producto') !!}
-                                {!! Form::text('desc_producto', '', array('class'=> 'form-control form-with-100 form-group-validate val_text_num', 'placeholder' => 'Descripcion del producto')) !!}
+                                {!! Form::textarea('desc_producto', '',
+                                array('class'=> 'form-control form-with-100 form-group-validate val_text_num', 'placeholder' => 'Descripcion del producto')) !!}
                             </div>
                         </div>
 
                         <div class="col-md-6">
                             <div class="form-group">
                                 {!! Form::label('estado', 'Estado del producto') !!}
-                                {!! Form::select('estado', array('0' => 'Habilitado', '1' => 'Deshabilitado'), 'Elige un estado',
-                                array('class'=> 'form-control form-with-100 form-group-validate val_text'))  !!}
+                                {!! Form::select('estado', array('0' => 'Disponible para el publico', '1' => 'No disponible para el publico'),
+                                 'Elige un estado', array('class'=> 'form-control form-with-100 form-group-validate val_text'))  !!}
                             </div>
                         </div>
 
                         <div class="col-md-6">
                             <div class="form-group">
                                 {!! Form::label('fabricante_id', 'Fabricante') !!}
-                                {!! Form::select('fabricante_id', array('0' => 'Ninguno', '1' => 'Cualquiera'), 'Ninguno',
+                                {!! Form::select('fabricante_id', $fabricantesList,Input::old('fabricante_id'),
                                 array('class'=> 'form-control form-with-100 form-group-validate val_text'))  !!}
                             </div>
                         </div>
@@ -80,16 +88,15 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 {!! Form::label('oferta_id', 'Oferta del producto') !!}
-                                {!! Form::select('oferta_id', array('0' => 'Ninguna', '1' => 'Cualquiera'), 'Ninguna',
+                                {!! Form::select('oferta_id', $ofertasList,Input::old('oferta_id'),
                                 array('class'=> 'form-control form-with-100 form-group-validate val_text'))  !!}
                             </div>
                         </div>
 
-
                         <div class="col-md-6">
                             <div class="form-group">
-                                {!! Form::label('users_id', 'Usuario') !!}
-                                {!! Form::select('users_id', array('0' => 'Ninguno', '1' => 'Cualquiera'), 'Ninguno',
+                                {!! Form::label('categoria', 'Categoria') !!}
+                                {!! Form::select('categoria', $categoriasList,Input::old('categoria'),
                                 array('class'=> 'form-control form-with-100 form-group-validate val_text'))  !!}
                             </div>
                         </div>

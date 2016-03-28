@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\URL;
 
 class TiendaController extends Controller
@@ -49,15 +50,6 @@ class TiendaController extends Controller
 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -124,16 +116,6 @@ class TiendaController extends Controller
         }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -175,14 +157,39 @@ class TiendaController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+
+    public function verTienda($tiendaRoute) {
+
+        Core::isTiendaRouteValid( $tiendaRoute );
+
+        if (!Auth::guest()) {
+            $userContacto = Core::getUserContact();
+            $userPerfil = Core::getUserPerfil();
+        }
+
+        $tienda = Tienda::where('store_route', $tiendaRoute)->first();
+
+        if ($tienda->store_route_platilla == 'basic') {
+            return view('plantillas.basic.index', compact('tienda', 'userContacto', 'userPerfil'));
+        }
+
+    }
+
+
+    public function verTiendaInfo($tiendaRoute) {
+
+        Core::isTiendaRouteValid( $tiendaRoute );
+
+        if (!Auth::guest()) {
+            $userContacto = Core::getUserContact();
+            $userPerfil = Core::getUserPerfil();
+        }
+
+        $tienda = Tienda::where('store_route', $tiendaRoute)->first();
+
+        if ($tienda->store_route_platilla == 'basic') {
+            return view('plantillas.basic.info-plantilla', compact('tienda', 'userContacto', 'userPerfil'));
+        }
+
     }
 }

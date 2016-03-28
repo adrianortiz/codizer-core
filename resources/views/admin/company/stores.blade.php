@@ -71,7 +71,7 @@
                                             <i class="fa fa-ellipsis-h fa-lg"></i>
                                         </button>
                                         <ul class="dropdown-menu dropdown-menu-right">
-                                            <li><a href="#" >Ver tienda</a></li>
+                                            <li><a href="{{ route('store.front', $tienda->store_route) }}" target="_blank">Ver tienda</a></li>
                                             <li class="divider"></li>
                                             <li><a class="btn-update-company" href="#" data-toggle="modal" data-target="#modalUpdateTienda">Editar</a></li>
                                         </ul>

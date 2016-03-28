@@ -80,7 +80,7 @@
 
                         <div class="body-tienda-employee">
                             <span class="txt-color-morado">Tienda</span>
-                            <div><a href="{{ $empleado->store_route }}" target="_blank">{{ $empleado->nombre_tienda }}</a></div>
+                            <div><a href="{{ route('store.front', $empleado->store_route) }}" target="_blank">{{ $empleado->nombre_tienda }}</a></div>
                         </div>
 
                         <img src="{{ asset('/media/photo-store/' . $empleado->foto_tienda) }}" class="body-photo-tienda-employee">
