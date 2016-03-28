@@ -19,7 +19,7 @@
     <div class="user-menu">
 
         <ul class="nav navbar-nav navbar-left">
-            <li><a href="{{ route('login') }}">Codizer Shop</a></li>
+            <li><a href="{{ route('index.view.page') }}">Codizer Shop</a></li>
         </ul>
 
         <ul class="nav navbar-nav navbar-right">

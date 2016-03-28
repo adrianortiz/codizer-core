@@ -2,15 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Perfil;
-use App\User;
-use App\UserHasPerfil;
 use Illuminate\Http\Request;
+
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Redirect;
 
-class AdminController extends Controller
+class IndexController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,18 +16,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-
-        /**
-         * SE RESCRIBIO LA RUTA PARA ADMIN
-         * PARA FUNCIONAR CON CORE
-         */
-        // Identificamos el id del usuario y buscamos su ruta de perfil
-        $perfilId = UserHasPerfil::where('users_id',\Auth::user()->id)->value('perfil_id');
-        $perfilRoute = Perfil::where('id', $perfilId)->value('perfil_route');
-
-        return Redirect::route('perfil', array('nick' => $perfilRoute));
-
-        // return view('admin/panel');
+        return view('welcome');
     }
 
     /**
@@ -71,11 +57,9 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-
     public function edit($id)
     {
-        $user = User::findOrFail($id);
-        return view('admin/admin-edit', compact('user'));
+        //
     }
 
     /**
@@ -85,12 +69,9 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Requests\EditUserRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        $user = User::findOrFail($id);
-        $user->fill($request->all());
-        $user->save();
-        return redirect('admin');
+        //
     }
 
     /**

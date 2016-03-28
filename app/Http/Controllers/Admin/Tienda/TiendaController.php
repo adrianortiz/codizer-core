@@ -189,14 +189,17 @@ class TiendaController extends Controller
 
         }
 
-
-
-
-
-
     }
 
 
+    /**
+     * Método para mostra la información de la tienda y su empresa
+     * Plantilla de la tienda así como validar que la
+     * tienda este activa para el publico
+     *
+     * @param $tiendaRoute
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function verTiendaInfo($tiendaRoute) {
 
         Core::isTiendaRouteValid( $tiendaRoute );
@@ -208,7 +211,7 @@ class TiendaController extends Controller
 
         $tienda = Tienda::where('store_route', $tiendaRoute)->first();
 
-        if( $tienda->estao = '0' ) {
+        if( $tienda->estado == 0 ) {
             return view('plantillas.cerrado.index', compact('tienda'));
         } else {
             $empresa = Empresa::where('id', $tienda->empresa_id)->first();
@@ -218,6 +221,10 @@ class TiendaController extends Controller
             }
         }
 
+
+    }
+
+    public function verProductoInfo($tiendaRoute, $idProduct) {
 
     }
 }
