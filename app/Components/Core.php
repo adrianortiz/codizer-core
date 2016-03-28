@@ -107,6 +107,19 @@ class Core
     }
 
     /**
+     * Get all information of one specific contact
+     * @return mixed
+     */
+    public function getContactInfo($id){
+        return Contacto::join('contact_address', 'contacto.id', '=', 'contact_address.contacto_id')
+            ->join('contact_phone', 'contacto.id', '=', 'contact_phone.contacto_id')
+            ->join('contact_mail', 'contacto.id', '=', 'contact_mail.contacto_id')
+            ->join('contact_social','contacto.id', '=', 'contact_social.contacto_id')
+            ->where('contacto.id', $id)
+            ->get();
+    }
+
+    /**
      * Get all friends that one user has added
      *
      * @param $contacto

@@ -8,7 +8,7 @@
             <div class="list-contact-full-name">{{ $contact -> nombre. ' ' .$contact -> ap_paterno }}</div>
         </a>
     @empty
-        <div class="list-contact-full-name">No hay contactos.</div>
+        <div class="msg-list-vacio">No hay contactos.</div>
     @endforelse
     <a href="{{ route('friends', $perfil[0]->perfil_route) }}" class="core-menu-list"><div>Amigos <span>{{ count($friends) }}</span></div></a>
     <a href="{{ route('followers', $perfil[0]->perfil_route) }}" class="core-menu-list"><div>Seguidores <span>{{ count($followers) }}</span></div></a>

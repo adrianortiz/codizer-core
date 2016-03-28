@@ -43,8 +43,8 @@
                 <div id="btn-group-to-contact" class="btn-group left" role="group" aria-label="...">
                     <button type="button" id="btn-new-contact" class="btn btn-default btn-sm">Nuevo contacto</button> <!-- data-toggle="modal" data-target="#modalNewContact" -->
                 </div>
-                <div id="btn-group-to-contact" class="btn-group right" role="group" aria-label="...">
-                    <button type="button" id="btn-edit-contact" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modalUpdateContact">Editar</button>
+                <div id="btns-group-to-contact" class="btn-group right" role="group" aria-label="...">
+                    <button type="button" id="btn-edit-contact" class="btn btn-default btn-sm">Editar</button>
                     <button type="button" id="btn-delete-contact" class="btn btn-default btn-sm">Eliminar</button>
                 </div>
 
@@ -55,25 +55,19 @@
     <div class="left-content-list">
         <table class="table table-hover">
             <tbody id="list-contacts">
-
             @forelse($contacts as $contact)
-                <tr class="data-contacto-tr" data-contacto="{{ $contact -> id }}">
-                    <td class="container-list-photo-user">
-                        <img src="{{ asset('/media/photo-perfil/' . $contact -> foto) }}">
-                    </td>
-                    <td>
-                        <div class="list-contact-full-name">{{ $contact -> nombre. ' ' .$contact -> ap_paterno }} </div>
-                        <span class="list-contact-mail">{{ $contact -> profesion }}</span>
-                    </td>
-                </tr>
-                @empty
-                <tr class="data-contacto-tr">
-                    <td class="list-contact-full-name">
-                        No hay contactos.
-                    </td>
-                </tr>
+            <tr class="data-contacto-tr" data-contacto="{{ $contact -> id }}">
+                <td class="container-list-photo-user">
+                    <img src="{{ asset('/media/photo-perfil/' . $contact -> foto) }}">
+                </td>
+                <td>
+                    <div class="list-contact-full-name">{{ $contact -> nombre. ' ' .$contact -> ap_paterno }} </div>
+                    <span class="list-contact-mail">{{ $contact -> profesion }}</span>
+                </td>
+            </tr>
+            @empty
+                <div id="list-vacio">No hay contactos.</div>
             @endforelse
-
             </tbody>
         </table>
     </div>
@@ -86,8 +80,8 @@
 
                 <!-- LOS ID EN SU MAYORIA SON PARA QUE IDENTIFIQUES A LOS ELEMENTOS CON JS Y PUEDAS MODIFICAR LA INFORMACIÓN -->
 
-                <div id="show-info-contact-empresa" class="core-show-sub-title">Codizer</div>
-                <div id="show-info-contact-nombre-completo" class="core-show-title-blue">Adrian Ortiz martinez</div>
+                <div id="show-info-contact-empresa" class="core-show-sub-title">Contacto</div>
+                <div id="show-info-contact-nombre-completo" class="core-show-title-blue"></div>
             </div>
 
             <div class="container-show-info-contact-img-b">
@@ -101,53 +95,140 @@
             </div>
 
             <div class="container-show-info-contact-list-c">
-                <div>
-                    <div>Profesión</div>
-                    <!-- PUEDES AGREGAR id="show-info-product-cantidad" PARA IDENTIFICAR CADA ELEMENTO CON JS -->
-                    <div id="show-info-contact-profesion" class="show-info-contact">Ventas Chanel</div>
-                </div>
-                <div>
-                    <div>Telefono</div>
-                    <div id="show-info-contact-telefono" class="show-info-contact">(55) 29 26 01 08</div>
-                </div>
+
                 <div>
                     <div>Sexo</div>
-                    <div class="show-info-contact">Mujer</div>
+                    <div class="show-info-contact" id="show-info-contact-sexo"></div>
                 </div>
+
                 <div>
-                    <div>Algo más</div>
-                    <div class="show-info-contact">Información</div>
+                    <div>Fecha de nacimiento</div>
+                    <div id="show-info-contact-f-nacimiento" class="show-info-contact"></div>
                 </div>
+
+                <div>
+                    <div>Profesión</div>
+                    <div id="show-info-contact-profesion" class="show-info-contact"></div>
+                </div>
+
+                <div>
+                    <div>Estado civil</div>
+                    <div id="show-info-contact-estado-civil" class="show-info-contact"></div>
+                </div>
+
+                <div>
+                   <div>Descripción</div>
+                   <div  class="show-info-contact" id="show-info-contact-desc-info"></div>
+               </div>
             </div>
 
             <div class="container-list-something">
-                <div class="core-show-title-blue">Descripción</div>
-            </div>
-            <div id="show-info-contact-desc">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis iaculis, ante non molestie sagittis, felis turpis vulputate dui, et laoreet quam felis ut odio. Quisque ullamcorper consectetur dolor. Phasellus interdum consequat tortor quis egestas. Curabitur mattis urna a iaculis volutpat. Duis facilisis lorem vel viverra ultricies. Morbi semper venenatis neque, eget rhoncus enim. Morbi in malesuada sem.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis iaculis, ante non molestie sagittis, felis turpis vulputate dui, et laoreet quam felis ut odio. Quisque ullamcorper consectetur dolor. Phasellus interdum consequat tortor quis egestas. Curabitur mattis urna a iaculis volutpat. Duis facilisis lorem vel viverra ultricies. Morbi semper venenatis neque, eget rhoncus enim. Morbi in malesuada sem.</p>
+                <div class="core-show-title-blue">Dirección</div>
+
+                <div>
+                    <div>Descripción</div>
+                    <div class="show-info-contact" id="show-info-contact-desc-dir"></div>
+                </div>
+
+                <div>
+                    <div>Calle</div>
+                    <div class="show-info-contact" id="show-info-contact-calle"></div>
+                </div>
+
+                <div>
+                    <div>Número</div>
+                    <div class="show-info-contact" id="show-info-contact-num-dir"></div>
+                </div>
+
+                <div>
+                    <div>Piso/Edificio</div>
+                    <div class="show-info-contact" id="show-info-contact-p-e"></div>
+                </div>
+
+                <div>
+                    <div>Ciudad</div>
+                    <div class="show-info-contact" id="show-info-contact-cd"></div>
+                </div>
+
+                <div>
+                    <div>Código Postal</div>
+                    <div class="show-info-contact" id="show-info-contact-cp"></div>
+                </div>
+
+                <div>
+                    <div>Estado</div>
+                    <div class="show-info-contact" id="show-info-contact-edo"></div>
+                </div>
+
+                <div>
+                    <div>País</div>
+                    <div class="show-info-contact" id="show-info-contact-pais"></div>
+                </div>
+
             </div>
 
             <div class="container-list-something">
-                <div class="core-show-title-blue">Más información</div>
+                <div class="core-show-title-blue">Teléfono</div>
+
                 <div>
-                    <div>Telefono celular</div>
-                    <div class="show-info-contact">(55) 044 12 45 67 89</div>
+                    <div>Descripción</div>
+                    <div class="show-info-contact" id="show-info-contact-desc-tel"></div>
                 </div>
+
                 <div>
-                    <div>Telefono celular</div>
-                    <div class="show-info-contact">(55) 044 12 45 67 89</div>
+                    <div>Número</div>
+                    <div class="show-info-contact" id="show-info-contact-num-tel"></div>
                 </div>
-                <div>
-                    <div>Telefono celular</div>
-                    <div class="show-info-contact">(55) 044 12 45 67 89</div>
-                </div>
+
             </div>
+
+           <div class="container-list-something">
+               <div class="core-show-title-blue">Correo</div>
+
+               <div>
+                   <div>Descripción</div>
+                   <div class="show-info-contact" id="show-info-contact-desc-mail"></div>
+               </div>
+
+               <div>
+                   <div>Correo</div>
+                   <div class="show-info-contact" id="show-info-contact-mail"></div>
+               </div>
+
+           </div>
+
+           <div class="container-list-something">
+               <div class="core-show-title-blue">Redes sociales</div>
+
+               <div>
+                   <div>Red social</div>
+                   <div class="show-info-contact" id="show-info-contact-social"></div>
+               </div>
+
+               <div>
+                   <div>URL</div>
+                   <div class="show-info-contact" id="show-info-contact-url"></div>
+               </div>
+
+           </div>
         </div>
 
-        <div id="form">
-            @include('admin.contacts.patials.form-contacts')
+        <div id="form-register">
+            @include('admin.contacts.patials.contact-register')
         </div>
+        <div id="form-edit">
+            @include('admin.contacts.patials.contact-edit')
+        </div>
+
+        {{-- Formulario seleccion de contacto --}}
+        {!! Form::open(['route' => 'contact.show', 'method' => 'GET', 'id' => 'form-contact-show']) !!}
+        {!! Form::hidden('id', 'null', ['id' => 'id-contact-to-show']) !!}
+        {!! Form::close() !!}
+
+        {{-- Formulario para eliminar contacto --}}
+        {!! Form::open(['route' => 'contact.delete', 'method' => 'DELETE', 'id' => 'form-contact-delete']) !!}
+        {!! Form::hidden('id', 'null', ['id' => 'id-contact-to-delete']) !!}
+        {!! Form::close() !!}
     </div>
 @endsection
 

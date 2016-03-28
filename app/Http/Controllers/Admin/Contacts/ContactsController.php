@@ -13,6 +13,7 @@ use App\Facades\Core;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class ContactsController extends Controller
 {
@@ -62,56 +63,56 @@ class ContactsController extends Controller
             // Contacto a registrar
             $contact = new Contacto([
                 'foto'          => 'unknow.png',
-                'nombre'        => $request['nombre'],
-                'ap_paterno'    => $request['ap_paterno'],
-                'ap_materno'    => $request['ap_materno'],
-                'sexo'          => $request['sexo'],
-                'f_nacimiento'  => $request['f_nacimiento'],
-                'profesion'     => $request['profesion'],
-                'estado_civil'  => $request['estado_civil'],
+                'nombre'        => $request -> nombre,
+                'ap_paterno'    => $request -> ap_paterno,
+                'ap_materno'    => $request -> ap_materno,
+                'sexo'          => $request -> sexo,
+                'f_nacimiento'  => $request -> f_nacimiento,
+                'profesion'     => $request -> profesion,
+                'estado_civil'  => $request -> estado_civil,
                 'estado'        => 'iniciado',
-                'desc_contacto' => $request['desc_contacto']
+                'desc_contacto' => $request -> desc_contacto
             ]);
             $contact -> save();
 
             $contact_dir = new ContactAddress([
-                'desc_dir'      => $request['desc_dir'],
-                'calle'         => $request['calle'],
-                'numero_dir'    => $request['numero_dir'],
-                'piso_edificio' => $request['piso_edificio'],
-                'ciudad'        => $request['ciudad'],
-                'cp'            => $request['cp'],
-                'estado_dir'    => $request['estado_dir'],
-                'pais'          => $request['pais'],
+                'desc_dir'      => $request -> desc_dir,
+                'calle'         => $request -> calle,
+                'numero_dir'    => $request -> numero_dir,
+                'piso_edificio' => $request -> piso_edificio,
+                'ciudad'        => $request -> ciudad,
+                'cp'            => $request -> cp,
+                'estado_dir'    => $request -> estado_dir,
+                'pais'          => $request -> pais,
                 'contacto_id'   => $contact->id
             ]);
             $contact_dir -> save();
 
             $contact_mail = new ContactMail([
-                'desc_mail'     => $request['desc_mail'],
-                'email'         => $request['email'],
+                'desc_mail'     => $request -> desc_mail,
+                'email'         => $request -> email,
                 'contacto_id'   => $contact->id
             ]);
             $contact_mail -> save();
 
             $contact_tel = new ContactPhone([
-                'desc_tel'     => $request['desc_tel'],
-                'numero_tel'         => $request['numero_tel'],
+                'desc_tel'     => $request -> desc_tel,
+                'numero_tel'         => $request -> numero_tel,
                 'contacto_id'   => $contact->id
             ]);
             $contact_tel -> save();
 
             $contact_social = new ContactSocial([
-                'red_social_nombre' => $request['red_social_nombre'],
-                'url'               => $request['url'],
-                'contacto_id'       => $contact->id
+                'red_social_nombre' => $request -> red_social_nombre,
+                'url'               => $request -> url,
+                'contacto_id'       => $contact -> id
             ]);
             $contact_social -> save();
 
             // Contacto a guardar en agenda
             $agenda = new UserHasAgendaContactos([
-                'users_id'      => \Auth::user()->id,
-                'contacto_id'   => $contact->id
+                'users_id'      => \Auth::user() -> id,
+                'contacto_id'   => $contact -> id
             ]);
 
 
@@ -135,9 +136,17 @@ class ContactsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
-        //
+        if ($request->ajax()) {
+            $contacto = Core::getContactInfo($request['id']);
+
+            return response()->json([
+                'contacto' => $contacto,
+            ]);
+        } else {
+            abort(404);
+        }
     }
 
     /**

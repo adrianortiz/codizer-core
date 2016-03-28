@@ -1,121 +1,105 @@
-<div class="block-content-info-contact">
-    <div class="container-show-info-contact-a">
-        <div id="show-info-contact-empresa" class="core-show-sub-title">Registro</div>
-        <div id="show-info-contact-nombre-completo" class="core-show-title-blue">Nuevo contacto</div>
-    </div>
+<div class="tab-conten" id="registro">
+    <ul class="nav nav-tabs" data-tabs="tabs">
+        <li class="active"><a href="#info" data-toggle="tab">Informaci贸n</a></li>
+        <li><a href="#dir" data-toggle="tab">Direcci贸n</a></li>
+        <li><a href="#tel" data-toggle="tab">Tel茅fono</a></li>
+        <li><a href="#mail" data-toggle="tab">Correo</a></li>
+        <li><a href="#social" data-toggle="tab">Redes sociales</a></li>
+    </ul>
 
-    <div class="block-content-info-contact">
-        {!! Form::open(['route' => 'contact.create', 'method' => 'POST', 'id' => 'form-contact-to-create']) !!}
-        <div class="tab-conten" id="registro">
-            <ul class="nav nav-tabs" data-tabs="tabs">
-                <li class="active"><a href="#info" data-toggle="tab">Informaci髇</a></li>
-                <li><a href="#dir" data-toggle="tab">Direcci髇</a></li>
-                <li><a href="#tel" data-toggle="tab">Tel閒ono</a></li>
-                <li><a href="#mail" data-toggle="tab">Correo</a></li>
-                <li><a href="#social" data-toggle="tab">Redes sociales</a></li>
-            </ul>
+    <div class="tab-content">
 
-            <div id="my-tab-content" class="tab-content">
+        {{-- Tab informacion --}}
+        <div class="form-group tab-pane active" id="info">
 
-                {{-- Tab informacion --}}
-                <div class="form-group tab-pane active" id="info">
+            <div class="container-show-info-contact-img-b">
+                <img id="show-info-contact-foto" src="{{ asset('/media/photo-perfil/unknow.png') }}">
+                <a id="show-perfil-contact-link" href="#" class="btn btn-sm-radius btn-shadow-blue">Seleccionar foto</a>
+            </div>
 
-                    <div class="container-show-info-contact-img-b">
-                        <img id="show-info-contact-foto" src="{{ asset('/media/photo-perfil/unknow.png') }}">
-                        <a id="show-perfil-contact-link" href="#" class="btn btn-sm-radius btn-shadow-blue">Seleccionar foto</a>
-                    </div>
+            <div class="container-show-info-contact-list-c">
+                <label for="nombre">@lang('validation.attributes.name')</label>
+                <div class="show-info-contact">{!! Form::text('nombre', old('nombre'), ['id' => 'nombre', 'class' => 'form-control']) !!}</div>
 
-                    <div class="container-show-info-contact-list-c">
-                        <label for="nombre">@lang('validation.attributes.name')</label>
-                        <div class="show-info-contact">{!! Form::text('nombre', old('nombre'), ['id' => 'nombre', 'class' => 'form-control']) !!}</div>
+                <label for="ap_paterno">@lang('validation.attributes.paterno')</label>
+                <div class="show-info-contact">{!! Form::text('ap_paterno', old('ap_paterno'), ['id' => 'ap_paterno', 'class' => 'form-control']) !!}</div>
 
-                        <label for="ap_paterno">@lang('validation.attributes.paterno')</label>
-                        <div class="show-info-contact">{!! Form::text('ap_paterno', old('ap_paterno'), ['id' => 'ap_paterno', 'class' => 'form-control']) !!}</div>
+                <label for="ap_materno">@lang('validation.attributes.materno')</label>
+                <div class="show-info-contact">{!! Form::text('ap_materno', old('ap_materno'), ['id' => 'ap_materno', 'class' => 'form-control']) !!}</div>
 
-                        <label for="ap_materno">@lang('validation.attributes.materno')</label>
-                        <div class="show-info-contact">{!! Form::text('ap_materno', old('ap_materno'), ['id' => 'ap_materno', 'class' => 'form-control']) !!}</div>
-
-                        <label for="sexo">Sexo</label>
-                        <div class="btn-group show-info-contact" id="radio-btns" data-toggle="buttons">
-                            <label class="btn btn-default btn-xs active">Masculino{!! Form::radio('sexo', 'Masculino', true, ['id' => 'masculino', 'class' => 'form-control']) !!}</label>
-                            <label class="btn btn-default btn-xs">Femenino{!! Form::radio('sexo', 'Femenino', false, ['id' => 'femenino', 'class' => 'form-control']) !!}</label>
-                        </div>
-
-                        <label for="f_nacimiento">Fecha de nacimiento</label>
-                        <div class="show-info-contact">{!! Form::date('f_nacimiento', old('f_nacimiento'), ['id' => 'f_nacimiento', 'class' => 'form-control']) !!}</div>
-
-                        <label for="profesion">Profesi髇</label>
-                        <div class="show-info-contact">{!! Form::text('profesion', old('profesion'), ['id' => 'profesion', 'class' => 'form-control']) !!}</div>
-
-                        <label for="estado_civil">Estado civil</label>
-                        <div class="show-info-contact">{!! Form::text('estado_civil', old('estado_civil'), ['id' => 'estado_civil', 'class' => 'form-control']) !!}</div>
-
-                        <label for="desc_contacto">Descripci髇 contacto</label>
-                        <div class="show-info-contact">{!! Form::text('desc_contacto', old('desc_contacto'), ['id' => 'desc_contacto', 'class' => 'form-control']) !!}</div>
-                    </div>
+                <label for="sexo">Sexo</label>
+                <div class="btn-group show-info-contact" id="radio-btns" data-toggle="buttons">
+                    <label class="btn btn-default btn-xs active">Masculino{!! Form::radio('sexo', 'Masculino', true, ['id' => 'masculino', 'class' => 'form-control']) !!}</label>
+                    <label class="btn btn-default btn-xs">Femenino{!! Form::radio('sexo', 'Femenino', false, ['id' => 'femenino', 'class' => 'form-control']) !!}</label>
                 </div>
 
-                {{-- Tab Direccion --}}
-                <div class="container-list-something form-group tab-pane" id="dir">
-                    <label for="desc_dir">Descripci髇</label>
-                    <div class="show-info-contact">{!! Form::text('desc_dir', old('desc_dir'), ['id' => 'desc_dir', 'class' => 'form-control']) !!}</div>
+                <label for="f_nacimiento">Fecha de nacimiento</label>
+                <div class="show-info-contact">{!! Form::date('f_nacimiento', old('f_nacimiento'), ['id' => 'f_nacimiento', 'class' => 'form-control']) !!}</div>
 
-                    <label for="calle">Calle</label>
-                    <div class="show-info-contact">{!! Form::text('calle', old('calle'), ['id' => 'calle', 'class' => 'form-control']) !!}</div>
+                <label for="profesion">Profesi贸n</label>
+                <div class="show-info-contact">{!! Form::text('profesion', old('profesion'), ['id' => 'profesion', 'class' => 'form-control']) !!}</div>
 
-                    <label for="numero">Numero</label>
-                    <div class="show-info-contact">{!! Form::text('numero', old('numero'), ['id' => 'numero', 'class' => 'form-control']) !!}</div>
+                <label for="estado_civil">Estado civil</label>
+                <div class="show-info-contact">{!! Form::text('estado_civil', old('estado_civil'), ['id' => 'estado_civil', 'class' => 'form-control']) !!}</div>
 
-                    <label for="piso_edificio">Piso/Edificio</label>
-                    <div class="show-info-contact">{!! Form::text('piso_edificio', old('piso_edificio'), ['id' => 'piso_edificio', 'class' => 'form-control']) !!}</div>
-
-                    <label for="ciudad">Ciudad</label>
-                    <div class="show-info-contact">{!! Form::text('ciudad', old('ciudad'), ['id' => 'ciudad', 'class' => 'form-control']) !!}</div>
-
-                    <label for="cp">Codigo Postal</label>
-                    <div class="show-info-contact">{!! Form::text('cp', old('cp'), ['id' => 'cp', 'class' => 'form-control']) !!}</div>
-
-                    <label for="estado">Estado</label>
-                    <div class="show-info-contact">{!! Form::text('estado', old('estado'), ['id' => 'estado', 'class' => 'form-control']) !!}</div>
-
-                    <label for="pais">Pais</label>
-                    <div class="show-info-contact">{!! Form::text('pais', old('pais'), ['id' => 'pais', 'class' => 'form-control']) !!}</div>
-                </div>
-
-                {{-- Tab Telefono --}}
-                <div class="container-list-something form-group tab-pane" id="tel">
-                    <label for="desc_tel">Descripci髇</label>
-                    <div class="show-info-contact">{!! Form::text('desc_tel', old('desc_tel'), ['id' => 'desc_tel', 'class' => 'form-control']) !!}</div>
-
-                    <label for="numero_tel">Numero</label>
-                    <div class="show-info-contact">{!! Form::text('numero_tel', old('numero_tel'), ['id' => 'numero_tel', 'class' => 'form-control']) !!}</div>
-                </div>
-
-                {{-- Tab Correo --}}
-                <div class="container-list-something form-group tab-pane" id="mail">
-                    <label for="desc_mail">Descripci髇</label>
-                    <div class="show-info-contact">{!! Form::text('desc_mail', old('desc_mail'), ['id' => 'desc_mail', 'class' => 'form-control']) !!}</div>
-
-                    <label for="email">Correo</label>
-                    <div class="show-info-contact">{!! Form::text('email', old('email'), ['id' => 'email', 'class' => 'form-control']) !!}</div>
-                </div>
-
-                {{-- Tab Social --}}
-                <div class="container-list-something form-group tab-pane" id="social">
-                    <label for="red_social_nombre">Red social</label>
-                    <div class="show-info-contact">{!! Form::text('red_social_nombre', old('red_social_nombre'), ['id' => 'red_social_nombre', 'class' => 'form-control']) !!}</div>
-
-                    <label for="url">URL</label>
-                    <div class="show-info-contact">{!! Form::text('url', old('url'), ['id' => 'url', 'class' => 'form-control']) !!}</div>
-                </div>
-
+                <label for="desc_contacto">Descripci贸n contacto</label>
+                <div class="show-info-contact">{!! Form::text('desc_contacto', old('desc_contacto'), ['id' => 'desc_contacto', 'class' => 'form-control']) !!}</div>
             </div>
         </div>
-        {!! Form::close() !!}
-    </div>
 
-    <div class="container-list-something" id="show-info-contact-desc">
-        <button id="btn-cancel-contact" type="button" class="btn btn-default btn-sm btn-sm-radius">Cancelar</button>
-        <button id="btn-save-contact" type="button" class="btn btn-primary btn-sm btn-sm-radius btn-shadow-blue right">Guardar</button>
+        {{-- Tab Direccion --}}
+        <div class="container-list-something form-group tab-pane" id="dir">
+            <label for="desc_dir">Descripci贸n</label>
+            <div class="show-info-contact">{!! Form::text('desc_dir', old('desc_dir'), ['id' => 'desc_dir', 'class' => 'form-control']) !!}</div>
+
+            <label for="calle">Calle</label>
+            <div class="show-info-contact">{!! Form::text('calle', old('calle'), ['id' => 'calle', 'class' => 'form-control']) !!}</div>
+
+            <label for="numero_dir">N煤mero</label>
+            <div class="show-info-contact">{!! Form::text('numero_dir', old('numero_dir'), ['id' => 'numero_dir', 'class' => 'form-control']) !!}</div>
+
+            <label for="piso_edificio">Piso/Edificio</label>
+            <div class="show-info-contact">{!! Form::text('piso_edificio', old('piso_edificio'), ['id' => 'piso_edificio', 'class' => 'form-control']) !!}</div>
+
+            <label for="ciudad">Ciudad</label>
+            <div class="show-info-contact">{!! Form::text('ciudad', old('ciudad'), ['id' => 'ciudad', 'class' => 'form-control']) !!}</div>
+
+            <label for="cp">C贸digo Postal</label>
+            <div class="show-info-contact">{!! Form::text('cp', old('cp'), ['id' => 'cp', 'class' => 'form-control']) !!}</div>
+
+            <label for="estado_dir">Estado</label>
+            <div class="show-info-contact">{!! Form::text('estado_dir', old('estado_dir'), ['id' => 'estado_dir', 'class' => 'form-control']) !!}</div>
+
+            <label for="pais">Pa铆s</label>
+            <div class="show-info-contact">{!! Form::text('pais', old('pais'), ['id' => 'pais', 'class' => 'form-control']) !!}</div>
+        </div>
+
+        {{-- Tab Telefono --}}
+        <div class="container-list-something form-group tab-pane" id="tel">
+            <label for="desc_tel">Descripci贸n</label>
+            <div class="show-info-contact">{!! Form::text('desc_tel', old('desc_tel'), ['id' => 'desc_tel', 'class' => 'form-control']) !!}</div>
+
+            <label for="numero_tel">N煤mero</label>
+            <div class="show-info-contact">{!! Form::text('numero_tel', old('numero_tel'), ['id' => 'numero_tel', 'class' => 'form-control']) !!}</div>
+        </div>
+
+        {{-- Tab Correo --}}
+        <div class="container-list-something form-group tab-pane" id="mail">
+            <label for="desc_mail">Descripci贸n</label>
+            <div class="show-info-contact">{!! Form::text('desc_mail', old('desc_mail'), ['id' => 'desc_mail', 'class' => 'form-control']) !!}</div>
+
+            <label for="email">Correo</label>
+            <div class="show-info-contact">{!! Form::text('email', old('email'), ['id' => 'email', 'class' => 'form-control']) !!}</div>
+        </div>
+
+        {{-- Tab Social --}}
+        <div class="container-list-something form-group tab-pane" id="social">
+            <label for="red_social_nombre">Red social</label>
+            <div class="show-info-contact">{!! Form::text('red_social_nombre', old('red_social_nombre'), ['id' => 'red_social_nombre', 'class' => 'form-control']) !!}</div>
+
+            <label for="url">URL</label>
+            <div class="show-info-contact">{!! Form::text('url', old('url'), ['id' => 'url', 'class' => 'form-control']) !!}</div>
+        </div>
+
     </div>
 </div>
