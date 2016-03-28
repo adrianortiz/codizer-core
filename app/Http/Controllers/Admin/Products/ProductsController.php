@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers\Admin\Products;
 
+use App\EmpresaHasProducto;
 use App\Fabricante;
 use App\Facades\Core;
+use App\Img_product;
 use App\Product;
+use App\Tienda;
+use App\TiendaHasProducto;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -19,13 +23,11 @@ class ProductsController extends Controller
      */
     public function index($nameFirstName, $idEmpresa, $idTienda)
     {
-
         /**
          * Con los id $idEmpresa, $idTienda
          * Puedes realizar consultas de la tabla de empres o tienda
          * y obtener su data
          */
-
         // User son los datos del usuario Logueado
         $userPerfil = Core::getUserPerfil();
         $userContacto = Core::getUserContact();
@@ -63,12 +65,14 @@ class ProductsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request , $idEmpresa , $idTienda )
+
     {
+
         if ($request->ajax()) {
 
-            $producto = new Product([
 
+            $producto = new Product([
                 'codigo_producto'=>$request['codigo_producto'],
                 'cantidad_disponible'=>$request['cantidad_disponible'],
                 'nombre'=>$request['nombre'],
@@ -79,12 +83,42 @@ class ProductsController extends Controller
                 'oferta_id'=>$request['oferta_id'],
                 'users_id'=>$request['users_id']
             ]);
+            $producto->save();
 
-            if ( $producto->save() )
+
+            $filePhotoProduct = $request->file('logo');
+            $namePhotoProduct = 'company-'.\Auth::user()->id . Carbon::now()->second . $filePhotoProduct->getClientOriginalName();
+            \Storage::disk('photo_product')->put($namePhotoProduct, \File::get($filePhotoProduct));
+
+            $photoProducto = new Img_product([
+                'img'           =>  $namePhotoProduct,
+                'producto_id'   =>  $producto->id,
+                'principal'     =>  '0'
+            ]);
+            $photoProducto->save();
+
+            $empresa_has_producto= new EmpresaHasProducto(
+                [
+                    //$empresa = Empresa::where('users_id', \Auth::user()->id)->first(),
+                    'empresa_id'    =>  $idEmpresa->id,
+                    'producto_id'   =>  $producto->id
+                ]
+            );
+            $empresa_has_producto->save();
+
+
+            $tienda_has_producto= new TiendaHasProducto(
+                [
+                    'tienda_id'    =>  $idTienda->id,
+                    'producto_id'   =>  $producto->id
+                ]
+            );
+            $tienda_has_producto->save();
+
+            if ( $tienda_has_producto->save() )
                 $message = 'Producto agregado.';
             else
                 $message = 'No se pudo agregar el producto.';
-
 
             return response()->json([
                 'message' => $message,

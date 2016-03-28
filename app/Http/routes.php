@@ -246,7 +246,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 
         Route::post('perfil/{nameFirstName}/products/store', [
-            'uses'  => 'Admin\Products\Products@store',
+            'uses'  => 'Admin\Products\ProductsController@store',
             'as'    => 'products.store'
         ]);
 

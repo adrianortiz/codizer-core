@@ -61,13 +61,6 @@
 
                     <div class="row">
 
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                {!! Form::label('desc_producto', 'Descripcion del producto') !!}
-                                {!! Form::textarea('desc_producto', '',
-                                array('class'=> 'form-control form-with-100 form-group-validate val_text_num', 'placeholder' => 'Descripcion del producto')) !!}
-                            </div>
-                        </div>
 
                         <div class="col-md-6">
                             <div class="form-group">
@@ -98,6 +91,14 @@
                                 {!! Form::label('categoria', 'Categoria') !!}
                                 {!! Form::select('categoria', $categoriasList,Input::old('categoria'),
                                 array('class'=> 'form-control form-with-100 form-group-validate val_text'))  !!}
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {!! Form::label('desc_producto', 'Descripcion del producto') !!}
+                                {!! Form::textarea('desc_producto', '',
+                                array('class'=> 'form-control form-with-100 form-group-validate val_text_num', 'placeholder' => 'Descripcion del producto')) !!}
                             </div>
                         </div>
                     </div>
