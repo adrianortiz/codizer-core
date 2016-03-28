@@ -70,8 +70,10 @@
 
 
 <footer>
-    <strong>Footer</strong>
-    <span>© Codizer - 2016 </span>
+    <div>
+        <strong>{{ $tienda->nombre }}</strong>
+        <span>© Codizer - 2016 </span>
+    </div>
 </footer>
 
 @yield('modals')

@@ -174,12 +174,25 @@ class TiendaController extends Controller
             $userPerfil = Core::getUserPerfil();
         }
 
-        $tienda = Tienda::where('store_route', $tiendaRoute)->first();
-        $productos = Core::getAllProductosByTiendaRoute($tiendaRoute, '1');
 
-        if ($tienda->store_route_platilla == 'basic') {
-            return view('plantillas.basic.index', compact('tienda', 'userContacto', 'userPerfil', 'productos'));
+        $tienda = Tienda::where('store_route', $tiendaRoute)->first();
+
+        if( $tienda->estado == 0 ) {
+            return view('plantillas.cerrado.index', compact('tienda'));
+        } else {
+
+            $productos = Core::getAllProductosByTiendaRoute($tiendaRoute, '1');
+
+            if ($tienda->store_route_platilla == 'basic') {
+                return view('plantillas.basic.index', compact('tienda', 'userContacto', 'userPerfil', 'productos'));
+            }
+
         }
+
+
+
+
+
 
     }
 
@@ -195,9 +208,16 @@ class TiendaController extends Controller
 
         $tienda = Tienda::where('store_route', $tiendaRoute)->first();
 
-        if ($tienda->store_route_platilla == 'basic') {
-            return view('plantillas.basic.info-plantilla', compact('tienda', 'userContacto', 'userPerfil'));
+        if( $tienda->estao = '0' ) {
+            return view('plantillas.cerrado.index', compact('tienda'));
+        } else {
+            $empresa = Empresa::where('id', $tienda->empresa_id)->first();
+
+            if ($tienda->store_route_platilla == 'basic') {
+                return view('plantillas.basic.info-plantilla', compact('tienda', 'empresa', 'userContacto', 'userPerfil'));
+            }
         }
+
 
     }
 }

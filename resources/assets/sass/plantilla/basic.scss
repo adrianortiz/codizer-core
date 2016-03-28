@@ -1,20 +1,38 @@
+
+
+
+
 // Variables
-@import "../tema/varibles";
-@import "../tema/core-products";
+@import "basic-tema/basic-varibles";
+
+// Temas
+@import "basic-tema/basic-products";
+@import "basic-tema/basic-show-info";
+@import "basic-tema/basic-companies";
+@import "basic-tema/basic-contacts";
+@import "basic-tema/basic-footer";
 
 // components
 @import "../librerias/normalize";
 @import "../librerias/ed-grid/ed-grid";
 
-// Quitar el focus de todos los elementos del DOM
-*:focus {
-  outline:0 !important;
+
+.container-list-something-50 {
+  width: 49%;
+  display: inline-block;
+  text-align: left;
+  padding-left: 30px;
 }
 
-$basic-negro: #222;
-$basic-gris: #F7F7F7;
+.container-list-something-50-logo {
+  width: 49%;
+  display: inline-block;
+  padding-left: 30px;
+}
 
-$amarillo-200: #EFC439;
+#continaer-note-shows {
+  background-color: transparent;
+}
 
 body {
   @include box-sizing(border-box);
