@@ -130,6 +130,9 @@ class Core
             ->join('contact_mail', 'contacto.id', '=', 'contact_mail.contacto_id')
             ->join('contact_social','contacto.id', '=', 'contact_social.contacto_id')
             ->where('contacto.id', $id)
+            ->select('contacto.id', 'foto', 'nombre', 'ap_paterno', 'ap_materno', 'sexo', 'f_nacimiento', 'profesion', 'estado_civil', 'estado', 'desc_contacto',
+                'desc_dir', 'calle', 'numero_dir', 'piso_edificio', 'ciudad', 'cp', 'estado_dir', 'pais',
+                'desc_tel', 'numero_tel', 'desc_mail', 'email', 'red_social_nombre', 'url')
             ->get();
     }
 

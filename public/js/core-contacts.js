@@ -20,10 +20,84 @@ function contactNewEdit(result) {
         '</tr>';
 }
 
-function fieldsRefill(){
-    emptyFields();
-    $("#show-info-contact-foto").attr("src","/media/photo-perfil/"+ contacto[0].foto);
+function emptyAndRefillFieldsToUpdate(){
+    $('#nombre-ud').empty();
+    $('#ap_paterno-ud').empty();
+    $('#ap_materno-ud').empty();
+
+    $('input:radio[name=sexo-ud]').filter('[value=Masculino]').prop('checked', true);
+
+    $('#f_nacimiento-ud').empty();
+    $('#profesion-ud').empty();
+    $('#estado_civil-ud').empty();
+    $('#desc_contacto-ud').empty();
+    $('#desc_dir-ud').empty();
+    $('#calle-ud').empty();
+    $('#numero_dir-ud').empty();
+    $('#piso_edificio-ud').empty();
+    $('#ciudad-ud').empty();
+    $('#cp-ud').empty();
+    $('#estado_dir-ud').empty();
+    $('#pais-ud').empty();
+    $('#desc_tel-ud').empty();
+    $('#numero_tel-ud').empty();
+    $('#desc_mail-ud').empty();
+    $('#email-ud').empty();
+    $('#red_social_nombre-ud').empty();
+    $('#url-ud').empty();
+
+    $('#nombre-ud').val(contacto[0].nombre);
+    $('#ap_paterno-ud').val(contacto[0].ap_paterno);
+    $('#ap_materno-ud').val(contacto[0].ap_materno);
+
+    $('#show-info-contact-foto').attr('src','/media/photo-perfil/'+ contacto[0].foto);
+
+    $('input:radio[name=sexo-ud]').filter('[value='+contacto[0].sexo+']').prop('checked', true);
+
+    $('#f_nacimiento-ud').val($.formatDate('d/m/Y', contacto[0].f_nacimiento));
+    $('#profesion-ud').val(contacto[0].profesion);
+    $('#estado_civil-ud').val(contacto[0].estado_civil);
+    $('#desc_contacto-ud').val(contacto[0].desc_contacto);
+    $('#desc_dir-ud').val(contacto[0].desc_dir);
+    $('#calle-ud').val(contacto[0].calle);
+    $('#numero_dir-ud').val(contacto[0].numero_dir);
+    $('#piso_edificio-ud').val(contacto[0].piso_edificio);
+    $('#ciudad-ud').val(contacto[0].ciudad);
+    $('#cp-ud').val(contacto[0].cp);
+    $('#estado_dir-ud').val(contacto[0].estado_dir);
+    $('#pais-ud').val(contacto[0].pais);
+    $('#desc_tel-ud').val(contacto[0].desc_tel);
+    $('#numero_tel-ud').val(contacto[0].numero_tel);
+    $('#desc_mail-ud').val(contacto[0].desc_mail);
+    $('#email-ud').val(contacto[0].email);
+    $('#red_social_nombre-ud').val(contacto[0].red_social_nombre);
+    $('#url-ud').val(contacto[0].url);
+}
+
+function emptyAndRefillFieldsToShow(){
+    $('#show-info-contact-nombre-completo').empty();
+    $('#show-info-contact-sexo').empty();
+    $('#show-info-contact-f-nacimiento').empty();
+    $('#show-info-contact-profesion').empty();
+    $('#show-info-contact-estado-civil').empty();
+    $('#show-info-contact-desc-info').empty();
+    $('#show-info-contact-desc-dir').empty();
+    $('#show-info-contact-calle').empty();
+    $('#show-info-contact-num-dir').empty();
+    $('#show-info-contact-p-e').empty();
+    $('#show-info-contact-cd').empty();
+    $('#show-info-contact-cp').empty();
+    $('#show-info-contact-edo').empty();
+    $('#show-info-contact-pais').empty();
+    $('#show-info-contact-desc-tel').empty();
+    $('#show-info-contact-num-tel').empty();
+    $('#show-info-contact-desc-mail').empty();
+    $('#show-info-contact-mail').empty();
+    $('#show-info-contact-social').empty();
+    $('#show-info-contact-url').empty();
+
     $('#show-info-contact-nombre-completo').append(contacto[0].nombre + ' ' + contacto[0].ap_paterno + ' ' + contacto[0].ap_materno);
+    $('#show-info-contact-foto').attr('src','/media/photo-perfil/'+ contacto[0].foto);
     $('#show-info-contact-sexo').append(contacto[0].sexo);
     $('#show-info-contact-f-nacimiento').append(contacto[0].f_nacimiento);
     $('#show-info-contact-profesion').append(contacto[0].profesion);
@@ -45,29 +119,6 @@ function fieldsRefill(){
     $('#show-info-contact-url').append(contacto[0].url);
 }
 
-function emptyFields(){
-    $('#show-info-contact-nombre-completo').empty();
-    $('#show-info-contact-sexo').empty();
-    $('#show-info-contact-f-nacimiento').empty();
-    $('#show-info-contact-profesion').empty();
-    $('#show-info-contact-estado-civil').empty();
-    $('#show-info-contact-desc-info').empty();
-    $('#show-info-contact-desc-dir').empty();
-    $('#show-info-contact-calle').empty();
-    $('#show-info-contact-num-dir').empty();
-    $('#show-info-contact-p-e').empty();
-    $('#show-info-contact-cd').empty();
-    $('#show-info-contact-cp').empty();
-    $('#show-info-contact-edo').empty();
-    $('#show-info-contact-pais').empty();
-    $('#show-info-contact-desc-tel').empty();
-    $('#show-info-contact-num-tel').empty();
-    $('#show-info-contact-desc-mail').empty();
-    $('#show-info-contact-mail').empty();
-    $('#show-info-contact-social').empty();
-    $('#show-info-contact-url').empty();
-}
-
 $(document).ready(function(){
     $('#form-register').hide();
     $('#form-edit').hide();
@@ -81,6 +132,14 @@ $(document).ready(function(){
         $('#form-edit').hide();
         $('#info-contact').hide();
         $('#btns-group-to-contact').hide();
+    });
+
+    $('#btn-edit-contact').click(function(){
+        $('#form-edit').show();
+        emptyAndRefillFieldsToUpdate();
+        $('#form-register').hide();
+        $('#info-contact').hide();
+        $('#btn-new-contact').show();
     });
 
     $('#btn-cancel-contact').click(function(){
@@ -184,7 +243,7 @@ $(document).ready(function(){
                         $('#btns-group-to-contact').show();
                         continaerContact.show();
 
-                        fieldsRefill();
+                        emptyAndRefillFieldsToShow();
 
                         // Asignar id del contacto seleccionado para eliminar
                         $('#id-contact-to-delete').val($(this).attr('data-contacto'));
@@ -216,49 +275,51 @@ $(document).ready(function(){
          */
         UpdateContact: function()
         {
-            $('#btn-edit-contact').click( function()
+            $('#btn-update-contact').click( function()
             {
-                alert(contacto.id);
-                var form = $('#form-note-to-update');
-                var datos = form.serializeArray();
-                var route = form.attr('action');
+                emptyAndRefillFieldsToUpdate();
 
-                $.ajax({
-                    url:        route,
-                    type:       'PUT',
-                    dataType:   'json',
-                    async:      false,
-                    data:       datos,
-
-                    success: function( result )
-                    {
-                        // console.log(result);
-                        hideShowAlert('msj-success', result.message);
-                        containerNotes.prepend( contactNewEdit(result) );
-
-                        // Agregar datos de la nota consultada al contenedor derecho
-                        continaerNoteShow.html('<div class="block-content-info">' + result.note.content + '</div>');
-
-                        // Agregar datos de la nota seleccionada al formulario de actualización
-                        $('#id-note-to-update').val(result.note.id);
-                        $('#content-note-to-update').val(result.note.content);
-
-                        // Mostrar mensaje y cerrar modal
-                        $('.close').click();
-
-                        // Quitar nota de la vista
-                        tableTrTouched.fadeOut();
-                    }
-
-                }).fail(function( jqXHR, textStatus ) {
-                    $('#msj-danger-state').empty();
-
-                    $(jqXHR).each(function(key,error)
-                    {
-                        hideShowAlert('msj-danger', 'Ocurrio un problema');
-                    });
-
-                });
+                //alert(contacto.id);
+                //var form = $('#form-contact-to-update');
+                //var datos = form.serializeArray();
+                //var route = form.attr('action');
+                //
+                //$.ajax({
+                //    url:        route,
+                //    type:       'PUT',
+                //    dataType:   'json',
+                //    async:      false,
+                //    data:       datos,
+                //
+                //    success: function( result )
+                //    {
+                //        // console.log(result);
+                //        hideShowAlert('msj-success', result.message);
+                //        containerNotes.prepend( contactNewEdit(result) );
+                //
+                //        // Agregar datos de la nota consultada al contenedor derecho
+                //        continaerNoteShow.html('<div class="block-content-info">' + result.note.content + '</div>');
+                //
+                //        // Agregar datos de la nota seleccionada al formulario de actualización
+                //        $('#id-note-to-update').val(result.note.id);
+                //        $('#content-note-to-update').val(result.note.content);
+                //
+                //        // Mostrar mensaje y cerrar modal
+                //        $('.close').click();
+                //
+                //        // Quitar nota de la vista
+                //        tableTrTouched.fadeOut();
+                //    }
+                //
+                //}).fail(function( jqXHR, textStatus ) {
+                //    $('#msj-danger-state').empty();
+                //
+                //    $(jqXHR).each(function(key,error)
+                //    {
+                //        hideShowAlert('msj-danger', 'Ocurrio un problema');
+                //    });
+                //
+                //});
             });
 
         }
