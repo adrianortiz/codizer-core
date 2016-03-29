@@ -35,10 +35,14 @@ class ProductsController extends Controller
         $perfil = $userPerfil;
         $contacto = $userContacto;
 
+
         // Obtener todos los fabricantes de la empresa N
         $fabricantesList  = Core::getFabricantesByIdEmpresa( $idEmpresa );
         $ofertasList    =   Core::getOfertasByIdEmpresa($idEmpresa);
         $categoriasList =   Core::getCategoriasByIdEmpresa($idEmpresa);
+
+        $products = Producto::all();
+
 
         // Nos aseguramos de que la ruta sea la del usuario logueado
         if ( $nameFirstName != $userPerfil[0]->perfil_route)
@@ -47,7 +51,7 @@ class ProductsController extends Controller
         Core::isRouteValid($userPerfil[0]->perfil_route);
 
         return view('admin.products.products',
-            compact('perfil', 'contacto', 'userPerfil', 'userContacto','fabricantesList','ofertasList','categoriasList', 'idEmpresa', 'idTienda'));
+            compact('totProducts','products', 'perfil', 'contacto', 'userPerfil', 'userContacto','fabricantesList','ofertasList','categoriasList', 'idEmpresa', 'idTienda'));
     }
 
     /**
@@ -143,9 +147,16 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
-        //
+        if ( $request->ajax() ) {
+
+            $producto = Producto::findOrFail($request['id']);
+
+            return response()->json([
+                'producto' => $producto
+            ]);
+        }
     }
 
     /**

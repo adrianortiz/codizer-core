@@ -14,19 +14,24 @@
 
     @include('partials.perfil-link')
 
-    <a href="#" class="core-menu-list"><div>Empresa</div></a>
+    <a href="#" class="core-menu-list"><div>{{ $idEmpresa }}</div></a>
 
     <a href="#" class="core-menu-list menu-list-option menu-lis-img">
         <img src="{{ asset('/media/photo-store/chanel-123.png') }}">
         <div>Chanel</div>
     </a>
 
-    <a href="#" class="core-menu-list"><div>Productos <span>234</span></div></a>
+    <a href="#" class="core-menu-list"><div>Productos
 
-    <a href="#" class="core-menu-list"><div>Categorias <span>3</span></div></a>
-    <a href="#" class="core-menu-list menu-list-option"><div>Bolso</div></a>
-    <a href="#" class="core-menu-list menu-list-option"><div>Piel</div></a>
-    <a href="#" class="core-menu-list menu-list-option"><div>Critales</div></a>
+                <span>{{count($products)}}</span>
+
+        </div></a>
+
+    <a href="#" class="core-menu-list"><div>Categorias <span>{{ count($categoriasList) }}</span></div></a>
+
+    @foreach($categoriasList as $categoria)
+    <a href="#" class="core-menu-list menu-list-option"><div>{{$categoria}}</div></a>
+    @endforeach
 
 @endsection
 
@@ -62,19 +67,19 @@
     <table class="table table-hover">
         <tbody id="list-products">
 
-        @for($i = 0; $i<100; $i++)
+        @foreach($products as $product)
             <tr class="data-product-tr" data-product="1">
                 <td>
                     <img src="{{ asset('/media/photo-product/bolso-rosa-chanel.png') }}">
                 </td>
                 <td>
-                    <div class="list-product-title">Bolso de mano de piel rosado con cristales</div>
-                    <span class="list-product-tags">Bolso - Piel</span><br/>
-                    <div class="list-product-pz">300 pz</div>
-                    <div class="list-product-price">$2100.00</div>
+                    <div class="list-product-title">{{$product->nombre}}</div>
+                    <span class="list-product-tags">piel-bolso</span><br/>
+                    <div class="list-product-pz">{{$product->cantidad_disponible}} pz</div>
+                    <div class="list-product-price">{{$product->precio}}</div>
                 </td>
             </tr>
-        @endfor
+        @endforeach
 
         </tbody>
     </table>
