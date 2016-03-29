@@ -128,13 +128,14 @@
   width: 50px;
   height: auto;
   border: solid 1px $gris-250;
+  margin-top: 5px;
   margin-bottom: 3px;
   @include transition(.3s ease);
 
   &:hover {
     border: solid 1px $azul-200;
     cursor: pointer;
-    transform: scale(1.2, 1.2);
+    @include prefixer(transform, scale(1.2, 1.2));
   }
 }
 

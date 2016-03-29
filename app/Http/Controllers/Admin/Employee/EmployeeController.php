@@ -89,6 +89,7 @@ class EmployeeController extends Controller
                 $employeeAll->foto_tienda = URL::to('/') . '/media/photo-store/' . $employeeAll->foto_tienda;
                 $employeeAll->foto = URL::to('/') . '/media/photo-perfil/' . $employeeAll->foto;
                 $employeeAll->perfil_route = route('perfil', $employeeAll->perfil_route);
+                $employeeAll->store_route = URL::to('/') . '/tienda/' . $employeeAll->store_route;
 
                 return response()->json([
                     'empleado' => $employeeAll
@@ -161,6 +162,7 @@ class EmployeeController extends Controller
                 $employeeAll->foto_tienda = URL::to('/') . '/media/photo-store/' . $employeeAll->foto_tienda;
                 $employeeAll->foto = URL::to('/') . '/media/photo-perfil/' . $employeeAll->foto;
                 $employeeAll->perfil_route = route('perfil', $employeeAll->perfil_route);
+                $employeeAll->store_route = URL::to('/') . '/tienda/' . $employeeAll->store_route;
 
                 return response()->json([
                     'empleado' => $employeeAll
