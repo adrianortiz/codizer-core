@@ -14,6 +14,7 @@ use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 
 class ContactsController extends Controller
 {
@@ -37,7 +38,10 @@ class ContactsController extends Controller
         $friends = Core::getAmigos($contacto);
         $followers = Core::getFollowers($contacto);
 
-        return view('admin.contacts.contacts', compact('perfil', 'contacto', 'userPerfil', 'userContacto', 'contacts', 'friends', 'followers'));
+        if($contacto[0]->id == \Auth::user()->id)
+            return view('admin.contacts.contacts', compact('perfil', 'contacto', 'userPerfil', 'userContacto', 'contacts', 'friends', 'followers'));
+        else
+            return Redirect::to('/perfil/'.$nameFirstName);
     }
 
     /**
