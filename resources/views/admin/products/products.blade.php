@@ -141,11 +141,14 @@
 @section('modals')
 
    <!-- Aqui vas tus modals para los formularios -->
+@include('partials.loader')
 @include('admin.products.patials.modal-product')
+
 
 @endsection
 
 @section('extra-js')
     <!-- Aqui vas tus js para peticiones Ajax -->
+<script src="{{ asset('/js/codizer-validate.js') }}"></script>
 <script src="{{ asset('/js/core-products.js') }}"></script>
 @endsection

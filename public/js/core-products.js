@@ -6,16 +6,16 @@ var tableTrTouched = null;
 // Contenedor de la lista de las notas (Izquierdo)
 var containerProducts = $('#list-products');
 // Contenedor del lado derecho
-var continaerProductShow = $('#continaer-note-shows');
+var continaerProductShow = $('#continaer-product-shows');
 
 // Retorna la fila de una notra creada o actulizada
 function productCreateUpdate(result) {
-    return '<tr class="data-note-tr" data-note="' + result.product.id + '">' +
+    return '<tr class="data-product-tr" data-product="' + result.product.id + '">' +
         '<td class="container-list-point">' +
         '<div></div><div></div><div></div></td>' +
         '<td>' +
         '<div class="list-product-content">' + result.product.content + '</div>' +
-        '<span class="list-note-date-update">' + result.note.created_at + '</span>' +
+        '<span class="list-product-date-update">' + result.product.created_at + '</span>' +
         '</td>' +
         '</tr>';
 }
@@ -24,10 +24,10 @@ function productCreateUpdate(result) {
 
     var App = { init: function() {
         App.CreateProduct();
-        App.SelectNote();
-        App.UpdateNote();
-        App.DeleteNote();
-        App.SearchAndListAllNotes();
+        App.SelectProduct();
+        App.UpdateProduct();
+        App.DeleteProduct();
+        App.SearchAndListAllProducts();
     },
 
         /**
@@ -36,23 +36,40 @@ function productCreateUpdate(result) {
          */
         CreateProduct: function()
         {
-            $('#store-new-product').click( function()
-            {
+            $('#store-new-product').click( function() {
+                if ( validateGroup('.form-group-validate') == -1 )
+                    initSaveProduct();
+            });
+
+            function initSaveProduct() {
                 var form = $('#form-products-store');
                 var datos = form.serializeArray();
                 var route = form.attr('action');
 
                 $.ajax({
+
                     url:        route,
                     type:       'POST',
                     dataType:   'json',
-                    async:      false,
-                    data:       datos,
+                    // async:   false,
+
+                    data:new FormData( $('#form-products-store')[0] ),
+                    contentType: false,
+                    processData: false,
+
+                    beforeSend: function(){
+                        $('.core-loader').show();
+                    },
 
                     success: function( result ) {
                         // console.log(result);
 
-                        if (result.message == "No se pudo crear la nota.") {
+                        $('.core-loader').hide();
+
+                        console.log(result.message);
+                        console.log(result.producto);
+
+                        if (result.message == "No se pudo agregar el producto.") {
                             hideShowAlert('msj-danger', 'Ocurrio un problema');
                         } else {
                             hideShowAlert('msj-success', result.message);
@@ -64,6 +81,7 @@ function productCreateUpdate(result) {
                     }
 
                 }).fail(function( jqXHR, textStatus ) {
+                    $('.core-loader').hide();
                     $('#msj-danger-state').empty();
 
                     $(jqXHR).each(function(key,error)
@@ -72,30 +90,30 @@ function productCreateUpdate(result) {
                     });
 
                 });
-            });
+            }
         },
 
         /**
          * Seleccionar una nota de la lista de notas y mostrar su
-         * infomación en la vista lateral (Derecha)
+         * infomaciï¿½n en la vista lateral (Derecha)
          * @constructor
          */
-        SelectNote: function()
+        SelectProduct: function()
         {
 
             $(containerProducts).on("click", "tr", function()
             {
                 tableTrTouched = $(this);
-                $('.data-note-tr').removeClass('activarFila');
+                $('.data-product-tr').removeClass('activarFila');
                 $(this).addClass('activarFila');
 
-                $('#id-note-to-show').val($(this).attr('data-note'));
+                $('#id-product-to-show').val($(this).attr('data-product'));
 
                 // Enviar id de la nota para eliminar
-                $('#id-note-to-delete').val($(this).attr('data-note'));
+                $('#id-product-to-delete').val($(this).attr('data-product'));
                 $('#btn-group-to-note').show();
 
-                var form = $('#form-note-to-show');
+                var form = $('#form-product-to-show');
                 var datos = form.serializeArray();
                 var route = form.attr('action');
 
@@ -109,11 +127,11 @@ function productCreateUpdate(result) {
                     {
                         // console.log(result);
                         // Agregar datos de la nota consultada al contenedor derecho
-                        continaerNoteShow.html('<div class="block-content-info">' + result.note[0].content + '</div>');
+                        continaerProductShow.html('<div class="block-content-info">' + result.note[0].content + '</div>');
 
-                        // Agregar datos de la nota seleccionada al formulario de actualización
-                        $('#id-note-to-update').val(result.note[0].id);
-                        $('#content-note-to-update').val(result.note[0].content);
+                        // Agregar datos de la nota seleccionada al formulario de actualizaciï¿½n
+                        $('#id-product-to-update').val(result.product[0].id);
+                        $('#content-product-to-update').val(result.product[0].content);
 
                     }
 
@@ -134,51 +152,49 @@ function productCreateUpdate(result) {
          * Actualizar una nota de la lista de notas
          * @constructor
          */
-        UpdateNote: function()
-        {
-            $('#update-actual-note').click( function()
-            {
-                var form = $('#form-note-to-update');
-                var datos = form.serializeArray();
+        UpdateProduct: function() {
+            $('#update-product').click( function() {
+                if ( validateGroup(".form-group-validate-update") == -1 )
+                    initUpdateProduct();
+            });
+
+            function initUpdateProduct() {
+                var form = $('#form-product-update');
                 var route = form.attr('action');
 
                 $.ajax({
                     url:        route,
-                    type:       'PUT',
+                    type:       'POST',
                     dataType:   'json',
-                    async:      false,
-                    data:       datos,
+                    // async:   false,
 
-                    success: function( result )
-                    {
-                        // console.log(result);
-                        hideShowAlert('msj-success', result.message);
-                        containerNotes.prepend( noteCreateUpdate(result) );
+                    data:new FormData( $('#form-product-update')[0] ),
+                    contentType: false,
+                    processData: false,
 
-                        // Agregar datos de la nota consultada al contenedor derecho
-                        continaerNoteShow.html('<div class="block-content-info">' + result.note.content + '</div>');
+                    beforeSend: function(){
+                        $('.core-loader').show();
+                    },
 
-                        // Agregar datos de la nota seleccionada al formulario de actualización
-                        $('#id-note-to-update').val(result.note.id);
-                        $('#content-note-to-update').val(result.note.content);
-
-                        // Mostrar mensaje y cerrar modal
+                    success: function (result) {
+                        $('.core-loader').hide();
                         $('.close').click();
+                        document.getElementById("form-product-update").reset();
 
-                        // Quitar nota de la vista
-                        tableTrTouched.fadeOut();
+                        tiendaOldContainerToHide.hide();
                     }
 
-                }).fail(function( jqXHR, textStatus ) {
+                }).fail(function (jqXHR, textStatus) {
+                    $('.core-loader').hide();
+
                     $('#msj-danger-state').empty();
 
-                    $(jqXHR).each(function(key,error)
-                    {
+                    $(jqXHR).each(function (key, error) {
                         hideShowAlert('msj-danger', 'Ocurrio un problema');
                     });
 
                 });
-            });
+            }
 
         },
 
@@ -186,10 +202,10 @@ function productCreateUpdate(result) {
          * Eliminar una nota
          * @constructor
          */
-        DeleteNote: function() {
+        DeleteProduct: function() {
 
             // Mostrar modal global de eliminar
-            $('#btn-delete-note').click( function() {
+            $('#btn-delete-product').click( function() {
                 $('#modal-delete').fadeIn();
                 $('.notificacion-text').addClass('in');
             });
@@ -206,7 +222,7 @@ function productCreateUpdate(result) {
                 $('.notificacion-text').removeClass('in');
                 $('#modal-delete').fadeOut();
 
-                var form = $('#form-note-to-delete');
+                var form = $('#form-product-to-delete');
                 var datos = form.serializeArray();
                 var route = form.attr('action');
 
@@ -226,8 +242,8 @@ function productCreateUpdate(result) {
 
                         // Quitar nota de la vista
                         tableTrTouched.fadeOut();
-                        $('#btn-group-to-note').hide();
-                        continaerNoteShow.html('<div id="msg-vacio">Ninguna nota seleccionada.</div>');
+                        $('#btn-group-to-product').hide();
+                        continaerProductShow.html('<div id="msg-vacio">Ningun producto seleccionado.</div>');
                     }
 
                 }).fail(function( jqXHR, textStatus ) {
@@ -245,20 +261,20 @@ function productCreateUpdate(result) {
 
         SearchAndListAllNotes: function() {
 
-            // Llama al método buscarUnoTodoNote cuando se teclea en el buscador
+            // Llama al mï¿½todo buscarUnoTodoNote cuando se teclea en el buscador
             $('#core-search-group input').keyup( function() {
-                buscarUnoTodoNote();
+                buscarUnoTodoProduct();
             });
 
-            // Llama al método buscarUnoTodoNote cuando se le da click
+            // Llama al mï¿½todo buscarUnoTodoNote cuando se le da click
             // Al estar el campo de busqueda vacio, traera toda la data
-            $('#btn-list-all-notes').click( function() {
+            $('#btn-list-all-products').click( function() {
                 $('#core-search-group input').val('');
-                buscarUnoTodoNote();
+                buscarUnoTodoProduct();
             });
 
-            function buscarUnoTodoNote() {
-                var form = $('#form-note-to-search');
+            function buscarUnoTodoProduct() {
+                var form = $('#form-product-to-search');
                 var datos = form.serializeArray();
                 var route = form.attr('action');
 
@@ -270,24 +286,24 @@ function productCreateUpdate(result) {
 
                     success: function( result) {
 
-                        containerNotes.empty();
+                        containerProducts.empty();
                         var count = 0;
                         $( result['notes']).each( function(key, value) {
                             count++;
-                            containerNotes.prepend(
-                                '<tr class="data-note-tr" data-note="' + value.id + '">' +
+                            containerProducts.prepend(
+                                '<tr class="data-product-tr" data-product="' + value.id + '">' +
                                 '<td class="container-list-point">' +
                                 '<div></div><div></div><div></div></td>' +
                                 '<td>' +
-                                '<div class="list-note-content">' + value.content.substring(0, 40) + '...</div>' +
-                                '<span class="list-note-date-update">' + value.updated_at + '</span>' +
+                                '<div class="list-product-content">' + value.content.substring(0, 40) + '...</div>' +
+                                '<span class="list-product-date-update">' + value.updated_at + '</span>' +
                                 '</td>' +
                                 '</tr>'
                             );
                         });
 
                         if (count == 0)
-                            containerNotes.html('<div id="msg-list-vacio">Ninguna coincidencia.</div>');
+                            containerProducts.html('<div id="msg-list-vacio">Ninguna coincidencia.</div>');
 
                     }
                 }).fail( function( result ) {

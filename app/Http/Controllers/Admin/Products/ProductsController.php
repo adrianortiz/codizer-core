@@ -3,16 +3,16 @@
 namespace App\Http\Controllers\Admin\Products;
 
 use App\EmpresaHasProducto;
-use App\Fabricante;
 use App\Facades\Core;
-use App\Img_product;
-use App\Product;
-use App\Tienda;
+use App\ImgProduct;
+use App\Producto;
 use App\TiendaHasProducto;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\URL;
 
 class ProductsController extends Controller
 {
@@ -46,7 +46,8 @@ class ProductsController extends Controller
 
         Core::isRouteValid($userPerfil[0]->perfil_route);
 
-        return view('admin.products.products', compact('perfil', 'contacto', 'userPerfil', 'userContacto','fabricantesList','ofertasList','categoriasList'));
+        return view('admin.products.products',
+            compact('perfil', 'contacto', 'userPerfil', 'userContacto','fabricantesList','ofertasList','categoriasList', 'idEmpresa', 'idTienda'));
     }
 
     /**
@@ -65,42 +66,44 @@ class ProductsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request , $idEmpresa , $idTienda )
-
+    public function store(Request $request )
     {
-
         if ($request->ajax()) {
 
-
-            $producto = new Product([
-                'codigo_producto'=>$request['codigo_producto'],
-                'cantidad_disponible'=>$request['cantidad_disponible'],
-                'nombre'=>$request['nombre'],
-                'precio'=>$request['precio'],
-                'des_producto'=>$request['desc_producto'],
-                'estado'=>$request['estado'],
-                'fabricante_id'=>$request['fabricante_id'],
-                'oferta_id'=>$request['oferta_id'],
-                'users_id'=>$request['users_id']
-            ]);
-            $producto->save();
-
-
-            $filePhotoProduct = $request->file('logo');
-            $namePhotoProduct = 'company-'.\Auth::user()->id . Carbon::now()->second . $filePhotoProduct->getClientOriginalName();
+            $filePhotoProduct = $request->file('img');
+            $namePhotoProduct = 'product-'.\Auth::user()->id . Carbon::now()->second . $filePhotoProduct->getClientOriginalName();
             \Storage::disk('photo_product')->put($namePhotoProduct, \File::get($filePhotoProduct));
 
-            $photoProducto = new Img_product([
+            /*
+            $producto = new Producto([
+                'codigo_producto'       => $request['codigo_producto'],
+                'cantidad_disponible'   => $request['cantidad_disponible'],
+                'nombre'                => $request['nombre'],
+                'precio'                => $request['precio'],
+                'desc_producto'         => $request['desc_producto'],
+                'estado'                => $request['estado'],
+                'fabricante_id'         => $request['fabricante_id'],
+                'oferta_id'             => $request['oferta_id'],
+                'users_id'              => \Auth::user()->id
+            ]);
+            */
+
+            $producto = new Producto();
+            $producto->fill($request->all());
+            $producto->users_id = \Auth::user()->id;
+            $producto->save();
+
+            $photoProducto = new ImgProduct([
                 'img'           =>  $namePhotoProduct,
                 'producto_id'   =>  $producto->id,
-                'principal'     =>  '0'
+                'principal'     =>  '1'
             ]);
             $photoProducto->save();
 
-            $empresa_has_producto= new EmpresaHasProducto(
+            $empresa_has_producto = new EmpresaHasProducto(
                 [
                     //$empresa = Empresa::where('users_id', \Auth::user()->id)->first(),
-                    'empresa_id'    =>  $idEmpresa->id,
+                    'empresa_id'    =>  $request['empresa_id'],
                     'producto_id'   =>  $producto->id
                 ]
             );
@@ -109,7 +112,7 @@ class ProductsController extends Controller
 
             $tienda_has_producto= new TiendaHasProducto(
                 [
-                    'tienda_id'    =>  $idTienda->id,
+                    'tienda_id'    =>  $request['tienda_id'],
                     'producto_id'   =>  $producto->id
                 ]
             );
@@ -120,10 +123,15 @@ class ProductsController extends Controller
             else
                 $message = 'No se pudo agregar el producto.';
 
+            // Obtener nombre y ruta de la foto del producto
+            $photoProducto->img = URL::to('/') . '/media/photo-product/' . $photoProducto->img;
+
             return response()->json([
-                'message' => $message,
-                'producto' => $producto
+                'message'               => $message,
+                'producto'              => $producto,
+                'photoProducto'         => $photoProducto,
             ]);
+
         } else {
             abort(404);
         }

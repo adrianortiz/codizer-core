@@ -158,6 +158,13 @@ class TiendaController extends Controller
     }
 
 
+    /**
+     * Este método es para ver la página web de una tienda, sus productos etc
+     * También controlamos la plantilla que tendra la tienda
+     *
+     * @param $tiendaRoute
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function verTienda($tiendaRoute) {
 
         Core::isTiendaRouteValid( $tiendaRoute );
@@ -167,15 +174,32 @@ class TiendaController extends Controller
             $userPerfil = Core::getUserPerfil();
         }
 
+
         $tienda = Tienda::where('store_route', $tiendaRoute)->first();
 
-        if ($tienda->store_route_platilla == 'basic') {
-            return view('plantillas.basic.index', compact('tienda', 'userContacto', 'userPerfil'));
+        if( $tienda->estado == 0 ) {
+            return view('plantillas.cerrado.index', compact('tienda'));
+        } else {
+
+            $productos = Core::getAllProductosByTiendaRoute($tiendaRoute, '1');
+
+            if ($tienda->store_route_platilla == 'basic') {
+                return view('plantillas.basic.index', compact('tienda', 'userContacto', 'userPerfil', 'productos'));
+            }
+
         }
 
     }
 
 
+    /**
+     * Método para mostra la información de la tienda y su empresa
+     * Plantilla de la tienda así como validar que la
+     * tienda este activa para el publico
+     *
+     * @param $tiendaRoute
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function verTiendaInfo($tiendaRoute) {
 
         Core::isTiendaRouteValid( $tiendaRoute );
@@ -187,9 +211,20 @@ class TiendaController extends Controller
 
         $tienda = Tienda::where('store_route', $tiendaRoute)->first();
 
-        if ($tienda->store_route_platilla == 'basic') {
-            return view('plantillas.basic.info-plantilla', compact('tienda', 'userContacto', 'userPerfil'));
+        if( $tienda->estado == 0 ) {
+            return view('plantillas.cerrado.index', compact('tienda'));
+        } else {
+            $empresa = Empresa::where('id', $tienda->empresa_id)->first();
+
+            if ($tienda->store_route_platilla == 'basic') {
+                return view('plantillas.basic.info-plantilla', compact('tienda', 'empresa', 'userContacto', 'userPerfil'));
+            }
         }
+
+
+    }
+
+    public function verProductoInfo($tiendaRoute, $idProduct) {
 
     }
 }

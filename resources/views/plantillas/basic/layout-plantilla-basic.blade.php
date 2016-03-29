@@ -19,7 +19,7 @@
     <div class="user-menu">
 
         <ul class="nav navbar-nav navbar-left">
-            <li><a href="{{ route('login') }}">Codizer Shop</a></li>
+            <li><a href="{{ route('index.view.page') }}">Codizer Shop</a></li>
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
@@ -58,8 +58,8 @@
 
 <nav>
     <ul>
-        <li><a href="{{ route('store.front', $tienda->store_route) }}" class="menu-selected">Home</a></li>
-        <li><a href="{{ route('store.front.info', $tienda->store_route) }}">Acerca de</a></li>
+        <li><a id="tag-home" href="{{ route('store.front', $tienda->store_route) }}">Home</a></li>
+        <li><a id="tag-info" href="{{ route('store.front.info', $tienda->store_route) }}">Acerca de</a></li>
         <li><a href="#">Home</a></li>
         <li><a href="#">Home</a></li>
     </ul>
@@ -70,8 +70,10 @@
 
 
 <footer>
-    <strong>Footer</strong>
-    <span>© Codizer - 2016 </span>
+    <div>
+        <strong>{{ $tienda->nombre }}</strong>
+        <span>© Codizer - 2016 </span>
+    </div>
 </footer>
 
 @yield('modals')

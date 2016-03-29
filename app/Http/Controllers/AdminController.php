@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Perfil;
 use App\User;
+use App\UserHasPerfil;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Redirect;
 
 class AdminController extends Controller
 {
@@ -16,7 +19,18 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin/panel');
+
+        /**
+         * SE RESCRIBIO LA RUTA PARA ADMIN
+         * PARA FUNCIONAR CON CORE
+         */
+        // Identificamos el id del usuario y buscamos su ruta de perfil
+        $perfilId = UserHasPerfil::where('users_id',\Auth::user()->id)->value('perfil_id');
+        $perfilRoute = Perfil::where('id', $perfilId)->value('perfil_route');
+
+        return Redirect::route('perfil', array('nick' => $perfilRoute));
+
+        // return view('admin/panel');
     }
 
     /**

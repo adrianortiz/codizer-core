@@ -22,10 +22,10 @@ Route::get('lang/{lang}', function($lang) {
     'lang' => 'en|es'
 ]);
 
-Route::get('/', function() {
-    // return view('auth.login');
-    return view('welcome');
-});
+Route::get('/', [
+    'uses'  => 'IndexController@index',
+    'as'    => 'index.view.page'
+]);
 
 // Authentication routes...
 Route::get('login', [
@@ -78,6 +78,11 @@ Route::get('tienda/{tiendaRoute}/info', [
     'as'    => 'store.front.info'
 ]);
 
+// Mostrar un producto
+Route::get('tienda/{tiendaRoute}/product/{idProduct}/show', [
+    'uses'  => 'Admin\Tienda\TiendaController@verProductoInfo',
+    'as'    => 'store.front.product.show'
+]);
 
 
 /*
