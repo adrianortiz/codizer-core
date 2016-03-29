@@ -315,7 +315,11 @@ class Core
             ->join('empresa_has_oferta', 'empresa.id', '=', 'empresa_has_oferta.empresa_id')
             ->join('oferta', 'empresa_has_oferta.oferta_id', '=', 'oferta.id')
             ->where('empresa.id', $empresaId)
-            ->lists('oferta.regla_porciento', 'oferta.id');
+            ->lists(DB::raw('concat(oferta.tipo_oferta, " ", oferta.regla_porciento, "%") AS regla_porciento'), 'oferta.id');
+
+
+
+
     }
 
     /**
