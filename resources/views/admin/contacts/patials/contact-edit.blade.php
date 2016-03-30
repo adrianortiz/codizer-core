@@ -21,8 +21,10 @@
                 <div class="form-group tab-pane active" id="info-ud">
 
                     <div class="container-show-info-contact-img-b">
-                        <img id="show-info-contact-foto" src="{{ asset('/media/photo-perfil/unknow.png') }}">
-                        <a id="show-perfil-contact-link" href="#" class="btn btn-sm-radius btn-shadow-blue">Seleccionar foto</a>
+                        <label for="foto" class="btn btn-sm-radius">
+                            <img id="show-info-contact-foto-ud" class="img-rounded" src="{{ asset('/media/photo-perfil/unknow.png') }}">
+                            {!! Form::file('foto', ['accept' => 'image/jpg,image/png', 'id' => 'foto-up', 'class' => 'form-control form-with-100', 'style' => 'display:none']) !!}
+                        </label>
                     </div>
 
                     <div class="container-show-info-contact-list-c">
@@ -37,8 +39,8 @@
 
                         <label for="sexo">Sexo</label>
                         <div class="btn-group show-info-contact" id="radio-btns" data-toggle="buttons">
-                            <label class="btn btn-default btn-xs active">Masculino{!! Form::radio('sexo-ud', 'Masculino', true, ['id' => 'Masculino-ud', 'class' => 'form-control']) !!}</label>
-                            <label class="btn btn-default btn-xs">Femenino{!! Form::radio('sexo-ud', 'Femenino', false, ['id' => 'Femenino-ud', 'class' => 'form-control']) !!}</label>
+                            <label id="btn-m" class="btn btn-primary btn-xs active">Masculino{!! Form::radio('sexo-ud', 'Masculino', true, ['id' => 'Masculino-ud', 'class' => 'form-control']) !!}</label>
+                            <label id="btn-f" class="btn btn-info btn-xs">Femenino{!! Form::radio('sexo-ud', 'Femenino', false, ['id' => 'Femenino-ud', 'class' => 'form-control']) !!}</label>
                         </div>
 
                         <label for="f_nacimiento">Fecha de nacimiento</label>
@@ -115,7 +117,7 @@
     </div>
 
     <div class="container-list-something" id="show-info-contact-desc">
-        <button id="btn-cancel-contact" type="button" class="btn btn-default btn-sm btn-sm-radius">Cancelar</button>
+        <button id="btn-cancel-update" type="button" class="btn btn-default btn-sm btn-sm-radius">Cancelar</button>
         <button id="btn-update-contact" type="button" class="btn btn-primary btn-sm btn-sm-radius btn-shadow-blue right">Actualizar</button>
     </div>
 </div>

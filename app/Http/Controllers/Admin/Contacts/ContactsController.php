@@ -11,9 +11,9 @@ use App\User;
 use App\UserHasAgendaContactos;
 use App\Facades\Core;
 use App\Http\Requests;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 
 class ContactsController extends Controller
@@ -62,11 +62,19 @@ class ContactsController extends Controller
      */
     public function store(Request $request)
     {
+        $foto = 'unknow.png';
+        if ($request->file('foto'))
+        {
+            // Guardar la nueva imagen en el disco
+            $foto = 'contact-' .$request -> nombre. '_' .$request -> ap_paterno. '_' .$request -> ap_materno. '_' .Carbon::now()->second . $request->file('foto')->getClientOriginalName();
+            \Storage::disk('photo')->put($foto, \File::get($request->file('foto')));
+        }
+
         if ($request->ajax()) {
 
             // Contacto a registrar
             $contact = new Contacto([
-                'foto'          => 'unknow.png',
+                'foto'          => $foto,
                 'nombre'        => $request -> nombre,
                 'ap_paterno'    => $request -> ap_paterno,
                 'ap_materno'    => $request -> ap_materno,

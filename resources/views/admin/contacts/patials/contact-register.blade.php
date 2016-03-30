@@ -21,8 +21,8 @@
                 <div class="form-group tab-pane active" id="info">
 
                     <div class="container-show-info-contact-img-b">
-                        <img id="show-info-contact-foto" src="{{ asset('/media/photo-perfil/unknow.png') }}">
-                        <a id="show-perfil-contact-link" href="#" class="btn btn-sm-radius btn-shadow-blue">Seleccionar foto</a>
+                        <label for="foto">Foto</label>
+                        {!! Form::file('foto', ['accept' => 'image/jpg,image/png', 'id' => 'foto', 'class' => 'form-control form-with-100']) !!}
                     </div>
 
                     <div class="container-show-info-contact-list-c">
