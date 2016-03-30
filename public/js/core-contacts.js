@@ -8,6 +8,7 @@ var continaerContact = $('#info-contact');
 
 var contacto = null;
 
+
 // Retorna la fila de un contacto creado o actulizado
 function contactNewEdit(result) {
     return '<tr class="data-contacto-tr" data-contacto="' + result.contacto.id + '">' +
@@ -20,12 +21,10 @@ function contactNewEdit(result) {
         '</tr>';
 }
 
-function emptyAndRefillFieldsToUpdate(){
+function emptyAndRefillFieldsToUpdate() {
     $('#nombre-ud').empty();
     $('#ap_paterno-ud').empty();
     $('#ap_materno-ud').empty();
-
-    $('input:radio[name=sexo-ud]').filter('[value=Masculino]').prop('checked', true);
 
     $('#f_nacimiento-ud').empty();
     $('#profesion-ud').empty();
@@ -50,11 +49,21 @@ function emptyAndRefillFieldsToUpdate(){
     $('#ap_paterno-ud').val(contacto[0].ap_paterno);
     $('#ap_materno-ud').val(contacto[0].ap_materno);
 
-    $('#show-info-contact-foto').attr('src','/media/photo-perfil/'+ contacto[0].foto);
+    $('#show-info-contact-foto-ud').attr('src', '/media/photo-perfil/' + contacto[0].foto);
 
-    $('input:radio[name=sexo-ud]').filter('[value='+contacto[0].sexo+']').prop('checked', true);
+    if (contacto[0].sexo == 'Masculino') {
+        $('#btn-f').removeClass('active');
+        $('#btn-m').addClass("active");
+        //$('#Masculino-ud').prop( "checked", true );
+    } else {
+        $('#btn-m').removeClass('active');
+        $('#btn-f').addClass("active");
+    }
+    $('#'+contacto[0].sexo+'-ud').prop( "checked", true );
 
-    $('#f_nacimiento-ud').val($.formatDate('d/m/Y', contacto[0].f_nacimiento));
+    var fecha = new Date(contacto[0].f_nacimiento);
+    $('#f_nacimiento-ud').val(fecha.toISOString().slice(0,10));
+
     $('#profesion-ud').val(contacto[0].profesion);
     $('#estado_civil-ud').val(contacto[0].estado_civil);
     $('#desc_contacto-ud').val(contacto[0].desc_contacto);
@@ -119,34 +128,47 @@ function emptyAndRefillFieldsToShow(){
     $('#show-info-contact-url').append(contacto[0].url);
 }
 
-$(document).ready(function(){
+function hideElements(){
     $('#form-register').hide();
     $('#form-edit').hide();
     $('#info-contact').hide();
+    $('#btn-edit-contact').show();
     $('#btns-group-to-contact').hide();
+    document.getElementById("form-contact-to-create").reset();
+    document.getElementById("form-contact-to-update").reset();
+}
+
+$(document).ready(function() {
+
+    hideElements();
 
     $('#btn-new-contact').click(function(){
-        $('#msg-list-vacio').hide();
+        hideElements();
         $('#form-register').show();
+        $('#msg-list-vacio').hide();
         $('#btn-new-contact').hide();
-        $('#form-edit').hide();
-        $('#info-contact').hide();
-        $('#btns-group-to-contact').hide();
     });
 
     $('#btn-edit-contact').click(function(){
+        hideElements();
+        $('#btns-group-to-contact').show();
+        $('#btn-edit-contact').hide();
         $('#form-edit').show();
-        emptyAndRefillFieldsToUpdate();
-        $('#form-register').hide();
-        $('#info-contact').hide();
         $('#btn-new-contact').show();
+        emptyAndRefillFieldsToUpdate();
     });
 
     $('#btn-cancel-contact').click(function(){
+        hideElements();
         $('#msg-list-vacio').show();
-        $('#form-register').hide();
         $('#btn-new-contact').show();
-        document.getElementById("form-contact-to-create").reset();
+    });
+
+    $('#btn-cancel-update').click(function (){
+        hideElements();
+        $('#msg-list-vacio').show();
+        $('#btn-new-contact').show();
+        $('#btn-edit-contact').show();
     });
 
     //$('#btn-save-contact').click(function(){
@@ -179,8 +201,11 @@ $(document).ready(function(){
                 url:        route,
                 type:       'POST',
                 dataType:   'json',
-                async:      false,
-                data:       datos,
+                    // async:   false,
+
+                data:new FormData( $('#form-contact-to-create')[0] ),
+                contentType: false,
+                processData: false,
 
                 success: function( result ) {
                     // console.log(result);
@@ -240,6 +265,7 @@ $(document).ready(function(){
                     {
                         contacto = result.contacto;
                         $('#msg-list-vacio').hide();
+                        hideElements();
                         $('#btns-group-to-contact').show();
                         continaerContact.show();
 
@@ -277,9 +303,8 @@ $(document).ready(function(){
         {
             $('#btn-update-contact').click( function()
             {
-                emptyAndRefillFieldsToUpdate();
-
-                //alert(contacto.id);
+                alert($('input:radio[name=sexo-ud]:checked').val());
+                alert($('#f_nacimiento-ud').val());
                 //var form = $('#form-contact-to-update');
                 //var datos = form.serializeArray();
                 //var route = form.attr('action');
@@ -289,7 +314,10 @@ $(document).ready(function(){
                 //    type:       'PUT',
                 //    dataType:   'json',
                 //    async:      false,
-                //    data:       datos,
+                //
+                //    data:new FormData( $('#form-contact-to-update')[0] ),
+                //    contentType: false,
+                //    processData: false,
                 //
                 //    success: function( result )
                 //    {

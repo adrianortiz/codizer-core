@@ -365,6 +365,26 @@ class Core
             ->get();
     }
 
+    /**
+     * Obtener todos los productos de una tienda y listarlos
+     * en el administrador de productos. Estos productos
+     * pueden o no estar activos para editar
+     *
+     * @param $idTienda
+     * @return mixed
+     */
+    public function getAllProductosByIdTienda( $idTienda ) {
+
+        return DB::table('tienda')
+            ->join('tienda_has_producto', 'tienda.id', '=', 'tienda_has_producto.tienda_id')
+            ->join('producto', 'producto.id', '=', 'tienda_has_producto.producto_id')
+            ->join('oferta', 'producto.oferta_id', '=', 'oferta.id')
+            ->join('img_producto', 'producto.id', '=', 'img_producto.producto_id')
+            ->where('tienda.id', $idTienda)
+            ->where('img_producto.principal', '1')
+            ->select('producto.*', 'tienda_has_producto.producto_id', 'oferta.*', 'img_producto.*')
+            ->get();
+    }
 
     /**
      * Obtener un producto en base al id del producto y id de la tienda
@@ -410,6 +430,18 @@ class Core
         else
             return $result = (double)($price - $valor);
 
+    }
+
+    public function getEmpresaById($empresaId){
+        return DB::table('empresa')
+            ->where('id', '=' ,$empresaId)
+            ->first();
+    }
+
+    public function getTiendaById($tiendaId){
+        return DB::table('tienda')
+            ->where('id', '=' ,$tiendaId)
+            ->first();
     }
 
 }
