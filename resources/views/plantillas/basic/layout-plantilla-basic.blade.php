@@ -52,16 +52,14 @@
 
     </div>
     <div class="title-container">
-        <a href="#" class="title-store">{{ $tienda->nombre }}</a>
+        <a href="{{ route('store.front', $tienda->store_route) }}" class="title-store">{{ $tienda->nombre }}</a>
     </div>
 </header>
 
 <nav>
     <ul>
-        <li><a id="tag-home" href="{{ route('store.front', $tienda->store_route) }}">Home</a></li>
+        <li><a id="tag-home" href="{{ route('store.front', $tienda->store_route) }}">Inicio</a></li>
         <li><a id="tag-info" href="{{ route('store.front.info', $tienda->store_route) }}">Acerca de</a></li>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Home</a></li>
     </ul>
 </nav>
 

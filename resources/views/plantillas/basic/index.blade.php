@@ -34,14 +34,17 @@
             @for($i = 0; $i < 3; $i++)
 
                 <div class="product-container">
-                    <a href="#">
+                    <a href="{{ route('store.front.product.show', [$tienda->store_route, $productos[$i]->producto_id]) }}">
                         <img src="{{ asset('/media/photo-product/' . $productos[$i]->img) }}">
                     </a>
 
                     <div class="lo-nuevo-info">
-                        <div><a href="#">{{ $productos[$i]->nombre }}</a></div>
-                        <div><a href="#">${{ $productos[$i]->precio }} <span>{{ $productos[$i]->tipo_oferta .' '.$productos[$i]->regla_porciento }}%</span></a></div>
-                        <div><a href="#" id="btn-view-modal" class="btn btn-sm" data-toggle="modal" data-target="#modalView">Ver producto</a> <a href="#" class="btn btn-sm">Agregar al carrito</a></div>
+                        <div><a href="{{ route('store.front.product.show', [$tienda->store_route, $productos[$i]->producto_id]) }}">{{ $productos[$i]->nombre }}</a></div>
+                        <div><a href="{{ route('store.front.product.show', [$tienda->store_route, $productos[$i]->producto_id]) }}">${{ $productos[$i]->precio }} <span>{{ $productos[$i]->tipo_oferta .' '.$productos[$i]->regla_porciento }}%</span></a></div>
+                        <div>
+                            <a href="#" id="btn-view-modal" class="btn btn-sm" data-toggle="modal" data-target="#modalView">Ver producto</a>
+                            <a href="#" class="btn btn-sm">Agregar al carrito</a>
+                        </div>
                     </div>
                 </div>
 
@@ -67,14 +70,17 @@
             @foreach( $productos as $producto )
 
                 <div class="product-container">
-                    <a href="#">
+                    <a href="{{ route('store.front.product.show', [$tienda->store_route, $producto->producto_id]) }}">
                         <img src="{{ asset('/media/photo-product/' . $producto->img) }}">
                     </a>
 
                     <div class="lo-nuevo-info">
-                        <div><a href="#">{{ $producto->nombre }}</a></div>
-                        <div><a href="#">${{ $producto->precio }} <span>{{ $producto->tipo_oferta .' '.$producto->regla_porciento }}%</span></a></div>
-                        <div><a href="#" id="btn-view-modal" class="btn btn-sm" data-toggle="modal" data-target="#modalView">Ver producto</a> <a href="#" class="btn btn-sm">Agregar al carrito</a></div>
+                        <div><a href="{{ route('store.front.product.show', [$tienda->store_route, $producto->producto_id]) }}">{{ $producto->nombre }}</a></div>
+                        <div><a href="{{ route('store.front.product.show', [$tienda->store_route, $producto->producto_id]) }}">${{ $producto->precio }} <span>{{ $producto->tipo_oferta .' '.$producto->regla_porciento }}%</span></a></div>
+                        <div>
+                            <a href="#" id="btn-view-modal" class="btn btn-sm" data-toggle="modal" data-target="#modalView">Ver producto</a>
+                            <a href="#" class="btn btn-sm">Agregar al carrito</a>
+                        </div>
                     </div>
                 </div>
 
