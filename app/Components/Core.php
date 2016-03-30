@@ -432,4 +432,16 @@ class Core
 
     }
 
+    public function getEmpresaById($empresaId){
+        return DB::table('empresa')
+            ->where('id', '=' ,$empresaId)
+            ->first();
+    }
+
+    public function getTiendaById($tiendaId){
+        return DB::table('tienda')
+            ->where('id', '=' ,$tiendaId)
+            ->first();
+    }
+
 }
