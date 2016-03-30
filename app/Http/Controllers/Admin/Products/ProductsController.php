@@ -6,6 +6,7 @@ use App\EmpresaHasProducto;
 use App\Facades\Core;
 use App\ImgProduct;
 use App\Producto;
+use App\ProductoHasCategoria;
 use App\TiendaHasProducto;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -35,10 +36,15 @@ class ProductsController extends Controller
         $perfil = $userPerfil;
         $contacto = $userContacto;
 
+
         // Obtener todos los fabricantes de la empresa N
         $fabricantesList  = Core::getFabricantesByIdEmpresa( $idEmpresa );
         $ofertasList    =   Core::getOfertasByIdEmpresa($idEmpresa);
         $categoriasList =   Core::getCategoriasByIdEmpresa($idEmpresa);
+        $products  = Core::getAllProductosByIdTienda($idTienda);
+
+
+
 
         // Nos aseguramos de que la ruta sea la del usuario logueado
         if ( $nameFirstName != $userPerfil[0]->perfil_route)
@@ -47,7 +53,7 @@ class ProductsController extends Controller
         Core::isRouteValid($userPerfil[0]->perfil_route);
 
         return view('admin.products.products',
-            compact('perfil', 'contacto', 'userPerfil', 'userContacto','fabricantesList','ofertasList','categoriasList', 'idEmpresa', 'idTienda'));
+            compact('products', 'perfil', 'contacto', 'userPerfil', 'userContacto','fabricantesList','ofertasList','categoriasList', 'idEmpresa', 'idTienda'));
     }
 
     /**
@@ -118,7 +124,15 @@ class ProductsController extends Controller
             );
             $tienda_has_producto->save();
 
-            if ( $tienda_has_producto->save() )
+            $producto_has_categoria  = new ProductoHasCategoria(
+                [
+                    'categoria_id'    =>  $request['categoria'],
+                    'producto_id'   =>  $producto->id
+                ]
+            );
+            $producto_has_categoria->save();
+
+            if (  $producto->save() && $photoProducto  && $empresa_has_producto &&$tienda_has_producto->save() &&  $producto_has_categoria)
                 $message = 'Producto agregado.';
             else
                 $message = 'No se pudo agregar el producto.';
@@ -143,9 +157,16 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
-        //
+        if ( $request->ajax() ) {
+
+            $producto = Producto::findOrFail($request['id']);
+
+            return response()->json([
+                'producto' => $producto
+            ]);
+        }
     }
 
     /**

@@ -198,6 +198,11 @@ class Core
             ->get();
     }
 
+    public function getCategoriasByIdProduct( $idProduct )
+    {
+
+    }
+
     /**
      * Validar que la ruta de la tienda sea unica
      * Si es 0 significa que no existe y es valida
@@ -356,8 +361,75 @@ class Core
             ->where('tienda.store_route', $storeRoute)
             ->where('producto.estado', $estadoProduct)
             ->where('img_producto.principal', '1')
-            ->select('producto.*', 'oferta.*', 'img_producto.*')
+            ->select('producto.*', 'tienda_has_producto.producto_id', 'oferta.*', 'img_producto.*')
             ->get();
+    }
+
+    /**
+     * Obtener todos los productos de una tienda y listarlos
+     * en el administrador de productos. Estos productos
+     * pueden o no estar activos para editar
+     *
+     * @param $idTienda
+     * @return mixed
+     */
+    public function getAllProductosByIdTienda( $idTienda ) {
+
+        return DB::table('tienda')
+            ->join('tienda_has_producto', 'tienda.id', '=', 'tienda_has_producto.tienda_id')
+            ->join('producto', 'producto.id', '=', 'tienda_has_producto.producto_id')
+            ->join('oferta', 'producto.oferta_id', '=', 'oferta.id')
+            ->join('img_producto', 'producto.id', '=', 'img_producto.producto_id')
+            ->where('tienda.id', $idTienda)
+            ->where('img_producto.principal', '1')
+            ->select('producto.*', 'tienda_has_producto.producto_id', 'oferta.*', 'img_producto.*')
+            ->get();
+    }
+
+    /**
+     * Obtener un producto en base al id del producto y id de la tienda
+     * Solo retorna un producto activo
+     * con su imagen activa
+     *
+     * @param $storeRoute
+     * @param $idProduct
+     * @return mixed
+     */
+    public function getProductoById( $idTienda, $idProduct )
+    {
+        return DB::table('tienda')
+            ->join('tienda_has_producto', 'tienda.id', '=', 'tienda_has_producto.tienda_id')
+            ->join('producto', 'producto.id', '=', 'tienda_has_producto.producto_id')
+            ->join('oferta', 'producto.oferta_id', '=', 'oferta.id')
+            ->join('fabricante', 'producto.fabricante_id', '=', 'fabricante.id')
+            ->join('img_producto', 'producto.id', '=', 'img_producto.producto_id')
+            ->where('tienda_has_producto.tienda_id', $idTienda)
+            ->where('tienda_has_producto.producto_id', $idProduct)
+            ->where('producto.estado', '1')
+            ->where('img_producto.principal', '1')
+            ->select('producto.*', 'oferta.*', 'img_producto.*', 'fabricante.nombre AS nombre_fabricante')
+            ->first();
+    }
+
+    /**
+     * Obtener el precio final de un producto, aplicando su porcentaje de descuento
+     * o acumulación del mismo.
+     *
+     * @param $price
+     * @param $incrementDecrement '+' or '-'
+     * @param $rulePercent
+     * @return float
+     */
+    public function getFinalPriceByProduct($price, $incrementDecrement, $rulePercent)
+    {
+        $porcentaje = $rulePercent / 100;
+        $valor = $price * $porcentaje;
+
+        if ($incrementDecrement === '+')
+            return $result = (double)($price + $valor);
+        else
+            return $result = (double)($price - $valor);
+
     }
 
 }

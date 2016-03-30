@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin\Tienda;
 
 use App\Empresa;
 use App\Facades\Core;
+use App\ImgProduct;
+use App\Oferta;
 use App\Tienda;
 use App\UsuarioEmpleadoInfo;
 use Carbon\Carbon;
@@ -85,6 +87,7 @@ class TiendaController extends Controller
 
                 // Obtener nombre y ruta de la foto de la tienda
                 $tienda->foto = URL::to('/') . '/media/photo-store/' . $tienda->foto;
+                $tienda->store_route = URL::to('/') . '/tienda/' . $tienda->store_route;
 
                 return response()->json([
                     'tienda' => $tienda
@@ -150,6 +153,7 @@ class TiendaController extends Controller
 
             // Obtener nombre y ruta de la foto de la tienda
             $tienda->foto = URL::to('/') . '/media/photo-store/' . $tienda->foto;
+            $tienda->store_route = URL::to('/') . '/tienda/' . $tienda->store_route;
 
             return response()->json([
                 'tienda' => $tienda
@@ -226,5 +230,27 @@ class TiendaController extends Controller
 
     public function verProductoInfo($tiendaRoute, $idProduct) {
 
+        Core::isTiendaRouteValid($tiendaRoute);
+
+        if (!Auth::guest() ) {
+            $userContacto = Core::getUserContact();
+            $userPerfil = Core::getUserPerfil();
+        }
+
+        $tienda = Tienda::where('store_route', $tiendaRoute)->first();
+
+        if( $tienda->estado == 0 ) {
+            return view('plantillas.cerrado.index', compact('tienda'));
+        } else {
+
+            $product = Core::getProductoById( $tienda->id, $idProduct );
+            $imgsProduct = ImgProduct::where('producto_id', $product->id)->get();
+            $finalPrice = Core::getFinalPriceByProduct($product->precio, $product->tipo_oferta, $product->regla_porciento);
+
+            if ($tienda->store_route_platilla == 'basic') {
+                return view('plantillas.basic.product', compact('tienda', 'product', 'imgsProduct', 'finalPrice', 'userContacto', 'userPerfil'));
+            }
+
+        }
     }
 }
