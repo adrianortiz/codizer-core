@@ -365,10 +365,26 @@ class Core
             ->get();
     }
 
-<<<<<<< HEAD
+    /**
+     * Obtener todos los productos de una tienda y listarlos
+     * en el administrador de productos. Estos productos
+     * pueden o no estar activos para editar
+     *
+     * @param $idTienda
+     * @return mixed
+     */
     public function getAllProductosByIdTienda( $idTienda ) {
 
-=======
+        return DB::table('tienda')
+            ->join('tienda_has_producto', 'tienda.id', '=', 'tienda_has_producto.tienda_id')
+            ->join('producto', 'producto.id', '=', 'tienda_has_producto.producto_id')
+            ->join('oferta', 'producto.oferta_id', '=', 'oferta.id')
+            ->join('img_producto', 'producto.id', '=', 'img_producto.producto_id')
+            ->where('tienda.id', $idTienda)
+            ->where('img_producto.principal', '1')
+            ->select('producto.*', 'tienda_has_producto.producto_id', 'oferta.*', 'img_producto.*')
+            ->get();
+    }
 
     /**
      * Obtener un producto en base al id del producto y id de la tienda
@@ -381,20 +397,10 @@ class Core
      */
     public function getProductoById( $idTienda, $idProduct )
     {
->>>>>>> d35099a7b7dcc555287efdf95b5fdbfe3034fb89
         return DB::table('tienda')
             ->join('tienda_has_producto', 'tienda.id', '=', 'tienda_has_producto.tienda_id')
             ->join('producto', 'producto.id', '=', 'tienda_has_producto.producto_id')
             ->join('oferta', 'producto.oferta_id', '=', 'oferta.id')
-<<<<<<< HEAD
-            ->join('img_producto', 'producto.id', '=', 'img_producto.producto_id')
-            ->where('tienda.id', $idTienda)
-            ->where('img_producto.principal', '1')
-            ->select('producto.*', 'tienda_has_producto.producto_id','oferta.*', 'img_producto.*')
-            ->get();
-    }
-
-=======
             ->join('fabricante', 'producto.fabricante_id', '=', 'fabricante.id')
             ->join('img_producto', 'producto.id', '=', 'img_producto.producto_id')
             ->where('tienda_has_producto.tienda_id', $idTienda)
@@ -425,6 +431,5 @@ class Core
             return $result = (double)($price - $valor);
 
     }
->>>>>>> d35099a7b7dcc555287efdf95b5fdbfe3034fb89
 
 }
