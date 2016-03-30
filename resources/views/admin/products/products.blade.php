@@ -17,7 +17,7 @@
     <a href="#" class="core-menu-list"><div>{{ $idEmpresa }}</div></a>
 
     <a href="#" class="core-menu-list menu-list-option menu-lis-img">
-        <img src="{{ asset('/media/photo-store/chanel-123.png') }}">
+        <img src="{{ asset('/media/photo-store/chanel-123.png' )}}">
         <div>Chanel</div>
     </a>
 
@@ -70,13 +70,13 @@
         @foreach($products as $product)
             <tr class="data-product-tr" data-product="1">
                 <td>
-                    <img src="{{ asset('/media/photo-product/bolso-rosa-chanel.png') }}">
+                    <img src="{{ asset('/media/photo-product/'. $product->img) }}">
                 </td>
                 <td>
                     <div class="list-product-title">{{$product->nombre}}</div>
-                    <span class="list-product-tags">piel-bolso</span><br/>
+                    <span class="list-product-tags">{{$product->tipo_oferta.$product->regla_porciento.'%' }}</span><br/>
                     <div class="list-product-pz">{{$product->cantidad_disponible}} pz</div>
-                    <div class="list-product-price">{{$product->precio}}</div>
+                    <div class="list-product-price">{{'$+-'.$product->precio}}</div>
                 </td>
             </tr>
         @endforeach

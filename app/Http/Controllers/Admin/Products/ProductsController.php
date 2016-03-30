@@ -6,6 +6,7 @@ use App\EmpresaHasProducto;
 use App\Facades\Core;
 use App\ImgProduct;
 use App\Producto;
+use App\ProductoHasCategoria;
 use App\TiendaHasProducto;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -40,8 +41,9 @@ class ProductsController extends Controller
         $fabricantesList  = Core::getFabricantesByIdEmpresa( $idEmpresa );
         $ofertasList    =   Core::getOfertasByIdEmpresa($idEmpresa);
         $categoriasList =   Core::getCategoriasByIdEmpresa($idEmpresa);
+        $products  = Core::getAllProductosByIdTienda($idTienda);
 
-        $products = Producto::all();
+
 
 
         // Nos aseguramos de que la ruta sea la del usuario logueado
@@ -51,7 +53,7 @@ class ProductsController extends Controller
         Core::isRouteValid($userPerfil[0]->perfil_route);
 
         return view('admin.products.products',
-            compact('totProducts','products', 'perfil', 'contacto', 'userPerfil', 'userContacto','fabricantesList','ofertasList','categoriasList', 'idEmpresa', 'idTienda'));
+            compact('products', 'perfil', 'contacto', 'userPerfil', 'userContacto','fabricantesList','ofertasList','categoriasList', 'idEmpresa', 'idTienda'));
     }
 
     /**
@@ -122,7 +124,15 @@ class ProductsController extends Controller
             );
             $tienda_has_producto->save();
 
-            if ( $tienda_has_producto->save() )
+            $producto_has_categoria  = new ProductoHasCategoria(
+                [
+                    'categoria_id'    =>  $request['categoria'],
+                    'producto_id'   =>  $producto->id
+                ]
+            );
+            $producto_has_categoria->save();
+
+            if (  $producto->save() && $photoProducto  && $empresa_has_producto &&$tienda_has_producto->save() &&  $producto_has_categoria)
                 $message = 'Producto agregado.';
             else
                 $message = 'No se pudo agregar el producto.';
