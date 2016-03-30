@@ -84,6 +84,18 @@ Route::get('tienda/{tiendaRoute}/product/{idProduct}/show', [
     'as'    => 'store.front.product.show'
 ]);
 
+// Mostrar un producto AJAX
+Route::get('tienda/product/show', [
+    'uses'  => 'Admin\Tienda\TiendaController@verProductoInfoAjax',
+    'as'    => 'store.front.product.show.ajax'
+]);
+
+// Agregar al carrito
+Route::post('tienda/product/orden/store', [
+    'uses'  => 'Admin\Orden\OrdenController@store',
+    'as'    => 'store.front.product.orden.store'
+]);
+
 
 /*
  * Indentificar si un usuario esta conectado

@@ -7,6 +7,7 @@ use App\Facades\Core;
 use App\ImgProduct;
 use App\Oferta;
 use App\Tienda;
+use App\TiendaHasProducto;
 use App\UsuarioEmpleadoInfo;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -246,11 +247,36 @@ class TiendaController extends Controller
             $product = Core::getProductoById( $tienda->id, $idProduct );
             $imgsProduct = ImgProduct::where('producto_id', $product->id)->get();
             $finalPrice = Core::getFinalPriceByProduct($product->precio, $product->tipo_oferta, $product->regla_porciento);
+            $productCategories = Core::getCategoriasByIdProduct($product->id);
 
             if ($tienda->store_route_platilla == 'basic') {
-                return view('plantillas.basic.product', compact('tienda', 'product', 'imgsProduct', 'finalPrice', 'userContacto', 'userPerfil'));
+                return view('plantillas.basic.product', compact('tienda', 'product', 'imgsProduct', 'finalPrice', 'productCategories', 'userContacto', 'userPerfil'));
             }
 
+        }
+    }
+
+    public function verProductoInfoAjax(Request $request) {
+
+        if ($request->ajax() ) {
+
+            $tiendaHasProduct = TiendaHasProducto::where('producto_id', $request['id'])->first();
+            $tienda = Tienda::findOrFail($tiendaHasProduct->tienda_id);
+
+            $product = Core::getProductoById( $tienda->id, $request['id'] );
+            $imgsProduct = ImgProduct::where('producto_id', $product->id)->get();
+            $finalPrice = Core::getFinalPriceByProduct($product->precio, $product->tipo_oferta, $product->regla_porciento);
+            $productCategories = Core::getCategoriasByIdProduct($product->id);
+
+            $url = URL::to('/') . '/media/photo-product/';
+
+            return response()->json([
+                'product'           => $product,
+                'imgsProduct'       => $imgsProduct,
+                'finalPrice'        => $finalPrice,
+                'productCategories' => $productCategories,
+                'url'               => $url
+            ]);
         }
     }
 }

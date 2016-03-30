@@ -200,7 +200,10 @@ class Core
 
     public function getCategoriasByIdProduct( $idProduct )
     {
-
+        return DB::table('categoria')
+            ->join('producto_has_categoria', 'categoria.id', '=', 'producto_has_categoria.categoria_id')
+            ->where('producto_has_categoria.producto_id', $idProduct)
+            ->get();
     }
 
     /**
