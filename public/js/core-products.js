@@ -259,7 +259,7 @@ function productCreateUpdate(result) {
             });
         },
 
-        SearchAndListAllNotes: function() {
+        SearchAndListAllProducts: function() {
 
             // Llama al m�todo buscarUnoTodoNote cuando se teclea en el buscador
             $('#core-search-group input').keyup( function() {

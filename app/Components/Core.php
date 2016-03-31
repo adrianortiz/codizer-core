@@ -67,8 +67,9 @@ class Core
      */
     public function getContact($perfil)
     {
-        $userHasPerfil = UserHasPerfil::where('perfil_id', $perfil[0]->id)->get();
-        return Contacto::where('id', $userHasPerfil[0]->users_id)->get();
+        $userHasPerfil = UserHasPerfil::where('perfil_id', $perfil[0]->id)->first();
+        $user = User::findOrFail($userHasPerfil->users_id);
+        return Contacto::where('id', $user->contacto_id)->get();
     }
 
     /**
@@ -77,8 +78,8 @@ class Core
      */
     public function  getUserPerfil()
     {
-        $userHasPerfil = UserHasPerfil::where('users_id', \Auth::user()->id)->get();
-        return Perfil::where('id', $userHasPerfil[0]->perfil_id)->get();
+        $userHasPerfil = UserHasPerfil::where('users_id', \Auth::user()->id)->first();
+        return Perfil::where('id', $userHasPerfil->perfil_id)->get();
     }
 
     /**
@@ -87,7 +88,8 @@ class Core
      */
     public function getUserContact()
     {
-        return Contacto::where('id', \Auth::user()->id)->get();
+        $user = User::findOrFail(\Auth::user()->id);
+        return Contacto::where('id', $user->contacto_id)->get();
     }
 
     /**
@@ -100,10 +102,11 @@ class Core
      */
     public function searchGlobal($searh) {
         return DB::table('users')
-            ->join('contacto', 'users.id', '=', 'contacto.id')
+            ->join('contacto', 'users.contacto_id', '=', 'contacto.id')
             ->join('users_has_perfil', 'users.id', '=', 'users_has_perfil.users_id')
             ->join('perfil', 'users_has_perfil.perfil_id', '=', 'perfil.id')
             ->where(DB::raw('concat(nombre, " ", ap_paterno, " ", ap_materno)'), 'LIKE', '%'.$searh.'%')
+            ->skip(0)->take(5)
             ->select('contacto.*', 'perfil.perfil_route')
             ->get();
     }
@@ -200,7 +203,10 @@ class Core
 
     public function getCategoriasByIdProduct( $idProduct )
     {
-
+        return DB::table('categoria')
+            ->join('producto_has_categoria', 'categoria.id', '=', 'producto_has_categoria.categoria_id')
+            ->where('producto_has_categoria.producto_id', $idProduct)
+            ->get();
     }
 
     /**
@@ -430,6 +436,18 @@ class Core
         else
             return $result = (double)($price - $valor);
 
+    }
+
+    public function getEmpresaById($empresaId){
+        return DB::table('empresa')
+            ->where('id', '=' ,$empresaId)
+            ->first();
+    }
+
+    public function getTiendaById($tiendaId){
+        return DB::table('tienda')
+            ->where('id', '=' ,$tiendaId)
+            ->first();
     }
 
 }

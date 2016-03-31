@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin\Social;
 use App\Contacto;
 use App\Facades\Core;
 use App\Http\Requests;
+use App\User;
+use App\UserHasFriendUser;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -31,7 +33,15 @@ class PerfilController extends Controller
         $friends = Core::getAmigos($contacto);
         $followers = Core::getFollowers($contacto);
 
-        return view('admin.social.perfil', compact('perfil', 'contacto', 'userPerfil', 'userContacto', 'contacts', 'friends', 'followers'));
+        $idUserView = User::where('contacto_id', $contacto[0]->id)
+            ->select('id')
+            ->first();
+
+        $isMyFriend = UserHasFriendUser::where('users_id', \Auth::user()->id)
+            ->where('users_id_friend', $idUserView->id)
+            ->count();
+
+        return view('admin.social.perfil', compact('perfil', 'contacto', 'userPerfil', 'userContacto', 'contacts', 'friends', 'followers', 'idUserView', 'isMyFriend'));
     }
 
     /**
@@ -123,5 +133,35 @@ class PerfilController extends Controller
             ]);
         }
         abort(404);
+    }
+
+    public function addOrNotAddToFriend(Request $request) {
+
+        if ( $request->ajax() ) {
+
+            $isMyFriend = UserHasFriendUser::where('users_id', \Auth::user()->id)
+                ->where('users_id_friend', $request['id'])
+                ->count();
+
+            $result = null;
+
+            if ($isMyFriend === 0) {
+                $addFriend = new UserHasFriendUser();
+                $addFriend->users_id = \Auth::user()->id;
+                $addFriend->users_id_friend = $request['id'];
+                $addFriend->save();
+                $result = 1;
+
+            } else {
+                UserHasFriendUser::where('users_id', \Auth::user()->id)
+                    ->where('users_id_friend', $request['id'])
+                    ->delete();
+                $result = 0;
+            }
+
+            return response()->json([
+                'result' => $result
+            ]);
+        }
     }
 }

@@ -7,29 +7,28 @@
   width: 546px !important;
   background-color: $gris-250 !important;
   border: solid 0 !important;
-  border-radius: 8px;
+  border-radius: 6px;
   padding: 5px;
   padding-left: 16px;
-
-  height: 36px;
-  margin: 0 5px;
+  height: 34px;
+  margin: 0 3px;
 }
 
 #btn-close-modal-search {
   float: right;
-  width: 36px;
-  height: 36px;
+  width: 34px;
+  height: 34px;
   background-color: $blanco;
   border-radius: 36px;
   margin-top: -36px;
   margin-right: 10px;
-  border: solid 1px $gris-300;
+  border: solid 1px $gris-250;
   color: $gris-300;
   @include transition(.3s ease);
 
   &:hover {
-    border: solid 1px $black-core;
-    color: $black-core;
+    border: solid 1px $gris-300;
+    color: $gris-300;
   }
 }
 
@@ -51,15 +50,15 @@
   display: none;
   width: 100%;
   height: 100%;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
-  background-color: rgba(#000, 0.8);
+  background-color: rgba(#535353, 0.7);
   z-index: 1000;
 
   .core-search {
     width: 100%;
-    height: 54px;
+    height: 52px;
     background-color: #FAFAFA;
     position: fixed;
 
@@ -73,9 +72,10 @@
     padding: 0 auto;
     width: 674px;
     height: 322px;
+    @include prefixer(max-height, calc(100% - 90px));
     overflow: auto;
     background-color: $blanco;
-    margin-top: 54px;
+    margin-top: 52px;
     border-radius: 0 0 10px 10px;
     box-shadow: $sombra-max;
     @include transition(.3s ease);

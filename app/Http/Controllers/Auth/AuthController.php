@@ -7,6 +7,7 @@ use App\Perfil;
 use App\User;
 use Carbon\Carbon;
 use App\UserHasPerfil;
+use Illuminate\Support\Facades\DB;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -65,40 +66,48 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        // Contacto a registrar
-        $contact = new Contacto([
-            'foto'          => 'unknow.png',
-            'nombre'        => $data['name'],
-            'ap_paterno'    => $data['paterno'],
-            'ap_materno'    => $data['materno'],
-            'estado'        => 'iniciado',
-            'profesion'     => '-'
-        ]);
-        $contact->save();
+        DB::beginTransaction();
+        try {
+            // Contacto a registrar
+            $contact = new Contacto([
+                'foto'          => 'unknow.png',
+                'nombre'        => $data['name'],
+                'ap_paterno'    => $data['paterno'],
+                'ap_materno'    => $data['materno'],
+                'estado'        => 'iniciado',
+                'profesion'     => '-'
+            ]);
+            $contact->save();
 
 
-        // Nuevo modelo de usuario sin persistir
-        $user = new User([
-            'email'         => $data['email'],
-            'password'      => $data['password'],
-            'contacto_id'   => $contact->id
-        ]);
-        $user->role = 'core';
-        $user->save();
+            // Nuevo modelo de usuario sin persistir
+            $user = new User([
+                'email'         => $data['email'],
+                'password'      => $data['password'],
+                'contacto_id'   => $contact->id
+            ]);
+            $user->role = 'core';
+            $user->save();
 
-        $perfil = new Perfil([
-            'rol'           => 'normal',
-            'perfil_route'  => $data['name'] . '-' .Carbon::createFromTimestamp(0)->diffInSeconds() . '-' . str_random(10)//.random_bytes(5)
-        ]);
-        $perfil->save();
+            $perfil = new Perfil([
+                'rol'           => 'normal',
+                'perfil_route'  => $data['name'] . '-' .Carbon::createFromTimestamp(0)->diffInSeconds() . '-' . str_random(10),//.random_bytes(5)
+                'cover'         => 'cover.png'
+            ]);
+            $perfil->save();
 
-        $userHasPerfil = new UserHasPerfil([
-            'users_id'  => $user->id,
-            'perfil_id' => $perfil->id
-        ]);
-        $userHasPerfil->save();
+            $userHasPerfil = new UserHasPerfil([
+                'users_id'  => $user->id,
+                'perfil_id' => $perfil->id
+            ]);
+            $userHasPerfil->save();
 
-        return $user;
+            DB::commit();
+            return $user;
+
+        } catch (\Exception $e) {
+            DB::rollback();
+        }
     }
 
 

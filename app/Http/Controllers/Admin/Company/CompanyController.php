@@ -19,6 +19,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\URL;
 
 class CompanyController extends Controller
@@ -84,45 +86,27 @@ class CompanyController extends Controller
             $namePhotoCompany = 'company-'.\Auth::user()->id . Carbon::now()->second . $filePhotoCompany->getClientOriginalName();
             \Storage::disk('photo_company')->put($namePhotoCompany, \File::get($filePhotoCompany));
 
-            // Generte data
-            /*
-            $company = new Empresa([
-                'users_id'       => \Auth::user()->id,
-                'estado'        => '1',
-                'logo'          => $namePhotoCompany,
-                'nombre'        => $request['nombre'],
-                'rfc'           => $request['rfc'],
-                'pagina_web'    => $request['pagina_web'],
-                'giro_empresa'  => $request['giro_empresa'],
-                'sector'        => $request['sector'],
-                'direccion'     => $request['direccion'],
-                'tel'           => $request['tel'],
-                'fax'           => $request['fax'],
-                'correo'        => $request['correo'],
-                'idioma'        => $request['idioma'],
-                'pais'          => $request['pais']
-            ]);
-            */
+            /**
+             * Save company and categoria, oferta y fabricante por defecto
+             *
+             * Crear categoria, oferta y fabricante por defecto
+             * Para asi poder llenar los combos de las vistas para asignarlas a los productos
+             * y que mínimo exista una por defecto por seguridad
+             *
+             * categoria    -> nombre = Sin categoría
+             * oferta       -> regla_porciento = 0
+             * fabricante   -> nombre = Sin fabricante
+             */
 
-            $company = new Empresa();
-            $company->fill($request->all());
-            $company->users_id = \Auth::user()->id;
-            $company->estado = '1';
-            $company->logo = $namePhotoCompany;
+            DB::beginTransaction();
+            try {
 
-
-            // Save company and categoria, oferta y fabricante por defecto
-            if ( $company->save() ) {
-
-                /**
-                 * Crear categoria, oferta y fabricante por defecto
-                 * Para asi poder llenar los combos de las vistas para asignarlas a los productos
-                 * y que mínimo exista una por defecto por seguridad
-                 *
-                 * categoria    -> nombre = Sin categoría
-                 * oferta       -> regla_porciento = 0
-                 * fabricante   -> nombre = Sin fabricante
-                 */
+                $company = new Empresa();
+                $company->fill($request->all());
+                $company->users_id = \Auth::user()->id;
+                $company->estado = '1';
+                $company->logo = $namePhotoCompany;
+                $company->save();
 
                 $categoria = new Categoria();
                 $categoria->nombre = 'Sin categoría';
@@ -145,7 +129,7 @@ class CompanyController extends Controller
                 $empresaHasOferta->save();
 
 
-                $fabricante =  new Fabricante();
+                $fabricante = new Fabricante();
                 $fabricante->nombre = 'Sin fabricante';
                 $fabricante->save();
 
@@ -154,14 +138,26 @@ class CompanyController extends Controller
                 $empresaHasFabricante->fabricante_id = $fabricante->id;
                 $empresaHasFabricante->save();
 
-
                 $userPerfil = Core::getUserPerfil();
+
+                DB::commit();
 
                 return response()->json([
                     'message' => 'Empresa dada de alta.',
-                    'url'       => route('companies.index', $userPerfil[0]->perfil_route)
+                    'url' => route('companies.index', $userPerfil[0]->perfil_route)
+                ]);
+
+            } catch (\Exception $e) {
+                // Delete img
+                File::delete('media/photo-company/' . $namePhotoCompany);
+                DB::rollback();
+
+                return response()->json([
+                    'error' => 'Ocurrio un error.',
+                    'errore' => $e
                 ]);
             }
+
         }
 
         abort(404);
@@ -218,12 +214,10 @@ class CompanyController extends Controller
                 $namePhotoCompany = 'company-'.\Auth::user()->id . Carbon::now()->second . $filePhotoCompany->getClientOriginalName();
                 \Storage::disk('photo_company')->put($namePhotoCompany, \File::get($filePhotoCompany));
 
-                $nameImgToDelete = $empresa->logo;
+                // Eliminar la vieja imagen del disco duro y asignar la nueva a la empresa
+                File::delete('media/photo-company/' . $empresa->logo);
                 $empresa->logo = $namePhotoCompany;
-
-                // ELIMINAR LA VIEJA IMAGEN DEL DISCO DURO
             }
-
 
             $empresa->save();
 
@@ -231,7 +225,7 @@ class CompanyController extends Controller
             $empresa->logo = URL::to('/') . '/media/photo-company/' . $empresa->logo;
 
             return response()->json([
-                'company' => $empresa
+                'company'   => $empresa
             ]);
         }
     }

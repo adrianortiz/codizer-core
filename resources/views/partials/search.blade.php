@@ -2,7 +2,7 @@
 <div class="core-search-container">
     <div class="core-search">
 
-        {!! Form::open(['route' => 'core.searchGlobal', 'method' => 'GET', 'id' => 'form-global-search']) !!}
+        {!! Form::open(['route' => 'core.searchGlobal', 'method' => 'GET', 'id' => 'form-global-search', 'autocomplete' => 'off']) !!}
         {!! Form::text('searh-global', null, ['id' => 'btn-search-ui', 'type' => 'text', 'placeholder' => 'Buscar']) !!}
         <button type="button" id="btn-global-search">OK</button>
         {!! Form::close() !!}

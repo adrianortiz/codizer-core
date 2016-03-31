@@ -14,11 +14,11 @@
 
     @include('partials.perfil-link')
 
-    <a href="#" class="core-menu-list"><div>{{ $idEmpresa }}</div></a>
+    <a href="#" class="core-menu-list"><div>{{ $empresa->nombre }}</div></a>
 
     <a href="#" class="core-menu-list menu-list-option menu-lis-img">
-        <img src="{{ asset('/media/photo-store/chanel-123.png' )}}">
-        <div>Chanel</div>
+        <img src="{{ asset('/media/photo-store/'.$tienda->foto)}}">
+        <div>{{$tienda->nombre}}</div>
     </a>
 
     <a href="#" class="core-menu-list"><div>Productos
@@ -29,9 +29,6 @@
 
     <a href="#" class="core-menu-list"><div>Categorias <span>{{ count($categoriasList) }}</span></div></a>
 
-    @foreach($categoriasList as $categoria)
-    <a href="#" class="core-menu-list menu-list-option"><div>{{$categoria}}</div></a>
-    @endforeach
 
 @endsection
 
@@ -76,7 +73,7 @@
                     <div class="list-product-title">{{$product->nombre}}</div>
                     <span class="list-product-tags">{{$product->tipo_oferta.$product->regla_porciento.'%' }}</span><br/>
                     <div class="list-product-pz">{{$product->cantidad_disponible}} pz</div>
-                    <div class="list-product-price">{{'$+-'.$product->precio}}</div>
+                    <div class="list-product-price">{{'$'.$product->precio}}</div>
                 </td>
             </tr>
         @endforeach
@@ -93,7 +90,7 @@
 
             <!-- LOS ID EN SU MAYORIA SON PARA QUE IDENTIFIQUES A LOS ELEMENTOS CON JS Y PUEDAS MODIFICAR LA INFORMACIÓN -->
 
-            <div id="show-info-product-marca">Chanel</div>
+            <div id="show-info-product-marca">{{$tienda->nombre}}</div>
             <div id="show-info-product-title">Bolso de mano de piel rosado</div>
 
             <div class="container-show-info-product-img-b">

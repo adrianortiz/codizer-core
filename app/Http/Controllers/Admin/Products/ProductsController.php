@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Products;
 
+use App\Empresa;
 use App\EmpresaHasProducto;
 use App\Facades\Core;
 use App\ImgProduct;
@@ -42,6 +43,8 @@ class ProductsController extends Controller
         $ofertasList    =   Core::getOfertasByIdEmpresa($idEmpresa);
         $categoriasList =   Core::getCategoriasByIdEmpresa($idEmpresa);
         $products  = Core::getAllProductosByIdTienda($idTienda);
+        $empresa = Core::getEmpresaById($idEmpresa);
+        $tienda=Core::getTiendaById($idTienda);
 
 
 
@@ -53,7 +56,7 @@ class ProductsController extends Controller
         Core::isRouteValid($userPerfil[0]->perfil_route);
 
         return view('admin.products.products',
-            compact('products', 'perfil', 'contacto', 'userPerfil', 'userContacto','fabricantesList','ofertasList','categoriasList', 'idEmpresa', 'idTienda'));
+            compact('tienda','empresa','products', 'perfil', 'contacto', 'userPerfil', 'userContacto','fabricantesList','ofertasList','categoriasList', 'idEmpresa', 'idTienda'));
     }
 
     /**

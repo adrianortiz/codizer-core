@@ -11,10 +11,8 @@
                     <div id="show-info-product-marca">Producto</div>
                     <div id="show-info-product-title">{{ $product->nombre }}</div>
 
-                    <div class="container-show-info-product-img-b">
-                        <!-- USA UN FOR PARA IMPRIMIR LAS FOTOS DE CADA PRODUCTO -->
+                    <div id="show-info-product-img" class="container-show-info-product-img-b">
                         <img id="principal-image-product" src="{{ asset('/media/photo-product/' . $product->img ) }}">
-
                         @foreach($imgsProduct as $imgProduct)
                             <img class="sub-image-product" src="{{ asset('/media/photo-product/' . $imgProduct->img ) }}">
                         @endforeach
@@ -39,18 +37,33 @@
 
                         <div>
                             <div>Precio final</div>
-                            <div class="show-info-product">$ {{ $finalPrice }}</div>
+                            <div class="show-info-product show-final-price">$ {{ $finalPrice }}</div>
+                        </div>
+
+                        {!! Form::open(['route' => 'store.front.product.orden.store', 'method' => 'POST', 'id' => 'form-tienda-store']) !!}
+                        <div>
+                            <div>{!! Form::label('nombre', 'Cantidad') !!}</div>
+                            <div class="show-info-product">
+                                {!! Form::number('cantidad', '1',
+                                ['id' => 'cantidad', 'class'=> 'form-control', 'placeholder' => 'Piezas']) !!}
+                            </div>
+                        </div>
+                        {!! Form::close() !!}
+
+                        <div>
+                            <div class="show-info-product">
+                                <button type="button" class="btn btn-sm btn-border-yellow">Añadir al carrito</button>
+                            </div>
                         </div>
 
                         <div>
                             <div>Categorias</div>
                             <div id="show-info-product-categorias" class="show-info-product">
-                                <!-- USA UN FOR PARA IMPRIMIR LAS CATEGORIAS A LAS QUE PERTENECE UN PRODUCTO -->
-                                <span class="list-product-tags">Bolso</span>
-                                <span class="list-product-tags">Piel</span>
-                                <span class="list-product-tags">Cafe</span>
-                                <span class="list-product-tags">Cafe</span>
-                                <span class="list-product-tags">Chanel</span>
+                                @forelse($productCategories as $categoria)
+                                    <span class="list-product-tags">{{ $categoria->nombre }}</span>
+                                @empty
+                                    <p>No tiene categorias</p>
+                                @endforelse
                             </div>
                         </div>
                     </div>

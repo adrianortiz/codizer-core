@@ -22,40 +22,55 @@
 
                     <div class="container-show-info-product-a">
 
-                        <div id="show-info-product-marca">Chanel</div>
-                        <div id="show-info-product-title">Bolso de mano de piel rosado</div>
+                        <div>Producto</div>
+                        <div id="show-info-product-title">-</div>
 
-                        <div class="container-show-info-product-img-b">
-                            <!-- USA UN FOR PARA IMPRIMIR LAS FOTOS DE CADA PRODUCTO -->
-                            <img id="principal-image-product" src="{{ asset('/media/photo-product/bolso-rosa-chanel.png') }}">
-                            <img id="show-info-product-img-1" class="sub-image-product principal-image-product" src="{{ asset('/media/photo-product/bolso-rosa-chanel.png') }}">
-                            <img id="show-info-product-img-2" class="sub-image-product" src="{{ asset('/media/photo-product/bolso-rosa-chanel2.png') }}">
-                            <img id="show-info-product-img-3" class="sub-image-product" src="{{ asset('/media/photo-product/sudadera-cat.png') }}">
-                            <img id="show-info-product-img-4" class="sub-image-product" src="{{ asset('/media/photo-product/bolso-rosa-chanel.png') }}">
+                        <div id="show-info-product-img" class="container-show-info-product-img-b">
+                            <!-- List Product Img here -->
                         </div>
 
                         <div class="container-show-info-product-list-c">
+
                             <div>
-                                <div>Precio</div>
-                                <div id="show-info-product-price" class="show-info-product">$2100.00</div>
+                                <div>Código</div>
+                                <div id="show-info-product-code" class="show-info-product">-</div>
                             </div>
+
                             <div>
-                                <div>Cantidad</div>
-                                <div id="show-info-product-cantidad" class="show-info-product">300 pz</div>
+                                <div>Fabricante</div>
+                                <div id="show-info-product-fabricante" class="show-info-product">-</div>
                             </div>
+
                             <div>
-                                <div>Me gusta</div>
-                                <div id="show-info-product-me-gusta" class="show-info-product">603</div>
+                                <div>Precio y descuento</div>
+                                <div id="show-info-product-precio-descuento" class="show-info-product">$ - </div>
                             </div>
+
+                            <div>
+                                <div>Precio final</div>
+                                <div id="show-info-product-final-price" class="show-info-product show-final-price">$0.00</div>
+                            </div>
+
+                            {!! Form::open(['route' => 'store.front.product.orden.store', 'method' => 'POST', 'id' => 'form-tienda-store']) !!}
+                            <div>
+                                <div>{!! Form::label('nombre', 'Cantidad') !!}</div>
+                                <div class="show-info-product">
+                                    {!! Form::number('cantidad', '1',
+                                    ['id' => 'cantidad', 'class'=> 'form-control', 'placeholder' => 'Piezas']) !!}
+                                </div>
+                            </div>
+                            {!! Form::close() !!}
+
+                            <div>
+                                <div class="show-info-product">
+                                    <button type="button" class="btn btn-sm btn-border-yellow">Añadir al carrito</button>
+                                </div>
+                            </div>
+
                             <div>
                                 <div>Categorias</div>
                                 <div id="show-info-product-categorias" class="show-info-product">
-                                    <!-- USA UN FOR PARA IMPRIMIR LAS CATEGORIAS A LAS QUE PERTENECE UN PRODUCTO -->
-                                    <span class="list-product-tags">Bolso</span>
-                                    <span class="list-product-tags">Piel</span>
-                                    <span class="list-product-tags">Cafe</span>
-                                    <span class="list-product-tags">Cafe</span>
-                                    <span class="list-product-tags">Chanel</span>
+
                                 </div>
                             </div>
                         </div>
@@ -64,8 +79,7 @@
 
                     <div id="description-text-title">Descripción</div>
                     <div id="show-info-product-desc">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis iaculis, ante non molestie sagittis, felis turpis vulputate dui, et laoreet quam felis ut odio. Quisque ullamcorper consectetur dolor. Phasellus interdum consequat tortor quis egestas. Curabitur mattis urna a iaculis volutpat. Duis facilisis lorem vel viverra ultricies. Morbi semper venenatis neque, eget rhoncus enim. Morbi in malesuada sem.</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis iaculis, ante non molestie sagittis, felis turpis vulputate dui, et laoreet quam felis ut odio. Quisque ullamcorper consectetur dolor. Phasellus interdum consequat tortor quis egestas. Curabitur mattis urna a iaculis volutpat. Duis facilisis lorem vel viverra ultricies. Morbi semper venenatis neque, eget rhoncus enim. Morbi in malesuada sem.</p>
+
                     </div>
 
                 </div>
@@ -79,3 +93,10 @@
         </div>
     </div>
 </div>
+
+
+
+<!-- FORMULARIO DE SELECCIÓN TIENDA -->
+{!! Form::open(['route' => 'store.front.product.show.ajax', 'method' => 'GET', 'id' => 'form-product-to-show']) !!}
+{!! Form::hidden('id', 'null', ['id' => 'id-product-to-show']) !!}
+{!! Form::close() !!}

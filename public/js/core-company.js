@@ -109,13 +109,20 @@ function fillShowInfoCompany(result)
                     },
 
                     success: function (result) {
+
                         $('.core-loader').hide();
 
-                        hideShowAlert('msj-success', result.message);
-                        $('.close').click();
-                        document.getElementById("form-company-store").reset();
+                        if( result.error ) {
+                            hideShowAlert('msj-danger', result.error);
+                            console.log(result.errore);
 
-                        window.location.href = result.url;
+                        } else {
+                            hideShowAlert('msj-success', result.message);
+                            $('.close').click();
+                            document.getElementById("form-company-store").reset();
+                            window.location.href = result.url;
+
+                        }
                     }
 
                 }).fail(function (jqXHR, textStatus) {
@@ -159,6 +166,7 @@ function fillShowInfoCompany(result)
                     success: function (result) {
                         $('.core-loader').hide();
                         $('.close').click();
+                        console.log(result);
                         document.getElementById("form-company-update").reset();
                         fillShowInfoCompany(result);
                     }
