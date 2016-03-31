@@ -62,15 +62,16 @@ class ContactsController extends Controller
      */
     public function store(Request $request)
     {
-        $foto = 'unknow.png';
-        if ($request->file('foto'))
-        {
-            // Guardar la nueva imagen en el disco
-            $foto = 'contact-' .$request -> nombre. '_' .$request -> ap_paterno. '_' .$request -> ap_materno. '_' .Carbon::now()->second . $request->file('foto')->getClientOriginalName();
-            \Storage::disk('photo')->put($foto, \File::get($request->file('foto')));
-        }
-
         if ($request->ajax()) {
+
+            // Validar si se inserto una imagen si no es asi la imagen guardad sera unknow por default
+            $foto = 'unknow.png';
+            if ($request->file('foto'))
+            {
+                // Guardar la nueva imagen en el disco
+                $foto = 'contact-' .$request -> nombre. '_' .$request -> ap_paterno. '_' .$request -> ap_materno. '_' .Carbon::now()->second . $request->file('foto')->getClientOriginalName();
+                \Storage::disk('photo')->put($foto, \File::get($request->file('foto')));
+            }
 
             // Contacto a registrar
             $contact = new Contacto([
@@ -127,7 +128,6 @@ class ContactsController extends Controller
                 'contacto_id'   => $contact -> id
             ]);
 
-
             if ( $agenda -> save() )
                 $message = 'Contacto guardado';
             else
@@ -179,9 +179,68 @@ class ContactsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        if ($request->ajax()) {
+
+
+            // Contacto a registrar
+            $contact = Contacto::findOrFail($request->id);
+            $contact->fill($request->all());
+
+            //Se valida que haya insertado una nueva imagen
+//            if ($request->file('foto'))
+//            {
+//                // Guardar la nueva imagen en el disco
+//                $foto = 'contact-' .$request -> nombre. '_' .$request -> ap_paterno. '_' .$request -> ap_materno. '_' .Carbon::now()->second . $request->file('foto')->getClientOriginalName();
+//                \Storage::disk('photo')->put($foto, \File::get($request->file('foto')));
+//                $contact->foto = $foto;
+//            }
+//            $contact -> save();
+
+            /**
+             * Hacer lo mismo para los demas modelo y descomentar el if
+             */
+            $id = \DB::table('contact_address')->where('contacto_id', $request->id)->select('id')->get();
+            $contact_dir = ContactAddress::findOrFail($id[0]->id);
+            dd($contact_dir->fill($request->all()));//$contact_dir->save();
+
+            /**
+             * De aqui para abajo hace lo mismo que con
+             */
+            $contact_mail = ContactMail::findOrFail($request->id);
+            $contact_mail->fill($request->all());
+            $contact_mail -> save();
+
+            $contact_tel = ContactPhone::findOrFail($request->id);
+            $contact_tel->fill($request->all());
+            $contact_tel -> save();
+
+            $contact_social = ContactSocial([
+                'red_social_nombre' => $request -> red_social_nombre,
+                'url'               => $request -> url,
+                'contacto_id'       => $contact -> id
+            ]);
+            $contact_social -> save();
+
+            // Contacto a guardar en agenda
+            $agenda = new UserHasAgendaContactos([
+                'users_id'      => \Auth::user() -> id,
+                'contacto_id'   => $contact -> id
+            ]);
+
+            if ( $agenda -> save() )
+                $message = 'Contacto guardado';
+            else
+                $message = 'No se pudo guardar el contacto.';
+
+            return response()->json([
+                'message' => $message,
+                'contacto' => $contact,
+            ]);
+        } else {
+            abort(404);
+        }
     }
 
     /**

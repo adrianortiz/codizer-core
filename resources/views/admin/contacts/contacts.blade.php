@@ -77,9 +77,6 @@
 
        <div class="block-content-info-contact" id="info-contact">
             <div class="container-show-info-contact-a">
-
-                <!-- LOS ID EN SU MAYORIA SON PARA QUE IDENTIFIQUES A LOS ELEMENTOS CON JS Y PUEDAS MODIFICAR LA INFORMACIÓN -->
-
                 <div id="show-info-contact-empresa" class="core-show-sub-title">Contacto</div>
                 <div id="show-info-contact-nombre-completo" class="core-show-title-blue"></div>
             </div>

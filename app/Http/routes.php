@@ -159,7 +159,7 @@ Route::group(['middleware' => 'auth'], function () {
         ]);
 
         // Update Contact
-        Route::put('perfil/{nameFirstName}/contacts/show', [
+        Route::post('perfil/{nameFirstName}/contacts/update', [
             'uses'  => 'Admin\Contacts\ContactsController@update',
             'as'    =>  'contact.update'
         ]);

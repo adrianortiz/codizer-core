@@ -58,8 +58,8 @@ function emptyAndRefillFieldsToUpdate() {
     } else {
         $('#btn-m').removeClass('active');
         $('#btn-f').addClass("active");
+    //$('#Femenino-ud').prop( "checked", true );
     }
-    $('#'+contacto[0].sexo+'-ud').prop( "checked", true );
 
     var fecha = new Date(contacto[0].f_nacimiento);
     $('#f_nacimiento-ud').val(fecha.toISOString().slice(0,10));
@@ -168,13 +168,7 @@ $(document).ready(function() {
         hideElements();
         $('#msg-list-vacio').show();
         $('#btn-new-contact').show();
-        $('#btn-edit-contact').show();
     });
-
-    //$('#btn-save-contact').click(function(){
-    //    alert($('#f_nacimiento').val());
-    //});
-
 });
 
 (function($){
@@ -194,14 +188,12 @@ $(document).ready(function() {
             $('#btn-save-contact').click( function()
             {
                 var form = $('#form-contact-to-create');
-                var datos = form.serializeArray();
                 var route = form.attr('action');
 
                 $.ajax({
                 url:        route,
                 type:       'POST',
                 dataType:   'json',
-                    // async:   false,
 
                 data:new FormData( $('#form-contact-to-create')[0] ),
                 contentType: false,
@@ -216,9 +208,7 @@ $(document).ready(function() {
                         hideShowAlert('msj-success', result.message);
 
                         containerContacts.prepend( contactNewEdit(result) );
-                        document.getElementById("form-contact-to-create").reset();
                         $('#msg-list-vacio').show();
-                        $('#form-register').hide();
                         $('#btn-new-contact').show();
                         $('#list-vacio').remove();
                     }
@@ -265,7 +255,9 @@ $(document).ready(function() {
                     {
                         contacto = result.contacto;
                         $('#msg-list-vacio').hide();
+
                         hideElements();
+
                         $('#btns-group-to-contact').show();
                         continaerContact.show();
 
@@ -275,11 +267,7 @@ $(document).ready(function() {
                         $('#id-contact-to-delete').val($(this).attr('data-contacto'));
 
                         // Asignar id del contacto seleccionado para actualizar
-                        //$('#id-note-to-update').val(result.contacto[0].id);
-                        //$('#form-contact-to-update').val(result.contacto[0]);
-
-
-
+                        $('#id-contact-to-update').val(contacto[0].id);
                     }
 
                 }).fail(function( jqXHR, textStatus ) {
@@ -303,51 +291,45 @@ $(document).ready(function() {
         {
             $('#btn-update-contact').click( function()
             {
-                alert($('input:radio[name=sexo-ud]:checked').val());
-                alert($('#f_nacimiento-ud').val());
-                //var form = $('#form-contact-to-update');
-                //var datos = form.serializeArray();
-                //var route = form.attr('action');
-                //
-                //$.ajax({
-                //    url:        route,
-                //    type:       'PUT',
-                //    dataType:   'json',
-                //    async:      false,
-                //
-                //    data:new FormData( $('#form-contact-to-update')[0] ),
-                //    contentType: false,
-                //    processData: false,
-                //
-                //    success: function( result )
-                //    {
-                //        // console.log(result);
-                //        hideShowAlert('msj-success', result.message);
-                //        containerNotes.prepend( contactNewEdit(result) );
-                //
-                //        // Agregar datos de la nota consultada al contenedor derecho
-                //        continaerNoteShow.html('<div class="block-content-info">' + result.note.content + '</div>');
-                //
-                //        // Agregar datos de la nota seleccionada al formulario de actualización
-                //        $('#id-note-to-update').val(result.note.id);
-                //        $('#content-note-to-update').val(result.note.content);
-                //
-                //        // Mostrar mensaje y cerrar modal
-                //        $('.close').click();
-                //
-                //        // Quitar nota de la vista
-                //        tableTrTouched.fadeOut();
-                //    }
-                //
-                //}).fail(function( jqXHR, textStatus ) {
-                //    $('#msj-danger-state').empty();
-                //
-                //    $(jqXHR).each(function(key,error)
-                //    {
-                //        hideShowAlert('msj-danger', 'Ocurrio un problema');
-                //    });
-                //
-                //});
+                var form = $('#form-contact-to-update');
+                var route = form.attr('action');
+
+                $.ajax({
+                    url:        route,
+                    type:       'POST',
+                    dataType:   'json',
+
+                    data:new FormData( $('#form-contact-to-update')[0] ),
+                    contentType: false,
+                    processData: false,
+
+                    success: function( result )
+                    {
+
+                        if (result.message == "No se pudo guardar el contacto.") {
+                            hideShowAlert('msj-danger', 'Ocurrio un problema');
+                        } else {
+                            hideShowAlert('msj-success', result.message);
+
+                            containerContacts.prepend( contactNewEdit(result) );
+
+                            $('#msg-list-vacio').show();
+                            $('#btn-new-contact').show();
+                            hideElements();
+
+                            tableTrTouched.fadeOut();
+                        }
+                    }
+
+                }).fail(function( jqXHR, textStatus ) {
+                    $('#msj-danger-state').empty();
+
+                    $(jqXHR).each(function(key,error)
+                    {
+                        hideShowAlert('msj-danger', 'Ocurrio un problema');
+                    });
+
+                });
             });
 
         }

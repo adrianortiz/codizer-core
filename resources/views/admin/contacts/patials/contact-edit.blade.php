@@ -5,7 +5,7 @@
     </div>
 
     <div class="block-content-info-contact">
-        {!! Form::open(['route' => 'contact.update', 'method' => 'PUT', 'id' => 'form-contact-to-update']) !!}
+        {!! Form::open(['route' => 'contact.update', 'method' => 'POST', 'id' => 'form-contact-to-update']) !!}
         <div class="tab-conten" id="editar">
             <ul class="nav nav-tabs" data-tabs="tabs">
                 <li class="active"><a href="#info-ud" data-toggle="tab">Información</a></li>
@@ -28,6 +28,7 @@
                     </div>
 
                     <div class="container-show-info-contact-list-c">
+                        {!! Form::hidden('id', 'null', ['id' => 'id-contact-to-update']) !!}
                         <label for="nombre">@lang('validation.attributes.name')</label>
                         <div class="show-info-contact">{!! Form::text('nombre', old('nombre'), ['id' => 'nombre-ud', 'class' => 'form-control']) !!}</div>
 
@@ -39,8 +40,8 @@
 
                         <label for="sexo">Sexo</label>
                         <div class="btn-group show-info-contact" id="radio-btns" data-toggle="buttons">
-                            <label id="btn-m" class="btn btn-primary btn-xs active">Masculino{!! Form::radio('sexo-ud', 'Masculino', true, ['id' => 'Masculino-ud', 'class' => 'form-control']) !!}</label>
-                            <label id="btn-f" class="btn btn-info btn-xs">Femenino{!! Form::radio('sexo-ud', 'Femenino', false, ['id' => 'Femenino-ud', 'class' => 'form-control']) !!}</label>
+                            <label id="btn-m" class="btn btn-primary btn-xs active">Masculino{!! Form::radio('sexo-ud', 'Masculino', ['id' => 'Masculino-ud', 'class' => 'form-control']) !!}</label>
+                            <label id="btn-f" class="btn btn-info btn-xs">Femenino{!! Form::radio('sexo-ud', 'Femenino', ['id' => 'Femenino-ud', 'class' => 'form-control']) !!}</label>
                         </div>
 
                         <label for="f_nacimiento">Fecha de nacimiento</label>
