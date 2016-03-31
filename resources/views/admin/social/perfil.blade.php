@@ -154,9 +154,8 @@
         </div>
     </div>
 
-    <!-- FORMULARIO DE SELECCIÓN TIENDA -->
     {!! Form::open(['route' => 'contacto.to.friend', 'method' => 'GET', 'id' => 'form-add-to-friend']) !!}
-    {!! Form::text('id', $idUserView->id) !!}
+    {!! Form::hidden('id', $idUserView->id) !!}
     {!! Form::close() !!}
 
 @endsection

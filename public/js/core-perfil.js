@@ -25,22 +25,18 @@
                     dataType:   'json',
                     data:       data,
 
-                    beforeSend: function(){
-                        $('.core-loader').show();
-                    },
-
                     success: function (result) {
-
-                        $('.core-loader').hide();
-                        console.log(result);
-
+                        if ( result.result === 1 ) {
+                            $('.container-add-friend').html('<li><a id="btn-add-delete-friend" href="#">Quitar de mis amigo</a></li>');
+                            hideShowAlert('msj-success', 'Usuario agregado a tus contactos');
+                        } else {
+                            $('.container-add-friend').html('<li><a id="btn-add-delete-friend" href="#">Agregar como amigo</a></li>');
+                            hideShowAlert('msj-success', 'Usuario eliminado de tus contactos');
+                        }
                     }
 
                 }).fail(function (jqXHR, textStatus) {
-                    $('.core-loader').hide();
-
                     $('#msj-danger-state').empty();
-
                     $(jqXHR).each(function (key, error) {
                         hideShowAlert('msj-danger', 'Ocurrio un problema');
                     });
