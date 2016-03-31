@@ -84,6 +84,18 @@ Route::get('tienda/{tiendaRoute}/product/{idProduct}/show', [
     'as'    => 'store.front.product.show'
 ]);
 
+// Mostrar un producto AJAX
+Route::get('tienda/product/show', [
+    'uses'  => 'Admin\Tienda\TiendaController@verProductoInfoAjax',
+    'as'    => 'store.front.product.show.ajax'
+]);
+
+// Agregar al carrito
+Route::post('tienda/product/orden/store', [
+    'uses'  => 'Admin\Orden\OrdenController@store',
+    'as'    => 'store.front.product.orden.store'
+]);
+
 
 /*
  * Indentificar si un usuario esta conectado
@@ -115,6 +127,12 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('perfil/{nameFirstName}/photo/user/update', [
            'uses'   => 'Admin\Social\PerfilController@updatePhotoUser',
             'as'    => 'contact.photo.store'
+        ]);
+
+        // Add contact to my friends
+        Route::get('perfil/to/friend', [
+           'uses'   => 'Admin\Social\PerfilController@addOrNotAddToFriend',
+            'as'    => 'contacto.to.friend'
         ]);
 
 

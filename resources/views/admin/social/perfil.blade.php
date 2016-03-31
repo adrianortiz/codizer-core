@@ -91,11 +91,14 @@
                 + Contacto
                 <span class="caret"></span>
             </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                <li><a href="#">Agregar como amigo</a></li>
-                <li><a href="#">Enviar mensaje</a></li>
-                <li role="separator" class="divider"></li>
-                <li><a href="#">Bloquear</a></li>
+            <ul class="dropdown-menu container-add-friend" aria-labelledby="dropdownMenu1">
+                @if( !($userPerfil[0]->perfil_route == $perfil[0]->perfil_route) )
+                    @if($isMyFriend === 0)
+                        <li><a id="btn-add-delete-friend" href="#">Agregar como amigo</a></li>
+                    @else
+                        <li><a id="btn-add-delete-friend" href="#">Quitar de mis amigo</a></li>
+                    @endif
+                @endif
             </ul>
         </div>
     </div>
@@ -150,7 +153,13 @@
             <a href="#" class="core-menu-list menu-list-option"><div>#Globos</div></a>
         </div>
     </div>
+
+    {!! Form::open(['route' => 'contacto.to.friend', 'method' => 'GET', 'id' => 'form-add-to-friend']) !!}
+    {!! Form::hidden('id', $idUserView->id) !!}
+    {!! Form::close() !!}
+
 @endsection
 
 @section('extra-js')
+    <script src="{{ asset('/js/core-perfil.js') }}"></script>
 @endsection
