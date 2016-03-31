@@ -77,6 +77,8 @@ function fillModalProduct(result)
 
                     success: function (result) {
 
+                        console.log(result);
+
                         $('.core-loader').hide();
                         fillModalProduct(result);
 

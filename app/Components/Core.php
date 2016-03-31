@@ -67,8 +67,9 @@ class Core
      */
     public function getContact($perfil)
     {
-        $userHasPerfil = UserHasPerfil::where('perfil_id', $perfil[0]->id)->get();
-        return Contacto::where('id', $userHasPerfil[0]->users_id)->get();
+        $userHasPerfil = UserHasPerfil::where('perfil_id', $perfil[0]->id)->first();
+        $user = User::findOrFail($userHasPerfil->users_id);
+        return Contacto::where('id', $user->contacto_id)->get();
     }
 
     /**
@@ -77,8 +78,8 @@ class Core
      */
     public function  getUserPerfil()
     {
-        $userHasPerfil = UserHasPerfil::where('users_id', \Auth::user()->id)->get();
-        return Perfil::where('id', $userHasPerfil[0]->perfil_id)->get();
+        $userHasPerfil = UserHasPerfil::where('users_id', \Auth::user()->id)->first();
+        return Perfil::where('id', $userHasPerfil->perfil_id)->get();
     }
 
     /**
@@ -87,7 +88,8 @@ class Core
      */
     public function getUserContact()
     {
-        return Contacto::where('id', \Auth::user()->id)->get();
+        $user = User::findOrFail(\Auth::user()->id);
+        return Contacto::where('id', $user->contacto_id)->get();
     }
 
     /**

@@ -129,6 +129,12 @@ Route::group(['middleware' => 'auth'], function () {
             'as'    => 'contact.photo.store'
         ]);
 
+        // Add contact to my friends
+        Route::get('perfil/to/friend', [
+           'uses'   => 'Admin\Social\PerfilController@addOrNotAddToFriend',
+            'as'    => 'contacto.to.friend'
+        ]);
+
 
         /**
          * Contacts - Agenda
