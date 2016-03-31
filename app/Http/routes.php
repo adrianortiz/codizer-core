@@ -91,7 +91,7 @@ Route::get('tienda/product/show', [
 ]);
 
 // Agregar al carrito
-Route::post('tienda/product/orden/store', [
+Route::get('tienda/product/orden/store', [
     'uses'  => 'Admin\Orden\OrdenController@store',
     'as'    => 'store.front.product.orden.store'
 ]);

@@ -6,6 +6,7 @@
 function fillModalProduct(result)
 {
     $('#cantidad').val('1');
+    $('#id_producto_x').val(result.product.producto_id);
     $('#show-info-product-title').text(result.product.nombre);
     $('#show-info-product-code').text(result.product.codigo_producto);
     $('#show-info-product-fabricante').text(result.product.nombre_fabricante);
@@ -13,6 +14,7 @@ function fillModalProduct(result)
     $('#show-info-product-final-price').text('$' + result.finalPrice);
 
     $('#show-info-product-desc').text(result.product.desc_producto);
+
 
     $('#show-info-product-categorias').empty();
     if (result.productCategories.length == 0) {
@@ -36,6 +38,7 @@ function fillModalProduct(result)
         init: function () {
             App.changeImageModal();
             App.GetDataProduct();
+            App.AddToOrden();
         },
 
         changeImageModal: function() {
@@ -48,13 +51,9 @@ function fillModalProduct(result)
 
         GetDataProduct: function() {
 
-            // Escuchar eventos dentro de .container-admin-100 sobre .btn-update-company
             $('.container-products').on("click", '.btn-preview-product', function() {
 
-                // Obtenerl el elemento padre div.tienda-container
                 tiendaOldContainerToHide = $(this).parents('div.product-container');
-
-                // Obtener el data-id del elemento padre y agregarlo al formulario de show tienda para obtener la data
                 $('#id-product-to-show').val( tiendaOldContainerToHide.data('id') );
 
                 initGetTienda();
@@ -81,6 +80,55 @@ function fillModalProduct(result)
 
                         $('.core-loader').hide();
                         fillModalProduct(result);
+
+                    }
+
+                }).fail(function (jqXHR, textStatus) {
+                    $('.core-loader').hide();
+
+                    $('#msj-danger-state').empty();
+
+                    $(jqXHR).each(function (key, error) {
+                        hideShowAlert('msj-danger', 'Ocurrio un problema');
+                    });
+
+                });
+            }
+
+        },
+
+        AddToOrden: function() {
+
+            $('.show-info-product').on("click", '#btn-add-orden-store', function() {
+                if ( $('#cantidad').val() >= 1 )
+                    addOrden();
+                else
+                    alert("Cantidad mínima es de 1");
+            });
+
+            function addOrden() {
+                var form = $('#form-orden-store');
+                var data = form.serializeArray();
+                var route = form.attr('action');
+
+                $.ajax({
+                    url:        route,
+                    type:       'GET',
+                    dataType:   'json',
+                    data:       data,
+
+                    beforeSend: function(){
+                        $('.core-loader').show();
+                    },
+
+                    success: function (result) {
+
+                        if (result.error)
+                            alert(result.error);
+                        else
+                            alert(result.message);
+
+                        $('.core-loader').hide();
 
                     }
 

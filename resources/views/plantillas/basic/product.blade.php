@@ -40,19 +40,19 @@
                             <div class="show-info-product show-final-price">$ {{ $finalPrice }}</div>
                         </div>
 
-                        {!! Form::open(['route' => 'store.front.product.orden.store', 'method' => 'POST', 'id' => 'form-tienda-store']) !!}
+                        {!! Form::open(['route' => 'store.front.product.orden.store', 'method' => 'GET', 'id' => 'form-orden-store']) !!}
+                            {!! Form::hidden('id', $product->id, ['id' => 'id']) !!}
                         <div>
                             <div>{!! Form::label('nombre', 'Cantidad') !!}</div>
                             <div class="show-info-product">
-                                {!! Form::number('cantidad', '1',
-                                ['id' => 'cantidad', 'class'=> 'form-control', 'placeholder' => 'Piezas']) !!}
+                                {!! Form::number('cantidad', '1', ['id' => 'cantidad', 'class'=> 'form-control', 'placeholder' => 'Piezas']) !!}
                             </div>
                         </div>
                         {!! Form::close() !!}
 
                         <div>
                             <div class="show-info-product">
-                                <button type="button" class="btn btn-sm btn-border-yellow">Añadir al carrito</button>
+                                <button id="btn-add-orden-store" type="button" class="btn btn-sm btn-border-yellow">Añadir al carrito</button>
                             </div>
                         </div>
 
