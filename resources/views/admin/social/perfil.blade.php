@@ -88,7 +88,7 @@
         </div>
         <div id="options-menu-amigo" class="dropdown">
             <button class="btn btn-sm dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                + Contacto
+                + Amigo
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu container-add-friend" aria-labelledby="dropdownMenu1">
