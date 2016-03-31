@@ -102,10 +102,11 @@ class Core
      */
     public function searchGlobal($searh) {
         return DB::table('users')
-            ->join('contacto', 'users.id', '=', 'contacto.id')
+            ->join('contacto', 'users.contacto_id', '=', 'contacto.id')
             ->join('users_has_perfil', 'users.id', '=', 'users_has_perfil.users_id')
             ->join('perfil', 'users_has_perfil.perfil_id', '=', 'perfil.id')
             ->where(DB::raw('concat(nombre, " ", ap_paterno, " ", ap_materno)'), 'LIKE', '%'.$searh.'%')
+            ->skip(0)->take(5)
             ->select('contacto.*', 'perfil.perfil_route')
             ->get();
     }
