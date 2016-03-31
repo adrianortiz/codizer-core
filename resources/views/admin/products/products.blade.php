@@ -29,9 +29,6 @@
 
     <a href="#" class="core-menu-list"><div>Categorias <span>{{ count($categoriasList) }}</span></div></a>
 
-    @foreach($categoriasList as $categoria)
-    <a href="#" class="core-menu-list menu-list-option"><div>{{$categoria}}</div></a>
-    @endforeach
 
 @endsection
 
@@ -76,7 +73,7 @@
                     <div class="list-product-title">{{$product->nombre}}</div>
                     <span class="list-product-tags">{{$product->tipo_oferta.$product->regla_porciento.'%' }}</span><br/>
                     <div class="list-product-pz">{{$product->cantidad_disponible}} pz</div>
-                    <div class="list-product-price">{{'$+-'.$product->precio}}</div>
+                    <div class="list-product-price">{{'$'.$product->precio}}</div>
                 </td>
             </tr>
         @endforeach
