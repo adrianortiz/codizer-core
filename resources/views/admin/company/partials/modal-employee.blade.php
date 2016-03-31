@@ -45,13 +45,13 @@
 
                                     @if ($i === 0)
                                         <label class="btn form-with-100 option-employee-to-select active">
-                                            <input type="radio" id="users_id-employee-new" name="users_id" value="{{ $amigosListToEmployee[$i]->id }}" autocomplete="off" class="radio-employee-select" checked>
+                                            <input type="radio" id="users_id-employee-new" name="users_id" value="{{ $amigosListToEmployee[$i]->user_id_we }}" autocomplete="off" class="radio-employee-select" checked>
                                             <img src="{{ asset('/media/photo-perfil/' . $amigosListToEmployee[$i]->foto) }}">
                                             <span>{{ $amigosListToEmployee[$i]->nombre . ' ' . $amigosListToEmployee[$i]->ap_paterno . ' ' . $amigosListToEmployee[$i]->ap_materno  }}</span>
                                         </label>
                                     @else
                                         <label class="btn form-with-100 option-employee-to-select">
-                                            <input type="radio" id="users_id-employee-new" name="users_id" value="{{ $amigosListToEmployee[$i]->id }}" autocomplete="off" class="radio-employee-select">
+                                            <input type="radio" id="users_id-employee-new" name="users_id" value="{{ $amigosListToEmployee[$i]->user_id_we }}" autocomplete="off" class="radio-employee-select">
                                             <img src="{{ asset('/media/photo-perfil/' . $amigosListToEmployee[$i]->foto) }}">
                                             <span>{{ $amigosListToEmployee[$i]->nombre . ' ' . $amigosListToEmployee[$i]->ap_paterno . ' ' . $amigosListToEmployee[$i]->ap_materno  }}</span>
                                         </label>
@@ -175,13 +175,13 @@
 
                                         @if ($i === 0)
                                             <label class="btn form-with-100 option-employee-to-select active">
-                                                <input type="radio" name="users_id" id="users_id" value="{{ $amigosListToEmployee[$i]->id }}" autocomplete="off" class="radio-employee-select radio-employee-ghange" checked>
+                                                <input type="radio" name="users_id" id="users_id" value="{{ $amigosListToEmployee[$i]->user_id_we }}" autocomplete="off" class="radio-employee-select radio-employee-ghange" checked>
                                                 <img src="{{ asset('/media/photo-perfil/' . $amigosListToEmployee[$i]->foto) }}">
                                                 <span>{{ $amigosListToEmployee[$i]->nombre . ' ' . $amigosListToEmployee[$i]->ap_paterno . ' ' . $amigosListToEmployee[$i]->ap_materno  }}</span>
                                             </label>
                                         @else
                                             <label class="btn form-with-100 option-employee-to-select">
-                                                <input type="radio" name="users_id" id="users_id" value="{{ $amigosListToEmployee[$i]->id }}" autocomplete="off" class="radio-employee-select radio-employee-ghange">
+                                                <input type="radio" name="users_id" id="users_id" value="{{ $amigosListToEmployee[$i]->user_id_we }}" autocomplete="off" class="radio-employee-select radio-employee-ghange">
                                                 <img src="{{ asset('/media/photo-perfil/' . $amigosListToEmployee[$i]->foto) }}">
                                                 <span>{{ $amigosListToEmployee[$i]->nombre . ' ' . $amigosListToEmployee[$i]->ap_paterno . ' ' . $amigosListToEmployee[$i]->ap_materno  }}</span>
                                             </label>

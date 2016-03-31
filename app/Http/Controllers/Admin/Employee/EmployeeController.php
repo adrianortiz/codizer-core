@@ -46,7 +46,7 @@ class EmployeeController extends Controller
             $empresasList = Empresa::where('users_id', \Auth::user()->id)->lists('nombre', 'id');
             $tiendasList  = Tienda::where('empresa_id', $empresa->id)->lists('nombre', 'id');
 
-            $amigosListToEmployee = Core::getAmigos($userContacto);
+            $amigosListToEmployee = Core::getAmigos(\Auth::user()->id);
 
             $countEmpleados = UsuarioEmpleadoInfo::where('empresa_id', $empresa->id)->count();
             $empleados = Core::getAllEmployeesByEmpresaId($empresa->id);
@@ -74,6 +74,7 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
+
         if ($request->ajax()) {
 
             // Validar que no exista esa configuración de empleado en la BD

@@ -21,15 +21,18 @@ class FriendsController extends Controller
     {
         Core::isRouteValid($nameFirstName);
 
+        // Son los datos del usuario que estás viendo (Perfil)
         $perfil = Core::getPerfil($nameFirstName);
         $contacto = Core::getContact($perfil);
+        $userView = User::where('contacto_id', $contacto[0]->id)->first();
 
-        // User son los datos del usuario Logueado
+        // Son los datos del usuario Logueado
         $userPerfil = Core::getUserPerfil();
         $userContacto = Core::getUserContact();
+        $user = User::findOrFail(\Auth::user()->id);
 
-        $contacts = Core::getContactos($contacto);
-        $friends = Core::getAmigos($contacto);
+        $contacts = Core::getContactos($user->id);
+        $friends = Core::getAmigos($userView->id);
         $followers = Core::getFollowers($contacto);
 
         return view('admin.contacts.friends', compact('perfil', 'contacto', 'userPerfil', 'userContacto', 'contacts', 'friends', 'followers'));
