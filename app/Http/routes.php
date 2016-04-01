@@ -103,6 +103,11 @@ Route::get('tienda/car/show', [
     'as'    => 'store.front.product.orden.show'
 ]);
 
+Route::get('tienda/car/add/{idProduct}/', [
+    'uses'   => 'Admin\Car\CarController@add',
+    'as'    => 'store.front.product.orden.add'
+]);
+
 
 /*
  * Indentificar si un usuario esta conectado
