@@ -96,6 +96,13 @@ Route::get('tienda/product/orden/store', [
     'as'    => 'store.front.product.orden.store'
 ]);
 
+/// ========= PRUEBAS CON SESSION ========
+// Mostrar carrito de una session
+Route::get('tienda/car/show', [
+   'uses'   => 'Admin\Car\CarController@show',
+    'as'    => 'store.front.product.orden.show'
+]);
+
 
 /*
  * Indentificar si un usuario esta conectado
