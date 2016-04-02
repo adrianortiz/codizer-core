@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
 
 class ProductsController extends Controller
@@ -77,11 +78,8 @@ class ProductsController extends Controller
      */
     public function store(Request $request )
     {
-        if ($request->ajax()) {
 
-            $filePhotoProduct = $request->file('img');
-            $namePhotoProduct = 'product-'.\Auth::user()->id . Carbon::now()->second . $filePhotoProduct->getClientOriginalName();
-            \Storage::disk('photo_product')->put($namePhotoProduct, \File::get($filePhotoProduct));
+        if ($request->ajax()) {
 
             /*
             $producto = new Producto([
@@ -97,61 +95,75 @@ class ProductsController extends Controller
             ]);
             */
 
-            $producto = new Producto();
-            $producto->fill($request->all());
-            $producto->users_id = \Auth::user()->id;
-            $producto->save();
+            DB::beginTransaction();
+            try {
 
-            $photoProducto = new ImgProduct([
-                'img'           =>  $namePhotoProduct,
-                'producto_id'   =>  $producto->id,
-                'principal'     =>  '1'
-            ]);
-            $photoProducto->save();
+                $producto = new Producto();
+                $producto->fill($request->all());
+                $producto->users_id = \Auth::user()->id;
+                $producto->save();
 
-            $empresa_has_producto = new EmpresaHasProducto(
-                [
-                    //$empresa = Empresa::where('users_id', \Auth::user()->id)->first(),
-                    'empresa_id'    =>  $request['empresa_id'],
-                    'producto_id'   =>  $producto->id
-                ]
-            );
-            $empresa_has_producto->save();
+                for ($i = 0; $i < count($request->file('img')); $i++) {
 
+                    $filePhotoProduct = $request->file('img')[$i];
+                    $namePhotoProduct = 'product-' . \Auth::user()->id . Carbon::now()->second . $filePhotoProduct->getClientOriginalName();
+                    \Storage::disk('photo_product')->put($namePhotoProduct, \File::get($filePhotoProduct));
 
-            $tienda_has_producto= new TiendaHasProducto(
-                [
-                    'tienda_id'    =>  $request['tienda_id'],
-                    'producto_id'   =>  $producto->id
-                ]
-            );
-            $tienda_has_producto->save();
+                    $photoProducto = new ImgProduct([
+                        'img' => $namePhotoProduct,
+                        'producto_id' => $producto->id,
+                        'principal' => $i == 0 ? '1' : '0'
+                    ]);
+                    $photoProducto->save();
 
-            $producto_has_categoria  = new ProductoHasCategoria(
-                [
-                    'categoria_id'    =>  $request['categoria'],
-                    'producto_id'   =>  $producto->id
-                ]
-            );
-            $producto_has_categoria->save();
+                }
 
-            if (  $producto->save() && $photoProducto  && $empresa_has_producto &&$tienda_has_producto->save() &&  $producto_has_categoria)
-                $message = 'Producto agregado.';
-            else
-                $message = 'No se pudo agregar el producto.';
+                $empresa_has_producto = new EmpresaHasProducto([
+                    'empresa_id' => $request['empresa_id'],
+                    'producto_id' => $producto->id
+                ]);
+                $empresa_has_producto->save();
 
-            // Obtener nombre y ruta de la foto del producto
-            $photoProducto->img = URL::to('/') . '/media/photo-product/' . $photoProducto->img;
+                $tienda_has_producto = new TiendaHasProducto([
+                    'tienda_id' => $request['tienda_id'],
+                    'producto_id' => $producto->id
+                ]);
+                $tienda_has_producto->save();
 
-            return response()->json([
-                'message'               => $message,
-                'producto'              => $producto,
-                'photoProducto'         => $photoProducto,
-            ]);
+                // Save one or more categories
+                // foreach ($request['categoria'] as $categoria) {
+                for ($i = 0; $i < count($request['categoria']); $i++) {
 
-        } else {
-            abort(404);
+                    $producto_has_categoria = new ProductoHasCategoria([
+                        'categoria_id' => $request['categoria'][$i],
+                        'producto_id' => $producto->id
+                    ]);
+                    $producto_has_categoria->save();
+                }
+
+                // Obtener nombre y ruta de la foto del producto
+                $photoProducto->img = URL::to('/') . '/media/photo-product/' . $photoProducto->img;
+
+                DB::commit();
+                return response()->json([
+                    'message' => 'Producto agregado.',
+                    'producto' => $producto,
+                    'photoProducto' => $photoProducto,
+                ]);
+
+            } catch(\Exception $e ) {
+                DB::rollback();
+
+                return response()->json([
+                    'error' => 'Ocurrio un error.',
+                    'case' => $e
+                ]);
+
+            }
+
         }
+
+        abort(404);
     }
 
     /**

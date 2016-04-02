@@ -17,13 +17,13 @@ function fillModalProduct(result)
 
 
     $('#show-info-product-categorias').empty();
-    if (result.productCategories.length == 0) {
-        $('#show-info-product-categorias').append('<span>Sin categorias</span>');
-    } else {
+    // if (result.productCategories.length == 0) {
+       // $('#show-info-product-categorias').append('<span>Sin categorias</span>');
+    //} else {
         $.each(result.productCategories, function(index, item) {
             $('#show-info-product-categorias').append('<span class="list-product-tags">' + item.nombre + '</span>');
         });
-    }
+    // }
 
     $('#show-info-product-img').empty();
     $('#show-info-product-img').append('<img id="principal-image-product" src="' + result.url + result.imgsProduct[0].img + '">');

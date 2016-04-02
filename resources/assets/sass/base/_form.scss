@@ -109,3 +109,23 @@ input:focus, select:focus, textarea:focus {
   background-color: $gris-input-placeholder !important;
   border-color: $gris-background !important;
 }
+
+.core-checkbox {
+  background-color: $gris-100;
+  padding: 5px !important;
+  margin: 0 10px 10px 0 !important;
+  border-radius: 6px;
+
+  input {
+    padding: 0 !important;
+    margin: 0 !important;
+    margin-top: -8px !important;
+    display: inline-block;
+  }
+
+  span {
+    display: inline-block;
+    padding-right: 5px;
+    margin-left: 20px;
+  }
+}

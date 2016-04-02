@@ -7,9 +7,11 @@
 
 namespace App\Components;
 
+use App\Categoria;
 use App\Empresa;
 use App\Perfil;
 use App\Contacto;
+use App\ProductoHasCategoria;
 use App\Tienda;
 use App\User;
 use App\UserHasPerfil;
@@ -203,9 +205,14 @@ class Core
 
     public function getCategoriasByIdProduct( $idProduct )
     {
-        return DB::table('categoria')
-            ->join('producto_has_categoria', 'categoria.id', '=', 'producto_has_categoria.categoria_id')
-            ->where('producto_has_categoria.producto_id', $idProduct)
+        /*
+        return Categoria::join('producto_has_categoria', 'categoria.id', '=', 'producto_has_categoria.categoria_id')
+            ->where('producto_has_categoria.producto_id', '=', $idProduct)
+            ->get();
+        */
+
+        return ProductoHasCategoria::join('categoria', 'producto_has_categoria.categoria_id', '=', 'categoria.id')
+            ->where('producto_id', '=', $idProduct)
             ->get();
     }
 
@@ -346,7 +353,8 @@ class Core
             ->join('empresa_has_categoria', 'empresa.id', '=', 'empresa_has_categoria.empresa_id')
             ->join('categoria', 'empresa_has_categoria.categoria_id', '=', 'categoria.id')
             ->where('empresa.id', $empresaId)
-            ->lists('categoria.nombre', 'categoria.id');
+            ->select('categoria.nombre', 'categoria.id')
+            ->get();
     }
 
     /**
@@ -413,7 +421,7 @@ class Core
             ->where('tienda_has_producto.producto_id', $idProduct)
             ->where('producto.estado', '1')
             ->where('img_producto.principal', '1')
-            ->select('producto.*', 'oferta.*', 'img_producto.*', 'fabricante.nombre AS nombre_fabricante')
+            ->select('producto.*', 'oferta.*', 'img_producto.*', 'fabricante.nombre AS nombre_fabricante', 'producto.id AS product_id')
             ->first();
     }
 

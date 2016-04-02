@@ -247,7 +247,7 @@ class TiendaController extends Controller
             $product = Core::getProductoById( $tienda->id, $idProduct );
             $imgsProduct = ImgProduct::where('producto_id', $product->id)->get();
             $finalPrice = Core::getFinalPriceByProduct($product->precio, $product->tipo_oferta, $product->regla_porciento);
-            $productCategories = Core::getCategoriasByIdProduct($product->id);
+            $productCategories = Core::getCategoriasByIdProduct($product->product_id);
 
             if ($tienda->store_route_platilla == 'basic') {
                 return view('plantillas.basic.product', compact('tienda', 'product', 'imgsProduct', 'finalPrice', 'productCategories', 'userContacto', 'userPerfil'));
@@ -266,7 +266,7 @@ class TiendaController extends Controller
             $product = Core::getProductoById( $tienda->id, $request['id'] );
             $imgsProduct = ImgProduct::where('producto_id', $request['id'])->get();
             $finalPrice = Core::getFinalPriceByProduct($product->precio, $product->tipo_oferta, $product->regla_porciento);
-            $productCategories = Core::getCategoriasByIdProduct($product->id);
+            $productCategories = Core::getCategoriasByIdProduct($product->product_id);
 
             $url = URL::to('/') . '/media/photo-product/';
 

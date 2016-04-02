@@ -28,7 +28,22 @@ function productCreateUpdate(result) {
         App.UpdateProduct();
         App.DeleteProduct();
         App.SearchAndListAllProducts();
+        App.AddInputFileImg();
     },
+
+        AddInputFileImg: function ()
+        {
+            var contador = 1;
+            $('#btn-add-form-file-img-codizer').click( function() {
+                if (contador < 4) {
+                    $('.codizer-new-img-product').append('<div class="form-group"><input type="file" accept="image/jpg,image/png" name="img[]" id="img" class="form-control form-with-100"></div>');
+                    contador++;
+                }
+
+                if ( contador == 4)
+                    $('#btn-add-form-file-img-codizer').hide();
+            });
+        },
 
         /**
          * Crear una nota y agregar la nota creada a la lista de notas (Izquierda)
@@ -66,11 +81,9 @@ function productCreateUpdate(result) {
 
                         $('.core-loader').hide();
 
-                        console.log(result.message);
-                        console.log(result.producto);
-
-                        if (result.message == "No se pudo agregar el producto.") {
-                            hideShowAlert('msj-danger', 'Ocurrio un problema');
+                        if ( result.error ) {
+                            console.log(result.case);
+                            hideShowAlert('msj-danger', result.error);
                         } else {
                             hideShowAlert('msj-success', result.message);
                             $('#msg-list-vacio').hide();
@@ -261,12 +274,12 @@ function productCreateUpdate(result) {
 
         SearchAndListAllProducts: function() {
 
-            // Llama al m�todo buscarUnoTodoNote cuando se teclea en el buscador
+            // Llama al método buscarUnoTodoNote cuando se teclea en el buscador
             $('#core-search-group input').keyup( function() {
                 buscarUnoTodoProduct();
             });
 
-            // Llama al m�todo buscarUnoTodoNote cuando se le da click
+            // Llama al método buscarUnoTodoNote cuando se le da click
             // Al estar el campo de busqueda vacio, traera toda la data
             $('#btn-list-all-products').click( function() {
                 $('#core-search-group input').val('');

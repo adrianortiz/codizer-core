@@ -46,7 +46,7 @@ class CarController extends Controller
     public function add($idProduct)
     {
         $product = Producto::where('id', $idProduct)->first();
-        // Peizas
+        // Piezas
         $product->quantity = 3;
 
         $car = Session::get('car');
@@ -82,11 +82,21 @@ class CarController extends Controller
         return redirect()->route('store.front.product.orden.show');
     }
 
+    /**
+     * Elimina el carrito de compra de una sessión
+     */
     public function trash()
     {
         Session::forget('car');
     }
 
+    /**
+     * Genera el precio total a pagar, en base a la cantidad
+     * de productos en el carrito, su precio y cantidad de
+     * los mismos
+     *
+     * @return int
+     */
     private function total()
     {
         $car = Session::get('car');
