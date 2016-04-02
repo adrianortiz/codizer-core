@@ -176,3 +176,16 @@
     background-color: $gris-100 !important;
   }
 }
+
+.core-txt-title-modal {
+
+  div {
+    border-bottom: solid 1px $gris-100;
+    label {
+      text-transform: uppercase;
+      font-weight: 400;
+      color: $azul-200;
+    }
+  }
+
+}

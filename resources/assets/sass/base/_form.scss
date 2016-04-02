@@ -129,3 +129,10 @@ input:focus, select:focus, textarea:focus {
     margin-left: 20px;
   }
 }
+
+.form-group {
+  label {
+    font-size: 12px;
+    font-weight: bolder;
+  }
+}

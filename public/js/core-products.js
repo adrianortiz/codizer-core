@@ -60,6 +60,10 @@ function productCreateUpdate(result) {
             $('#core-file-img-4').on('change',function (e) {
                 $('#core-img-4').attr('src', URL.createObjectURL(e.target.files[0]));
             });
+
+            $('#core-file-img-5').on('change',function (e) {
+                $('#core-img-5').attr('src', URL.createObjectURL(e.target.files[0]));
+            });
         },
 
         /**

@@ -150,7 +150,30 @@
 @endsection
 
 @section('extra-js')
+
     <!-- Aqui vas tus js para peticiones Ajax -->
-<script src="{{ asset('/js/codizer-validate.js') }}"></script>
-<script src="{{ asset('/js/core-products.js') }}"></script>
+    <script src="{{ asset('/js/codizer-validate.js') }}"></script>
+    <script src="{{ asset('/js/core-products.js') }}"></script>
+
+
+    <!--
+    <link type="text/css" rel="stylesheet" href="{{ asset('/css/mootools/mooeditable/MooEditable.css') }}">
+    <link type="text/css" rel="stylesheet" href="{{ asset('/css/mootools/mooeditable/MooEditable.Extras.css') }}">
+    <link type="text/css" rel="stylesheet" href="{{ asset('/css/mootools/mooeditable/MooEditable.SilkTheme.css') }}">
+
+    <script src="{{ asset('/js/mootools/mootools.js') }}"></script>
+    <script src="{{ asset('/js/mootools/mooeditable/MooEditable.js') }}"></script>
+    <script src="{{ asset('/js/mootools/mooeditable/MooEditable.UI.MenuList.js') }}"></script>
+    <script src="{{ asset('/js/mootools/mooeditable/MooEditable.Extras.js') }}"></script>
+
+<script type="text/javascript">
+    var myMooEditable = new MooEditable('textarea-1', {
+        handleSubmit: false,
+        onRender: function() {
+            alert('Done rendering.');
+        }
+    });
+    var myMooEditableMenuList = new MooEditable.UI.MenuList([options]);
+</script>
+    -->
 @endsection
