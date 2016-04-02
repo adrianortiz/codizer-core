@@ -106,15 +106,20 @@ class ProductsController extends Controller
                 for ($i = 0; $i < count($request->file('img')); $i++) {
 
                     $filePhotoProduct = $request->file('img')[$i];
-                    $namePhotoProduct = 'product-' . \Auth::user()->id . Carbon::now()->second . $filePhotoProduct->getClientOriginalName();
-                    \Storage::disk('photo_product')->put($namePhotoProduct, \File::get($filePhotoProduct));
 
-                    $photoProducto = new ImgProduct([
-                        'img' => $namePhotoProduct,
-                        'producto_id' => $producto->id,
-                        'principal' => $i == 0 ? '1' : '0'
-                    ]);
-                    $photoProducto->save();
+                    // Validate if object selected has data
+                    if ( $filePhotoProduct != null) {
+
+                        $namePhotoProduct = 'product-' . \Auth::user()->id . Carbon::now()->second . $filePhotoProduct->getClientOriginalName();
+                        \Storage::disk('photo_product')->put($namePhotoProduct, \File::get($filePhotoProduct));
+
+                        $photoProducto = new ImgProduct([
+                            'img' => $namePhotoProduct,
+                            'producto_id' => $producto->id,
+                            'principal' => $i == 0 ? '1' : '0'
+                        ]);
+                        $photoProducto->save();
+                    }
 
                 }
 
@@ -131,11 +136,9 @@ class ProductsController extends Controller
                 $tienda_has_producto->save();
 
                 // Save one or more categories
-                // foreach ($request['categoria'] as $categoria) {
-                for ($i = 0; $i < count($request['categoria']); $i++) {
-
+                foreach ($request['categoria'] as $categoria) {
                     $producto_has_categoria = new ProductoHasCategoria([
-                        'categoria_id' => $request['categoria'][$i],
+                        'categoria_id' => $categoria,
                         'producto_id' => $producto->id
                     ]);
                     $producto_has_categoria->save();

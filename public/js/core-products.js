@@ -33,15 +33,32 @@ function productCreateUpdate(result) {
 
         AddInputFileImg: function ()
         {
+            /*
             var contador = 1;
             $('#btn-add-form-file-img-codizer').click( function() {
                 if (contador < 4) {
-                    $('.codizer-new-img-product').append('<div class="form-group"><input type="file" accept="image/jpg,image/png" name="img[]" id="img" class="form-control form-with-100"></div>');
-                    contador++;
-                }
+                    $('.codizer-new-img-product').append('<div class="col-xs-6 col-sm-6 col-md-3"><div class="form-group"><input type="file" accept="image/jpg,image/png" name="img[]" id="img" class="form-control form-with-100"></div></div>');
+                    contador++; }
 
                 if ( contador == 4)
                     $('#btn-add-form-file-img-codizer').hide();
+            });
+            */
+
+            $('#core-file-img-principal').on('change',function (e) {
+                $('#core-img-principal').attr('src', URL.createObjectURL(e.target.files[0]));
+            });
+
+            $('#core-file-img-2').on('change',function (e) {
+                $('#core-img-2').attr('src', URL.createObjectURL(e.target.files[0]));
+            });
+
+            $('#core-file-img-3').on('change',function (e) {
+                $('#core-img-3').attr('src', URL.createObjectURL(e.target.files[0]));
+            });
+
+            $('#core-file-img-4').on('change',function (e) {
+                $('#core-img-4').attr('src', URL.createObjectURL(e.target.files[0]));
             });
         },
 

@@ -80,9 +80,9 @@
   button {
     @include transition(.3s ease);
     border: none;
-    background-color: #666666;
+    background-color: rgba($blanco, 0.1);
     color: #E6E6E6;
-    border-radius: 20px;
+    border-radius: 5px;
     padding-left: 15px;
     padding-right: 15px;
   }

@@ -25,59 +25,90 @@
                     {!! Form::hidden('tienda_id', $idTienda, ['id' => 'tienda_id_new', 'class' => 'form-group-validate val_num']) !!}
 
 
-                    <div class="row">
 
+                    <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                {!! Form::label('img', 'Foto principal') !!}
-                                {!! Form::file('img[]', ['accept' => 'image/jpg,image/png', 'class' => 'form-control form-with-100 form-group-validate val_img', 'required']) !!}
+                                {!! Form::label('img-principal', 'Foto principal') !!}
                             </div>
-
-                            <div class="codizer-new-img-product">
-                                <!-- Input type file for img product -->
-                            </div>
-
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <button id="btn-add-form-file-img-codizer" type="button" class="btn btn-primary btn-sm btn-sm-radius btn-shadow-blue right">Agregar nueva imagen</button>
-                                </div>
-                            </div>
-
                         </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-3 col-md-3">
+                            <img id="core-img-principal" src="{{ asset('/media/icon/upload-img-icon.png') }}" />
+                        </div>
+                        <div class="col-xs-6 col-sm-3 col-md-3">
+                            <img id="core-img-2" src="{{ asset('/media/icon/upload-img-icon.png') }}" />
+                        </div>
+                        <div class="col-xs-6 col-sm-3 col-md-3">
+                            <img id="core-img-3" src="{{ asset('/media/icon/upload-img-icon.png') }}" />
+                        </div>
+                        <div class="col-xs-6 col-sm-3 col-md-3">
+                            <img id="core-img-4" src="{{ asset('/media/icon/upload-img-icon.png') }}" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-xs-6 col-sm-3 col-md-3">
+                            <div class="form-group">
+                                {!! Form::file('img[]', ['accept' => 'image/jpg,image/png', 'id' => 'core-file-img-principal', 'class' => 'form-control form-with-100 form-group-validate val_img', 'required']) !!}
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6 col-sm-3 col-md-3">
+                            <div class="form-group">
+                                {!! Form::file('img[]', ['accept' => 'image/jpg,image/png', 'id' => 'core-file-img-2', 'class' => 'form-control form-with-100']) !!}
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6 col-sm-3 col-md-3">
+                            <div class="form-group">
+                                {!! Form::file('img[]', ['accept' => 'image/jpg,image/png', 'id' => 'core-file-img-3', 'class' => 'form-control form-with-100']) !!}
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6 col-sm-3 col-md-3">
+                            <div class="form-group">
+                                {!! Form::file('img[]', ['accept' => 'image/jpg,image/png', 'id' => 'core-file-img-4', 'class' => 'form-control form-with-100']) !!}
+                            </div>
+                        </div>
+
                     </div>
 
 
                     <div class="row">
 
-                        <div class="col-md-6">
+                        <div class="col-xs-6 col-sm-6 col-md-6">
                             <div class="form-group">
                                 {!! Form::label('codigo_producto', 'Codigo producto') !!}
                                 {!! Form::text('codigo_producto','', array('class'=> 'form-control form-with-100 form-group-validate val_text_num', 'placeholder' => 'Codigo del producto')) !!}
                             </div>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-xs-6 col-sm-6 col-md-6">
                             <div class="form-group">
                                 {!! Form::label('nombre', 'Nombre') !!}
                                 {!! Form::text('nombre', '', array('class'=> 'form-control form-with-100 form-group-validate val_text_num', 'placeholder' => 'Nombre')) !!}
                             </div>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-xs-6 col-sm-6 col-md-6">
                             <div class="form-group">
                                 {!! Form::label('cantidad_disponible', 'Cantidad disponible') !!}
                                 {!!  Form::number('cantidad_disponible', '0', ['class'=> 'form-control form-with-100 form-group-validate val_num'])  !!}
                             </div>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-xs-6 col-sm-6 col-md-6">
                             <div class="form-group">
                                 {!! Form::label('precio', 'Precio') !!}
                                 {!! Form::text('precio', '', array('class'=> 'form-control form-with-100 form-group-validate val_double', 'placeholder' => 'Precio')) !!}
                             </div>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-xs-6 col-sm-6 col-md-6">
                             <div class="form-group">
                                 {!! Form::label('oferta_id', 'Oferta del producto') !!}
                                 {!! Form::select('oferta_id', $ofertasList,Input::old('oferta_id'),
@@ -85,7 +116,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-xs-6 col-sm-6 col-md-6">
                             <div class="form-group">
                                 {!! Form::label('fabricante_id', 'Fabricante') !!}
                                 {!! Form::select('fabricante_id', $fabricantesList,Input::old('fabricante_id'),
@@ -93,7 +124,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-xs-12 col-sm-6 col-md-6">
                             <div class="form-group">
                                 {!! Form::label('estado', 'Estado del producto') !!}
                                 {!! Form::select('estado', array('1' => 'Disponible para el publico', '0' => 'No disponible para el publico'),
