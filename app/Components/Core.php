@@ -11,6 +11,7 @@ use App\Categoria;
 use App\Empresa;
 use App\Perfil;
 use App\Contacto;
+use App\Producto;
 use App\ProductoHasCategoria;
 use App\Tienda;
 use App\User;
@@ -18,6 +19,7 @@ use App\UserHasPerfil;
 use App\UsuarioEmpleadoInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class Core
 {

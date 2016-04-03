@@ -15,7 +15,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Str;
 
 class TiendaController extends Controller
 {
@@ -64,35 +66,49 @@ class TiendaController extends Controller
     {
         if ($request->ajax() ) {
 
-            if (Core::existTiendaRoute($request['store_route']) === 0)
+            $newRoute = Str::slug($request['store_route']);
+
+            if (Core::existTiendaRoute($newRoute) === 0)
             {
-                $tienda = new Tienda();
-                $tienda->fill($request->all());
+                DB::beginTransaction();
+                try {
+                    $tienda = new Tienda();
+                    $tienda->fill($request->all());
+                    $tienda->store_route = $newRoute;
 
-                if ($request->file('foto') )
-                {
-                    // Guardar la nueva imagen en el disco
-                    $filePhotoTienda = $request->file('foto');
-                    $namePhotoTienda = 'store-'.\Auth::user()->id . Carbon::now()->second . $filePhotoTienda->getClientOriginalName();
-                    \Storage::disk('photo_store')->put($namePhotoTienda, \File::get($filePhotoTienda));
+                    if ($request->file('foto')) {
+                        // Guardar la nueva imagen en el disco
+                        $filePhotoTienda = $request->file('foto');
+                        $namePhotoTienda = 'store-' . \Auth::user()->id . Carbon::now()->second . $filePhotoTienda->getClientOriginalName();
+                        \Storage::disk('photo_store')->put($namePhotoTienda, \File::get($filePhotoTienda));
 
-                    $tienda->foto = $namePhotoTienda;
+                        $tienda->foto = $namePhotoTienda;
 
-                    // FALTA ELIMINAR LA VIEJA IMAGEN DEL DISCO DURO
+                        // FALTA ELIMINAR LA VIEJA IMAGEN DEL DISCO DURO
+                    }
+
+                    $empresa = Empresa::where('users_id', \Auth::user()->id)->first();
+
+                    $tienda->empresa_id = $empresa->id;
+                    $tienda->save();
+
+                    // Obtener nombre y ruta de la foto de la tienda
+                    $tienda->foto = URL::to('/') . '/media/photo-store/' . $tienda->foto;
+                    $tienda->store_route = URL::to('/') . '/tienda/' . $tienda->store_route;
+
+                    DB::commit();
+                    return response()->json([
+                        'tienda' => $tienda
+                    ]);
+
+                } catch (\Exception $e ) {
+                    DB::rollback();
+
+                    return response()->json([
+                        'message' => 'Sucedio un error.'
+                    ]);
+
                 }
-
-                $empresa = Empresa::where('users_id', \Auth::user()->id)->first();
-
-                $tienda->empresa_id = $empresa->id;
-                $tienda->save();
-
-                // Obtener nombre y ruta de la foto de la tienda
-                $tienda->foto = URL::to('/') . '/media/photo-store/' . $tienda->foto;
-                $tienda->store_route = URL::to('/') . '/tienda/' . $tienda->store_route;
-
-                return response()->json([
-                    'tienda' => $tienda
-                ]);
             }
 
             return response()->json([
@@ -100,6 +116,8 @@ class TiendaController extends Controller
             ]);
 
         }
+
+        abort(404);
     }
 
     /**
@@ -118,6 +136,8 @@ class TiendaController extends Controller
                'tienda' => $tienda
             ]);
         }
+
+        abort(404);
     }
 
 
@@ -160,6 +180,8 @@ class TiendaController extends Controller
                 'tienda' => $tienda
             ]);
         }
+
+        abort(404);
     }
 
 
@@ -229,7 +251,7 @@ class TiendaController extends Controller
 
     }
 
-    public function verProductoInfo($tiendaRoute, $idProduct) {
+    public function verProductoInfo($tiendaRoute, $idProduct, $slug) {
 
         Core::isTiendaRouteValid($tiendaRoute);
 
@@ -278,5 +300,7 @@ class TiendaController extends Controller
                 'url'               => $url
             ]);
         }
+
+        abort(404);
     }
 }

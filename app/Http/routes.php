@@ -79,7 +79,7 @@ Route::get('tienda/{tiendaRoute}/info', [
 ]);
 
 // Mostrar un producto
-Route::get('tienda/{tiendaRoute}/product/{idProduct}/show', [
+Route::get('tienda/{tiendaRoute}/producto/{idProduct}/{slug}', [
     'uses'  => 'Admin\Tienda\TiendaController@verProductoInfo',
     'as'    => 'store.front.product.show'
 ]);
@@ -104,9 +104,15 @@ Route::get('tienda/car/show', [
 ]);
 
 Route::get('tienda/car/add/{idProduct}/', [
+    // 'middleware' => 'auth',
     'uses'   => 'Admin\Car\CarController@add',
     'as'    => 'store.front.product.orden.add'
 ]);
+
+
+
+
+
 
 
 /*

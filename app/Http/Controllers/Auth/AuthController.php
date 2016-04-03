@@ -8,6 +8,7 @@ use App\User;
 use Carbon\Carbon;
 use App\UserHasPerfil;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -91,7 +92,7 @@ class AuthController extends Controller
 
             $perfil = new Perfil([
                 'rol'           => 'normal',
-                'perfil_route'  => $data['name'] . '-' .Carbon::createFromTimestamp(0)->diffInSeconds() . '-' . str_random(10),//.random_bytes(5)
+                'perfil_route'  => Str::slug($data['name'] . ' '. $data['paterno'] . ' ' .Carbon::createFromTimestamp(0)->diffInSeconds()), // str_random(10),//.random_bytes(5)
                 'cover'         => 'cover.png'
             ]);
             $perfil->save();
