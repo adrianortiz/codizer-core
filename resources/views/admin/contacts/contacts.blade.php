@@ -43,7 +43,7 @@
                 <div id="btn-group-to-contact" class="btn-group left" role="group" aria-label="...">
                     <button type="button" id="btn-new-contact" class="btn btn-default btn-sm">Nuevo contacto</button> <!-- data-toggle="modal" data-target="#modalNewContact" -->
                 </div>
-                <div id="btns-group-to-contact" class="btn-group right" role="group" aria-label="...">
+                <div id="btns-group-to-contact" class="btn-group right core-hidden" role="group" aria-label="...">
                     <button type="button" id="btn-edit-contact" class="btn btn-default btn-sm">Editar</button>
                     <button type="button" id="btn-delete-contact" class="btn btn-default btn-sm">Eliminar</button>
                 </div>
@@ -75,7 +75,7 @@
     <div id="continer-contact-shows" class="right-content-list">
        <div id="msg-list-vacio">Ningún contacto seleccionado.</div>
 
-       <div class="block-content-info-contact" id="info-contact">
+       <div class="block-content-info-contact core-hidden" id="info-contact">
             <div class="container-show-info-contact-a">
                 <div id="show-info-contact-empresa" class="core-show-sub-title">Contacto</div>
                 <div id="show-info-contact-nombre-completo" class="core-show-title-blue"></div>
@@ -115,106 +115,76 @@
 
                 <div>
                    <div>Descripción</div>
-                   <div  class="show-info-contact" id="show-info-contact-desc-info"></div>
+                   <div  class="show-info-contact" id="show-contact-desc-info"></div>
                </div>
             </div>
 
-            <div class="container-list-something">
-                <div class="core-show-title-blue">Dirección</div>
-
-                <div>
-                    <div>Descripción</div>
-                    <div class="show-info-contact" id="show-info-contact-desc-dir"></div>
+            <div id="core-info-contact-address">
+                <div class="container-list-something" id="core-content-address">
+                    <!-- Se agrega la informacion de la direccion por cada iteracion -->
                 </div>
 
-                <div>
-                    <div>Calle</div>
-                    <div class="show-info-contact" id="show-info-contact-calle"></div>
+                <div class="col-md-12" id="show-info-contact-desc">
+                    <div class="form-group">
+                        <button id="btn-update-address" type="button" class="btn btn-primary btn-sm btn-sm-radius btn-shadow-blue right">Editar Dirección</button>
+                    </div>
                 </div>
-
-                <div>
-                    <div>Número</div>
-                    <div class="show-info-contact" id="show-info-contact-num-dir"></div>
-                </div>
-
-                <div>
-                    <div>Piso/Edificio</div>
-                    <div class="show-info-contact" id="show-info-contact-p-e"></div>
-                </div>
-
-                <div>
-                    <div>Ciudad</div>
-                    <div class="show-info-contact" id="show-info-contact-cd"></div>
-                </div>
-
-                <div>
-                    <div>Código Postal</div>
-                    <div class="show-info-contact" id="show-info-contact-cp"></div>
-                </div>
-
-                <div>
-                    <div>Estado</div>
-                    <div class="show-info-contact" id="show-info-contact-edo"></div>
-                </div>
-
-                <div>
-                    <div>País</div>
-                    <div class="show-info-contact" id="show-info-contact-pais"></div>
-                </div>
-
             </div>
 
-            <div class="container-list-something">
-                <div class="core-show-title-blue">Teléfono</div>
-
-                <div>
-                    <div>Descripción</div>
-                    <div class="show-info-contact" id="show-info-contact-desc-tel"></div>
+            <div id="core-info-contact-phone">
+                <div class="container-list-something" id="core-content-phone">
+                    <!-- Se agrega la informacion del telefono por cada iteracion -->
                 </div>
 
-                <div>
-                    <div>Número</div>
-                    <div class="show-info-contact" id="show-info-contact-num-tel"></div>
+                <div class="col-md-12" id="show-info-contact-desc">
+                    <div class="form-group">
+                        <button id="btn-update-phone" type="button" class="btn btn-primary btn-sm btn-sm-radius btn-shadow-blue right">Editar Teléfono</button>
+                    </div>
                 </div>
-
             </div>
 
-           <div class="container-list-something">
-               <div class="core-show-title-blue">Correo</div>
-
-               <div>
-                   <div>Descripción</div>
-                   <div class="show-info-contact" id="show-info-contact-desc-mail"></div>
+           <div id="core-info-contact-mail">
+               <div class="container-list-something" id="core-content-mail">
+                   <!-- Se agrega la informacion del telefono por cada iteracion -->
                </div>
 
-               <div>
-                   <div>Correo</div>
-                   <div class="show-info-contact" id="show-info-contact-mail"></div>
+               <div class="col-md-12" id="show-info-contact-desc">
+                   <div class="form-group">
+                       <button id="btn-update-mail" type="button" class="btn btn-primary btn-sm btn-sm-radius btn-shadow-blue right">Editar Correo</button>
+                   </div>
                </div>
-
            </div>
 
-           <div class="container-list-something">
-               <div class="core-show-title-blue">Redes sociales</div>
-
-               <div>
-                   <div>Red social</div>
-                   <div class="show-info-contact" id="show-info-contact-social"></div>
+           <div id="core-info-contact-social">
+               <div class="container-list-something" id="core-content-social">
+                   <!-- Se agrega la informacion de redes sociales por cada iteracion -->
                </div>
 
-               <div>
-                   <div>URL</div>
-                   <div class="show-info-contact" id="show-info-contact-url"></div>
+               <div class="col-md-12" id="show-info-contact-desc">
+                   <div class="form-group">
+                       <button id="btn-update-social" type="button" class="btn btn-primary btn-sm btn-sm-radius btn-shadow-blue right">Editar Redes sociales</button>
+                   </div>
                </div>
-
            </div>
         </div>
 
-        <div id="form-register">
+        <div id="form-register" class="core-hidden">
             @include('admin.contacts.patials.contact-register')
         </div>
-        <div id="form-edit">
+        <div id="form-edit" class="core-hidden">
             @include('admin.contacts.patials.contact-edit')
+        </div>
+        <div id="address-edit" class="core-hidden">
+            @include('admin.contacts.patials.address-edit')
+        </div>
+        <div id="phone-edit" class="core-hidden">
+            @include('admin.contacts.patials.phone-edit')
+        </div>
+        <div id="mail-edit" class="core-hidden">
+            @include('admin.contacts.patials.mail-edit')
+        </div>
+        <div id="social-edit" class="core-hidden">
+            @include('admin.contacts.patials.social-edit')
         </div>
 
         {{-- Formulario seleccion de contacto --}}

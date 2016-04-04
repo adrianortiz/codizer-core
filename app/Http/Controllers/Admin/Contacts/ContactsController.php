@@ -14,6 +14,7 @@ use App\Http\Requests;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 
 class ContactsController extends Controller
@@ -65,84 +66,94 @@ class ContactsController extends Controller
      */
     public function store(Request $request)
     {
+//        dd($request->all());
         if ($request->ajax()) {
 
-            // Validar si se inserto una imagen si no es asi la imagen guardad sera unknow por default
-            $foto = 'unknow.png';
-            if ($request->file('foto'))
-            {
-                // Guardar la nueva imagen en el disco
-                $foto = 'contact-' .$request -> nombre. '_' .$request -> ap_paterno. '_' .$request -> ap_materno. '_' .Carbon::now()->second . $request->file('foto')->getClientOriginalName();
-                \Storage::disk('photo')->put($foto, \File::get($request->file('foto')));
+            DB::beginTransaction();
+            try {
+                // Validar si se inserto una imagen si no es asi la imagen guardad sera unknow por default
+                $foto = 'unknow.png';
+                if ($request->file('foto')) {
+                    // Guardar la nueva imagen en la carpeta photo_perfil
+                    $foto = 'contact-' . $request->nombre . '_' . $request->ap_paterno . '_' . $request->ap_materno . '_' . Carbon::now()->second . $request->file('foto')->getClientOriginalName();
+                    \Storage::disk('photo')->put($foto, \File::get($request->file('foto')));
+                }
+
+                // Contacto a registrar
+                $contact = new Contacto();
+                $contact->fill($request->all());
+                $contact->foto = $foto;
+                $contact->estado = 'iniciado';
+                $contact->save();
+
+                // Guardar direccion o direcciones del contacto
+                for ($i = 0; $i < count($request->desc_dir); $i++) {
+                    $contact_dir = new ContactAddress([
+                        "desc_dir" => $request->desc_dir[$i],
+                        "calle" => $request->calle[$i],
+                        "numero_dir" => $request->numero_dir[$i],
+                        "piso_edificio" => $request->piso_edificio[$i],
+                        "ciudad" => $request->ciudad[$i],
+                        "cp" => $request->cp[$i],
+                        "estado_dir" => $request->estado_dir[$i],
+                        "pais" => $request->pais[$i],
+                        "contacto_id" => $contact->id
+                    ]);
+                    $contact_dir->save();
+                }
+
+                // Guardar mail o mails del contacto
+                for ($i = 0; $i < count($request->desc_mail); $i++) {
+                    $contact_mail = new ContactMail([
+                        'desc_mail' => $request->desc_mail[$i],
+                        'email' => $request->email[$i],
+                        'contacto_id' => $contact->id
+                    ]);
+                    $contact_mail->save();
+                }
+
+                // Guardar telefono o telefonos del contacto
+                for ($i = 0; $i < count($request->desc_tel); $i++) {
+                    $contact_tel = new ContactPhone([
+                        'desc_tel' => $request->desc_tel[$i],
+                        'numero_tel' => $request->numero_tel[$i],
+                        'contacto_id' => $contact->id
+                    ]);
+                    $contact_tel->save();
+                }
+
+                // Guardar red social o redes sociales del contacto
+                for ($i = 0; $i < count($request->red_social_nombre); $i++) {
+                    $contact_social = new ContactSocial([
+                        'red_social_nombre' => $request->red_social_nombre[$i],
+                        'url' => $request->url[$i],
+                        'contacto_id' => $contact->id
+                    ]);
+                    $contact_social->save();
+                }
+
+                // Contacto a guardar en agenda
+                $agenda = new UserHasAgendaContactos([
+                    'users_id' => \Auth::user()->id,
+                    'contacto_id' => $contact->id
+                ]);
+                $agenda->save();
+
+                DB::commit();
+                return response()->json([
+                    'contacto' => $contact,
+                ]);
+
+            } catch (\Exception $e) {
+                DB::rollback();
+
+                return response()->json([
+                    'error' => 'Ocurrio un error.',
+                    'case' => $e
+                ]);
             }
-
-            // Contacto a registrar
-            $contact = new Contacto([
-                'foto'          => $foto,
-                'nombre'        => $request -> nombre,
-                'ap_paterno'    => $request -> ap_paterno,
-                'ap_materno'    => $request -> ap_materno,
-                'sexo'          => $request -> sexo,
-                'f_nacimiento'  => $request -> f_nacimiento,
-                'profesion'     => $request -> profesion,
-                'estado_civil'  => $request -> estado_civil,
-                'estado'        => 'iniciado',
-                'desc_contacto' => $request -> desc_contacto
-            ]);
-            $contact -> save();
-
-            $contact_dir = new ContactAddress([
-                'desc_dir'      => $request -> desc_dir,
-                'calle'         => $request -> calle,
-                'numero_dir'    => $request -> numero_dir,
-                'piso_edificio' => $request -> piso_edificio,
-                'ciudad'        => $request -> ciudad,
-                'cp'            => $request -> cp,
-                'estado_dir'    => $request -> estado_dir,
-                'pais'          => $request -> pais,
-                'contacto_id'   => $contact->id
-            ]);
-            $contact_dir -> save();
-
-            $contact_mail = new ContactMail([
-                'desc_mail'     => $request -> desc_mail,
-                'email'         => $request -> email,
-                'contacto_id'   => $contact->id
-            ]);
-            $contact_mail -> save();
-
-            $contact_tel = new ContactPhone([
-                'desc_tel'     => $request -> desc_tel,
-                'numero_tel'         => $request -> numero_tel,
-                'contacto_id'   => $contact->id
-            ]);
-            $contact_tel -> save();
-
-            $contact_social = new ContactSocial([
-                'red_social_nombre' => $request -> red_social_nombre,
-                'url'               => $request -> url,
-                'contacto_id'       => $contact -> id
-            ]);
-            $contact_social -> save();
-
-            // Contacto a guardar en agenda
-            $agenda = new UserHasAgendaContactos([
-                'users_id'      => \Auth::user() -> id,
-                'contacto_id'   => $contact -> id
-            ]);
-
-            if ( $agenda -> save() )
-                $message = 'Contacto guardado';
-            else
-                $message = 'No se pudo guardar el contacto.';
-
-            return response()->json([
-                'message' => $message,
-                'contacto' => $contact,
-            ]);
-        } else {
-            abort(404);
         }
+        abort(404);
     }
 
     /**
@@ -154,10 +165,18 @@ class ContactsController extends Controller
     public function show(Request $request)
     {
         if ($request->ajax()) {
-            $contacto = Core::getContactInfo($request['id']);
+            $contacto = Core::getContactInfo($request->id);
+            $contactoAddress = Core::getContactAddress($request->id);
+            $contactoPhone = Core::getContactPhone($request->id);
+            $contactoMail = Core::getContactMail($request->id);
+            $contactoSocial = Core::getContactSocial($request->id);
 
             return response()->json([
                 'contacto' => $contacto,
+                'address'  => $contactoAddress,
+                'phone'    => $contactoPhone,
+                'mail'     => $contactoMail,
+                'social'   => $contactoSocial
             ]);
         } else {
             abort(404);
@@ -184,6 +203,7 @@ class ContactsController extends Controller
      */
     public function update(Request $request)
     {
+        dd($request->all());
         if ($request->ajax()) {
 
 

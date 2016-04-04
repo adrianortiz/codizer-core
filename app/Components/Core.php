@@ -8,6 +8,10 @@
 namespace App\Components;
 
 use App\Categoria;
+use App\ContactAddress;
+use App\ContactMail;
+use App\ContactPhone;
+use App\ContactSocial;
 use App\Empresa;
 use App\Perfil;
 use App\Contacto;
@@ -130,14 +134,52 @@ class Core
      * @return mixed
      */
     public function getContactInfo($id){
-        return Contacto::join('contact_address', 'contacto.id', '=', 'contact_address.contacto_id')
-            ->join('contact_phone', 'contacto.id', '=', 'contact_phone.contacto_id')
-            ->join('contact_mail', 'contacto.id', '=', 'contact_mail.contacto_id')
-            ->join('contact_social','contacto.id', '=', 'contact_social.contacto_id')
-            ->where('contacto.id', $id)
-            ->select('contacto.id', 'foto', 'nombre', 'ap_paterno', 'ap_materno', 'sexo', 'f_nacimiento', 'profesion', 'estado_civil', 'estado', 'desc_contacto',
-                'desc_dir', 'calle', 'numero_dir', 'piso_edificio', 'ciudad', 'cp', 'estado_dir', 'pais',
-                'desc_tel', 'numero_tel', 'desc_mail', 'email', 'red_social_nombre', 'url')
+        return Contacto::where('contacto.id', $id)
+            ->select('id', 'foto', 'nombre', 'ap_paterno', 'ap_materno', 'sexo', 'f_nacimiento', 'profesion', 'estado_civil', 'estado', 'desc_contacto')
+            ->get();
+    }
+
+    /**
+     * Get all address that a contact has
+     * @param $id
+     */
+    public function getContactAddress($id){
+        return ContactAddress::join('contacto', 'contacto.id', '=', 'contact_address.contacto_id')
+            ->where('contacto_id', $id)
+            ->select('contact_address.id', 'desc_dir', 'calle', 'numero_dir', 'piso_edificio', 'ciudad', 'cp', 'estado_dir', 'pais')
+            ->get();
+    }
+
+    /**
+     * Get all phones that a contact has
+     * @param $id
+     */
+    public function getContactPhone($id){
+        return ContactPhone::join('contacto', 'contacto.id', '=', 'contact_phone.contacto_id')
+            ->where('contacto_id', $id)
+            ->select('contact_phone.id', 'desc_tel', 'numero_tel')
+            ->get();
+    }
+
+    /**
+     * Get all emails that a contact has
+     * @param $id
+     */
+    public function getContactMail($id){
+        return ContactMail::join('contacto', 'contacto.id', '=', 'contact_mail.contacto_id')
+            ->where('contacto_id', $id)
+            ->select('contact_mail.id', 'desc_mail', 'email')
+            ->get();
+    }
+
+    /**
+     * Get all social network that a contact has
+     * @param $id
+     */
+    public function getContactSocial($id){
+        return ContactSocial::join('contacto', 'contacto.id', '=', 'contact_social.contacto_id')
+            ->where('contacto_id', $id)
+            ->select('contact_social.id', 'red_social_nombre', 'url')
             ->get();
     }
 
