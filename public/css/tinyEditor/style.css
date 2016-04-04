@@ -1,0 +1,47 @@
+#tinyeditor {border:none; margin:0; padding:0; font:14px 'Courier New',Verdana}
+.tinyeditor {border:2px solid #F2F2F2; padding:0; font:12px Verdana,Arial}
+.tinyeditor iframe {border:none; overflow-x:hidden}
+.tinyeditor-header {height:36px; border-bottom:2px solid #F2F2F2; background:#FFF; padding-top:2px}
+.tinyeditor-header select {float:left; margin-top:5px}
+.tinyeditor-font {margin-left:12px}
+.tinyeditor-size {margin:0 3px}
+.tinyeditor-style {margin-right:12px}
+.tinyeditor-divider {float:left; width:2px; height:30px; background:#F2F2F2; margin: 0 3px}
+.tinyeditor-control {float:left; width:34px; height:30px; cursor:pointer; background-image:url(images/icons.png)}
+.tinyeditor-control:hover {background-color: #F2F2F2; background-position:30px 0; border-radius: 4px;}
+.tinyeditor-footer {height:32px; border-top:1px solid #F2F2F2; background:#F2F2F2}
+.toggle {float:left; background:url(images/icons.png) -34px 2px no-repeat; padding:9px 13px 0 31px; height:30px; border-right:1px solid #ccc; cursor:pointer; color:#666}
+.toggle:hover {background-color:#fff}
+.resize {float:right; height:32px; width:32px; background:url(images/resize.gif) 15px 15px no-repeat; cursor:s-resize}
+#editor {cursor:text; margin:10px}
+
+/* Codizer Style */
+.tinyeditor {
+    /*width: 99% !important; */
+    border-radius: 6px;
+}
+
+.tinyeditor-font, .tinyeditor-size, .tinyeditor-style {
+    width: auto !important;
+    height: auto !important;
+    border: solid 2px #F2F2F2 !important;
+}
+
+#editor {
+    width: 96% !important;
+}
+
+.tinyeditor iframe {
+   /* width: 100%; */
+}
+
+.form-core-textarea {
+    height: inherit !important;
+    border: solid 0 red !important;
+    border-radius: 0;
+    padding: 10px !important;
+}
+
+.form-core-textarea:focus {
+    border-bottom: solid 0 red !important;
+}
