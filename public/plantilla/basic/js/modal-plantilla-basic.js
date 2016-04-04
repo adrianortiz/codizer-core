@@ -13,7 +13,7 @@ function fillModalProduct(result)
     $('#show-info-product-precio-descuento').text('$' + result.product.precio + ' ' + result.product.tipo_oferta + ' ' + result.product.regla_porciento + '%');
     $('#show-info-product-final-price').text('$' + result.finalPrice);
 
-    $('#show-info-product-desc').text(result.product.desc_producto);
+    $('#show-info-product-desc').html(result.product.desc_producto);
 
 
     $('#show-info-product-categorias').empty();

@@ -16,6 +16,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Str;
 
 class ProductsController extends Controller
 {
@@ -81,26 +82,13 @@ class ProductsController extends Controller
 
         if ($request->ajax()) {
 
-            /*
-            $producto = new Producto([
-                'codigo_producto'       => $request['codigo_producto'],
-                'cantidad_disponible'   => $request['cantidad_disponible'],
-                'nombre'                => $request['nombre'],
-                'precio'                => $request['precio'],
-                'desc_producto'         => $request['desc_producto'],
-                'estado'                => $request['estado'],
-                'fabricante_id'         => $request['fabricante_id'],
-                'oferta_id'             => $request['oferta_id'],
-                'users_id'              => \Auth::user()->id
-            ]);
-            */
-
             DB::beginTransaction();
             try {
 
                 $producto = new Producto();
                 $producto->fill($request->all());
                 $producto->users_id = \Auth::user()->id;
+                $producto->slug = Str::slug($request['nombre']);
                 $producto->save();
 
                 for ($i = 0; $i < count($request->file('img')); $i++) {
@@ -108,7 +96,7 @@ class ProductsController extends Controller
                     $filePhotoProduct = $request->file('img')[$i];
 
                     // Validate if object selected has data
-                    if ( $filePhotoProduct != null) {
+                    if ($filePhotoProduct != null) {
 
                         $namePhotoProduct = 'product-' . \Auth::user()->id . Carbon::now()->second . $filePhotoProduct->getClientOriginalName();
                         \Storage::disk('photo_product')->put($namePhotoProduct, \File::get($filePhotoProduct));
@@ -154,17 +142,16 @@ class ProductsController extends Controller
                     'photoProducto' => $photoProducto,
                 ]);
 
-            } catch(\Exception $e ) {
+            } catch (\Exception $e) {
                 DB::rollback();
 
                 return response()->json([
                     'error' => 'Ocurrio un error.',
-                    'case' => $e
+                    'case'  => $e
                 ]);
-
             }
-
         }
+
 
         abort(404);
     }

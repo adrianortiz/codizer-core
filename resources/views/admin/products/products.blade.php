@@ -1,5 +1,8 @@
 @extends('layout-core')
 
+@section('extra-css')
+@endsection
+
 @section('title', 'Productos')
 
 @section('title-header', 'Productos')
@@ -155,25 +158,35 @@
     <script src="{{ asset('/js/codizer-validate.js') }}"></script>
     <script src="{{ asset('/js/core-products.js') }}"></script>
 
+<script src="{{ asset('/js/tinyEditor/tiny.editor.js') }}"></script>
+<script src="{{ asset('/js/tinyEditor/tiny.editor.packed.js') }}"></script>
 
-    <!--
-    <link type="text/css" rel="stylesheet" href="{{ asset('/css/mootools/mooeditable/MooEditable.css') }}">
-    <link type="text/css" rel="stylesheet" href="{{ asset('/css/mootools/mooeditable/MooEditable.Extras.css') }}">
-    <link type="text/css" rel="stylesheet" href="{{ asset('/css/mootools/mooeditable/MooEditable.SilkTheme.css') }}">
 
-    <script src="{{ asset('/js/mootools/mootools.js') }}"></script>
-    <script src="{{ asset('/js/mootools/mooeditable/MooEditable.js') }}"></script>
-    <script src="{{ asset('/js/mootools/mooeditable/MooEditable.UI.MenuList.js') }}"></script>
-    <script src="{{ asset('/js/mootools/mooeditable/MooEditable.Extras.js') }}"></script>
 
-<script type="text/javascript">
-    var myMooEditable = new MooEditable('textarea-1', {
-        handleSubmit: false,
-        onRender: function() {
-            alert('Done rendering.');
-        }
+<script>
+    var editor = new TINY.editor.edit('editor', {
+        id: 'tinyeditor',
+        width: 564,
+        height: 300,
+        cssclass: 'tinyeditor',
+        controlclass: 'tinyeditor-control',
+        rowclass: 'tinyeditor-header',
+        dividerclass: 'tinyeditor-divider',
+        controls: ['bold', 'italic', 'underline', 'strikethrough', '|', 'subscript', 'superscript', '|',
+            'orderedlist', 'unorderedlist', '|', 'outdent', 'indent', '|', 'leftalign',
+            'centeralign', 'rightalign', 'blockjustify', '|', 'unformat', 'n', 'undo', 'redo', '|',
+            'font', 'size', 'style', '|', 'image', 'hr', 'link', 'unlink', '|', 'print'],
+        footer: true,
+        fonts: ['Verdana','Arial','Georgia','Trebuchet MS'],
+        xhtml: true,
+        cssfile: 'custom.css',
+        bodyid: 'editor',
+        footerclass: 'tinyeditor-footer',
+        toggle: {text: 'source', activetext: 'wysiwyg', cssclass: 'toggle'},
+        resize: {cssclass: 'resize'}
     });
-    var myMooEditableMenuList = new MooEditable.UI.MenuList([options]);
 </script>
-    -->
+
+<link type="text/css" rel="stylesheet" href="{{ asset('/css/tinyEditor/style.css') }}">
+
 @endsection
