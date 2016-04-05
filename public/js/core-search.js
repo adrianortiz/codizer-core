@@ -9,7 +9,8 @@
         App.SearchUI();
     },
         ShowSearchUI: function() {
-            $('#call-seach').click( function() {
+            $('#call-seach').click( function(e) {
+                e.preventDefault();
                 $('.core-search-container').fadeIn(300);
                 $('.core-search').addClass('search-ui-in');
                 $('.core-search-suggestions').addClass('search-result-ui-in');

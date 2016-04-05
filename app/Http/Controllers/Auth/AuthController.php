@@ -72,9 +72,9 @@ class AuthController extends Controller
             // Contacto a registrar
             $contact = new Contacto([
                 'foto'          => 'unknow.png',
-                'nombre'        => $data['name'],
-                'ap_paterno'    => $data['paterno'],
-                'ap_materno'    => $data['materno'],
+                'nombre'        => ucwords(strtolower($data['name'])),
+                'ap_paterno'    => ucwords(strtolower($data['paterno'])),
+                'ap_materno'    => ucwords(strtolower($data['materno'])),
                 'estado'        => 'iniciado',
                 'profesion'     => '-'
             ]);

@@ -6,6 +6,7 @@ use App\Contacto;
 use App\Facades\Core;
 use App\Http\Requests;
 use App\User;
+use App\UserHasFollowerUser;
 use App\UserHasFriendUser;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -41,7 +42,11 @@ class PerfilController extends Controller
             ->where('users_id_friend', $idUserView->id)
             ->count();
 
-        return view('admin.social.perfil', compact('perfil', 'contacto', 'userPerfil', 'userContacto', 'contacts', 'friends', 'followers', 'idUserView', 'isMyFriend'));
+        $amIFollower = UserHasFollowerUser::where('users_id', \Auth::user()->id)
+            ->where('users_id_followers', $idUserView->id)
+            ->count();
+
+        return view('admin.social.perfil', compact('perfil', 'contacto', 'userPerfil', 'userContacto', 'contacts', 'friends', 'followers', 'idUserView', 'isMyFriend', 'amIFollower'));
     }
 
     /**
@@ -135,6 +140,16 @@ class PerfilController extends Controller
         abort(404);
     }
 
+    /**
+     * Agrega o quita a un usuario de tu lista de amigos
+     *
+     * Si agregas a un usuario a tu lista de amigos
+     * por defecto también serás agregado a su
+     * lista de amigos y viceversa
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function addOrNotAddToFriend(Request $request) {
 
         if ( $request->ajax() ) {
@@ -146,16 +161,28 @@ class PerfilController extends Controller
             $result = null;
 
             if ($isMyFriend === 0) {
+
                 $addFriend = new UserHasFriendUser();
-                $addFriend->users_id = \Auth::user()->id;
+                $addFriend->users_id        = \Auth::user()->id;
                 $addFriend->users_id_friend = $request['id'];
                 $addFriend->save();
+
+                $addFriend = new UserHasFriendUser();
+                $addFriend->users_id        = $request['id'];
+                $addFriend->users_id_friend = \Auth::user()->id;
+                $addFriend->save();
+
                 $result = 1;
 
             } else {
                 UserHasFriendUser::where('users_id', \Auth::user()->id)
                     ->where('users_id_friend', $request['id'])
                     ->delete();
+
+                UserHasFriendUser::where('users_id', $request['id'])
+                    ->where('users_id_friend', \Auth::user()->id)
+                    ->delete();
+
                 $result = 0;
             }
 
@@ -163,5 +190,42 @@ class PerfilController extends Controller
                 'result' => $result
             ]);
         }
+
+        abort(404);
+    }
+
+
+    public function addOrNotAddToFollower(Request $request) {
+
+        if ( $request->ajax() ) {
+
+            $amIFollower = UserHasFollowerUser::where('users_id', \Auth::user()->id)
+                ->where('users_id_followers', $request['id'])
+                ->count();
+
+            $result = null;
+
+            if ($amIFollower === 0) {
+
+                $addFollower = new UserHasFollowerUser();
+                $addFollower->users_id        = \Auth::user()->id;
+                $addFollower->users_id_followers = $request['id'];
+                $addFollower->save();
+
+                $result = 1;
+
+            } else {
+                UserHasFollowerUser::where('users_id', \Auth::user()->id)
+                    ->where('users_id_followers', $request['id'])
+                    ->delete();
+
+                $result = 0;
+            }
+
+            return response()->json([
+                'result' => $result
+            ]);
+        }
+
     }
 }

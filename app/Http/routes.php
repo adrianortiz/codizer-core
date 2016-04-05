@@ -147,10 +147,16 @@ Route::group(['middleware' => 'auth'], function () {
             'as'    => 'contact.photo.store'
         ]);
 
-        // Add contact to my friends
+        // Add or delete user to my friends
         Route::get('perfil/to/friend', [
            'uses'   => 'Admin\Social\PerfilController@addOrNotAddToFriend',
             'as'    => 'contacto.to.friend'
+        ]);
+
+        // Add user to my followers
+        Route::get('perfil/to/follower', [
+           'uses'   => 'Admin\Social\PerfilController@addOrNotAddToFollower',
+            'as'    => 'contacto.to.follower'
         ]);
 
 

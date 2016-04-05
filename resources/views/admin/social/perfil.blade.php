@@ -84,7 +84,15 @@
             <a class="btn" href="#" role="button">Video</a>
         </div>
         <div id="options-menu-seguir">
-            <a class="btn" href="#" role="button">+ Seguir</a>
+            @if( !($userPerfil[0]->perfil_route == $perfil[0]->perfil_route) )
+                @if($amIFollower === 0)
+                    <a href="#" class="btn" role="button" title="Comenzar a seguir">+ Seguir</a>
+                @else
+                    <a href="#" class="btn" role="button" title="Dejar de seguir">- Seguir</a>
+                @endif
+            @else
+                <button href="#" class="btn" role="button" title="Dejar de seguir"> - </button>
+            @endif
         </div>
         <div id="options-menu-amigo" class="dropdown">
             <button class="btn btn-sm dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -154,7 +162,13 @@
         </div>
     </div>
 
+    <!-- TO FRIEND -->
     {!! Form::open(['route' => 'contacto.to.friend', 'method' => 'GET', 'id' => 'form-add-to-friend']) !!}
+    {!! Form::hidden('id', $idUserView->id) !!}
+    {!! Form::close() !!}
+
+    <!-- TO FALLOWER -->
+    {!! Form::open(['route' => 'contacto.to.follower', 'method' => 'GET', 'id' => 'form-add-to-fallower']) !!}
     {!! Form::hidden('id', $idUserView->id) !!}
     {!! Form::close() !!}
 
