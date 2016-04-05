@@ -55,6 +55,7 @@
   left: 0;
   background-color: rgba(#535353, 0.7);
   z-index: 1000;
+  overflow: hidden;
 
   .core-search {
     width: 100%;
@@ -70,7 +71,7 @@
   .core-search-suggestions {
     margin: 0 auto;
     padding: 0 auto;
-    width: 674px;
+    width: 670px;
     height: 322px;
     @include prefixer(max-height, calc(100% - 90px));
     overflow: auto;
@@ -143,7 +144,7 @@
 }
 
 #search-suggestions-a {
-  width: 490px;
+  width: 480px;
   height: auto;
   border-right: solid 1px $gris-250;
   float: left;
@@ -163,24 +164,28 @@
 }
 
 #search-suggestions-b {
+  position: absolute;
   width: 184px;
   height: auto;
-  float: left;
   text-align: center;
+
+  margin-left: 480px;
 
   h3 {
     margin-top: 36px;
+    margin-bottom: 20px;
     font-size: 18px;
   }
 
   a {
     padding: 15px 30px;
-    margin-top: 24px;
+    margin-top: 2px;
     display: inline-block;
     font-size: 14px;
     width: 100%;
     text-decoration: none;
     color: $black-core;
+    @include prefixer(transition, .3s ease);
 
     &:hover {
       background-color: $gris-50;
