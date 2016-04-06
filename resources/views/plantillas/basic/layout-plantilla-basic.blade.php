@@ -29,7 +29,7 @@
                 <li><a href="{{ route('register') }}">@lang('core.register')</a></li>
             @else
                 <li>
-                    <a href="#">
+                    <a href="{{ route('store.front.product.orden.show', [$tienda->store_route]) }}">
                         <div><i class="fa fa-shopping-basket"> </i> <span class="txt-carrito">Carrito</span></div>
                     </a>
                 </li>

@@ -90,23 +90,28 @@ Route::get('tienda/product/show', [
     'as'    => 'store.front.product.show.ajax'
 ]);
 
-// Agregar al carrito
-Route::get('tienda/product/orden/store', [
-    'uses'  => 'Admin\Orden\OrdenController@store',
-    'as'    => 'store.front.product.orden.store'
-]);
 
-/// ========= PRUEBAS CON SESSION ========
+
+/// ========= CART SESSION ========
+
 // Mostrar carrito de una session
-Route::get('tienda/car/show', [
-   'uses'   => 'Admin\Car\CarController@show',
+Route::get('tienda/{tiendaRoute}/cart/show', [
+    // 'middleware' => 'auth',
+   'uses'   => 'Admin\Cart\CartController@show',
     'as'    => 'store.front.product.orden.show'
 ]);
 
-Route::get('tienda/car/add/{idProduct}/', [
-    // 'middleware' => 'auth',
-    'uses'   => 'Admin\Car\CarController@add',
-    'as'    => 'store.front.product.orden.add'
+// Agregar al carrito
+Route::get('tienda/product/orden/store', [
+    'uses'  => 'Admin\Cart\CartController@add',
+    'as'    => 'store.front.product.orden.store'
+]);
+
+
+// Eliminar carrito
+Route::get('tienda/cart/trash', [
+    'uses'   => 'Admin\Cart\CartController@trash',
+    'as'    => 'store.front.product.orden.trash'
 ]);
 
 

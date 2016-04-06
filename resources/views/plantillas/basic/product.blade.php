@@ -72,7 +72,7 @@
 
                 <div id="description-text-title">Descripción</div>
                 <div id="show-info-product-desc">
-                    <p>{{ $product->desc_producto }}</p>
+                    <p>{!! $product->desc_producto !!}</p>
                 </div>
 
             </div>
