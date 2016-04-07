@@ -17,6 +17,40 @@
 @import "../librerias/normalize";
 @import "../librerias/ed-grid/ed-grid";
 
+ul {
+  padding-left: 5px;
+
+  li {
+    list-style: none;
+    margin-top: 5px;
+  }
+}
+
+.cd-link {
+  font-weight: bold;
+}
+
+a {
+  color: $gris-400;
+  &:hover {
+    color: $gris-600;
+  }
+}
+
+.btn-danger {
+  background-color: $blanco;
+  color: $gris-600;
+  border: solid 2px $red-200 !important;
+  @include transition(.3s ease);
+  font-weight: 400 !important;
+
+  &:hover {
+    color: $gris-600;
+    background-color: rgba($red-200, 0.5);
+  }
+
+}
+
 
 .container-list-something-50 {
   width: 49%;
@@ -490,5 +524,9 @@ nav {
   .modal-icon {
     background-color: $gris-100 !important;
   }
+}
+
+.btn-order-quantity {
+  width: 40px !important;
 }
 

@@ -2,11 +2,15 @@ html,body {
   margin: 0;
   height: 100%;
   background-color: #F2F2F2;
+  // -webkit-font-smoothing: antialiased;
+  // -moz-osx-font-smoothing: grayscale;
+
 }
 
 // Quitar el focus de todos los elementos del DOM
-*:focus {
+*, *:focus {
   outline:0 !important;
+  @include box-sizing(border-box);
 }
 
 #container-ui {

@@ -3,3 +3,4 @@
 *.less linguist-vendored
 .env
 .idea
+.sass-cache
