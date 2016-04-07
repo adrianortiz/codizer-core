@@ -88,7 +88,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default btn-sm btn-sm-radius" data-dismiss="modal">Cancelar</button>
-                <button id="btn-iniciar-compra" type="button" class="btn btn-sm btn-border-yellow">Iniciar compra</button>
+                <a href="{{ route('store.front.product.orden.show', [$tienda->store_route]) }}" id="btn-iniciar-compra" type="button" class="btn btn-sm btn-border-yellow">Ir a mi carrito</a>
             </div>
         </div>
     </div>

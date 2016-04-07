@@ -66,20 +66,31 @@ class CartController extends Controller
      */
     public function add(Request $request)
     {
-        // dd($request->all());
+        if ($request->ajax()) {
 
-        $tiendaHasProduct = TiendaHasProducto::where('producto_id', $request['id'])->first();
-        $tienda = Tienda::findOrFail($tiendaHasProduct->tienda_id);
-        $product = Core::getProductoById( $tienda->id, $request['id'] );
+            $tiendaHasProduct = TiendaHasProducto::where('producto_id', $request['id'])->first();
+            $tienda = Tienda::findOrFail($tiendaHasProduct->tienda_id);
+            $product = Core::getProductoById( $tienda->id, $request['id'] );
 
-        // Piezas
-        $product->quantity = $request['cantidad'];
-        $product->final_price = Core::getFinalPriceByProduct($product->precio, $product->tipo_oferta, $product->regla_porciento);
+            $cart = Session::get('cart');
 
-        $cart = Session::get('cart');
-        $cart[$product->id] = $product;
-        Session::put('cart', $cart);
+            if (array_key_exists($product->product_id, $cart))
+                $product->quantity = ($cart[$product->product_id]->quantity + $request['cantidad']);
+            else
+                $product->quantity = $request['cantidad'];
 
+            $product->final_price = Core::getFinalPriceByProduct($product->precio, $product->tipo_oferta, $product->regla_porciento);
+
+
+            $cart[$product->product_id] = $product;
+            Session::put('cart', $cart);
+
+            return response()->json([
+                'message' => 'Se añadio a su carrito'
+            ]);
+        }
+
+        abort(404);
     }
 
     public function update($idProduct, $quantity)
