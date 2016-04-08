@@ -53,6 +53,11 @@
                 </tbody>
             </table>
             @endif
+
+                <a href="{{ route('payment') }}" class="btn">Pagar con Paypal</a>
+                <a href="#" class="btn">Tarjeta de credito</a>
+                <a href="#" class="btn">Deposito</a>
+
         </article>
     </section>
 

@@ -41,7 +41,7 @@
                         </div>
 
                         {!! Form::open(['route' => 'store.front.product.orden.store', 'method' => 'GET', 'id' => 'form-orden-store']) !!}
-                            {!! Form::hidden('id', $product->id, ['id' => 'id']) !!}
+                            {!! Form::hidden('id', $product->product_id, ['id' => 'id']) !!}
                         <div>
                             <div>{!! Form::label('nombre', 'Cantidad') !!}</div>
                             <div class="show-info-product">
