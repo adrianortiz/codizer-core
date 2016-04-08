@@ -56,6 +56,8 @@
                 var datos = $('#form-global-search').serializeArray();
                 var route = $('#form-global-search').attr('action');
                 var tablaUserSuggestions = $('#container-user-suggestions');
+                var tableItemsSuggestions = $('#container-product-suggestions');
+                var tableStoresSuggestions = $('#container-store-suggestions');
 
                 $.ajax({
                     url: route,
@@ -65,16 +67,45 @@
                     // async: false,
 
                     success: function( result ) {
+
                         $users = result['users'];
+                        $items = result['items'];
+                        $stores = result['stores'];
+
                         tablaUserSuggestions.empty();
-                        var count = 0;
+                        tableItemsSuggestions.empty();
+                        tableStoresSuggestions.empty();
+
+                        // Add users
+                        var countUsers = 0;
                         $($users).each(function(key, value) {
-                            count++;
-                            tablaUserSuggestions.append('<div class="suggestion"> <a href="/perfil/' + value.perfil_route + '"> <img src="/media/photo-perfil/'+ value.foto +'" /> <div> <h4>' + value.nombre + ' ' + value.ap_paterno + ' ' + value.ap_materno + '</h4> <h5>' + value.profesion + '</h5> </div> </a> <a href="/perfil/' + value.perfil_route + '" class="btn-suggestions-go">Ver</a> </div>');
+                            countUsers++;
+                            tablaUserSuggestions.append('<div class="suggestion"> <a href="/perfil/' + value.perfil_route + '"> <img src="' + result.urlImgUser + value.foto +'" /> <div> <h4>' + value.nombre + ' ' + value.ap_paterno + ' ' + value.ap_materno + '</h4> <h5>' + value.profesion + '</h5> </div> </a> <a href="/perfil/' + value.perfil_route + '" class="btn-suggestions-go">Ver</a> </div>');
                         });
 
-                        if (txtSearch.val() == "" || count == 0)
-                            $('#container-user-suggestions').html('<h5>No results</h5>');
+                        if (txtSearch.val() == "" || countUsers == 0)
+                            tablaUserSuggestions.html('<h5>No results</h5>');
+
+                        // Add items
+                        var countItems = 0;
+                        $($items).each( function(key, value) {
+                            countItems++;
+                            tableItemsSuggestions.append('<div class="suggestion"><a href="' + result.url + '/tienda/' + value.store_route + '/producto/'+ value.producto_id +'/'+ value.slug +'/" target="_blank"><img src="'+ result.urlImgItem + value.img +'" /><div><h4>' + value.product_name + '</h4><h5>'+ value.nombre +' - <span>$'+ value.precio + ' ' + value.tipo_oferta + ' ' + value.regla_porciento + '%</span></h5></div></a><a href="#" class="btn-suggestions-go">Ver</a></div>');
+                        });
+
+                        if (txtSearch.val() == "" || countItems == 0)
+                            tableItemsSuggestions.html('<h5>No results</h5>');
+
+                        // Add stores
+                        var countStores = 0;
+                        $($stores).each( function(key, value) {
+                           countStores++;
+                            tableStoresSuggestions.append('<div class="suggestion"> <a href="' + result.url + '/tienda/' + value.store_route +'/" target="_blank"> <img src="' + result.urlImgStore + value.foto + '" /> <div> <h4>' + value.nombre + '</h4> <h5>Official Store</h5> </div> </a> <a href="#" class="btn-suggestions-go">Ver</a> </div>');
+                        });
+
+                        if (txtSearch.val() == "" || countItems == 0)
+                            tableStoresSuggestions.html('<h5>No results</h5>');
+
                     }
 
                 }).fail(function(jqXHR, textStatus) {

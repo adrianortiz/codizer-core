@@ -105,14 +105,40 @@ class Core
      * @param $searh String
      * @return mixed
      */
-    public function searchGlobal($searh) {
-        return DB::table('users')
-            ->join('contacto', 'users.contacto_id', '=', 'contacto.id')
+    public function searchGlobalUser($searh) {
+        return User::join('contacto', 'users.contacto_id', '=', 'contacto.id')
             ->join('users_has_perfil', 'users.id', '=', 'users_has_perfil.users_id')
             ->join('perfil', 'users_has_perfil.perfil_id', '=', 'perfil.id')
             ->where(DB::raw('concat(nombre, " ", ap_paterno, " ", ap_materno)'), 'LIKE', '%'.$searh.'%')
             ->skip(0)->take(5)
             ->select('contacto.*', 'perfil.perfil_route')
+            ->get();
+    }
+
+    /**
+     * Serch items by name item, limited by 5 result
+     * Where name is between $search
+     *
+     * @param $searh
+     * @return mixed
+     */
+    public function searchGlobalItem($searh) {
+        return Tienda::join('tienda_has_producto', 'tienda.id', '=', 'tienda_has_producto.tienda_id')
+            ->join('producto', 'producto.id', '=', 'tienda_has_producto.producto_id')
+            ->join('oferta', 'producto.oferta_id', '=', 'oferta.id')
+            ->join('img_producto', 'producto.id', '=', 'img_producto.producto_id')
+            ->where('producto.nombre', 'LIKE', '%'.$searh.'%')
+            ->where('producto.estado', 1)
+            ->where('img_producto.principal', '1')
+            ->skip(0)->take(5)
+            ->select('producto.*', 'tienda_has_producto.producto_id', 'oferta.*', 'img_producto.*', 'tienda.*', 'producto.nombre AS product_name')
+            ->get();
+    }
+
+    public function searchGlobalStore($searh) {
+        return Tienda::where('nombre', 'LIKE', '%'.$searh.'%')
+            ->where('estado', 1)
+            ->skip(0)->take(5)
             ->get();
     }
 
@@ -408,8 +434,7 @@ class Core
      */
     public function getAllProductosByTiendaRoute( $storeRoute, $estadoProduct ) {
 
-        return DB::table('tienda')
-            ->join('tienda_has_producto', 'tienda.id', '=', 'tienda_has_producto.tienda_id')
+        return Tienda::join('tienda_has_producto', 'tienda.id', '=', 'tienda_has_producto.tienda_id')
             ->join('producto', 'producto.id', '=', 'tienda_has_producto.producto_id')
             ->join('oferta', 'producto.oferta_id', '=', 'oferta.id')
             ->join('img_producto', 'producto.id', '=', 'img_producto.producto_id')

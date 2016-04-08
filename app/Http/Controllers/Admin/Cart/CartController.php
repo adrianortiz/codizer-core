@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
@@ -93,29 +94,45 @@ class CartController extends Controller
         abort(404);
     }
 
-    public function update($idProduct, $quantity)
+    /**
+     * Update quantity of exist product cart list
+     *
+     * @param Request $request
+     * @return mixed
+     */
+    public function update(Request $request)
     {
-        $product = Producto::where('id', $idProduct)->first();
+        $tiendaHasProduct = TiendaHasProducto::where('producto_id', $request['id'])->first();
+        $tienda = Tienda::findOrFail($tiendaHasProduct->tienda_id);
+        $product = Core::getProductoById( $tienda->id, $request['id'] );
 
         $cart = Session::get('cart');
-        $cart[$product->id]->quantity = $quantity;
+        $cart[$product->product_id]->quantity = $request['cantidad'];
         Session::put('cart', $cart);
+
+        return Redirect::back()->with('message','Cantidad del Item actualizado.');
     }
 
     /**
-     * Eliminar un producto del carrito
-     *
-     * @param $idProduct
-     * @return \Illuminate\Http\RedirectResponse
+     * Delete a producto from cart
+     * @param Request $request
      */
-    public function delete($idProduct)
+    public function delete(Request $request)
     {
-        $product = Producto::where('id', $idProduct)->first();
+
+
+        /*
+        $tiendaHasProduct = TiendaHasProducto::where('producto_id', $request['id'])->first();
+        $tienda = Tienda::findOrFail($tiendaHasProduct->tienda_id);
+        $product = Core::getProductoById( $tienda->id, $request['id'] );
+
+        */
 
         $cart = Session::get('cart');
-        unset($cart[$product->id]);
+        unset($cart[$request['id']]);
         Session::put('cart', $cart);
 
+        return Redirect::back()->with('message','Item eliminado de la lista.');
     }
 
     /**
@@ -124,6 +141,8 @@ class CartController extends Controller
     public function trash()
     {
         Session::forget('cart');
+
+        return Redirect::back()->with('message','Item eliminado de la lista.');
     }
 
     /**
@@ -142,5 +161,36 @@ class CartController extends Controller
         }
 
         return $total;
+    }
+
+
+
+    public function orderDetail($tiendaRoute)
+    {
+        if(count(Session::get('cart')) <= 0 ) {
+            abort(404);
+        }
+
+        $cart = Session::get('cart');
+        $total = $this->total();
+
+        Core::isTiendaRouteValid($tiendaRoute);
+
+        if (!Auth::guest() ) {
+            $userContacto = Core::getUserContact();
+            $userPerfil = Core::getUserPerfil();
+        }
+
+        $tienda = Tienda::where('store_route', $tiendaRoute)->first();
+
+        if( $tienda->estado == 0 ) {
+            return view('plantillas.cerrado.index', compact('tienda'));
+        } else {
+
+            if ($tienda->store_route_platilla == 'basic') {
+                return view('plantillas.basic.order-detail', compact('tienda', 'userContacto', 'userPerfil', 'cart', 'total'));
+            }
+
+        }
     }
 }

@@ -107,13 +107,30 @@ Route::get('tienda/product/orden/store', [
     'as'    => 'store.front.product.orden.store'
 ]);
 
+// Update item from cart
+Route::put('tienda/product/orden/update', [
+    'uses'  => 'Admin\Cart\CartController@update',
+    'as'    => 'store.front.product.orden.update'
+]);
+
+Route::delete('tienda/product/orden/delete', [
+    'uses'  => 'Admin\Cart\CartController@delete',
+    'as'    => 'store.front.product.orden.delete'
+]);
 
 // Eliminar carrito
-Route::get('tienda/cart/trash', [
+Route::delete('tienda/cart/trash', [
     'uses'   => 'Admin\Cart\CartController@trash',
     'as'    => 'store.front.product.orden.trash'
 ]);
 
+
+/// ========= ORDER DETAIL =========
+Route::get('tienda/{tiendaRoute}/cart/order', [
+    'middleware' => 'auth',
+    'uses'   => 'Admin\Cart\CartController@orderDetail',
+    'as'    => 'store.front.product.orden.detail'
+]);
 
 
 

@@ -33,7 +33,7 @@
 
             @for($i = 0; $i < 3; $i++)
 
-                <div class="product-container" data-id="{{ $productos[$i]->id }}">
+                <div class="product-container" data-id="{{ $productos[$i]->producto_id }}">
                     <a href="{{ route('store.front.product.show', [$tienda->store_route, $productos[$i]->producto_id, $productos[$i]->slug]) }}">
                         <img src="{{ asset('/media/photo-product/' . $productos[$i]->img) }}">
                     </a>
