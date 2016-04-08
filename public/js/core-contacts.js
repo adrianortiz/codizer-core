@@ -150,9 +150,9 @@ function emptyAndRefillFieldsToShow(result){
 
     $('#core-content-address').empty();
     if(!result.address.length){
-        $('#group-edit-address').fadeOut();
+        $('#btn-edit-address').fadeOut();
     } else {
-        $('#group-edit-address').fadeIn();
+        $('#btn-edit-address').fadeIn();
         $.each(result.address, function (index, item) {
             $('#core-content-address').append(
                 '<div class="core-show-title-blue">Dirección ' + item.desc_dir + '</div>' +
@@ -170,9 +170,9 @@ function emptyAndRefillFieldsToShow(result){
 
     $('#core-content-phone').empty();
     if(!result.phone.length) {
-        $('#group-edit-phone').fadeOut();
+        $('#btn-edit-phone').fadeOut();
     } else {
-        $('#group-edit-phone').fadeIn();
+        $('#btn-edit-phone').fadeIn();
         $.each(result.phone, function (index, item) {
             if (item.desc_tel == "" && item.numero_tel == "") {
                 $('#core-content-phone').append(
@@ -192,9 +192,9 @@ function emptyAndRefillFieldsToShow(result){
 
     $('#core-content-mail').empty();
     if(!result.mail.length) {
-        $('#group-edit-mail').fadeOut();
+        $('#btn-edit-mail').fadeOut();
     } else {
-        $('#group-edit-mail').fadeIn();
+        $('#btn-edit-mail').fadeIn();
         $.each(result.mail, function (index, item) {
             if (item.desc_mail == "" && item.email == "") {
                 $('#core-content-mail').append(
@@ -214,9 +214,9 @@ function emptyAndRefillFieldsToShow(result){
 
     $('#core-content-social').empty();
     if(!result.social.length) {
-        $('#group-edit-social').fadeOut();
+        $('#btn-edit-social').fadeOut();
     } else {
-        $('#group-edit-social').fadeIn();
+        $('#btn-edit-social').fadeIn();
         $.each(result.social, function (index, item) {
             if (item.red_social_nombre == "" && item.url == "") {
                 $('#core-content-social').append(
@@ -241,11 +241,19 @@ function emptyAndRefillFieldsToShow(result){
 function hideElements(){
     $('#form-register').hide();
     $('#form-edit').hide();
+    $('#address-edit').hide();
+    $('#phone-edit').hide();
+    $('#mail-edit').hide();
+    $('#social-edit').hide();
     $('#info-contact').hide();
     $('#btn-edit-contact').show();
     $('#btns-group-to-contact').hide();
     document.getElementById("form-contact-to-create").reset();
     document.getElementById("form-contact-to-update").reset();
+    document.getElementById("form-address-to-update").reset();
+    document.getElementById("form-phone-to-update").reset();
+    document.getElementById("form-mail-to-update").reset();
+    document.getElementById("form-social-to-update").reset();
     $('.codizer-new-social-network').empty();
     $('.codizer-new-mail').empty();
     $('.codizer-new-phone').empty();
@@ -277,7 +285,6 @@ $(document).ready(function() {
     $('#btn-cancel-address').click(function () {
         hideElements();
         $('#core-content-form-address').empty();
-        $('#address-edit').hide();
         $('#msg-list-vacio').show();
         $('#btn-new-contact').show();
     });
@@ -285,7 +292,20 @@ $(document).ready(function() {
     $('#btn-cancel-phone').click(function () {
         hideElements();
         $('#core-content-form-phone').empty();
-        $('#phone-edit').hide();
+        $('#msg-list-vacio').show();
+        $('#btn-new-contact').show();
+    });
+
+    $('#btn-cancel-mail').click(function () {
+        hideElements();
+        $('#core-content-form-mail').empty();
+        $('#msg-list-vacio').show();
+        $('#btn-new-contact').show();
+    });
+
+    $('#btn-cancel-social').click(function () {
+        hideElements();
+        $('#core-content-form-social').empty();
         $('#msg-list-vacio').show();
         $('#btn-new-contact').show();
     });
@@ -338,8 +358,20 @@ $(document).ready(function() {
                         hideShowAlert('msj-success', result.message);
 
                         containerContacts.prepend( contactNewEdit(result) );
+                        var nContacts = parseInt($('#NContacts').html()) + 1;
+                        $('#NContacts').empty();
+                        $('#NContacts').append(nContacts);
+                        if(nContacts < 6){
+                            $('#core-contacts-container').append(
+                                '<a href="#" class="core-menu-list menu-list-option menu-lis-img" id="' + result.contacto.id + '">' +
+                                '<img src="http://localhost:8000/media/photo-perfil/' + result.contacto.foto + '">' +
+                                '<div class="list-contact-full-name">' + result.contacto.nombre + ' ' + result.contacto.ap_paterno + ' ' + result.contacto.ap_materno + '</div>' +
+                                '</a>'
+                            );
+                        }
+
+                        hideElements();
                         $('#msg-list-vacio').show();
-                        $('#btn-new-contact').show();
                         $('#list-vacio').remove();
                     }
                 }
@@ -785,7 +817,7 @@ $(document).ready(function() {
                 $('#modal-delete').fadeOut();
             });
 
-            // Eliminar nota
+            // Ejecutar accion de eliminar al pulsar si
             $('#si').click( function() {
 
                 $('.notificacion-text').removeClass('in');
@@ -809,6 +841,10 @@ $(document).ready(function() {
                         } else {
                             hideShowAlert('msj-success', result.message);
 
+                            var nContacts = parseInt($('#NContacts').html()) - 1;
+                            $('#NContacts').empty();
+                            $('#NContacts').append(nContacts);
+                            $('#' + result.remove).fadeOut();
                             tableTrTouched.fadeOut();
                             hideElements();
                         }

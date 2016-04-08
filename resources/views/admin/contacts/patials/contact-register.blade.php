@@ -6,7 +6,7 @@
 
     <div class="block-content-info-contact">
         {!! Form::open(['route' => 'contact.create', 'method' => 'POST', 'id' => 'form-contact-to-create']) !!}
-        <div class="tab-conten" id="registro">
+
             <ul class="nav nav-tabs" data-tabs="tabs">
                 <li class="active"><a href="#info" data-toggle="tab">Información</a></li>
                 <li><a href="#dir" data-toggle="tab">Dirección</a></li>
@@ -148,7 +148,6 @@
                 </div>
 
             </div>
-        </div>
 
         {!! Form::close() !!}
     </div>
