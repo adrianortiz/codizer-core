@@ -5,9 +5,11 @@
     </div>
 
     {!! Form::open(['route' => 'contact.update', 'method' => 'POST', 'id' => 'form-mail-to-update']) !!}
-    <div class="container-list-something form-group" id="core-content-form-mail">
-        <!-- Se agregan los campos correspondientes del correo -->
-    </div>
+        {!! Form::hidden('option', '4', ['id' => 'option-contact-to-update']) !!}
+        {!! Form::hidden('contacto_id', 'null', ['id' => 'contactId-contactMail-to-update']) !!}
+        <div class="container-list-something form-group" id="core-content-form-mail">
+            <!-- Se agregan los campos correspondientes del correo -->
+        </div>
     {!! Form::close() !!}
 
     <div class="container-list-something" id="show-info-contact-desc">

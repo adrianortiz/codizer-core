@@ -125,8 +125,8 @@
                 </div>
 
                 <div class="col-md-12" id="show-info-contact-desc">
-                    <div class="form-group">
-                        <button id="btn-update-address" type="button" class="btn btn-primary btn-sm btn-sm-radius btn-shadow-blue right">Editar Dirección</button>
+                    <div class="form-group" id="group-edit-address">
+                        <button id="btn-edit-address" type="button" class="btn btn-primary btn-sm btn-sm-radius btn-shadow-blue right">Editar Dirección</button>
                     </div>
                 </div>
             </div>
@@ -137,8 +137,8 @@
                 </div>
 
                 <div class="col-md-12" id="show-info-contact-desc">
-                    <div class="form-group">
-                        <button id="btn-update-phone" type="button" class="btn btn-primary btn-sm btn-sm-radius btn-shadow-blue right">Editar Teléfono</button>
+                    <div class="form-group" id="group-edit-phone">
+                        <button id="btn-edit-phone" type="button" class="btn btn-primary btn-sm btn-sm-radius btn-shadow-blue right">Editar Teléfono</button>
                     </div>
                 </div>
             </div>
@@ -149,8 +149,8 @@
                </div>
 
                <div class="col-md-12" id="show-info-contact-desc">
-                   <div class="form-group">
-                       <button id="btn-update-mail" type="button" class="btn btn-primary btn-sm btn-sm-radius btn-shadow-blue right">Editar Correo</button>
+                   <div class="form-group" id="group-edit-mail">
+                       <button id="btn-edit-mail" type="button" class="btn btn-primary btn-sm btn-sm-radius btn-shadow-blue right">Editar Correo</button>
                    </div>
                </div>
            </div>
@@ -161,8 +161,8 @@
                </div>
 
                <div class="col-md-12" id="show-info-contact-desc">
-                   <div class="form-group">
-                       <button id="btn-update-social" type="button" class="btn btn-primary btn-sm btn-sm-radius btn-shadow-blue right">Editar Redes sociales</button>
+                   <div class="form-group" id="group-edit-social">
+                       <button id="btn-edit-social" type="button" class="btn btn-primary btn-sm btn-sm-radius btn-shadow-blue right">Editar Redes sociales</button>
                    </div>
                </div>
            </div>
@@ -197,12 +197,6 @@
         {!! Form::hidden('id', 'null', ['id' => 'id-contact-to-delete']) !!}
         {!! Form::close() !!}
     </div>
-@endsection
-
-@section('modals')
-
-    @include('admin.contacts.patials.modal-contacto')
-
 @endsection
 
 @section('extra-js')

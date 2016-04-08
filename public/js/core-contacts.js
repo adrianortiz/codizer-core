@@ -21,6 +21,13 @@ function contactNewEdit(result) {
 }
 
 /**
+ * Imagen muestra antes de actualizar
+ */
+$('#foto-ud').change(function (e) {
+    $('#show-info-contact-foto-ud').attr('src', URL.createObjectURL(e.target.files[0]));
+});
+
+/**
  * Llena el formulario para actualizar informacion del contacto
  * @param contacto
  * Recibe el objeto con la informacion del contacto
@@ -52,14 +59,13 @@ function emptyAndRefillFieldsToUpdate(contacto) {
     $('#desc_contacto-ud').val(contacto.desc_contacto);
 }
 
-$('#foto-ud').change(function (e) {
-    $('#show-info-contact-foto-ud').attr('src', URL.createObjectURL(e.target.files[0]));
-});
 
 function emptyAndRefillPhoneFieldsToUpdate(phone) {
     $('#core-content-form-phone').empty();
     $.each(phone, function (index, item) {
+        $('#contactId-contactPhone-to-update').val(item.contacto_id);
         $('#core-content-form-phone').append(
+            '<input name="id[]" type="hidden" value="' + item.id + '">' +
             '<label for="desc_tel">Descripción</label><input class="form-control" name="desc_tel[]" type="text" value="' + item.desc_tel + '">' +
             '<label for="numero_tel">Número</label><input class="form-control" name="numero_tel[]" type="text" value="' + item.numero_tel + '">' +
             '<hr/>'
@@ -70,7 +76,9 @@ function emptyAndRefillPhoneFieldsToUpdate(phone) {
 function emptyAndRefillAddressFieldsToUpdate(address) {
     $('#core-content-form-address').empty();
     $.each(address, function (index, item) {
+        $('#contactId-contactAddress-to-update').val(item.contacto_id);
         $('#core-content-form-address').append(
+            '<input name="id[]" type="hidden" value="' + item.id + '">' +
             '<label for="desc_dir">Descripción</label><input class="form-control" name="desc_dir[]" type="text" value="' + item.desc_dir + '">' +
             '<label for="calle">Calle</label><input class="form-control" name="calle[]" type="text" value="' + item.calle + '">' +
             '<label for="numero_dir">Número</label><input class="form-control" name="numero_dir[]" type="text" value="' + item.numero_dir + '">' +
@@ -87,7 +95,9 @@ function emptyAndRefillAddressFieldsToUpdate(address) {
 function emptyAndRefillMailFieldsToUpdate(mail) {
     $('#core-content-form-mail').empty();
     $.each(mail, function (index, item) {
+        $('#contactId-contactMail-to-update').val(item.contacto_id);
         $('#core-content-form-mail').append(
+            '<input name="id[]" type="hidden" value="' + item.id + '">' +
             '<label for="desc_mail">Descripción</label><input class="form-control" name="desc_mail[]" type="text" value="' + item.desc_mail + '">' +
             '<label for="email">Correo</label><input class="form-control" name="email[]" type="text" value="' + item.email + '">' +
             '<hr/>'
@@ -98,9 +108,11 @@ function emptyAndRefillMailFieldsToUpdate(mail) {
 function emptyAndRefillSocialFieldsToUpdate(social) {
     $('#core-content-form-social').empty();
     $.each(social, function (index, item) {
+        $('#contactId-contactSocial-to-update').val(item.contacto_id);
         $('#core-content-form-social').append(
+            '<input name="id[]" type="hidden" value="' + item.id + '">' +
             '<label for="red_social_nombre">Descripción</label><select id="r-s-n' + index +'" class="form-control" name="red_social_nombre[]"><option value="Facebook">Facebook</option><option value="Twitter">Twitter</option><option value="Linkedin">Linkedin</option><option value="Google+">Google+</option><option value="Instagram">Instagram</option></select>'+
-            '<label for="email">Correo</label><input class="form-control" name="email[]" type="text" value="' + item.url + '">' +
+            '<label for="email">Correo</label><input class="form-control" name="url[]" type="text" value="' + item.url + '">' +
             '<hr/>'
         );
         $('#r-s-n'+ index).val(item.red_social_nombre).attr('selected', 'selected');
@@ -137,70 +149,90 @@ function emptyAndRefillFieldsToShow(result){
     $('#show-contact-desc-info').append(result.contacto[0].desc_contacto);
 
     $('#core-content-address').empty();
-    $.each(result.address, function (index, item) {
-        $('#core-content-address').append(
-            '<div class="core-show-title-blue">Dirección '+ item.desc_dir +'</div>' +
-            '<div><div>Descripción</div><div class="show-info-contact" id="show-info-contact-desc-dir">' + item.desc_dir + '</div></div>' +
-            '<div><div>Calle</div><div class="show-info-contact" id="show-info-contact-calle">' + item.calle + '</div></div>' +
-            '<div><div>Número</div><div class="show-info-contact" id="show-info-contact-num-dir">' + item.numero_dir + '</div></div>' +
-            '<div><div>Piso/Edificio</div><div class="show-info-contact" id="show-info-contact-p-e">' + item.piso_edificio + '</div></div>' +
-            '<div><div>Ciudad</div><div class="show-info-contact" id="show-info-contact-cd">' + item.ciudad + '</div></div>' +
-            '<div><div>Código Postal</div><div class="show-info-contact" id="show-info-contact-cp">' + item.cp + '</div></div>' +
-            '<div><div>Estado</div><div class="show-info-contact" id="show-info-contact-edo">' + item.estado_dir + '</div></div>' +
-            '<div><div>País</div><div class="show-info-contact" id="show-info-contact-pais">' + item.pais + '</div></div>'
-        );
-    });
+    if(!result.address.length){
+        $('#group-edit-address').fadeOut();
+    } else {
+        $('#group-edit-address').fadeIn();
+        $.each(result.address, function (index, item) {
+            $('#core-content-address').append(
+                '<div class="core-show-title-blue">Dirección ' + item.desc_dir + '</div>' +
+                '<div><div>Descripción</div><div class="show-info-contact" id="show-info-contact-desc-dir">' + item.desc_dir + '</div></div>' +
+                '<div><div>Calle</div><div class="show-info-contact" id="show-info-contact-calle">' + item.calle + '</div></div>' +
+                '<div><div>Número</div><div class="show-info-contact" id="show-info-contact-num-dir">' + item.numero_dir + '</div></div>' +
+                '<div><div>Piso/Edificio</div><div class="show-info-contact" id="show-info-contact-p-e">' + item.piso_edificio + '</div></div>' +
+                '<div><div>Ciudad</div><div class="show-info-contact" id="show-info-contact-cd">' + item.ciudad + '</div></div>' +
+                '<div><div>Código Postal</div><div class="show-info-contact" id="show-info-contact-cp">' + item.cp + '</div></div>' +
+                '<div><div>Estado</div><div class="show-info-contact" id="show-info-contact-edo">' + item.estado_dir + '</div></div>' +
+                '<div><div>País</div><div class="show-info-contact" id="show-info-contact-pais">' + item.pais + '</div></div>'
+            );
+        });
+    }
 
     $('#core-content-phone').empty();
-    $.each(result.phone, function (index, item) {
-        if (item.desc_tel == "" && item.numero_tel == "") {
-            $('#core-content-phone').append(
-                '<div class="core-show-title-blue">Teléfono</div>' +
-                '<div><div>Descripción</div><div class="show-info-contact" id="show-info-contact-desc-tel">Aun no has añadido ninguna descripción</div></div>' +
-                '<div><div>Número</div><div class="show-info-contact" id="show-info-contact-num-tel">Aun no has añadido ningun teléfono</div></div>'
-            );
-        } else {
-            $('#core-content-phone').append(
-                '<div class="core-show-title-blue">Teléfono ' + item.desc_tel + '</div>' +
-                '<div><div>Descripción</div><div class="show-info-contact" id="show-info-contact-desc-tel">' + item.desc_tel + '</div></div>' +
-                '<div><div>Número</div><div class="show-info-contact" id="show-info-contact-num-tel">' + item.numero_tel + '</div></div>'
-            );
-        }
-    });
+    if(!result.phone.length) {
+        $('#group-edit-phone').fadeOut();
+    } else {
+        $('#group-edit-phone').fadeIn();
+        $.each(result.phone, function (index, item) {
+            if (item.desc_tel == "" && item.numero_tel == "") {
+                $('#core-content-phone').append(
+                    '<div class="core-show-title-blue">Teléfono</div>' +
+                    '<div><div>Descripción</div><div class="show-info-contact" id="show-info-contact-desc-tel">Aun no has añadido ninguna descripción</div></div>' +
+                    '<div><div>Número</div><div class="show-info-contact" id="show-info-contact-num-tel">Aun no has añadido ningun teléfono</div></div>'
+                );
+            } else {
+                $('#core-content-phone').append(
+                    '<div class="core-show-title-blue">Teléfono ' + item.desc_tel + '</div>' +
+                    '<div><div>Descripción</div><div class="show-info-contact" id="show-info-contact-desc-tel">' + item.desc_tel + '</div></div>' +
+                    '<div><div>Número</div><div class="show-info-contact" id="show-info-contact-num-tel">' + item.numero_tel + '</div></div>'
+                );
+            }
+        });
+    }
 
     $('#core-content-mail').empty();
-    $.each(result.mail, function (index, item) {
-        if (item.desc_mail == "" && item.email == "") {
-            $('#core-content-mail').append(
-                '<div class="core-show-title-blue">Correo</div>' +
-                '<div><div>Descripción</div><div class="show-info-contact" id="show-info-contact-desc-mail">Aun no has añadido ninguna descripcion</div></div>' +
-                '<div><div>Correo</div><div class="show-info-contact" id="show-info-contact-mail">Aun no has añadido ningun correo</div></div>'
-            );
-        } else {
-            $('#core-content-mail').append(
-                '<div class="core-show-title-blue">Correo ' + item.desc_mail + '</div>' +
-                '<div><div>Descripción</div><div class="show-info-contact" id="show-info-contact-desc-mail">' + item.desc_mail + '</div></div>' +
-                '<div><div>Correo</div><div class="show-info-contact" id="show-info-contact-mail">' + item.email + '</div></div>'
-            );
-        }
-    });
+    if(!result.mail.length) {
+        $('#group-edit-mail').fadeOut();
+    } else {
+        $('#group-edit-mail').fadeIn();
+        $.each(result.mail, function (index, item) {
+            if (item.desc_mail == "" && item.email == "") {
+                $('#core-content-mail').append(
+                    '<div class="core-show-title-blue">Correo</div>' +
+                    '<div><div>Descripción</div><div class="show-info-contact" id="show-info-contact-desc-mail">Aun no has añadido ninguna descripcion</div></div>' +
+                    '<div><div>Correo</div><div class="show-info-contact" id="show-info-contact-mail">Aun no has añadido ningun correo</div></div>'
+                );
+            } else {
+                $('#core-content-mail').append(
+                    '<div class="core-show-title-blue">Correo ' + item.desc_mail + '</div>' +
+                    '<div><div>Descripción</div><div class="show-info-contact" id="show-info-contact-desc-mail">' + item.desc_mail + '</div></div>' +
+                    '<div><div>Correo</div><div class="show-info-contact" id="show-info-contact-mail">' + item.email + '</div></div>'
+                );
+            }
+        });
+    }
 
     $('#core-content-social').empty();
-    $.each(result.social, function (index, item) {
-        if (item.red_social_nombre == "" && item.url == "") {
-            $('#core-content-social').append(
-                '<div class="core-show-title-blue">Redes sociales</div>' +
-                '<div><div>Red social</div><div class="show-info-contact" id="show-info-contact-social">Aun no has añadido ninguna red social</div></div>' +
-                '<div><div>URL</div><div class="show-info-contact" id="show-info-contact-url">Aun no has añadido ninguna url</div></div>'
-            );
-        } else {
-            $('#core-content-social').append(
-                '<div class="core-show-title-blue">Red social ' + item.red_social_nombre + '</div>' +
-                '<div><div>Red social</div><div class="show-info-contact" id="show-info-contact-social">' + item.red_social_nombre + '</div></div>' +
-                '<div><div>URL</div><div class="show-info-contact" id="show-info-contact-url">' + item.url + '</div></div>'
-            );
-        }
-    });
+    if(!result.social.length) {
+        $('#group-edit-social').fadeOut();
+    } else {
+        $('#group-edit-social').fadeIn();
+        $.each(result.social, function (index, item) {
+            if (item.red_social_nombre == "" && item.url == "") {
+                $('#core-content-social').append(
+                    '<div class="core-show-title-blue">Redes sociales</div>' +
+                    '<div><div>Red social</div><div class="show-info-contact" id="show-info-contact-social">Aun no has añadido ninguna red social</div></div>' +
+                    '<div><div>URL</div><div class="show-info-contact" id="show-info-contact-url">Aun no has añadido ninguna url</div></div>'
+                );
+            } else {
+                $('#core-content-social').append(
+                    '<div class="core-show-title-blue">Red social ' + item.red_social_nombre + '</div>' +
+                    '<div><div>Red social</div><div class="show-info-contact" id="show-info-contact-social">' + item.red_social_nombre + '</div></div>' +
+                    '<div><div>URL</div><div class="show-info-contact" id="show-info-contact-url">' + item.url + '</div></div>'
+                );
+            }
+        });
+    }
 }
 
 /**
@@ -266,10 +298,15 @@ $(document).ready(function() {
         App.CreateContact();
         App.SelectContact();
         App.UpdateContact();
+        App.UpdateAddress();
+        App.UpdatePhone();
+        App.UpdateMail();
+        App.UpdateSocial();
         App.AddNewSocial();
         App.AddNewMail();
         App.AddNewPhone();
         App.AddNewAddress();
+        App.DeleteContact();
     },
 
         /**
@@ -357,7 +394,7 @@ $(document).ready(function() {
                         emptyAndRefillFieldsToShow(result);
 
                         // Asignar id del contacto seleccionado para eliminar
-                        $('#id-contact-to-delete').val($(this).attr('data-contacto'));
+                        $('#id-contact-to-delete').val(result.contacto[0].id);
 
                         /**
                          * Evento que se lanza al editar informacion de contacto
@@ -373,7 +410,7 @@ $(document).ready(function() {
                         /**
                          * Evento que se lanaza al editar direccion(es) de contacto
                          */
-                        $('#btn-update-address').click(function () {
+                        $('#btn-edit-address').click(function () {
                             hideElements();
                             $('#btns-group-to-contact').show();
                             $('#btn-edit-contact').hide();
@@ -384,7 +421,7 @@ $(document).ready(function() {
                         /**
                          * Evento que se lanza al editar telefono(s) de contacto
                          */
-                        $('#btn-update-phone').click(function () {
+                        $('#btn-edit-phone').click(function () {
                             hideElements();
                             $('#btns-group-to-contact').show();
                             $('#btn-edit-contact').hide();
@@ -392,7 +429,7 @@ $(document).ready(function() {
                             emptyAndRefillPhoneFieldsToUpdate(result.phone);
                         });
 
-                        $('#btn-update-mail').click(function () {
+                        $('#btn-edit-mail').click(function () {
                             hideElements();
                             $('#btns-group-to-contact').show();
                             $('#btn-edit-contact').hide();
@@ -400,7 +437,7 @@ $(document).ready(function() {
                             emptyAndRefillMailFieldsToUpdate(result.mail);
                         });
 
-                        $('#btn-update-social').click(function () {
+                        $('#btn-edit-social').click(function () {
                             hideElements();
                             $('#btns-group-to-contact').show();
                             $('#btn-edit-contact').hide();
@@ -535,7 +572,7 @@ $(document).ready(function() {
                     success: function( result )
                     {
 
-                        if (result.message == "No se pudo guardar el contacto.") {
+                        if (result.error) {
                             hideShowAlert('msj-danger', 'Ocurrio un problema');
                         } else {
                             hideShowAlert('msj-success', result.message);
@@ -561,6 +598,231 @@ $(document).ready(function() {
                 });
             });
 
+        },
+
+        UpdateAddress: function()
+        {
+            $('#btn-update-address').click( function()
+            {
+                var form = $('#form-address-to-update');
+                var route = form.attr('action');
+
+                $.ajax({
+                    url:        route,
+                    type:       'POST',
+                    dataType:   'json',
+
+                    data:new FormData( $('#form-address-to-update')[0] ),
+                    contentType: false,
+                    processData: false,
+
+                    success: function( result )
+                    {
+
+                        if (result.message == "No se pudo guardar el contacto.") {
+                            hideShowAlert('msj-danger', 'Ocurrio un problema');
+                        } else {
+                            hideShowAlert('msj-success', result.message);
+
+                            $('#msg-list-vacio').show();
+                            $('#btn-new-contact').show();
+                            hideElements();
+                        }
+                    }
+
+                }).fail(function( jqXHR, textStatus ) {
+                    $('#msj-danger-state').empty();
+
+                    $(jqXHR).each(function(key,error)
+                    {
+                        hideShowAlert('msj-danger', 'Ocurrio un problema');
+                    });
+
+                });
+            });
+
+        },
+
+        UpdatePhone: function()
+        {
+            $('#btn-update-phone').click( function()
+            {
+                var form = $('#form-phone-to-update');
+                var route = form.attr('action');
+
+                $.ajax({
+                    url:        route,
+                    type:       'POST',
+                    dataType:   'json',
+
+                    data:new FormData( $('#form-phone-to-update')[0] ),
+                    contentType: false,
+                    processData: false,
+
+                    success: function( result )
+                    {
+
+                        if (result.error) {
+                            hideShowAlert('msj-danger', 'Ocurrio un problema');
+                        } else {
+                            hideShowAlert('msj-success', result.message);
+                            $('#msg-list-vacio').show();
+                            $('#btn-new-contact').show();
+                            hideElements();
+                        }
+                    }
+
+                }).fail(function( jqXHR, textStatus ) {
+                    $('#msj-danger-state').empty();
+
+                    $(jqXHR).each(function(key,error)
+                    {
+                        hideShowAlert('msj-danger', 'Ocurrio un problema');
+                    });
+
+                });
+            });
+
+        },
+
+        UpdateMail: function()
+        {
+            $('#btn-update-mail').click( function()
+            {
+                var form = $('#form-mail-to-update');
+                var route = form.attr('action');
+
+                $.ajax({
+                    url:        route,
+                    type:       'POST',
+                    dataType:   'json',
+
+                    data:new FormData( $('#form-mail-to-update')[0] ),
+                    contentType: false,
+                    processData: false,
+
+                    success: function( result )
+                    {
+
+                        if (result.error) {
+                            hideShowAlert('msj-danger', 'Ocurrio un problema');
+                        } else {
+                            hideShowAlert('msj-success', result.message);
+
+                            $('#msg-list-vacio').show();
+                            $('#btn-new-contact').show();
+                            hideElements();
+                        }
+                    }
+
+                }).fail(function( jqXHR, textStatus ) {
+                    $('#msj-danger-state').empty();
+
+                    $(jqXHR).each(function(key,error)
+                    {
+                        hideShowAlert('msj-danger', 'Ocurrio un problema');
+                    });
+
+                });
+            });
+
+        },
+
+        UpdateSocial: function()
+        {
+            $('#btn-update-social').click( function()
+            {
+                var form = $('#form-social-to-update');
+                var route = form.attr('action');
+
+                $.ajax({
+                    url:        route,
+                    type:       'POST',
+                    dataType:   'json',
+
+                    data:new FormData( $('#form-social-to-update')[0] ),
+                    contentType: false,
+                    processData: false,
+
+                    success: function( result )
+                    {
+
+                        if (result.error) {
+                            hideShowAlert('msj-danger', 'Ocurrio un problema');
+                        } else {
+                            hideShowAlert('msj-success', result.message);
+
+                            $('#msg-list-vacio').show();
+                            $('#btn-new-contact').show();
+                            hideElements();
+                        }
+                    }
+
+                }).fail(function( jqXHR, textStatus ) {
+                    $('#msj-danger-state').empty();
+
+                    $(jqXHR).each(function(key,error)
+                    {
+                        hideShowAlert('msj-danger', 'Ocurrio un problema');
+                    });
+
+                });
+            });
+
+        },
+
+        DeleteContact: function() {
+
+            // Mostrar modal global de eliminar
+            $('#btn-delete-contact').click( function() {
+                $('#modal-delete').fadeIn();
+                $('.notificacion-text').addClass('in');
+            });
+
+            // Ocultar modal global de eliminar
+            $('#no').click( function() {
+                $('.notificacion-text').removeClass('in');
+                $('#modal-delete').fadeOut();
+            });
+
+            // Eliminar nota
+            $('#si').click( function() {
+
+                $('.notificacion-text').removeClass('in');
+                $('#modal-delete').fadeOut();
+
+                var form = $('#form-contact-delete');
+                var datos = form.serializeArray();
+                var route = form.attr('action');
+
+                $.ajax({
+                    url:        route,
+                    type:       'DELETE',
+                    dataType:   'json',
+                    // async:      false,
+                    data:       datos,
+
+                    success: function( result )
+                    {
+                        if(result.error){
+                            hideShowAlert('msj-danger', result.error);
+                        } else {
+                            hideShowAlert('msj-success', result.message);
+
+                            tableTrTouched.fadeOut();
+                            hideElements();
+                        }
+                    }
+
+                }).fail(function( jqXHR, textStatus ) {
+                    $('#msj-danger-state').empty();
+                    $(jqXHR).each(function(key,error)
+                    {
+                        hideShowAlert('msj-danger', 'Ocurrio un problema');
+                    });
+
+                });
+            });
         }
     };
 
