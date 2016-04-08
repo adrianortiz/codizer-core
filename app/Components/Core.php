@@ -217,8 +217,10 @@ class Core
     public function getAmigos($userId) {
         return User::join('contacto', 'users.contacto_id', '=', 'contacto.id')
             ->join('users_has_friend_users', 'users.id', '=', 'users_has_friend_users.users_id_friend')
+            ->join('users_has_perfil', 'users.id', '=', 'users_has_perfil.users_id')
+            ->join('perfil', 'users_has_perfil.perfil_id', '=', 'perfil.id')
             ->where('users_has_friend_users.users_id', $userId)
-            ->select('contacto.*', 'users.email' , 'users.password', 'users.role', 'users.id AS user_id_we')
+            ->select('contacto.*', 'users.email' , 'users.password', 'users.role', 'users.id AS user_id_we', 'perfil.perfil_route')
             ->get();
     }
 
@@ -228,11 +230,13 @@ class Core
      * @param $contacto
      * @return mixed
      */
-    public function getFollowers($contacto){
+    public function getFollowers($contacto) {
         return Contacto::join('users', 'users.id', '=', 'contacto.id')
             ->join('users_has_follower_users', 'users_has_follower_users.users_id_followers', '=', 'contacto.id')
-            ->where('users_id', '=', $contacto[0]->id)
-            ->select('contacto.*', 'users.email' , 'users.password', 'users.role')
+            ->join('users_has_perfil', 'users.id', '=', 'users_has_perfil.users_id')
+            ->join('perfil', 'users_has_perfil.perfil_id', '=', 'perfil.id')
+            ->where('users_has_follower_users.users_id', '=', $contacto[0]->id)
+            ->select('contacto.*', 'users.email' , 'users.password', 'users.role', 'perfil.perfil_route')
             ->get();
     }
 

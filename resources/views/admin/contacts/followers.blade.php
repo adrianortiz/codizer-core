@@ -41,23 +41,23 @@
 
     <div class="card-container">
 
-        @for($i = 0; $i < 130; $i++)
-
+        @forelse($followers as $follower)
         <div class="card-container-user">
             <div class="card-info">
-                <img src="{{ asset('/media/photo-perfil/karen-olvera123.png') }}" width="66px" height="66px">
+                <img src="{{ asset('/media/photo-perfil/' . $follower->foto) }}" width="70px" height="70px">
                 <ul>
-                    <li><a href="#">Karen Olvera</a></li>
-                    <li><span>Diseñadora</span></li>
+                    <li><a href="{{ route('perfil', $follower->perfil_route) }}">{{ $follower->nombre . ' ' . $follower->ap_paterno }}</a></li>
+                    <li><span>{{ $follower->profesion }}</span></li>
                 </ul>
             </div>
             <div class="card-btns">
-                <a href="#" class="btn">Ver perfil</a>
+                <a href="{{ route('perfil', $follower->perfil_route) }}" class="btn">Ver perfil</a>
                 <button class="btn">Dejar de seguir</button>
             </div>
         </div>
-
-        @endfor
+        @empty
+            <div id="msg-vacio">No tienes seguidores.</div>
+        @endforelse
 
     </div>
 
@@ -65,7 +65,6 @@
 
 @section('modals')
 
-    @include('admin.contacts.patials.modal-contacto')
 
 @endsection
 
