@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Events;
 
 use App\Facades\Core;
+use App\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -23,6 +24,7 @@ class EventsController extends Controller
 
         $perfil = $userPerfil;
         $contacto = $userContacto;
+        $userView = User::where('contacto_id', $contacto[0]->id)->first();
 
         // Nos aseguramos de que la ruta sea la del usuario logueado
         if ( $nameFirstName != $userPerfil[0]->perfil_route)
@@ -30,9 +32,15 @@ class EventsController extends Controller
 
         Core::isRouteValid($userPerfil[0]->perfil_route);
 
-        $friends = Core::getContactos($contacto);
+        $user = User::findOrFail(\Auth::user()->id);
 
-        return view('admin.events.events', compact('perfil', 'contacto', 'userPerfil', 'userContacto', 'friends'));
+        $contacts = Core::getContactos($user->id);
+        $friends = Core::getAmigos($userView->id);
+        $followers = Core::getFollowers($contacto);
+
+
+
+        return view('admin.events.events', compact('perfil', 'contacto', 'userPerfil', 'userContacto', 'friends', 'contacts', 'followers'));
     }
 
     /**
