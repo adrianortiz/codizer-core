@@ -267,7 +267,7 @@ class TiendaController extends Controller
         } else {
 
             $product = Core::getProductoById( $tienda->id, $idProduct );
-            $imgsProduct = ImgProduct::where('producto_id', $product->id)->get();
+            $imgsProduct = ImgProduct::where('producto_id', $product->product_id)->get();
             $finalPrice = Core::getFinalPriceByProduct($product->precio, $product->tipo_oferta, $product->regla_porciento);
             $productCategories = Core::getCategoriasByIdProduct($product->product_id);
 
