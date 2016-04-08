@@ -198,12 +198,13 @@ class ContactsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
     {
         if ($request->ajax()) {
+            DB::beginTransaction();
+            try {
                 switch ($request->option) {
                     case 1:
                         // Actualizar contacto
@@ -218,6 +219,7 @@ class ContactsController extends Controller
                             $contact->foto = $foto;
                         }
                         $contact->save();
+                        DB::commit();
                         return response()->json([
                             'message' => "Contacto actualizado.",
                             'contacto' => $contact,
@@ -237,8 +239,9 @@ class ContactsController extends Controller
                             $contact_dir->pais = $request->pais[$i];
                             $contact_dir->save();
                         }
+                        DB::commit();
                         return response()->json([
-                            'message' => "Contacto actualizado.",
+                            'message' => "Dirección actualizada.",
                         ]);
                         break;
                     case 3:
@@ -249,8 +252,9 @@ class ContactsController extends Controller
                             $contact_tel->numero_tel = $request->numero_tel[$i];
                             $contact_tel->save();
                         }
+                        DB::commit();
                         return response()->json([
-                            'message' => "Contacto actualizado.",
+                            'message' => "Teléfono actualizado.",
                         ]);
                         break;
                     case 4:
@@ -261,26 +265,38 @@ class ContactsController extends Controller
                             $contact_mail->email = $request->email[$i];
                             $contact_mail->save();
                         }
+                        DB::commit();
                         return response()->json([
-                            'message' => "Contacto actualizado.",
+                            'message' => "Correo actualizado.",
                         ]);
-                    break;
+                        break;
                     case 5:
+                        // Actualizar redes sociales
                         for ($i = 0; $i < count($request->id); $i++) {
                             $contact_social = ContactSocial::findOrFail($request->id[$i]);
                             $contact_social->red_social_nombre = $request->red_social_nombre[$i];
                             $contact_social->url = $request->url[$i];
                             $contact_social->save();
                         }
+                        DB::commit();
                         return response()->json([
-                            'message' => "Contacto actualizado.",
+                            'message' => "Red social actualizada.",
                         ]);
                         break;
                     default:
+                        DB::rollback();
                         return response()->json([
                             'error' => "Ocurrio un problema."
                         ]);
                 }
+            } catch (\Exception $e) {
+                DB::rollback();
+
+                return response()->json([
+                    'error' => 'Ocurrio un error.',
+                    'case' => $e
+                ]);
+            }
         }
         abort(404);
     }
@@ -292,31 +308,51 @@ class ContactsController extends Controller
      */
     public function destroy(Request $request)
     {
-        if ($request->ajax()) {
+        if ($request->ajax())
+        {
             DB::beginTransaction();
             try {
+
                 $idAddress = DB::table('contact_address')->where('contacto_id', $request->id)->select('id')->get();
-                ContactAddress::destroy($idAddress);
+                if (!$idAddress == null) {
+                    foreach ($idAddress as $id) {
+                        ContactAddress::destroy($id->id);
+                    }
+                }
 
-                $idPhone = ContactPhone::where('contacto_id', $request->id)->select('id')->get();
-                ContactPhone::destroy($idPhone);
+                $idPhone = DB::table('contact_phone')->where('contacto_id', $request->id)->select('id')->get();
+                if (!$idPhone == null) {
+                    foreach ($idPhone as $id) {
+                        ContactPhone::destroy($id->id);
+                    }
+                }
 
-                $idMail = ContactMail::where('contacto_id', $request->id)->select('id')->get();
-                ContactMail::destroy($idMail);
+                $idMail = DB::table('contact_mail')->where('contacto_id', $request->id)->select('id')->get();
+                if (!$idMail == null) {
+                    foreach ($idMail as $id) {
+                        ContactMail::destroy($id->id);
+                    }
+                }
 
-                $idSocial = ContactSocial::where('contacto_id', $request->id)->select('id')->get();
-                ContactSocial::destroy($idSocial);
+                $idSocial = DB::table('contact_social')->where('contacto_id', $request->id)->select('id')->get();
+                if (!$idSocial == null) {
+                    foreach ($idSocial as $id) {
+                        ContactSocial::destroy($id->id);
+                    }
+                }
 
-                $idAgenda = UserHasAgendaContactos::where('contacto_id', $request->id)->select('id')->get();
-                UserHasAgendaContactos::destroy($idAgenda);
+                $idAgenda = UserHasAgendaContactos::where('users_id', \Auth::user()->id)->where('contacto_id', $request->id);
+                $idAgenda->delete();
 
-                Contacto::destroy($request->id);
+                $contact = Contacto::findOrFail($request->id);
+                $contact->delete();
 
                 DB::commit();
                 return response()->json([
-                    'message' => "Contacto eliminado."
+                    'message' => "Contacto eliminado.",
+                    'remove' => $request->id
                 ]);
-            } catch(\Exception $e){
+            } catch (\Exception $e) {
                 DB::rollback();
 
                 return response()->json([

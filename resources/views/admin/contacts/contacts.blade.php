@@ -45,7 +45,7 @@
                 </div>
                 <div id="btns-group-to-contact" class="btn-group right core-hidden" role="group" aria-label="...">
                     <button type="button" id="btn-edit-contact" class="btn btn-default btn-sm">Editar</button>
-                    <button type="button" id="btn-delete-contact" class="btn btn-default btn-sm">Eliminar</button>
+                    <button type="button" id="btn-delete-contact" class="btn btn-default btn-sm">Eliminar Contacto</button>
                 </div>
 
             </div>
