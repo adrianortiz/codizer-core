@@ -7,7 +7,6 @@
 
 namespace App\Components;
 
-use App\Categoria;
 use App\ContactAddress;
 use App\ContactMail;
 use App\ContactPhone;
@@ -15,7 +14,6 @@ use App\ContactSocial;
 use App\Empresa;
 use App\Perfil;
 use App\Contacto;
-use App\Producto;
 use App\ProductoHasCategoria;
 use App\Tienda;
 use App\User;
@@ -23,7 +21,6 @@ use App\UserHasPerfil;
 use App\UsuarioEmpleadoInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
 class Core
 {
@@ -148,7 +145,7 @@ class Core
     public function getContactAddress($id){
         return ContactAddress::join('contacto', 'contacto.id', '=', 'contact_address.contacto_id')
             ->where('contacto_id', $id)
-            ->select('contact_address.id', 'desc_dir', 'calle', 'numero_dir', 'piso_edificio', 'ciudad', 'cp', 'estado_dir', 'pais')
+            ->select('contact_address.id', 'desc_dir', 'calle', 'numero_dir', 'piso_edificio', 'ciudad', 'cp', 'estado_dir', 'pais', 'contacto_id')
             ->get();
     }
 
@@ -159,7 +156,7 @@ class Core
     public function getContactPhone($id){
         return ContactPhone::join('contacto', 'contacto.id', '=', 'contact_phone.contacto_id')
             ->where('contacto_id', $id)
-            ->select('contact_phone.id', 'desc_tel', 'numero_tel')
+            ->select('contact_phone.id', 'desc_tel', 'numero_tel', 'contacto_id')
             ->get();
     }
 
@@ -170,7 +167,7 @@ class Core
     public function getContactMail($id){
         return ContactMail::join('contacto', 'contacto.id', '=', 'contact_mail.contacto_id')
             ->where('contacto_id', $id)
-            ->select('contact_mail.id', 'desc_mail', 'email')
+            ->select('contact_mail.id', 'desc_mail', 'email', 'contacto_id')
             ->get();
     }
 
@@ -181,7 +178,7 @@ class Core
     public function getContactSocial($id){
         return ContactSocial::join('contacto', 'contacto.id', '=', 'contact_social.contacto_id')
             ->where('contacto_id', $id)
-            ->select('contact_social.id', 'red_social_nombre', 'url')
+            ->select('contact_social.id', 'red_social_nombre', 'url', 'contacto_id')
             ->get();
     }
 

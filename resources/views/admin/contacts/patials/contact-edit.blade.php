@@ -4,6 +4,8 @@
         <div id="show-info-contact-nombre-completo" class="core-show-title-blue">Información Contacto</div>
     </div>
         {!! Form::open(['route' => 'contact.update', 'method' => 'POST', 'id' => 'form-contact-to-update']) !!}
+            {!! Form::hidden('option', '1', ['id' => 'option-contact-to-update']) !!}
+
             <div class="container-show-info-contact-img-b">
                     <img name="foto" id="show-info-contact-foto-ud" class="img-rounded btn btn-sm-radius" src="{{ asset('/media/photo-perfil/unknow.png') }}">
                     {!! Form::file('foto', ['accept' => 'image/jpg,image/png', 'id' => 'foto-ud', 'class' => 'form-control form-with-100']) !!}

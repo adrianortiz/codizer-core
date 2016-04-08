@@ -5,6 +5,9 @@
     </div>
 
         {!! Form::open(['route' => 'contact.update', 'method' => 'POST', 'id' => 'form-address-to-update']) !!}
+            {!! Form::hidden('option', '2', ['id' => 'option-contact-to-update']) !!}
+            {!! Form::hidden('contacto_id', 'null', ['id' => 'contactId-contactAddress-to-update']) !!}
+
             <div class="container-list-something form-group" id="core-content-form-address">
                 <!-- Se agrega los campos correspondientes de la direccion -->
             </div>

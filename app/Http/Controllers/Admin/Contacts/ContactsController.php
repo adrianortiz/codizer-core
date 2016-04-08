@@ -66,7 +66,6 @@ class ContactsController extends Controller
      */
     public function store(Request $request)
     {
-//        dd($request->all());
         if ($request->ajax()) {
 
             DB::beginTransaction();
@@ -142,6 +141,7 @@ class ContactsController extends Controller
                 DB::commit();
                 return response()->json([
                     'contacto' => $contact,
+                    'message' => "Contacto registrado."
                 ]);
 
             } catch (\Exception $e) {
@@ -203,77 +203,128 @@ class ContactsController extends Controller
      */
     public function update(Request $request)
     {
-        dd($request->all());
         if ($request->ajax()) {
+                switch ($request->option) {
+                    case 1:
+                        // Actualizar contacto
+                        $contact = Contacto::findOrFail($request->id);
+                        $contact->fill($request->all());
 
-
-            // Contacto a registrar
-            $contact = Contacto::findOrFail($request->id);
-            $contact->fill($request->all());
-
-            //Se valida que haya insertado una nueva imagen
-//            if ($request->file('foto'))
-//            {
-//                // Guardar la nueva imagen en el disco
-//                $foto = 'contact-' .$request -> nombre. '_' .$request -> ap_paterno. '_' .$request -> ap_materno. '_' .Carbon::now()->second . $request->file('foto')->getClientOriginalName();
-//                \Storage::disk('photo')->put($foto, \File::get($request->file('foto')));
-//                $contact->foto = $foto;
-//            }
-//            $contact -> save();
-
-            /**
-             * Hacer lo mismo para los demas modelo y descomentar el if
-             */
-            $id = \DB::table('contact_address')->where('contacto_id', $request->id)->select('id')->get();
-            $contact_dir = ContactAddress::findOrFail($id[0]->id);
-            dd($contact_dir->fill($request->all()));//$contact_dir->save();
-
-            /**
-             * De aqui para abajo hace lo mismo que con
-             */
-            $contact_mail = ContactMail::findOrFail($request->id);
-            $contact_mail->fill($request->all());
-            $contact_mail -> save();
-
-            $contact_tel = ContactPhone::findOrFail($request->id);
-            $contact_tel->fill($request->all());
-            $contact_tel -> save();
-
-            $contact_social = ContactSocial([
-                'red_social_nombre' => $request -> red_social_nombre,
-                'url'               => $request -> url,
-                'contacto_id'       => $contact -> id
-            ]);
-            $contact_social -> save();
-
-            // Contacto a guardar en agenda
-            $agenda = new UserHasAgendaContactos([
-                'users_id'      => \Auth::user() -> id,
-                'contacto_id'   => $contact -> id
-            ]);
-
-            if ( $agenda -> save() )
-                $message = 'Contacto guardado';
-            else
-                $message = 'No se pudo guardar el contacto.';
-
-            return response()->json([
-                'message' => $message,
-                'contacto' => $contact,
-            ]);
-        } else {
-            abort(404);
+                        //Se valida que haya insertado una nueva imagen
+                        if ($request->file('foto')) {
+                            // Guardar la nueva imagen en el disco
+                            $foto = 'contact-' . $request->nombre . '_' . $request->ap_paterno . '_' . $request->ap_materno . '_' . Carbon::now()->second . $request->file('foto')->getClientOriginalName();
+                            \Storage::disk('photo')->put($foto, \File::get($request->file('foto')));
+                            $contact->foto = $foto;
+                        }
+                        $contact->save();
+                        return response()->json([
+                            'message' => "Contacto actualizado.",
+                            'contacto' => $contact,
+                        ]);
+                        break;
+                    case 2:
+                        //Actualizar direcciones de contacto
+                        for ($i = 0; $i < count($request->id); $i++) {
+                            $contact_dir = ContactAddress::findOrFail($request->id[$i]);
+                            $contact_dir->desc_dir = $request->desc_dir[$i];
+                            $contact_dir->calle = $request->calle[$i];
+                            $contact_dir->numero_dir = $request->numero_dir[$i];
+                            $contact_dir->piso_edificio = $request->piso_edificio[$i];
+                            $contact_dir->ciudad = $request->ciudad[$i];
+                            $contact_dir->cp = $request->cp[$i];
+                            $contact_dir->estado_dir = $request->estado_dir[$i];
+                            $contact_dir->pais = $request->pais[$i];
+                            $contact_dir->save();
+                        }
+                        return response()->json([
+                            'message' => "Contacto actualizado.",
+                        ]);
+                        break;
+                    case 3:
+                        //Actualizar telefono de contacto
+                        for ($i = 0; $i < count($request->id); $i++) {
+                            $contact_tel = ContactPhone::findOrFail($request->id[$i]);
+                            $contact_tel->desc_tel = $request->desc_tel[$i];
+                            $contact_tel->numero_tel = $request->numero_tel[$i];
+                            $contact_tel->save();
+                        }
+                        return response()->json([
+                            'message' => "Contacto actualizado.",
+                        ]);
+                        break;
+                    case 4:
+                        // Actualizar mail de contacto
+                        for ($i = 0; $i < count($request->desc_mail); $i++) {
+                            $contact_mail = ContactMail::findOrFail($request->id[$i]);
+                            $contact_mail->desc_mail = $request->desc_mail[$i];
+                            $contact_mail->email = $request->email[$i];
+                            $contact_mail->save();
+                        }
+                        return response()->json([
+                            'message' => "Contacto actualizado.",
+                        ]);
+                    break;
+                    case 5:
+                        for ($i = 0; $i < count($request->id); $i++) {
+                            $contact_social = ContactSocial::findOrFail($request->id[$i]);
+                            $contact_social->red_social_nombre = $request->red_social_nombre[$i];
+                            $contact_social->url = $request->url[$i];
+                            $contact_social->save();
+                        }
+                        return response()->json([
+                            'message' => "Contacto actualizado.",
+                        ]);
+                        break;
+                    default:
+                        return response()->json([
+                            'error' => "Ocurrio un problema."
+                        ]);
+                }
         }
+        abort(404);
     }
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        if ($request->ajax()) {
+            DB::beginTransaction();
+            try {
+                $idAddress = DB::table('contact_address')->where('contacto_id', $request->id)->select('id')->get();
+                ContactAddress::destroy($idAddress);
+
+                $idPhone = ContactPhone::where('contacto_id', $request->id)->select('id')->get();
+                ContactPhone::destroy($idPhone);
+
+                $idMail = ContactMail::where('contacto_id', $request->id)->select('id')->get();
+                ContactMail::destroy($idMail);
+
+                $idSocial = ContactSocial::where('contacto_id', $request->id)->select('id')->get();
+                ContactSocial::destroy($idSocial);
+
+                $idAgenda = UserHasAgendaContactos::where('contacto_id', $request->id)->select('id')->get();
+                UserHasAgendaContactos::destroy($idAgenda);
+
+                Contacto::destroy($request->id);
+
+                DB::commit();
+                return response()->json([
+                    'message' => "Contacto eliminado."
+                ]);
+            } catch(\Exception $e){
+                DB::rollback();
+
+                return response()->json([
+                    'error' => 'Ocurrio un error.',
+                    'case' => $e
+                ]);
+            }
+        }
+            abort(404);
     }
 }
