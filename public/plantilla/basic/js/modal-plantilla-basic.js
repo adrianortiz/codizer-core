@@ -42,11 +42,13 @@ function fillModalProduct(result)
         },
 
         changeImageModal: function() {
+
             $('#show-info-product-img').on("click", '.sub-image-product', function() {
                 $('#principal-image-product').attr('src', $(this).attr('src') );
                 $('.sub-image-product').removeClass('principal-image-product');
                 $(this).addClass('principal-image-product');
             });
+
         },
 
         GetDataProduct: function() {

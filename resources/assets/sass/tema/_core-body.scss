@@ -83,7 +83,7 @@ html,body {
   margin-top: -3px;
   background-color: $red-300;
 
-  box-shadow: $shadown-red-min;
+  @include prefixer(box-shadow, $shadown-red-min);
   border-radius: 33px;
 
   font-size: 12px;
@@ -239,7 +239,7 @@ MODIFICACIONES PARA EL MENÚ E INFO DE LA APP
 }
 
 #main nav {
-  box-shadow: $sombra-gris-object;
+  @include prefixer(box-shadow, $sombra-gris-object);
   @include transition(.3s ease);
 }
 
@@ -362,7 +362,7 @@ MODIFICACIONES PARA EL MENÚ E INFO DE LA APP
 #content-body-ui {
   width: 801px;
   float: right;
-  box-shadow: $sombra-gris-object;
+  @include prefixer(box-shadow, $sombra-gris-object);
   @include box-sizing(border-box);
   @include transition(.3s ease);
 
