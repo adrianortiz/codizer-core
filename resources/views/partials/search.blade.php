@@ -14,6 +14,8 @@
 
             <h3>Store</h3>
             <div id="container-store-suggestions">
+                <h5>No results</h5>
+                <!--
                 <div class="suggestion">
                     <a href="#">
                         <img src="{{ asset('/media/photo-store/chanel-123.png') }}" />
@@ -24,10 +26,13 @@
                     </a>
                     <a href="#" class="btn-suggestions-go">Ver</a>
                 </div>
+                -->
             </div>
 
             <h3>Products</h3>
             <div id="container-product-suggestions">
+                <h5>No results</h5>
+                <!--
                 <div class="suggestion">
                     <a href="#">
                         <img src="{{ asset('/media/photo-product/sudadera-cat.png') }}" />
@@ -38,6 +43,7 @@
                     </a>
                     <a href="#" class="btn-suggestions-go">Ver</a>
                 </div>
+                -->
             </div>
 
             <h3>Users</h3>
