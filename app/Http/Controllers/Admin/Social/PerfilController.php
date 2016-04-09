@@ -38,6 +38,7 @@ class PerfilController extends Controller
         $followers  = Core::getFollowers($contacto);
 
 
+        // To know if a user is my friend, follower etc.
         $idUserView = User::where('contacto_id', $contacto[0]->id)
             ->select('id')
             ->first();
@@ -50,7 +51,11 @@ class PerfilController extends Controller
             ->where('users_id_followers', $idUserView->id)
             ->count();
 
-        return view('admin.social.perfil', compact('perfil', 'contacto', 'userPerfil', 'userContacto', 'contacts', 'friends', 'followers', 'idUserView', 'isMyFriend', 'amIFollower'));
+        // Get possible candidates users
+        $candidatesUsers = Core::getUsersAreNotYou()->all();
+
+        return view('admin.social.perfil',
+            compact('perfil', 'contacto', 'userPerfil', 'userContacto', 'contacts', 'friends', 'followers', 'idUserView', 'isMyFriend', 'amIFollower', 'candidatesUsers'));
     }
 
     /**

@@ -150,16 +150,21 @@
             <a href="#" class="core-menu-list"><div style="color: red">Posibles candidatos</div></a>
 
             <!-- list menu with img -->
-            <a href="#" class="core-menu-list menu-list-option menu-lis-img">
-                <img src="{{ asset('/media/photo-perfil/' . $contacto[0]->foto) }}">
-                <div>Karen Olvera</div>
+            @forelse($candidatesUsers as $candidate)
+
+            <a href="{{ route('perfil', [$candidate->perfil_route]) }}" class="core-menu-list menu-list-option menu-lis-img">
+                <img src="{{ asset('/media/photo-perfil/' . $candidate->foto) }}">
+                <div>{{ $candidate->nombre . ' ' . $candidate->ap_paterno }}</div>
             </a>
 
-            <!-- list menu with img -->
-            <a href="#" class="core-menu-list menu-list-option menu-lis-img">
-                <img src="{{ asset('/media/photo-perfil/' . $contacto[0]->foto) }}">
-                <div>Karen Olvera</div>
-            </a>
+            @empty
+
+            <div id="core-contacts-container">
+                <a href="#0" class="core-menu-list menu-list-option"><div>No hay candidatos</div></a>
+            </div>
+
+            @endforelse
+
 
             <a href="#" class="core-menu-list"><div style="color: red">Tendencias</div></a>
 

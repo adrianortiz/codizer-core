@@ -98,6 +98,20 @@ class Core
     }
 
     /**
+     * Get users data where they are not user login
+     */
+    public function getUsersAreNotYou()
+    {
+        return User::join('contacto', 'users.contacto_id', '=', 'contacto.id')
+            ->join('users_has_perfil', 'users.id', '=', 'users_has_perfil.users_id')
+            ->join('perfil', 'users_has_perfil.perfil_id', '=', 'perfil.id')
+            ->whereNotIn('users.id', [\Auth::user()->id])
+            ->skip(0)->take(4)
+            ->select('contacto.*', 'perfil.perfil_route')
+            ->get();
+    }
+
+    /**
      * Get all users, profiles and contacts
      * Where the name or last-name is
      * equals to $searh
