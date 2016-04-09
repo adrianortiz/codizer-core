@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Social;
 use App\Contacto;
 use App\Facades\Core;
 use App\Http\Requests;
+use App\Producto;
 use App\User;
 use App\UserHasFollowerUser;
 use App\UserHasFriendUser;
@@ -52,10 +53,13 @@ class PerfilController extends Controller
             ->count();
 
         // Get possible candidates users
-        $candidatesUsers = Core::getUsersAreNotYou()->all();
+        $candidatesUsers = Core::getUsersAreNotYou();
+
+        // Get tendencies
+        $tendencies = Producto::where('estado', 1)->select('nombre')->skip(0)->take(6)->get();
 
         return view('admin.social.perfil',
-            compact('perfil', 'contacto', 'userPerfil', 'userContacto', 'contacts', 'friends', 'followers', 'idUserView', 'isMyFriend', 'amIFollower', 'candidatesUsers'));
+            compact('perfil', 'contacto', 'userPerfil', 'userContacto', 'contacts', 'friends', 'followers', 'idUserView', 'isMyFriend', 'amIFollower', 'candidatesUsers', 'tendencies'));
     }
 
     /**
