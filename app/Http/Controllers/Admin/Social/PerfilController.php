@@ -24,17 +24,19 @@ class PerfilController extends Controller
     {
         Core::isRouteValid($nameFirstName);
 
-        $perfil = Core::getPerfil($nameFirstName);
-        $contacto = Core::getContact($perfil);
-        $userView = User::where('contacto_id', $contacto[0]->id)->first();
+        $perfil         = Core::getPerfil($nameFirstName);
+        $contacto       = Core::getContact($perfil);
+        $userPerfil     = Core::getUserPerfil();
+        $userContacto   = Core::getUserContact();
 
-        $userPerfil = Core::getUserPerfil();
-        $userContacto = Core::getUserContact();
-        $user = User::findOrFail(\Auth::user()->id);
 
-        $contacts = Core::getContactos($user->id);
-        $friends = Core::getAmigos($userView->id);
-        $followers = Core::getFollowers($contacto);
+        // Métodos para contactos
+        $userView   = User::where('contacto_id', $contacto[0]->id)->first();
+        $user       = User::findOrFail(\Auth::user()->id);
+        $contacts   = Core::getContactos($user->id);
+        $friends    = Core::getAmigos($userView->id);
+        $followers  = Core::getFollowers($contacto);
+
 
         $idUserView = User::where('contacto_id', $contacto[0]->id)
             ->select('id')

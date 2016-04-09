@@ -13,10 +13,7 @@
 @section('main-header-options-app')
 
     @include('partials.perfil-link')
-
-    <a href="#" class="core-menu-list"><div>Empresa</div></a>
-    <a href="#" id="btn-list-all-notes" class="core-menu-list menu-list-option"><div>Todas las notas</div></a>
-    <a href="#" class="core-menu-list menu-list-option"><div>Notas compartidas</div></a>
+    @include('partials.contacts-link')
 
 @endsection
 

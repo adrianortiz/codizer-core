@@ -16,24 +16,30 @@
 
     @section('main-header-options-app')
 
-            @include('partials.perfil-link')
+        @include('partials.perfil-link')
+        @include('partials.contacts-link')
 
-            <!-- Title menu -->
+        <!-- Title menu -->
+        <!--
         <a href="#" class="core-menu-list"><div>Información</div></a>
+        -->
 
         <!-- list menu with img -->
+        <!--
         <a href="#" class="core-menu-list menu-list-option menu-lis-img">
             <img src="{{ asset('/media/photo-perfil/' . $contacto[0]->foto) }}">
             <div>Karen Olvera</div>
         </a>
+        -->
 
-        @include('partials.contacts-link')
-
+        <!--
         <a href="#" class="core-menu-list"><div>Menu list <span>10</span></div></a>
 
         <a href="#" class="core-menu-list menu-list-option"><div>Option 1</div></a>
         <a href="#" class="core-menu-list menu-list-option"><div>Option 2</div></a>
-@endsection
+        -->
+
+    @endsection
 
 
 @section('options-tools')

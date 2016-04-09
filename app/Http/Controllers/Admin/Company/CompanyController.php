@@ -40,6 +40,15 @@ class CompanyController extends Controller
         $perfil = $userPerfil;
         $contacto = $userContacto;
 
+
+        // Métodos para contactos
+        $userView = User::where('contacto_id', $contacto[0]->id)->first();
+        $user = User::findOrFail(\Auth::user()->id);
+        $contacts = Core::getContactos($user->id);
+        $friends = Core::getAmigos($userView->id);
+        $followers = Core::getFollowers($contacto);
+
+
         // Nos aseguramos de que la ruta sea la del usuario logueado
         if ( $nameFirstName != $userPerfil[0]->perfil_route)
             return \Redirect::route('companies.index', $userPerfil[0]->perfil_route);
@@ -50,13 +59,14 @@ class CompanyController extends Controller
         $empresa = Empresa::where('users_id', \Auth::user()->id)->first();
 
         if ($empresa === null) {
-            return view('admin.company.new-company', compact('perfil', 'contacto', 'userPerfil', 'userContacto'));
+            return view('admin.company.new-company', compact('perfil', 'contacto', 'userPerfil', 'userContacto', 'contacts', 'friends', 'followers'));
 
         } else {
+
             $countTiendas = Tienda::where('empresa_id', $empresa->id)->count();
             $countEmpleados = UsuarioEmpleadoInfo::where('empresa_id', $empresa->id)->count();
 
-            return view('admin.company.company', compact('perfil', 'contacto', 'userPerfil', 'userContacto', 'empresa', 'countTiendas', 'countEmpleados'));
+            return view('admin.company.company', compact('perfil', 'contacto', 'userPerfil', 'userContacto', 'empresa', 'countTiendas', 'countEmpleados', 'contacts', 'friends', 'followers'));
         }
 
     }

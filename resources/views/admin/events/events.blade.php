@@ -47,11 +47,8 @@
 @section('main-header-options-app')
 
     @include('partials.perfil-link')
-
     @include('partials.contacts-link')
 
-    <a href="#" class="core-menu-list"><div>Seguidores</div></a>
-    <a href="#" class="core-menu-list menu-list-option"><div>Ver todos</div></a>
 @endsection
 
 
