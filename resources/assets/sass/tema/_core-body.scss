@@ -398,10 +398,30 @@ MODIFICACIONES PARA EL MENÚ E INFO DE LA APP
   color: red !important;
 }
 
-.active {
-  a {
-    border-top: solid 3px $azul-200 !important;
-    border-radius: 0 !important;
-    font-weight: bold;
+.nav-tabs {
+
+  li {
+
+    a {
+      border-top: solid 3px transparent;
+      border-radius: 0;
+      color: $black-core;
+      @include transition(.2s ease);
+
+      &:hover {
+        border-top: solid 3px $gris-290;
+        background-color: $gris-290;
+      }
+    }
+
+  }
+
+  .active {
+    a {
+      border-top: solid 3px $azul-200 !important;
+      border-radius: 0 !important;
+    }
   }
 }
+
+

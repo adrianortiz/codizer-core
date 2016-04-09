@@ -72,7 +72,7 @@ input, select, textarea {
   width: 235px !important;
   height: 36px !important;
   @include prefixer(background, transparent !important);
-  @include prefixer(border, solid 2px $gris-200 !important);
+  @include prefixer(border, solid 2px $gris-290 !important);
   @include prefixer(box-shadow, inset 0 0 0 rgba(0,0,0,.075) !important);
 }
 

@@ -24,7 +24,7 @@
 @section('article-content')
 
 @section('extra-content')
-    <div id="container-menu-companies"></div>
+    @include('admin.empleado.partials.tags-empleo')
 @endsection
 
 <div id="continaer-note-shows" class="right-content-list content-complete-high">
@@ -34,8 +34,8 @@
 
     <div class="container-list-something">
 
-        <div id="show-info-contact-empresa" class="core-show-sub-title">Empleado | Tienda</div>
-        <div id="show-info-contact-nombre" class="core-show-title-blue">Empleos</div>
+        <div id="show-info-contact-empresa" class="core-show-sub-title">Empleado</div>
+        <div id="show-info-contact-nombre" class="core-show-title-blue">Administrar Productos</div>
 
     </div>
 
