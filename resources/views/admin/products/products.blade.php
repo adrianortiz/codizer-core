@@ -68,7 +68,7 @@
         <tbody id="list-products">
 
         @foreach($products as $product)
-            <tr class="data-product-tr" data-product="1">
+            <tr class="data-product-tr" data-product="{{ $product->producto_id }}">
                 <td>
                     <img src="{{ asset('/media/photo-product/'. $product->img) }}">
                 </td>
@@ -94,6 +94,8 @@
             <!-- LOS ID EN SU MAYORIA SON PARA QUE IDENTIFIQUES A LOS ELEMENTOS CON JS Y PUEDAS MODIFICAR LA INFORMACIÓN -->
 
             <div id="show-info-product-marca">{{$tienda->nombre}}</div>
+
+
             <div id="show-info-product-title">Bolso de mano de piel rosado</div>
 
             <div class="container-show-info-product-img-b">
@@ -114,20 +116,19 @@
                     <div>Cantidad</div>
                     <div id="show-info-product-cantidad" class="show-info-product">300 pz</div>
                 </div>
+
+                <!--
                 <div>
                     <div>Me gusta</div>
                     <div id="show-info-product-me-gusta" class="show-info-product">603</div>
                 </div>
+                -->
+
                 <div>
                     <div>Categorias</div>
                     <div id="show-info-product-categorias" class="show-info-product">
                         <!-- USA UN FOR PARA IMPRIMIR LAS CATEGORIAS A LAS QUE PERTENECE UN PRODUCTO -->
                         <span class="list-product-tags">Bolso</span>
-                        <span class="list-product-tags">Piel</span>
-                        <span class="list-product-tags">Cafe</span>
-                        <span class="list-product-tags">Cafe</span>
-                        <span class="list-product-tags">Chanel</span>
-                    </div>
                 </div>
             </div>
 
@@ -135,13 +136,20 @@
 
         <div id="description-text-title">Descripción</div>
         <div id="show-info-product-desc">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis iaculis, ante non molestie sagittis, felis turpis vulputate dui, et laoreet quam felis ut odio. Quisque ullamcorper consectetur dolor. Phasellus interdum consequat tortor quis egestas. Curabitur mattis urna a iaculis volutpat. Duis facilisis lorem vel viverra ultricies. Morbi semper venenatis neque, eget rhoncus enim. Morbi in malesuada sem.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis iaculis, ante non molestie sagittis, felis turpis vulputate dui, et laoreet quam felis ut odio. Quisque ullamcorper consectetur dolor. Phasellus interdum consequat tortor quis egestas. Curabitur mattis urna a iaculis volutpat. Duis facilisis lorem vel viverra ultricies. Morbi semper venenatis neque, eget rhoncus enim. Morbi in malesuada sem.</p>
         </div>
 
     </div>
 </div>
-@endsection
+
+    <!-- id-product-to-show -->
+    {!! Form::open(['route' => 'products.store', 'method' => 'POST', 'id' => 'form-products-store']) !!}
+
+    {!! Form::text('id-product-to-show',0, array('id' => 'id-product-to-show')) !!}
+
+    {!! Form::close() !!}
+
+
+    @endsection
 
 @section('modals')
 

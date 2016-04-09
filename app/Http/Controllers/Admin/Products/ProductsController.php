@@ -58,7 +58,8 @@ class ProductsController extends Controller
         Core::isRouteValid($userPerfil[0]->perfil_route);
 
         return view('admin.products.products',
-            compact('tienda','empresa','products', 'perfil', 'contacto', 'userPerfil', 'userContacto','fabricantesList','ofertasList','categoriasList', 'idEmpresa', 'idTienda'));
+            compact('tienda','empresa','products', 'perfil', 'contacto', 'userPerfil', 'userContacto','fabricantesList',
+                'ofertasList','categoriasList', 'idEmpresa', 'idTienda'));
     }
 
     /**
@@ -132,14 +133,14 @@ class ProductsController extends Controller
                     $producto_has_categoria->save();
                 }
 
-                // Obtener nombre y ruta de la foto del producto
-                $photoProducto->img = URL::to('/') . '/media/photo-product/' . $photoProducto->img;
+
+                $fullProduct = Core::getProductoById($request['tienda_id'], $producto->id);
+                $fullProduct->img = URL::to('/') . '/media/photo-product/' . $fullProduct->img;
 
                 DB::commit();
                 return response()->json([
                     'message' => 'Producto agregado.',
-                    'producto' => $producto,
-                    'photoProducto' => $photoProducto,
+                    'producto' => $fullProduct
                 ]);
 
             } catch (\Exception $e) {
@@ -167,11 +168,16 @@ class ProductsController extends Controller
         if ( $request->ajax() ) {
 
             $producto = Producto::findOrFail($request['id']);
+            $imgsProduct = ImgProduct::where('producto_id', $request['id'])->get();
+            $productCategories = Core::getCategoriasByIdProduct($producto->product_id);
 
             return response()->json([
-                'producto' => $producto
+                'producto' => $producto,
+                'imgsProduct' => $imgsProduct,
+                'productCategories' => $productCategories
             ]);
         }
+        abort(404);
     }
 
     /**

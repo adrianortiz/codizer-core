@@ -10,12 +10,16 @@ var continaerProductShow = $('#continaer-product-shows');
 
 // Retorna la fila de una notra creada o actulizada
 function productCreateUpdate(result) {
-    return '<tr class="data-product-tr" data-product="' + result.product.id + '">' +
-        '<td class="container-list-point">' +
-        '<div></div><div></div><div></div></td>' +
+    console.log(result.product);
+
+    return '<tr class="data-product-tr" data-product="' + result.producto.id + '">' +
+        '<td class="container-list-photo-user">' +
+        '<img src="' + result.producto.img + '"></td>' +
         '<td>' +
-        '<div class="list-product-content">' + result.product.content + '</div>' +
-        '<span class="list-product-date-update">' + result.product.created_at + '</span>' +
+        '<div class="list-product-title">' + result.producto.nombre + ' ' + '</div>' +
+        '<span class="list-product-tags">' + result.producto.tipo_oferta + result.producto.regla_porciento + '%' + '</span>' + '<br/>' +
+        '<div class="list-product-pz">' + result.producto.cantidad_disponible + 'pz' + '</div>' +
+        '<div class="list-product-price">' + '$' + result.producto.precio + '</div>' +
         '</td>' +
         '</tr>';
 }
@@ -70,7 +74,7 @@ function productCreateUpdate(result) {
          * Crear una nota y agregar la nota creada a la lista de notas (Izquierda)
          * @constructor
          */
-        CreateProduct: function()
+            CreateProduct: function()
         {
             $('#store-new-product').click( function() {
                 if ( validateGroup('.form-group-validate') == -1 )
@@ -103,14 +107,19 @@ function productCreateUpdate(result) {
                         $('.core-loader').hide();
 
                         if ( result.error ) {
-                            console.log(result.case);
+                            console.log(result);
                             hideShowAlert('msj-danger', result.error);
                         } else {
                             hideShowAlert('msj-success', result.message);
                             $('#msg-list-vacio').hide();
                             containerProducts.prepend( productCreateUpdate(result) );
-                            $('.close').click();
-                            document.getElementById("form-products-store").reset();
+                            $('#cancel').click();
+
+                            var idEmpresa = $('#empresa_id_new').val();
+                            var idTienda = $('#tienda_id_new').val();
+                            document.getElementById("#form-products-store").reset();
+                            $('#empresa_id_new').val( idEmpresa );
+                            $('#tienda_id_new').val( idTienda);
                         }
                     }
 
@@ -137,6 +146,13 @@ function productCreateUpdate(result) {
 
             $(containerProducts).on("click", "tr", function()
             {
+
+                tableTrTouched=$(this);
+                console.log(tableTrTouched.attr('data-product'));
+                $('#id-product-to-show').val(tableTrTouched.attr('data-product'));
+                
+
+            /*
                 tableTrTouched = $(this);
                 $('.data-product-tr').removeClass('activarFila');
                 $(this).addClass('activarFila');
@@ -151,7 +167,8 @@ function productCreateUpdate(result) {
                 var datos = form.serializeArray();
                 var route = form.attr('action');
 
-                $.ajax({
+
+                /*$.ajax({
                     url:        route,
                     type:       'GET',
                     dataType:   'json',
@@ -161,7 +178,46 @@ function productCreateUpdate(result) {
                     {
                         // console.log(result);
                         // Agregar datos de la nota consultada al contenedor derecho
-                        continaerProductShow.html('<div class="block-content-info">' + result.note[0].content + '</div>');
+                        continaerProductShow.html(
+                            '<div id="show-info-product-title">' + result.producto.nombre + '</div>'+
+                            '<div class="container-show-info-product-img-b">'+
+
+                           '<img id="show-info-product-img-1" class="sub-image-product principal-image-product" src="' + result.producto.img + '">'+
+                        //<img id="show-info-product-img-2" class="sub-image-product" src="{{ asset('/media/photo-product/bolso-rosa-chanel.png') }}">
+                        //<img id="show-info-product-img-3" class="sub-image-product" src="{{ asset('/media/photo-product/bolso-rosa-chanel.png') }}">
+                        //<img id="show-info-product-img-4" class="sub-image-product" src="{{ asset('/media/photo-product/bolso-rosa-chanel.png') }}">
+                        '</div>'+
+
+                        '<div class="container-show-info-product-list-c">'+
+                        '<div>'+
+                        '<div>'+'Precio'+'</div>'+
+                        '<div id="show-info-product-price" class="show-info-product">'+'$'+ result.producto.precio +'</div>'+
+                    '</div>'+
+                    '<div>'+
+                    '<div>'+'Cantidad'+'</div>' +
+                    '<div id="show-info-product-cantidad" class="show-info-product">'+ result.producto.cantidad_disponible+'pz'+'</div>'+
+                    '</div>'+
+                        '<div>'+
+                        '<div>'+'Categorias'+'</div>'+
+                        '<div id="show-info-product-categorias" class="show-info-product">'+
+                            <!-- USA UN FOR PARA IMPRIMIR LAS CATEGORIAS A LAS QUE PERTENECE UN PRODUCTO -->
+                        '<span class="list-product-tags">'+'Bolso'+'</span>'+
+                        '<span class="list-product-tags">'+'Bolso'+'</span>'+
+                        '<span class="list-product-tags">'+'Bolso'+'</span>'+
+                        '<span class="list-product-tags">'+'Bolso'+'</span>'+
+                        '<span class="list-product-tags">'+'Bolso'+'</span>'+
+
+                        '</div>'+
+                        '</div>'+
+                        '</div>'+
+
+                        '</div>'+
+
+                        '<div id="description-text-title">'+result.producto.desc_producto+'</div>'+
+                        '<div id="show-info-product-desc">'+
+                        '</div>'
+
+                        );
 
                         // Agregar datos de la nota seleccionada al formulario de actualizaci�n
                         $('#id-product-to-update').val(result.product[0].id);
@@ -177,7 +233,7 @@ function productCreateUpdate(result) {
                         hideShowAlert('msj-danger', 'Ocurrio un problema');
                     });
 
-                });
+                });*/
             });
 
         },
