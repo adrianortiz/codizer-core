@@ -77,7 +77,7 @@
                                 <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="{{ route('perfil', $userPerfil[0]->perfil_route) }}">@lang('core.perfil')</a></li>
-                                <li><a href="#">@lang('core.account')</a></li>
+                                <li><a href="{{ route('perfil.info', $userPerfil[0]->perfil_route) }}">@lang('core.account')</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li><a href="{{ route('logout') }}">@lang('core.logout')</a></li>
                             </ul>
