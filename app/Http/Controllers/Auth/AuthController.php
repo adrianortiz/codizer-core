@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\ContactAddress;
 use App\Contacto;
 use App\Perfil;
 use App\User;
@@ -102,6 +103,20 @@ class AuthController extends Controller
                 'perfil_id' => $perfil->id
             ]);
             $userHasPerfil->save();
+
+
+            $contact_dir = new ContactAddress([
+                "desc_dir" => '',
+                "calle" => '',
+                "numero_dir" => '',
+                "piso_edificio" => '',
+                "ciudad" => '',
+                "cp" => '',
+                "estado_dir" => '',
+                "pais" => '',
+                "contacto_id" => $contact->id
+            ]);
+            $contact_dir->save();
 
             DB::commit();
             return $user;

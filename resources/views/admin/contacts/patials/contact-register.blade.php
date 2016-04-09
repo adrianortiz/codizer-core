@@ -1,4 +1,5 @@
 <div class="block-content-info-contact">
+
     <div class="container-show-info-contact-a">
         <div id="show-info-contact-empresa" class="core-show-sub-title">Registro</div>
         <div id="show-info-contact-nombre-completo" class="core-show-title-blue">Nuevo contacto</div>
