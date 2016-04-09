@@ -133,10 +133,6 @@ Route::get('tienda/{tiendaRoute}/cart/order', [
 ]);
 
 
-
-
-
-
 /*
  * Indentificar si un usuario esta conectado
  * Grupos de rutas de laravel
@@ -148,6 +144,26 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => 'role'], function () {
         // ---
     });
+
+
+    /**
+     * PAYPAL ROUTES API
+     */
+
+    // Enviamos nuestro pedido a Paypal
+    Route::get('payment', [
+       'uses'   => 'PaypalController@postPayment',
+        'as'    => 'payment'
+    ]);
+
+    // Paypal redirecciona a esta ruta
+    Route::get('payment/status', [
+        'uses'  => 'PaypalController@getPaymentStatus',
+        'as'    => 'payment.status'
+    ]);
+
+
+
 
         /**
          *  ==== Social - Perfil =====

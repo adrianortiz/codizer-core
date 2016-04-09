@@ -9,7 +9,8 @@
         "laravel/framework": "5.1.*",
         "laravelcollective/html": "5.1.*",
         "maatwebsite/excel": "~2.0",
-        "barryvdh/laravel-ide-helper": "^2.1"
+        "barryvdh/laravel-ide-helper": "^2.1",
+        "paypal/rest-api-sdk-php": "^1.6"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

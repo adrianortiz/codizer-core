@@ -172,6 +172,7 @@ class CartController extends Controller
         }
 
         $cart = Session::get('cart');
+        // dd($cart);
         $total = $this->total();
 
         Core::isTiendaRouteValid($tiendaRoute);

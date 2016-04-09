@@ -52,7 +52,9 @@
             </div>
             <div class="card-btns">
                 <a href="{{ route('perfil', $follower->perfil_route) }}" class="btn">Ver perfil</a>
+                @if( $userPerfil[0]->perfil_route == $perfil[0]->perfil_route )
                 <button class="btn">Dejar de seguir</button>
+                @endif
             </div>
         </div>
         @empty
