@@ -173,6 +173,11 @@ Route::group(['middleware' => 'auth'], function () {
             'as'    => 'perfil'
         ]);
 
+    Route::get('perfil/{nameFirstName}/info', [
+        'uses'  => 'Admin\Information\InformationController@index',
+        'as'    => 'perfil.info'
+    ]);
+
         // Update cover perfil
         Route::post('perfil/{nameFirstName}/cover/update', [
             'uses'  => 'Admin\Social\CoverController@store',

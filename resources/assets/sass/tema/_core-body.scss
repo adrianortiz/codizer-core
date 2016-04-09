@@ -392,16 +392,10 @@ MODIFICACIONES PARA EL MENÚ E INFO DE LA APP
 }
 
 
-// Tags
-
-#form-contact-to-create {
-  color: red !important;
-}
+// ======== TAGS STYLE ======
 
 .nav-tabs {
-
   li {
-
     a {
       border-top: solid 3px transparent;
       border-radius: 0;
@@ -413,13 +407,96 @@ MODIFICACIONES PARA EL MENÚ E INFO DE LA APP
         background-color: $gris-290;
       }
     }
-
   }
 
   .active {
     a {
       border-top: solid 3px $azul-200 !important;
       border-radius: 0 !important;
+    }
+  }
+}
+
+
+.core-tags-container {
+  width: 100%;
+  height: 46px;
+  background-color: $black-core;
+  overflow: hidden;
+
+  .nav-tabs {
+    li {
+      a {
+        display: inline-block;
+        border: none !important;
+        border-top: solid 2px transparent !important;
+        border-right: solid 1px $gris-500 !important;
+        height: 46px;
+        width: auto;
+        text-decoration: none;
+        padding: 0 !important;
+        margin: 0 !important;
+        @include transition(.3s ease);
+
+        .companies-icon, .companies-desc {
+          display: inline-block;
+          color: $gris-100;
+          @include transition(.3s ease);
+        }
+
+        .companies-icon {
+          width: 32px;
+          height: 32px;
+          background-color: $gris-400;
+          border-radius: 32px;
+          margin: 9px;
+          margin-top: 5px;
+          margin-left: 10px;
+        }
+
+        .companies-desc {
+          margin-right: 22px;
+          @include prefixer(transform, translateY(-15px));
+        }
+
+        .companies-title {
+          font-weight: 300;
+        }
+
+        .companies-tittle-tag {
+          font-size: 10px;
+          font-weight: 600;
+        }
+
+        // HOVER CUANDO ES SELECCIONADO
+        &:hover {
+          background-color: $blanco;
+          border-top: solid 2px $azul-100 !important;
+          border-right: solid 1px $black-core !important;
+          div {
+            color: $black-core;
+          }
+
+          .companies-icon {
+            background-color: $gris-100 !important;
+          }
+        }
+      }
+    }
+
+    .active {
+      a {
+        background-color: $blanco;
+        border-top: solid 2px $azul-100 !important;
+        border-right: solid 1px $black-core !important;
+        div {
+          color: $black-core;
+        }
+
+        .companies-icon {
+          background-color: $gris-100 !important;
+        }
+      }
     }
   }
 }
