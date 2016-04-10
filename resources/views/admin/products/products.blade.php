@@ -55,7 +55,7 @@
                 <button type="button" id="btn-new-product" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modalNewProduct">Nuevo producto</button>
             </div>
             <div id="btn-group-to-product" class="btn-group right" role="group" aria-label="...">
-                <button type="button" id="btn-edit-product" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modalUpdateProduct">Editar</button>
+                <button type="button" id="btn-edit-product" class="btn btn-default btn-sm core-hidden" data-toggle="modal" data-target="#modalUpdateProduct">Editar</button>
             </div>
 
         </div>
@@ -95,7 +95,7 @@
             <div id="show-info-product-marca">{{$tienda->nombre}}</div>
 
 
-            <div id="show-info-product-title-name"> PAN BIMBO</div>
+            <div id="show-info-product-title-name"></div>
 
             <div id="show-info-product-imgs" class="container-show-info-product-img-b">
                 <!-- USA UN FOR PARA IMPRIMIR LAS FOTOS DE CADA PRODUCTO -->
@@ -109,10 +109,17 @@
             </div>
 
             <div class="container-show-info-product-list-c">
+
+                <div>
+                    <div>Codigo del producto</div>
+                    <div id="show-info-product-codigo" class="show-info-product"></div>
+                </div>
+
                 <div>
                     <div>Precio</div>
                     <div id="show-info-product-price" class="show-info-product"></div>
                 </div>
+
                 <div>
                     <div>Cantidad disponible</div>
                     <div id="show-info-product-cantidad" class="show-info-product"></div>

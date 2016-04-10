@@ -9,7 +9,8 @@ var containerProducts = $('#list-products');
 var continaerProductShow = $('#continaer-product-shows');
 
 function fillModalProduct(result) {
-    $('#show-info-product-title-name').val(result.product.nombre);
+    $('#show-info-product-title-name').text(result.product.nombre);
+    $('#show-info-product-codigo').text(result.product.codigo_producto);
     $('#show-info-product-price').text('$'+result.product.precio);
     $('#show-info-product-cantidad').text(result.product.cantidad_disponible);
     $('#show-info-product-final-price').text('$' + result.finalPrice);
@@ -26,17 +27,9 @@ function fillModalProduct(result) {
     $('#show-info-product-imgs').empty();
     $('#show-info-product-imgs').append('<img id="principal-image-product" src="' + result.url + result.imgsProduct[0].img + '">');
     $.each(result.imgsProduct, function (index, item) {
-        $('#show-info-product-img').append('<img class="sub-image-product" src="' + result.url + item.img + '">');
+        $('#show-info-product-imgs').append('<img class="sub-image-product" src="' + result.url + item.img + '">');
     });
 }
-
-
-
-
-
-
-
-
 
 
 // Retorna la fila de una notra creada o actulizada
@@ -68,10 +61,20 @@ function productCreateUpdate(result) {
         App.CreateProduct();
         App.SelectProduct();
         App.UpdateProduct();
-        App.DeleteProduct();
         App.SearchAndListAllProducts();
         App.AddInputFileImg();
+        App.changeImageModal();
     },
+
+        changeImageModal: function() {
+
+            $('#show-info-product-imgs').on("click", '.sub-image-product', function() {
+                $('#principal-image-product').attr('src', $(this).attr('src') );
+                $('.sub-image-product').removeClass('principal-image-product');
+                $(this).addClass('principal-image-product');
+            });
+
+        },
 
         AddInputFileImg: function ()
         {
@@ -208,6 +211,8 @@ function productCreateUpdate(result) {
                             $('.core-loader').hide();
                             fillModalProduct(result);
                             $('#continaer-product-shows').show();
+                            $('#btn-edit-product').show();
+
 
                         }
 
