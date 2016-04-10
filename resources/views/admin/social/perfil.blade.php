@@ -16,24 +16,30 @@
 
     @section('main-header-options-app')
 
-            @include('partials.perfil-link')
+        @include('partials.perfil-link')
+        @include('partials.contacts-link')
 
-            <!-- Title menu -->
+        <!-- Title menu -->
+        <!--
         <a href="#" class="core-menu-list"><div>Información</div></a>
+        -->
 
         <!-- list menu with img -->
+        <!--
         <a href="#" class="core-menu-list menu-list-option menu-lis-img">
             <img src="{{ asset('/media/photo-perfil/' . $contacto[0]->foto) }}">
             <div>Karen Olvera</div>
         </a>
+        -->
 
-        @include('partials.contacts-link')
-
+        <!--
         <a href="#" class="core-menu-list"><div>Menu list <span>10</span></div></a>
 
         <a href="#" class="core-menu-list menu-list-option"><div>Option 1</div></a>
         <a href="#" class="core-menu-list menu-list-option"><div>Option 2</div></a>
-@endsection
+        -->
+
+    @endsection
 
 
 @section('options-tools')
@@ -144,21 +150,34 @@
             <a href="#" class="core-menu-list"><div style="color: red">Posibles candidatos</div></a>
 
             <!-- list menu with img -->
-            <a href="#" class="core-menu-list menu-list-option menu-lis-img">
-                <img src="{{ asset('/media/photo-perfil/' . $contacto[0]->foto) }}">
-                <div>Karen Olvera</div>
-            </a>
+            @forelse($candidatesUsers as $candidate)
 
-            <!-- list menu with img -->
-            <a href="#" class="core-menu-list menu-list-option menu-lis-img">
-                <img src="{{ asset('/media/photo-perfil/' . $contacto[0]->foto) }}">
-                <div>Karen Olvera</div>
-            </a>
+                <a href="{{ route('perfil', [$candidate->perfil_route]) }}" class="core-menu-list menu-list-option menu-lis-img">
+                    <img src="{{ asset('/media/photo-perfil/' . $candidate->foto) }}">
+                    <div>{{ $candidate->nombre . ' ' . $candidate->ap_paterno }}</div>
+                </a>
+
+            @empty
+
+                <div id="core-contacts-container">
+                    <a href="#0" class="core-menu-list menu-list-option"><div>No hay candidatos</div></a>
+                </div>
+
+            @endforelse
+
 
             <a href="#" class="core-menu-list"><div style="color: red">Tendencias</div></a>
 
-            <a href="#" class="core-menu-list menu-list-option"><div>#ZapatosRosas</div></a>
-            <a href="#" class="core-menu-list menu-list-option"><div>#Globos</div></a>
+            @forelse($tendencies as $tendencie)
+                <a href="#" class="core-menu-list menu-list-option"><div>#{{ substr(str_replace(' ', '', ucwords($tendencie->nombre)), 0, 22) }}</div></a>
+            @empty
+
+                <div id="core-contacts-container">
+                    <a href="#0" class="core-menu-list menu-list-option"><div>No hay candidatos</div></a>
+                </div>
+
+            @endforelse
+
         </div>
     </div>
 

@@ -4,12 +4,12 @@
         <!-- list menu with img -->
         <div id="core-contacts-container">
     @forelse($contacts as $contact)
-        <a href="#" class="core-menu-list menu-list-option menu-lis-img" id="{{ $contact -> id }}">
+        <a href="#0" class="core-menu-list menu-list-option menu-lis-img" id="{{ $contact -> id }}">
             <img src="{{ asset('/media/photo-perfil/' . $contact -> foto) }}">
             <div class="list-contact-full-name">{{ $contact -> nombre. ' ' .$contact -> ap_paterno }}</div>
         </a>
     @empty
-        <div class="msg-list-vacio" id="noContacts">No hay contactos.</div>
+        <a href="#0" class="core-menu-list menu-list-option"><div>No hay contactos</div></a>
     @endforelse
         </div>
 

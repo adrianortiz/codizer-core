@@ -81,6 +81,7 @@
   padding: 2px;
   padding-top: 0;
   padding-bottom: 2px;
+  color: $black-core;
 
 }
 
@@ -157,6 +158,7 @@
   @include prefixer(width, calc(100% - 200px));
   height: auto;
   float: right;
+  color: $black-core;
 
   padding-left: 30px;
   div {

@@ -13,10 +13,7 @@
 @section('main-header-options-app')
 
     @include('partials.perfil-link')
-
-    <a href="#" class="core-menu-list"><div>Empresa</div></a>
-    <a href="#" id="btn-list-all-notes" class="core-menu-list menu-list-option"><div>Todas las notas</div></a>
-    <a href="#" class="core-menu-list menu-list-option"><div>Notas compartidas</div></a>
+    @include('partials.contacts-link')
 
 @endsection
 
@@ -24,7 +21,7 @@
 @section('article-content')
 
 @section('extra-content')
-    <div id="container-menu-companies"></div>
+    @include('admin.empleado.partials.tags-empleo')
 @endsection
 
 <div id="continaer-note-shows" class="right-content-list content-complete-high">
@@ -34,8 +31,8 @@
 
     <div class="container-list-something">
 
-        <div id="show-info-contact-empresa" class="core-show-sub-title">Empleado | Tienda</div>
-        <div id="show-info-contact-nombre" class="core-show-title-blue">Empleos</div>
+        <div id="show-info-contact-empresa" class="core-show-sub-title">Empleado</div>
+        <div id="show-info-contact-nombre" class="core-show-title-blue">Administrar Productos</div>
 
     </div>
 

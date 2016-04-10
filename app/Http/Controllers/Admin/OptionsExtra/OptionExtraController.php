@@ -11,6 +11,7 @@ use App\Fabricante;
 use App\Facades\Core;
 use App\Oferta;
 use App\Tienda;
+use App\User;
 use App\UsuarioEmpleadoInfo;
 use Illuminate\Http\Request;
 
@@ -26,10 +27,19 @@ class OptionExtraController extends Controller
      */
     public function index($nameFirstName)
     {
-        $userPerfil = Core::getUserPerfil();
-        $userContacto = Core::getUserContact();
-        $perfil = $userPerfil;
-        $contacto = $userContacto;
+        $userPerfil     = Core::getUserPerfil();
+        $userContacto   = Core::getUserContact();
+        $perfil         = $userPerfil;
+        $contacto       = $userContacto;
+
+
+        // Métodos para contactos
+        $userView   = User::where('contacto_id', $contacto[0]->id)->first();
+        $user       = User::findOrFail(\Auth::user()->id);
+        $contacts   = Core::getContactos($user->id);
+        $friends    = Core::getAmigos($userView->id);
+        $followers  = Core::getFollowers($contacto);
+
 
         // Nos aseguramos de que la ruta sea la del usuario logueado
         if ( $nameFirstName != $userPerfil[0]->perfil_route)
@@ -41,7 +51,7 @@ class OptionExtraController extends Controller
         $empresa = Empresa::where('users_id', \Auth::user()->id)->first();
 
         if ($empresa === null) {
-            return view('admin.company.new-company', compact('perfil', 'contacto', 'userPerfil', 'userContacto'));
+            return view('admin.company.new-company', compact('perfil', 'contacto', 'userPerfil', 'userContacto', 'contacts', 'friends', 'followers'));
 
         } else {
 
@@ -52,7 +62,7 @@ class OptionExtraController extends Controller
             $fabricantes = Core::getFabricantes($empresa->id);
             $categorias = Core::getCategorias($empresa->id);
 
-            return view('admin.company.extras', compact('perfil', 'contacto', 'userPerfil', 'userContacto', 'empresa', 'countTiendas', 'ofertas', 'categorias', 'fabricantes', 'countEmpleados'));
+            return view('admin.company.extras', compact('perfil', 'contacto', 'userPerfil', 'userContacto', 'empresa', 'countTiendas', 'ofertas', 'categorias', 'fabricantes', 'countEmpleados', 'contacts', 'friends', 'followers'));
         }
     }
 

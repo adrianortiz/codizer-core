@@ -12,13 +12,13 @@
     <div class="core-search-suggestions">
         <div id="search-suggestions-a">
 
-            <h3>Store</h3>
+            <h3>Tiendas</h3>
             <div id="container-store-suggestions">
-                <h5>No results</h5>
+                <h5>Escribe algo en el buscador</h5>
                 <!--
                 <div class="suggestion">
                     <a href="#">
-                        <img src="{{ asset('/media/photo-store/chanel-123.png') }}" />
+                        <img src="/media" />
                         <div>
                             <h4>Chanel</h4>
                             <h5>Official Store</h5>
@@ -29,13 +29,13 @@
                 -->
             </div>
 
-            <h3>Products</h3>
+            <h3>Productos</h3>
             <div id="container-product-suggestions">
-                <h5>No results</h5>
+                <h5>Escribe algo en el buscador</h5>
                 <!--
                 <div class="suggestion">
                     <a href="#">
-                        <img src="{{ asset('/media/photo-product/sudadera-cat.png') }}" />
+                        <img src="/media" />
                         <div>
                             <h4>White Cat Sudadera</h4>
                             <h5>Hoodies - <span>$690.00</span></h5>
@@ -46,13 +46,13 @@
                 -->
             </div>
 
-            <h3>Users</h3>
+            <h3>Usuarios</h3>
             <div id="container-user-suggestions">
-                <h5>No results</h5>
+                <h5>Escribe algo en el buscador</h5>
                 <!--
                 <div class="suggestion">
                     <a href="#">
-                        <img src="{{ asset('/media/photo-perfil/israel-chavarria123.png') }}" />
+                        <img src="/media" />
                         <div>
                             <h4>Karen Olvera</h4>
                             <h5>Costumer at Chanel</h5>
@@ -61,16 +61,16 @@
                     <a href="#" class="btn-suggestions-go">Ver</a>
                 </div>
                 -->
-
             </div>
 
         </div>
 
         <div id="search-suggestions-b">
             <h3>Quick Help</h3>
-            <a href="#">Crear tienda</a>
-            <a href="#">Ayuda</a>
-            <a href="#">Codizer - 2016</a>
+            <a href="{{ route('companies.index', $userPerfil[0]->perfil_route) }}">Crear Empresa</a>
+            <a href="{{ route('stores.index', $userPerfil[0]->perfil_route) }}">Crear Tienda</a>
+            <a href="#0">Ayuda</a>
+            <a href="http://codizer.com/" target="_blank">Codizer - 2016</a>
         </div>
 
     </div>

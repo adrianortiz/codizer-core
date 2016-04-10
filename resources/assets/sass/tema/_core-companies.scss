@@ -26,15 +26,14 @@
 // CONTAINER MENU GENERAL FOR COMPANY
 #container-menu-companies {
   width: 100%;
-  height: 50px;
+  height: 46px;
   background-color: $black-core;
 
   a {
     display: inline-block;
     border-top: solid 2px transparent;
     border-right: solid 1px $gris-500;
-    border-right: solid 1px $gris-500;
-    height: 50px;
+    height: 46px;
     width: auto;
     text-decoration: none;
     @include transition(.3s ease);
@@ -42,6 +41,7 @@
     .companies-icon, .companies-desc {
       display: inline-block;
       color: $gris-100;
+      @include transition(.3s ease);
     }
 
     .companies-icon {
@@ -50,12 +50,12 @@
       background-color: $gris-400;
       border-radius: 32px;
       margin: 9px;
-      margin-top: 6px;
+      margin-top: 5px;
       margin-left: 10px;
     }
 
     .companies-desc {
-      margin-right: 19px;
+      margin-right: 22px;
       @include prefixer(transform, translateY(-15px));
     }
 
@@ -64,7 +64,7 @@
     }
 
     .companies-tittle-tag {
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 600;
     }
 

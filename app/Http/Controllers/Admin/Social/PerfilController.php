@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Social;
 use App\Contacto;
 use App\Facades\Core;
 use App\Http\Requests;
+use App\Producto;
 use App\User;
 use App\UserHasFollowerUser;
 use App\UserHasFriendUser;
@@ -24,18 +25,21 @@ class PerfilController extends Controller
     {
         Core::isRouteValid($nameFirstName);
 
-        $perfil = Core::getPerfil($nameFirstName);
-        $contacto = Core::getContact($perfil);
-        $userView = User::where('contacto_id', $contacto[0]->id)->first();
+        $perfil         = Core::getPerfil($nameFirstName);
+        $contacto       = Core::getContact($perfil);
+        $userPerfil     = Core::getUserPerfil();
+        $userContacto   = Core::getUserContact();
 
-        $userPerfil = Core::getUserPerfil();
-        $userContacto = Core::getUserContact();
-        $user = User::findOrFail(\Auth::user()->id);
 
-        $contacts = Core::getContactos($user->id);
-        $friends = Core::getAmigos($userView->id);
-        $followers = Core::getFollowers($contacto);
+        // Métodos para contactos
+        $userView   = User::where('contacto_id', $contacto[0]->id)->first();
+        $user       = User::findOrFail(\Auth::user()->id);
+        $contacts   = Core::getContactos($user->id);
+        $friends    = Core::getAmigos($userView->id);
+        $followers  = Core::getFollowers($contacto);
 
+
+        // To know if a user is my friend, follower etc.
         $idUserView = User::where('contacto_id', $contacto[0]->id)
             ->select('id')
             ->first();
@@ -48,7 +52,14 @@ class PerfilController extends Controller
             ->where('users_id_followers', $idUserView->id)
             ->count();
 
-        return view('admin.social.perfil', compact('perfil', 'contacto', 'userPerfil', 'userContacto', 'contacts', 'friends', 'followers', 'idUserView', 'isMyFriend', 'amIFollower'));
+        // Get possible candidates users
+        $candidatesUsers = Core::getUsersAreNotYou();
+
+        // Get tendencies
+        $tendencies = Producto::where('estado', 1)->select('nombre')->skip(0)->take(6)->get();
+
+        return view('admin.social.perfil',
+            compact('perfil', 'contacto', 'userPerfil', 'userContacto', 'contacts', 'friends', 'followers', 'idUserView', 'isMyFriend', 'amIFollower', 'candidatesUsers', 'tendencies'));
     }
 
     /**

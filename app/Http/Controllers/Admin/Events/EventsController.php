@@ -19,26 +19,25 @@ class EventsController extends Controller
     public function index($nameFirstName)
     {
         // User son los datos del usuario Logueado
-        $userPerfil = Core::getUserPerfil();
-        $userContacto = Core::getUserContact();
+        $userPerfil     = Core::getUserPerfil();
+        $userContacto   = Core::getUserContact();
+        $perfil         = $userPerfil;
+        $contacto       = $userContacto;
 
-        $perfil = $userPerfil;
-        $contacto = $userContacto;
-        $userView = User::where('contacto_id', $contacto[0]->id)->first();
+
+        // Métodos para contactos
+        $userView   = User::where('contacto_id', $contacto[0]->id)->first();
+        $user       = User::findOrFail(\Auth::user()->id);
+        $contacts   = Core::getContactos($user->id);
+        $friends    = Core::getAmigos($userView->id);
+        $followers  = Core::getFollowers($contacto);
+
 
         // Nos aseguramos de que la ruta sea la del usuario logueado
         if ( $nameFirstName != $userPerfil[0]->perfil_route)
             return \Redirect::route('events', $userPerfil[0]->perfil_route);
 
         Core::isRouteValid($userPerfil[0]->perfil_route);
-
-        $user = User::findOrFail(\Auth::user()->id);
-
-        $contacts = Core::getContactos($user->id);
-        $friends = Core::getAmigos($userView->id);
-        $followers = Core::getFollowers($contacto);
-
-
 
         return view('admin.events.events', compact('perfil', 'contacto', 'userPerfil', 'userContacto', 'friends', 'contacts', 'followers'));
     }

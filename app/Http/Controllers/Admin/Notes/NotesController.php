@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Notes;
 
 use App\Facades\Core;
 use App\Note;
+use App\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -18,10 +19,19 @@ class NotesController extends Controller
      */
     public function index($nameFirstName)
     {
-        $userPerfil = Core::getUserPerfil();
-        $userContacto = Core::getUserContact();
-        $perfil = $userPerfil;
-        $contacto = $userContacto;
+        $userPerfil     = Core::getUserPerfil();
+        $userContacto   = Core::getUserContact();
+        $perfil         = $userPerfil;
+        $contacto       = $userContacto;
+
+
+        // Métodos para contactos
+        $userView   = User::where('contacto_id', $contacto[0]->id)->first();
+        $user       = User::findOrFail(\Auth::user()->id);
+        $contacts   = Core::getContactos($user->id);
+        $friends    = Core::getAmigos($userView->id);
+        $followers  = Core::getFollowers($contacto);
+
 
         // Nos aseguramos de que la ruta sea la del usuario logueado
         if ( $nameFirstName != $userPerfil[0]->perfil_route)
@@ -34,7 +44,7 @@ class NotesController extends Controller
             ->orderBy('updated_at', 'desc')
             ->get();
 
-        return view('admin.Notes.notes', compact('perfil', 'contacto', 'userPerfil', 'userContacto', 'notes'));
+        return view('admin.Notes.notes', compact('perfil', 'contacto', 'userPerfil', 'userContacto', 'notes', 'contacts', 'friends', 'followers'));
     }
 
     /**
