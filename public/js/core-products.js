@@ -150,9 +150,79 @@ function productCreateUpdate(result) {
                 tableTrTouched=$(this);
                 console.log(tableTrTouched.attr('data-product'));
                 $('#id-product-to-show').val(tableTrTouched.attr('data-product'));
-                
+                /*var form = $('#form-product-to-show');
+                var datos = form.serializeArray();
+                var route = form.attr('action');
 
-            /*
+
+                $.ajax({
+                 url:        route,
+                 type:       'GET',
+                 dataType:   'json',
+                 data:       datos,
+
+                 success: function( result )
+                 {
+                 // console.log(result);
+                 // Agregar datos de la nota consultada al contenedor derecho
+                 continaerProductShow.html(
+                 '<div id="show-info-product-title">' + result.producto.nombre + '</div>'+
+                 '<div class="container-show-info-product-img-b">'+
+
+                 '<img id="show-info-product-img-1" class="sub-image-product principal-image-product" src="' + result.producto.img + '">'+
+                 //<img id="show-info-product-img-2" class="sub-image-product" src="{{ asset('/media/photo-product/bolso-rosa-chanel.png') }}">
+                 //<img id="show-info-product-img-3" class="sub-image-product" src="{{ asset('/media/photo-product/bolso-rosa-chanel.png') }}">
+                 //<img id="show-info-product-img-4" class="sub-image-product" src="{{ asset('/media/photo-product/bolso-rosa-chanel.png') }}">
+                 '</div>'+
+
+                 '<div class="container-show-info-product-list-c">'+
+                 '<div>'+
+                 '<div>'+'Precio'+'</div>'+
+                 '<div id="show-info-product-price" class="show-info-product">'+'$'+ result.producto.precio +'</div>'+
+                 '</div>'+
+                 '<div>'+
+                 '<div>'+'Cantidad'+'</div>' +
+                 '<div id="show-info-product-cantidad" class="show-info-product">'+ result.producto.cantidad_disponible+'pz'+'</div>'+
+                 '</div>'+
+                 '<div>'+
+                 '<div>'+'Categorias'+'</div>'+
+                 '<div id="show-info-product-categorias" class="show-info-product">'+
+                 <!-- USA UN FOR PARA IMPRIMIR LAS CATEGORIAS A LAS QUE PERTENECE UN PRODUCTO -->
+                 '<span class="list-product-tags">'+'Bolso'+'</span>'+
+                 '<span class="list-product-tags">'+'Bolso'+'</span>'+
+                 '<span class="list-product-tags">'+'Bolso'+'</span>'+
+                 '<span class="list-product-tags">'+'Bolso'+'</span>'+
+                 '<span class="list-product-tags">'+'Bolso'+'</span>'+
+
+                 '</div>'+
+                 '</div>'+
+                 '</div>'+
+
+                 '</div>'+
+
+                 '<div id="description-text-title">'+result.producto.desc_producto+'</div>'+
+                 '<div id="show-info-product-desc">'+
+                 '</div>'
+
+                 );
+
+                 // Agregar datos de la nota seleccionada al formulario de actualizaci�n
+                 //$('#id-product-to-update').val(result.product[0].id);
+                 //$('#content-product-to-update').val(result.product[0].content);
+
+                 }
+
+                 }).fail(function( jqXHR, textStatus ) {
+                 $('#msj-danger-state').empty();
+
+                 $(jqXHR).each(function(key,error)
+                 {
+                 hideShowAlert('msj-danger', 'Ocurrio un problema');
+                 });
+
+                 });
+
+
                 tableTrTouched = $(this);
                 $('.data-product-tr').removeClass('activarFila');
                 $(this).addClass('activarFila');
@@ -233,8 +303,8 @@ function productCreateUpdate(result) {
                         hideShowAlert('msj-danger', 'Ocurrio un problema');
                     });
 
-                });*/
-            });
+                });
+            */});
 
         },
 

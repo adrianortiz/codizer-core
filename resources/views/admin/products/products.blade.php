@@ -96,25 +96,27 @@
             <div id="show-info-product-marca">{{$tienda->nombre}}</div>
 
 
-            <div id="show-info-product-title">Bolso de mano de piel rosado</div>
+            <div id="show-info-product-title"></div>
 
             <div class="container-show-info-product-img-b">
                 <!-- USA UN FOR PARA IMPRIMIR LAS FOTOS DE CADA PRODUCTO -->
+                <!--
                 <img id="principal-image-product" src="{{ asset('/media/photo-product/bolso-rosa-chanel.png') }}">
                 <img id="show-info-product-img-1" class="sub-image-product principal-image-product" src="{{ asset('/media/photo-product/bolso-rosa-chanel.png') }}">
                 <img id="show-info-product-img-2" class="sub-image-product" src="{{ asset('/media/photo-product/bolso-rosa-chanel.png') }}">
                 <img id="show-info-product-img-3" class="sub-image-product" src="{{ asset('/media/photo-product/bolso-rosa-chanel.png') }}">
                 <img id="show-info-product-img-4" class="sub-image-product" src="{{ asset('/media/photo-product/bolso-rosa-chanel.png') }}">
+                -->
             </div>
 
             <div class="container-show-info-product-list-c">
                 <div>
-                    <div>Precio</div>
-                    <div id="show-info-product-price" class="show-info-product">$2100.00</div>
+                    <div></div>
+                    <div id="show-info-product-price" class="show-info-product"></div>
                 </div>
                 <div>
-                    <div>Cantidad</div>
-                    <div id="show-info-product-cantidad" class="show-info-product">300 pz</div>
+                    <div></div>
+                    <div id="show-info-product-cantidad" class="show-info-product"></div>
                 </div>
 
                 <!--
@@ -125,16 +127,16 @@
                 -->
 
                 <div>
-                    <div>Categorias</div>
+                    <div></div>
                     <div id="show-info-product-categorias" class="show-info-product">
                         <!-- USA UN FOR PARA IMPRIMIR LAS CATEGORIAS A LAS QUE PERTENECE UN PRODUCTO -->
-                        <span class="list-product-tags">Bolso</span>
+                        <span class="list-product-tags"></span>
                 </div>
             </div>
 
         </div>
 
-        <div id="description-text-title">Descripción</div>
+        <div id="description-text-title"></div>
         <div id="show-info-product-desc">
         </div>
 
