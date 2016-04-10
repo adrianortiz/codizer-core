@@ -1,6 +1,7 @@
 @extends('layout-core')
 
 @section('extra-css')
+
 @endsection
 
 @section('title', 'Productos')
@@ -187,35 +188,7 @@
     <script src="{{ asset('/js/codizer-validate.js') }}"></script>
     <script src="{{ asset('/js/core-products.js') }}"></script>
 
-<script src="{{ asset('/js/tinyEditor/tiny.editor.js') }}"></script>
-<script src="{{ asset('/js/tinyEditor/tiny.editor.packed.js') }}"></script>
-
-
-
-<script>
-    var editor = new TINY.editor.edit('editor', {
-        id: 'tinyeditor',
-        width: 564,
-        height: 300,
-        cssclass: 'tinyeditor',
-        controlclass: 'tinyeditor-control',
-        rowclass: 'tinyeditor-header',
-        dividerclass: 'tinyeditor-divider',
-        controls: ['bold', 'italic', 'underline', 'strikethrough', '|', 'subscript', 'superscript', '|',
-            'orderedlist', 'unorderedlist', '|', 'outdent', 'indent', '|', 'leftalign',
-            'centeralign', 'rightalign', 'blockjustify', '|', 'unformat', 'n', 'undo', 'redo', '|',
-            'font', 'size', 'style', '|', 'image', 'hr', 'link', 'unlink', '|', 'print'],
-        footer: true,
-        fonts: ['Verdana','Arial','Georgia','Trebuchet MS'],
-        xhtml: true,
-        cssfile: 'custom.css',
-        bodyid: 'editor',
-        footerclass: 'tinyeditor-footer',
-        toggle: {text: 'source', activetext: 'wysiwyg', cssclass: 'toggle'},
-        resize: {cssclass: 'resize'}
-    });
-</script>
-
-<link type="text/css" rel="stylesheet" href="{{ asset('/css/tinyEditor/style.css') }}">
+    <!-- Description Editor -->
+    <script src="{{ asset('/js/tinymce/tinymce.min.js')}}"></script>
 
 @endsection

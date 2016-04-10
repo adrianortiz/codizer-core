@@ -162,7 +162,7 @@
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
                                 {!! Form::textarea('desc_producto', '',
-                                array('id' => 'tinyeditor', 'class'=> 'form-core-textarea form-control form-with-100', 'placeholder' => 'Descripcion del producto')) !!}
+                                array('id' => 'desc_producto', 'class'=> 'form-core-textarea form-control form-with-100', 'placeholder' => 'Descripcion del producto')) !!}
                             </div>
                         </div>
                     </div>

@@ -21,8 +21,8 @@
                 {!! Form::open(['route' => 'products.update', 'method' => 'POST', 'id' => 'form-products-store-update']) !!}
                 <div class="form-group">
 
-                    {!! Form::hidden('empresa_id', $idEmpresa, ['id' => 'empresa_id_new', 'class' => 'form-group-validate val_num']) !!}
-                    {!! Form::hidden('tienda_id', $idTienda, ['id' => 'tienda_id_new', 'class' => 'form-group-validate val_num']) !!}
+                    {!! Form::hidden('empresa_id', $idEmpresa, ['id' => 'empresa_id_new', 'class' => 'form-group-validate-up val_num']) !!}
+                    {!! Form::hidden('tienda_id', $idTienda, ['id' => 'tienda_id_new', 'class' => 'form-group-validate-up val_num']) !!}
 
 
                     <div class="row col-md-6">
@@ -36,7 +36,7 @@
                         <div class="col-xs-6 col-md-12">
                             <img id="core-img-principal" src="{{ asset('/media/icon/upload-img-icon.png') }}" />
                             <div class="form-group">
-                                {!! Form::file('img[]', ['accept' => 'image/jpg,image/png', 'id' => 'core-file-img-principal', 'class' => 'form-control form-with-100 form-group-validate val_img', 'required']) !!}
+                                {!! Form::file('img[]', ['accept' => 'image/jpg,image/png', 'id' => 'core-file-img-principal', 'class' => 'form-control form-with-100 form-group-validate-up val_img', 'required']) !!}
                             </div>
                         </div>
 
@@ -74,28 +74,28 @@
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
                                 {!! Form::label('nombre', 'Nombre') !!}
-                                {!! Form::text('nombre', '', array('class'=> 'form-control form-with-100 form-group-validate val_text_num', 'placeholder' => 'Nombre')) !!}
+                                {!! Form::text('nombre', '', array('class'=> 'form-control form-with-100 form-group-validate-up val_text_num', 'placeholder' => 'Nombre')) !!}
                             </div>
                         </div>
 
                         <div class="col-xs-12 col-sm-6 col-md-12">
                             <div class="form-group">
                                 {!! Form::label('codigo_producto', 'Codigo producto') !!}
-                                {!! Form::text('codigo_producto','', array('class'=> 'form-control form-with-100 form-group-validate val_text_num', 'placeholder' => 'Codigo del producto')) !!}
+                                {!! Form::text('codigo_producto','', array('class'=> 'form-control form-with-100 form-group-validate-up val_text_num', 'placeholder' => 'Codigo del producto')) !!}
                             </div>
                         </div>
 
                         <div class="col-xs-12 col-sm-6 col-md-12">
                             <div class="form-group">
                                 {!! Form::label('cantidad_disponible', 'Cantidad disponible') !!}
-                                {!!  Form::number('cantidad_disponible', '0', ['class'=> 'form-control form-with-100 form-group-validate val_num'])  !!}
+                                {!!  Form::number('cantidad_disponible', '0', ['class'=> 'form-control form-with-100 form-group-validate-up val_num'])  !!}
                             </div>
                         </div>
 
                         <div class="col-xs-12 col-sm-6 col-md-12">
                             <div class="form-group">
                                 {!! Form::label('precio', 'Precio') !!}
-                                {!! Form::text('precio', '', array('class'=> 'form-control form-with-100 form-group-validate val_double', 'placeholder' => 'Precio')) !!}
+                                {!! Form::text('precio', '', array('class'=> 'form-control form-with-100 form-group-validate-up val_double', 'placeholder' => 'Precio')) !!}
                             </div>
                         </div>
 
@@ -103,7 +103,7 @@
                             <div class="form-group">
                                 {!! Form::label('oferta_id', 'Oferta del producto') !!}
                                 {!! Form::select('oferta_id', $ofertasList,Input::old('oferta_id'),
-                                array('class'=> 'form-control form-with-100 form-group-validate val_num'))  !!}
+                                array('class'=> 'form-control form-with-100 form-group-validate-up val_num'))  !!}
                             </div>
                         </div>
 
@@ -111,7 +111,7 @@
                             <div class="form-group">
                                 {!! Form::label('fabricante_id', 'Fabricante') !!}
                                 {!! Form::select('fabricante_id', $fabricantesList,Input::old('fabricante_id'),
-                                array('class'=> 'form-control form-with-100 form-group-validate val_num'))  !!}
+                                array('class'=> 'form-control form-with-100 form-group-validate-up val_num'))  !!}
                             </div>
                         </div>
 
@@ -119,7 +119,7 @@
                             <div class="form-group">
                                 {!! Form::label('estado', 'Estado del producto') !!}
                                 {!! Form::select('estado', array('1' => 'Disponible para el publico', '0' => 'No disponible para el publico'),
-                                 'Elige un estado', array('class'=> 'form-control form-with-100 form-group-validate val_num'))  !!}
+                                 'Elige un estado', array('class'=> 'form-control form-with-100 form-group-validate-up val_num'))  !!}
                             </div>
                         </div>
 
@@ -142,7 +142,7 @@
 
                                     @foreach( $categoriasList as $categoria )
                                         <label class="core-checkbox">
-                                            {!! Form::checkbox('categoria[]', $categoria->id, ['class'=> 'form-group-validate val_num'])  !!}
+                                            {!! Form::checkbox('categoria[]', $categoria->id, ['class'=> 'form-group-validate-up val_num'])  !!}
                                             <span>{{ $categoria->nombre }}</span>
                                         </label>
                                     @endforeach
@@ -161,8 +161,8 @@
 
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
-                                {!! Form::textarea('desc_producto', '',
-                                array('id' => 'tinyeditor', 'class'=> 'form-core-textarea form-control form-with-100', 'placeholder' => 'Descripcion del producto')) !!}
+                                {!! Form::textarea('desc_producto-up', '',
+                                array('id' => 'desc_producto-up', 'class'=> 'form-core-textarea form-control form-with-100', 'placeholder' => 'Descripcion del producto')) !!}
                             </div>
                         </div>
                     </div>

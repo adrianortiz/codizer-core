@@ -64,7 +64,43 @@ function productCreateUpdate(result) {
         App.SearchAndListAllProducts();
         App.AddInputFileImg();
         App.changeImageModal();
+        App.initEditor();
     },
+
+        initEditor: function() {
+
+          /*
+          // Get data
+          // tinymce.get('desc_producto').getContent()
+
+          tinymce.init({
+            selector: 'textarea#desc_producto',
+            height: 500,
+            plugins: [
+              'advlist autolink lists link image charmap print preview anchor',
+              'searchreplace visualblocks code fullscreen',
+              'insertdatetime media table contextmenu paste code'
+            ],
+            toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent' // | link image'
+            content_css: [
+              '//fast.fonts.net/cssapi/e6dc9b99-64fe-4292-ad98-6974f93cd2a2.css',
+              '//www.tinymce.com/css/codepen.min.css'
+            ]
+          });
+          */
+
+          tinymce.init({
+              selector: 'textarea#desc_producto',
+              height: 600,
+            });
+
+          tinymce.init({
+              selector: 'textarea#desc_producto-up',
+              height: 600,
+            });
+
+
+        },
 
         changeImageModal: function() {
 
@@ -118,8 +154,13 @@ function productCreateUpdate(result) {
             CreateProduct: function()
         {
             $('#store-new-product').click( function() {
-                if ( validateGroup('.form-group-validate') == -1 )
-                    initSaveProduct();
+
+              // Agregar irformación del sourceCode del editor al textarea de desc
+               $('textarea#desc_producto').val(tinymce.get('desc_producto').getContent());
+
+               if ( validateGroup('.form-group-validate') == -1 ) {
+                 initSaveProduct();
+               }
             });
 
             function initSaveProduct() {
@@ -174,7 +215,7 @@ function productCreateUpdate(result) {
 
         /**
          * Seleccionar una nota de la lista de notas y mostrar su
-         * infomaci�n en la vista lateral (Derecha)
+         * infomación en la vista lateral (Derecha)
          * @constructor
          */
         SelectProduct: function() {
@@ -183,7 +224,6 @@ function productCreateUpdate(result) {
                 tableTrTouched = $(this);
                 console.log(tableTrTouched.attr('data-product'));
                 $('#id-product-to-show').val(tableTrTouched.attr('data-product'));
-
 
                 initGetProduct();
             });
@@ -201,18 +241,16 @@ function productCreateUpdate(result) {
                         data:       data,
 
                         beforeSend: function(){
-                            $('.core-loader').show();
+                            $('.core-loader').fadeIn()
                         },
 
                         success: function (result) {
 
-                            console.log(result);
-
-                            $('.core-loader').hide();
+                            // console.log(result);
+                            $('.core-loader').fadeOut();
                             fillModalProduct(result);
                             $('#continaer-product-shows').show();
                             $('#btn-edit-product').show();
-
 
                         }
 
