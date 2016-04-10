@@ -9,24 +9,18 @@ var containerProducts = $('#list-products');
 var continaerProductShow = $('#continaer-product-shows');
 
 function fillModalProduct(result) {
-    $('#show-info-product-title').val(result.producto.nombre);
+    $('#show-info-product-title-name').val(result.product.nombre);
     $('#show-info-product-price').text('$'+result.product.precio);
-    $('#show-info-product-code').text(result.product.codigo_producto);
-    $('#show-info-product-fabricante').text(result.product.nombre_fabricante);
-    $('#show-info-product-precio-descuento').text('$' + result.product.precio + ' ' + result.product.tipo_oferta + ' ' + result.product.regla_porciento + '%');
+    $('#show-info-product-cantidad').text(result.product.cantidad_disponible);
     $('#show-info-product-final-price').text('$' + result.finalPrice);
-
     $('#show-info-product-desc').html(result.product.desc_producto);
 
 
     $('#show-info-product-categorias').empty();
-    // if (result.productCategories.length == 0) {
-    // $('#show-info-product-categorias').append('<span>Sin categorias</span>');
-    //} else {
     $.each(result.productCategories, function (index, item) {
         $('#show-info-product-categorias').append('<span class="list-product-tags">' + item.nombre + '</span>');
     });
-    // }
+
 
     $('#show-info-product-imgs').empty();
     $('#show-info-product-imgs').append('<img id="principal-image-product" src="' + result.url + result.imgsProduct[0].img + '">');
@@ -211,6 +205,8 @@ function productCreateUpdate(result) {
                             console.log(result);
 
                             $('.core-loader').hide();
+                            fillModalProduct(result);
+                            $('#continaer-product-shows').show();
 
                         }
 

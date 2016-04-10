@@ -85,7 +85,7 @@
     </table>
 </div>
 
-<div id="continaer-product-shows" class="right-content-list">
+<div id="continaer-product-shows" class="right-content-list core-hidden">
     <!-- <div id="msg-vacio">Ningún producto seleccionado</div> -->
     <div class="block-content-info-product">
 
@@ -96,7 +96,7 @@
             <div id="show-info-product-marca">{{$tienda->nombre}}</div>
 
 
-            <div id="show-info-product-title"></div>
+            <div id="show-info-product-title-name"> PAN BIMBO</div>
 
             <div id="show-info-product-imgs" class="container-show-info-product-img-b">
                 <!-- USA UN FOR PARA IMPRIMIR LAS FOTOS DE CADA PRODUCTO -->
@@ -111,23 +111,23 @@
 
             <div class="container-show-info-product-list-c">
                 <div>
-                    <div></div>
+                    <div>Precio</div>
                     <div id="show-info-product-price" class="show-info-product"></div>
                 </div>
                 <div>
-                    <div></div>
+                    <div>Cantidad disponible</div>
                     <div id="show-info-product-cantidad" class="show-info-product"></div>
                 </div>
 
-                <!--
-                <div>
-                    <div>Me gusta</div>
-                    <div id="show-info-product-me-gusta" class="show-info-product">603</div>
-                </div>
-                -->
 
                 <div>
-                    <div></div>
+                    <div>Precio final</div>
+                    <div id="show-info-product-final-price" class="show-info-product"></div>
+                </div>
+
+
+                <div>
+                    <div>Categorias</div>
                     <div id="show-info-product-categorias" class="show-info-product">
                         <!-- USA UN FOR PARA IMPRIMIR LAS CATEGORIAS A LAS QUE PERTENECE UN PRODUCTO -->
                         <span class="list-product-tags"></span>
@@ -136,7 +136,7 @@
 
         </div>
 
-        <div id="description-text-title"></div>
+        <div id="description-text-title">Descripcion del producto</div>
         <div id="show-info-product-desc">
         </div>
 
@@ -146,7 +146,7 @@
     <!-- id-product-to-show -->
     {!! Form::open(['route' => 'products.show', 'method' => 'GET', 'id' => 'form-products-to-show']) !!}
 
-    {!! Form::text('id',0, array('id' => 'id-product-to-show')) !!}
+    {!! Form::hidden('id',0, array('id' => 'id-product-to-show')) !!}
 
     {!! Form::close() !!}
 
