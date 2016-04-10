@@ -227,7 +227,8 @@ class ContactsController extends Controller
                         break;
                     case 2:
                         //Actualizar direcciones de contacto
-                        for ($i = 0; $i < count($request->id); $i++) {
+                        $i = 0;
+                        for ($i; $i < count($request->id); $i++) {
                             $contact_dir = ContactAddress::findOrFail($request->id[$i]);
                             $contact_dir->desc_dir = $request->desc_dir[$i];
                             $contact_dir->calle = $request->calle[$i];
@@ -239,6 +240,20 @@ class ContactsController extends Controller
                             $contact_dir->pais = $request->pais[$i];
                             $contact_dir->save();
                         }
+                        for ($i; $i < count($request->desc_dir); $i++) {
+                            $contact_dir = new ContactAddress([
+                                "desc_dir" => $request->desc_dir[$i],
+                                "calle" => $request->calle[$i],
+                                "numero_dir" => $request->numero_dir[$i],
+                                "piso_edificio" => $request->piso_edificio[$i],
+                                "ciudad" => $request->ciudad[$i],
+                                "cp" => $request->cp[$i],
+                                "estado_dir" => $request->estado_dir[$i],
+                                "pais" => $request->pais[$i],
+                                "contacto_id" => $request->contacto_id
+                            ]);
+                            $contact_dir->save();
+                        }
                         DB::commit();
                         return response()->json([
                             'message' => "Dirección actualizada.",
@@ -246,10 +261,19 @@ class ContactsController extends Controller
                         break;
                     case 3:
                         //Actualizar telefono de contacto
-                        for ($i = 0; $i < count($request->id); $i++) {
+                        $i = 0;
+                        for ($i; $i < count($request->id); $i++) {
                             $contact_tel = ContactPhone::findOrFail($request->id[$i]);
                             $contact_tel->desc_tel = $request->desc_tel[$i];
                             $contact_tel->numero_tel = $request->numero_tel[$i];
+                            $contact_tel->save();
+                        }
+                        for ($i; $i < count($request->desc_tel); $i++) {
+                                $contact_tel = new ContactPhone([
+                                'desc_tel' => $request->desc_tel[$i],
+                                'numero_tel' => $request->numero_tel[$i],
+                                'contacto_id' => $request->contacto_id
+                            ]);
                             $contact_tel->save();
                         }
                         DB::commit();
@@ -259,10 +283,19 @@ class ContactsController extends Controller
                         break;
                     case 4:
                         // Actualizar mail de contacto
-                        for ($i = 0; $i < count($request->desc_mail); $i++) {
+                        $i = 0;
+                        for ($i; $i < count($request->id); $i++) {
                             $contact_mail = ContactMail::findOrFail($request->id[$i]);
                             $contact_mail->desc_mail = $request->desc_mail[$i];
                             $contact_mail->email = $request->email[$i];
+                            $contact_mail->save();
+                        }
+                        for ($i; $i < count($request->desc_mail); $i++) {
+                            $contact_mail = new ContactMail([
+                                'desc_mail' => $request->desc_mail[$i],
+                                'email' => $request->email[$i],
+                                'contacto_id' => $request->contacto_id
+                            ]);
                             $contact_mail->save();
                         }
                         DB::commit();
@@ -272,10 +305,19 @@ class ContactsController extends Controller
                         break;
                     case 5:
                         // Actualizar redes sociales
-                        for ($i = 0; $i < count($request->id); $i++) {
+                        $i = 0;
+                        for ($i; $i < count($request->id); $i++) {
                             $contact_social = ContactSocial::findOrFail($request->id[$i]);
                             $contact_social->red_social_nombre = $request->red_social_nombre[$i];
                             $contact_social->url = $request->url[$i];
+                            $contact_social->save();
+                        }
+                        for($i; $i < count($request->red_social_nombre); $i++) {
+                            $contact_social = new ContactSocial([
+                                'red_social_nombre' => $request->red_social_nombre[$i],
+                                'url' => $request->url[$i],
+                                'contacto_id' => $request->contacto_id
+                            ]);
                             $contact_social->save();
                         }
                         DB::commit();

@@ -5,6 +5,7 @@
     </div>
         {!! Form::open(['route' => 'contact.update', 'method' => 'POST', 'id' => 'form-contact-to-update']) !!}
             {!! Form::hidden('option', '1', ['id' => 'option-contact-to-update']) !!}
+            {!! Form::hidden('id', 'null', ['id' => 'id-contact-to-update']) !!}
 
             <div class="container-show-info-contact-img-b">
                     <img name="foto" id="show-info-contact-foto-ud" class="img-rounded btn btn-sm-radius" src="{{ asset('/media/photo-perfil/unknow.png') }}">
@@ -12,7 +13,6 @@
             </div>
 
             <div class="container-show-info-contact-list-c">
-                {!! Form::hidden('id', 'null', ['id' => 'id-contact-to-update']) !!}
                 <label for="nombre">@lang('validation.attributes.name')</label>
                 <div class="show-info-contact">{!! Form::text('nombre', old('nombre'), ['id' => 'nombre-ud', 'class' => 'form-control']) !!}</div>
 

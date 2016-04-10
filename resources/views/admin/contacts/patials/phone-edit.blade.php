@@ -10,6 +10,12 @@
         <div class="container-list-something form-group" id="core-content-form-phone">
             <!-- Se agregan los campos correspondientes del telefono -->
         </div>
+
+        <div class="col-md-12">
+            <div class="form-group">
+                <button id="btn-update-new-phone" type="button" class="btn btn-primary btn-sm btn-sm-radius btn-shadow-blue right">+</button>
+            </div>
+        </div>
     {!! Form::close() !!}
 
     <div class="container-list-something" id="show-info-contact-desc">

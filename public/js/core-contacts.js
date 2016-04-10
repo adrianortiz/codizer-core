@@ -34,7 +34,6 @@ $('#foto-ud').change(function (e) {
  */
 function emptyAndRefillFieldsToUpdate(contacto) {
     // Info contacto
-    $('#id-contact-to-update').empty();
     $('#nombre-ud').empty();
     $('#ap_paterno-ud').empty();
     $('#ap_materno-ud').empty();
@@ -44,7 +43,6 @@ function emptyAndRefillFieldsToUpdate(contacto) {
     $('#estado_civil-ud').val('Soltero').attr('selected', 'selected');
     $('#desc_contacto-ud').empty();
 
-    $('#id-contact-to-update').val(contacto.id);
     $('#nombre-ud').val(contacto.nombre);
     $('#ap_paterno-ud').val(contacto.ap_paterno);
     $('#ap_materno-ud').val(contacto.ap_materno);
@@ -53,7 +51,16 @@ function emptyAndRefillFieldsToUpdate(contacto) {
     $('#sexo-ud').val(contacto.sexo).attr('selected', 'selected');
 
     var fecha = new Date(contacto.f_nacimiento);
-    $('#f_nacimiento-ud').val(fecha.toISOString().slice(0,10));
+    if(fecha == 'Invalid Date'){
+        $('#f_nacimiento-ud').val(null);
+        $('#f_nacimiento-ud').attr('min', $('#f_nacimiento').attr('min'));
+        $('#f_nacimiento-ud').attr('max', $('#f_nacimiento').attr('max'));
+    } else {
+        $('#f_nacimiento-ud').val(fecha.toISOString().slice(0, 10));
+        $('#f_nacimiento-ud').attr('min', $('#f_nacimiento').attr('min'));
+        $('#f_nacimiento-ud').attr('max', $('#f_nacimiento').attr('max'));
+    }
+
     $('#profesion-ud').val(contacto.profesion);
     $('#estado_civil-ud').val(contacto.estado_civil).attr('selected', 'selected');
     $('#desc_contacto-ud').val(contacto.desc_contacto);
@@ -71,6 +78,7 @@ function emptyAndRefillPhoneFieldsToUpdate(phone) {
             '<hr/>'
         );
     });
+    $('#core-content-form-phone').append('<div id="codizer-new-phone"></div>');
 }
 
 function emptyAndRefillAddressFieldsToUpdate(address) {
@@ -90,6 +98,7 @@ function emptyAndRefillAddressFieldsToUpdate(address) {
             '<hr/>'
         );
     });
+    $('#core-content-form-address').append('<div id="codizer-new-address"></div>');
 }
 
 function emptyAndRefillMailFieldsToUpdate(mail) {
@@ -103,6 +112,7 @@ function emptyAndRefillMailFieldsToUpdate(mail) {
             '<hr/>'
         );
     });
+    $('#core-content-form-mail').append('<div id="codizer-new-mail"></div>');
 }
 
 function emptyAndRefillSocialFieldsToUpdate(social) {
@@ -112,11 +122,11 @@ function emptyAndRefillSocialFieldsToUpdate(social) {
         $('#core-content-form-social').append(
             '<input name="id[]" type="hidden" value="' + item.id + '">' +
             '<label for="red_social_nombre">Descripción</label><select id="r-s-n' + index +'" class="form-control" name="red_social_nombre[]"><option value="Facebook">Facebook</option><option value="Twitter">Twitter</option><option value="Linkedin">Linkedin</option><option value="Google+">Google+</option><option value="Instagram">Instagram</option></select>'+
-            '<label for="email">Correo</label><input class="form-control" name="url[]" type="text" value="' + item.url + '">' +
-            '<hr/>'
+            '<label for="email">Correo</label><input class="form-control" name="url[]" type="text" value="' + item.url + '"><hr />'
         );
         $('#r-s-n'+ index).val(item.red_social_nombre).attr('selected', 'selected');
     });
+    $('#core-content-form-social').append('<div id="codizer-new-social-network"></div>');
 }
 
 /**
@@ -431,6 +441,7 @@ $(document).ready(function() {
                         /**
                          * Evento que se lanza al editar informacion de contacto
                          */
+                        $('#id-contact-to-update').val(result.contacto[0].id);
                         $('#btn-edit-contact').click(function(){
                             hideElements();
                             $('#btns-group-to-contact').show();
@@ -499,21 +510,32 @@ $(document).ready(function() {
             AddNewSocial: function()
             {
                 var control = 2;
+
+                var cont = '<label for="red_social_nombre">Red social</label>' +
+                    '<select name="red_social_nombre[]" class="form-control">' +
+                    '<option value="Facebook">Facebook</option>' +
+                    '<option value="Twitter">Twitter</option>' +
+                    '<option value="Linkedin">Linkedin</option>' +
+                    '<option value="Google+">Google+</option>' +
+                    '<option value="Instagram">Instagram</option>' +
+                    '</select>' +
+                    '<label for="url">URL</label>' +
+                    '<input class="form-control" name="url[]" type="text"><hr />';
+
                 $('#btn-add-new-social').click(function(){
                     if(control <= 10) {
-                        $('.codizer-new-social-network').append('<hr/><label for="red_social_nombre">Red social</label>' +
-                            '<select name="red_social_nombre[]" class="form-control">' +
-                            '<option value="Facebook">Facebook</option>' +
-                            '<option value="Twitter">Twitter</option>' +
-                            '<option value="Linkedin">Linkedin</option>' +
-                            '<option value="Google+">Google+</option>' +
-                            '<option value="Instagram">Instagram</option>' +
-                            '</select>' +
-                            '<label for="url">URL</label>' +
-                            '<input class="form-control" name="url[]" type="text">');
+                        $('.codizer-new-social-network').append(cont);
                         control ++;
                     } else
                         $('#btn-add-new-social').hide();
+                });
+
+                $('#btn-update-new-social').click(function(){
+                    if(control <= 10) {
+                        $('#codizer-new-social-network').append(cont);
+                        control ++;
+                    } else
+                        $('#btn-update-new-social').hide();
                 });
             },
 
@@ -524,12 +546,26 @@ $(document).ready(function() {
             AddNewMail: function ()
             {
                 var control = 2;
+
+                var content = '<label for="desc_mail">Descripción</label>' +
+                    '<input id="desc_mail" class="form-control" name="desc_mail[]" type="text">' +
+                    '<label for="email">Correo</label>' +
+                    '<input id="email" class="form-control" name="email[]" type="text"><hr />';
+
                 $('#btn-add-new-mail').click(function () {
                     if(control <= 10){
-                        $('.codizer-new-mail').append('<hr/><label for="desc_mail">Descripción</label><input id="desc_mail" class="form-control" name="desc_mail[]" type="text"><label for="email">Correo</label><input id="email" class="form-control" name="email[]" type="text">')
+                        $('.codizer-new-mail').append(content);
                         control++;
                     } else
                         $('#btn-add-new-mail').hide();
+                });
+
+                $('#btn-update-new-mail').click(function () {
+                    if(control <= 10){
+                        $('#codizer-new-mail').append(content);
+                        control++;
+                    } else
+                        $('#btn-update-new-mail').hide();
                 });
             },
 
@@ -540,13 +576,28 @@ $(document).ready(function() {
             AddNewPhone: function ()
             {
                 var control = 2;
+
+                var content = '<label for="desc_tel">Descripción</label>' +
+                '<input id="desc_tel" class="form-control" name="desc_tel[]" type="text">' +
+                '<label for="numero_tel">Número</label>' +
+                '<input id="numero_tel" class="form-control" name="numero_tel[]" type="text"><hr />';
+
                 $('#btn-add-new-phone').click(function () {
                     if(control <= 10){
-                        $('.codizer-new-phone').append('<hr/><label for="desc_tel">Descripción</label><input id="desc_tel" class="form-control" name="desc_tel[]" type="text"><label for="numero_tel">Número</label><input id="numero_tel" class="form-control" name="numero_tel[]" type="text">');
+                        $('.codizer-new-phone').append(content);
                         control++;
                     } else
                         $('#btn-add-new-phone').hide();
                 });
+
+                $('#btn-update-new-phone').click(function () {
+                    if(control <= 10){
+                        $('#codizer-new-phone').append(content);
+                        control++;
+                    } else
+                        $('#btn-update-new-phone').hide();
+                });
+
             },
 
             /**
@@ -556,29 +607,40 @@ $(document).ready(function() {
             AddNewAddress: function ()
             {
                 var control = 2;
+
+                var content = '<label for="desc_dir">Descripción</label>' +
+                '<input id="desc_dir" class="form-control" name="desc_dir[]" type="text">' +
+                '<label for="calle">Calle</label>' +
+                '<input id="calle" class="form-control" name="calle[]" type="text">' +
+                '<label for="numero_dir">Número</label>' +
+                '<input id="numero_dir" class="form-control" name="numero_dir[]" type="text">' +
+                '<label for="piso_edificio">Piso/Edificio</label>' +
+                '<input id="piso_edificio" class="form-control" name="piso_edificio[]" type="text">' +
+                '<label for="ciudad">Ciudad</label>' +
+                '<input id="ciudad" class="form-control" name="ciudad[]" type="text">' +
+                '<label for="cp">Código Postal</label>' +
+                '<input id="cp" class="form-control" name="cp[]" type="text">' +
+                '<label for="estado_dir">Estado</label>' +
+                '<input id="estado_dir" class="form-control" name="estado_dir[]" type="text">' +
+                '<label for="pais">País</label>' +
+                '<input id="pais" class="form-control" name="pais[]" type="text"><hr />';
+
                 $('#btn-add-new-address').click(function () {
                     if(control <= 3) {
-                        $(".codizer-new-addresa").append('<hr/>' +
-                            '<label for="desc_dir">Descripción</label>' +
-                            '<input id="desc_dir" class="form-control" name="desc_dir[]" type="text">' +
-                            '<label for="calle">Calle</label>' +
-                            '<input id="calle" class="form-control" name="calle[]" type="text">' +
-                            '<label for="numero_dir">Número</label>' +
-                            '<input id="numero_dir" class="form-control" name="numero_dir[]" type="text">' +
-                            '<label for="piso_edificio">Piso/Edificio</label>' +
-                            '<input id="piso_edificio" class="form-control" name="piso_edificio[]" type="text">' +
-                            '<label for="ciudad">Ciudad</label>' +
-                            '<input id="ciudad" class="form-control" name="ciudad[]" type="text">' +
-                            '<label for="cp">Código Postal</label>' +
-                            '<input id="cp" class="form-control" name="cp[]" type="text">' +
-                            '<label for="estado_dir">Estado</label>' +
-                            '<input id="estado_dir" class="form-control" name="estado_dir[]" type="text">' +
-                            '<label for="pais">País</label>' +
-                            '<input id="pais" class="form-control" name="pais[]" type="text">');
+                        $(".codizer-new-addresa").append(content);
                         control++;
                     } else
                     $('#btn-add-new-address').hide();
                 });
+
+                $('#btn-update-new-address').click(function () {
+                    if(control <= 3) {
+                        $("#codizer-new-address").append(content);
+                        control++;
+                    } else
+                        $('#btn-update-new-address').hide();
+                });
+
             },
 
         /**

@@ -10,6 +10,13 @@
         <div class="container-list-something form-group" id="core-content-form-mail">
             <!-- Se agregan los campos correspondientes del correo -->
         </div>
+
+        <div class="col-md-12">
+            <div class="form-group">
+                <button id="btn-update-new-mail" type="button" class="btn btn-primary btn-sm btn-sm-radius btn-shadow-blue right">+</button>
+            </div>
+        </div>
+
     {!! Form::close() !!}
 
     <div class="container-list-something" id="show-info-contact-desc">

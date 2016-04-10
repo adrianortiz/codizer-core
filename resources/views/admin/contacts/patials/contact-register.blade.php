@@ -40,7 +40,7 @@
                         {!! Form::select('sexo', ['Masculino' => 'Masculino', 'Femenino' => 'Femenino'], null, ['id' => 'sexo', 'class' => 'form-control']) !!}
 
                         <label for="f_nacimiento">Fecha de nacimiento</label>
-                        <div class="show-info-contact">{!! Form::date('f_nacimiento', old('f_nacimiento'), ['id' => 'f_nacimiento', 'class' => 'form-control']) !!}</div>
+                        <div class="show-info-contact">{!! Form::date('f_nacimiento', \Carbon\Carbon::createFromDate(null, 12, 31)->subYear(18)->toDateString(), ['id' => 'f_nacimiento', 'class' => 'form-control', 'min' => \Carbon\Carbon::createFromDate(null, 1, 1)->subYear(80)->toDateString(), 'max' => \Carbon\Carbon::createFromDate(null, 12, 31)->subYear(18)->toDateString()]) !!}</div>
 
                         <label for="profesion">Profesión</label>
                         <div class="show-info-contact">{!! Form::text('profesion', old('profesion'), ['id' => 'profesion', 'class' => 'form-control']) !!}</div>
@@ -78,9 +78,10 @@
 
                     <label for="pais">País</label>
                     <div class="show-info-contact">{!! Form::text('pais[]', old('pais'), ['id' => 'pais', 'class' => 'form-control']) !!}</div>
+                    <hr />
 
                     <div class="codizer-new-addresa">
-                        <!-- Inputs text for more social networks -->
+                        <!-- Inputs text for more address -->
                     </div>
 
                     <div class="col-md-12">
@@ -97,9 +98,10 @@
 
                     <label for="numero_tel">Número</label>
                     <div class="show-info-contact">{!! Form::text('numero_tel[]', old('numero_tel'), ['id' => 'numero_tel', 'class' => 'form-control']) !!}</div>
+                    <hr />
 
                     <div class="codizer-new-phone">
-                        <!-- Inputs text for more social networks -->
+                        <!-- Inputs text for more phones -->
                     </div>
 
                     <div class="col-md-12">
@@ -116,9 +118,10 @@
 
                     <label for="email">Correo</label>
                     <div class="show-info-contact">{!! Form::text('email[]', old('email'), ['id' => 'email', 'class' => 'form-control']) !!}</div>
+                    <hr />
 
                     <div class="codizer-new-mail">
-                        <!-- Inputs text for more social networks -->
+                        <!-- Inputs text for more mails -->
                     </div>
 
                     <div class="col-md-12">
@@ -135,6 +138,7 @@
 
                     <label for="url">URL</label>
                     <div class="show-info-contact">{!! Form::text('url[]', old('url'), ['id' => 'url', 'class' => 'form-control']) !!}</div>
+                    <hr />
 
                     <div class="codizer-new-social-network">
                         <!-- Inputs text for more social networks -->
