@@ -13,6 +13,7 @@ function fillModalProduct(result) {
     $('#show-info-product-price').text('$'+result.product.precio);
     $('#show-info-product-cantidad').text(result.product.cantidad_disponible);
     $('#show-info-product-final-price').text('$' + result.finalPrice);
+    $('#show-info-product-fabricante').text(result.product.nombre_fabricante);
     $('#show-info-product-desc').html(result.product.desc_producto);
 
 
@@ -229,13 +230,13 @@ function productCreateUpdate(result) {
          * @constructor
          */
         UpdateProduct: function() {
-            $('#update-product').click( function() {
+            $('#btn-edit-product').click( function() {
                 if ( validateGroup(".form-group-validate-update") == -1 )
                     initUpdateProduct();
             });
 
             function initUpdateProduct() {
-                var form = $('#form-product-update');
+                var form = $('#form-products-store-update');
                 var route = form.attr('action');
 
                 $.ajax({
@@ -244,7 +245,7 @@ function productCreateUpdate(result) {
                     dataType:   'json',
                     // async:   false,
 
-                    data:new FormData( $('#form-product-update')[0] ),
+                    data:new FormData( $('#form-products-store-update')[0] ),
                     contentType: false,
                     processData: false,
 
@@ -255,9 +256,9 @@ function productCreateUpdate(result) {
                     success: function (result) {
                         $('.core-loader').hide();
                         $('.close').click();
-                        document.getElementById("form-product-update").reset();
+                        document.getElementById("form-products-store-update").reset();
 
-                        tiendaOldContainerToHide.hide();
+                        tableTrTouched.hide();
                     }
 
                 }).fail(function (jqXHR, textStatus) {
@@ -274,66 +275,6 @@ function productCreateUpdate(result) {
 
         },
 
-        /**
-         * Eliminar una nota
-         * @constructor
-         */
-        DeleteProduct: function() {
-
-            // Mostrar modal global de eliminar
-            $('#btn-delete-product').click( function() {
-                $('#modal-delete').fadeIn();
-                $('.notificacion-text').addClass('in');
-            });
-
-            // Ocultar modal global de eliminar
-            $('#no').click( function() {
-                $('.notificacion-text').removeClass('in');
-                $('#modal-delete').fadeOut();
-            });
-
-            // Eliminar nota
-            $('#si').click( function() {
-
-                $('.notificacion-text').removeClass('in');
-                $('#modal-delete').fadeOut();
-
-                var form = $('#form-product-to-delete');
-                var datos = form.serializeArray();
-                var route = form.attr('action');
-
-                $.ajax({
-                    url:        route,
-                    type:       'DELETE',
-                    dataType:   'json',
-                    // async:      false,
-                    data:       datos,
-
-                    success: function( result )
-                    {
-                        // console.log(result);
-
-                        // Mensaje de alerta
-                        hideShowAlert('msj-success', result.message);
-
-                        // Quitar nota de la vista
-                        tableTrTouched.fadeOut();
-                        $('#btn-group-to-product').hide();
-                        continaerProductShow.html('<div id="msg-vacio">Ningun producto seleccionado.</div>');
-                    }
-
-                }).fail(function( jqXHR, textStatus ) {
-                    $('#msj-danger-state').empty();
-                    // Ocultar modal global de eliminar
-                    $('#modal-delete').fadeOut();
-                    $(jqXHR).each(function(key,error)
-                    {
-                        hideShowAlert('msj-danger', 'Ocurrio un problema');
-                    });
-
-                });
-            });
-        },
 
         SearchAndListAllProducts: function() {
 

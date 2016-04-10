@@ -56,7 +56,6 @@
             </div>
             <div id="btn-group-to-product" class="btn-group right" role="group" aria-label="...">
                 <button type="button" id="btn-edit-product" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modalUpdateProduct">Editar</button>
-                <button type="button" id="btn-delete-product" class="btn btn-default btn-sm">Eliminar</button>
             </div>
 
         </div>
@@ -74,7 +73,7 @@
                 </td>
                 <td>
                     <div class="list-product-title">{{$product->nombre}}</div>
-                    <span class="list-product-tags">{{$product->tipo_oferta.$product->regla_porciento.'%' }}</span><br/>
+                    <span class="list-product-tags">Oferta: {{$product->tipo_oferta.$product->regla_porciento.'%' }}</span><br/>
                     <div class="list-product-pz">{{$product->cantidad_disponible}} pz</div>
                     <div class="list-product-price">{{'$'.$product->precio}}</div>
                 </td>
@@ -132,9 +131,21 @@
                         <!-- USA UN FOR PARA IMPRIMIR LAS CATEGORIAS A LAS QUE PERTENECE UN PRODUCTO -->
                         <span class="list-product-tags"></span>
                 </div>
+
+
+                <div>
+                    <div>Fabricante</div>
+                    <div id="show-info-product-fabricante" class="show-info-product">
+
+                       <span class="list-product-tags"></span>
+                    </div>
+                </div>
+
+
+                </div>
             </div>
 
-        </div>
+
 
         <div id="description-text-title">Descripcion del producto</div>
         <div id="show-info-product-desc">
@@ -158,6 +169,7 @@
    <!-- Aqui vas tus modals para los formularios -->
 @include('partials.loader')
 @include('admin.products.patials.modal-product')
+@include('admin.products.patials.modal-product-update')
 
 
 @endsection
