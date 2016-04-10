@@ -144,9 +144,9 @@
 </div>
 
     <!-- id-product-to-show -->
-    {!! Form::open(['route' => 'products.store', 'method' => 'POST', 'id' => 'form-products-store']) !!}
+    {!! Form::open(['route' => 'products.show', 'method' => 'GET', 'id' => 'form-products-to-show']) !!}
 
-    {!! Form::text('id-product-to-show',0, array('id' => 'id-product-to-show')) !!}
+    {!! Form::text('id',0, array('id' => 'id-product-to-show')) !!}
 
     {!! Form::close() !!}
 

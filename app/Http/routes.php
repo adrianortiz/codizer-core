@@ -341,7 +341,7 @@ Route::group(['middleware' => 'auth'], function () {
         ]);
 
         // Get product
-        Route::get('perfil/{nameFirstNam/products/show', [
+        Route::get('perfil/{nameFirstName}/products/show', [
         'uses'  => 'Admin\Products\ProductsController@show',
         'as'    => 'products.show'
         ]);

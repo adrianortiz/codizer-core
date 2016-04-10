@@ -8,6 +8,7 @@ use App\Facades\Core;
 use App\ImgProduct;
 use App\Producto;
 use App\ProductoHasCategoria;
+use App\Tienda;
 use App\TiendaHasProducto;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -165,18 +166,27 @@ class ProductsController extends Controller
      */
     public function show(Request $request)
     {
-        if ( $request->ajax() ) {
+        if ($request->ajax() ) {
 
-            $producto = Producto::findOrFail($request['id']);
+            $tiendaHasProduct = TiendaHasProducto::where('producto_id', $request['id'])->first();
+            $tienda = Tienda::findOrFail($tiendaHasProduct->tienda_id);
+
+            $product = Core::getProductoById( $tienda->id, $request['id'] );
             $imgsProduct = ImgProduct::where('producto_id', $request['id'])->get();
-            $productCategories = Core::getCategoriasByIdProduct($producto->product_id);
+            $finalPrice = Core::getFinalPriceByProduct($product->precio, $product->tipo_oferta, $product->regla_porciento);
+            $productCategories = Core::getCategoriasByIdProduct($product->product_id);
+
+            $url = URL::to('/') . '/media/photo-product/';
 
             return response()->json([
-                'producto' => $producto,
-                'imgsProduct' => $imgsProduct,
-                'productCategories' => $productCategories
+                'product'           => $product,
+                'imgsProduct'       => $imgsProduct,
+                'finalPrice'        => $finalPrice,
+                'productCategories' => $productCategories,
+                'url'               => $url
             ]);
         }
+
         abort(404);
     }
 
