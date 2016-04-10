@@ -9,7 +9,7 @@ var containerProducts = $('#list-products');
 var continaerProductShow = $('#continaer-product-shows');
 
 function fillModalProduct(result) {
-    $('#show-info-product-title-name').text(result.product.nombre);
+    $('#show-info-product-title').text(result.product.nombre);
     $('#show-info-product-codigo').text(result.product.codigo_producto);
     $('#show-info-product-price').text('$'+result.product.precio);
     $('#show-info-product-cantidad').text(result.product.cantidad_disponible);

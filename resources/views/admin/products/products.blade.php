@@ -95,7 +95,7 @@
             <div id="show-info-product-marca">{{$tienda->nombre}}</div>
 
 
-            <div id="show-info-product-title-name"></div>
+            <div id="show-info-product-title"></div>
 
             <div id="show-info-product-imgs" class="container-show-info-product-img-b">
                 <!-- USA UN FOR PARA IMPRIMIR LAS FOTOS DE CADA PRODUCTO -->
