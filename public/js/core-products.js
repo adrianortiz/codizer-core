@@ -8,11 +8,53 @@ var containerProducts = $('#list-products');
 // Contenedor del lado derecho
 var continaerProductShow = $('#continaer-product-shows');
 
+function fillModalProduct(result) {
+    $('#show-info-product-title').val(result.producto.nombre);
+    $('#show-info-product-price').text('$'+result.product.precio);
+    $('#show-info-product-code').text(result.product.codigo_producto);
+    $('#show-info-product-fabricante').text(result.product.nombre_fabricante);
+    $('#show-info-product-precio-descuento').text('$' + result.product.precio + ' ' + result.product.tipo_oferta + ' ' + result.product.regla_porciento + '%');
+    $('#show-info-product-final-price').text('$' + result.finalPrice);
+
+    $('#show-info-product-desc').html(result.product.desc_producto);
+
+
+    $('#show-info-product-categorias').empty();
+    // if (result.productCategories.length == 0) {
+    // $('#show-info-product-categorias').append('<span>Sin categorias</span>');
+    //} else {
+    $.each(result.productCategories, function (index, item) {
+        $('#show-info-product-categorias').append('<span class="list-product-tags">' + item.nombre + '</span>');
+    });
+    // }
+
+    $('#show-info-product-imgs').empty();
+    $('#show-info-product-imgs').append('<img id="principal-image-product" src="' + result.url + result.imgsProduct[0].img + '">');
+    $.each(result.imgsProduct, function (index, item) {
+        $('#show-info-product-img').append('<img class="sub-image-product" src="' + result.url + item.img + '">');
+    });
+}
+
+
+
+
+
+
+
+
+
+
 // Retorna la fila de una notra creada o actulizada
 function productCreateUpdate(result) {
     console.log(result.product);
 
-    return '<tr class="data-product-tr" data-product="' + result.producto.id + '">' +
+    var idEmpresa = $('#empresa_id_new').val();
+    var idTienda = $('#tienda_id_new').val();
+    document.getElementById("form-products-store").reset();
+    $('#empresa_id_new').val( idEmpresa );
+    $('#tienda_id_new').val( idTienda);
+
+    return '<tr class="data-product-tr" data-product="' + result.producto.product_id + '">' +
         '<td class="container-list-photo-user">' +
         '<img src="' + result.producto.img + '"></td>' +
         '<td>' +
@@ -22,6 +64,7 @@ function productCreateUpdate(result) {
         '<div class="list-product-price">' + '$' + result.producto.precio + '</div>' +
         '</td>' +
         '</tr>';
+
 }
 
 (function($){
@@ -115,11 +158,6 @@ function productCreateUpdate(result) {
                             containerProducts.prepend( productCreateUpdate(result) );
                             $('#cancel').click();
 
-                            var idEmpresa = $('#empresa_id_new').val();
-                            var idTienda = $('#tienda_id_new').val();
-                            document.getElementById("#form-products-store").reset();
-                            $('#empresa_id_new').val( idEmpresa );
-                            $('#tienda_id_new').val( idTienda);
                         }
                     }
 
