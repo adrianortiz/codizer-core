@@ -251,6 +251,21 @@ function productCreateUpdate(result) {
                             fillModalProduct(result);
                             $('#continaer-product-shows').show();
                             $('#btn-edit-product').show();
+                            $('#btn-view-product').show();
+
+                            $('#core-img-principal-up').attr('src','/media/photo-product/'+result.product.img);
+                            $('#nombre-up').val(result.product.nombre);
+                            $('#codigo_producto-up').val(result.product.codigo_producto);
+                            $('#cantidad_disponible-up').val(result.product.cantidad_disponible);
+                            $('#precio-up').val(result.product.precio);
+                            $('#estado-up').val(result.product.estado);
+                            $('#oferta_id-up').val(result.product.oferta_id);
+                            $('#desc_producto-up').val(result.product.desc_producto);
+                            $('#fabricante_id-up').val(result.product.fabricante_id);
+
+
+
+
 
                         }
 
