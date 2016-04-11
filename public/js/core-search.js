@@ -77,7 +77,7 @@
                         tableStoresSuggestions.empty();
 
                         // Add users
-                        $($users).each(function(key, value) {
+                            $($users).each(function(key, value) {
                             tablaUserSuggestions.append('<div class="suggestion"> <a href="/perfil/' + value.perfil_route + '"> <img src="' + result.urlImgUser + value.foto +'" /> <div> <h4>' + value.nombre + ' ' + value.ap_paterno + ' ' + value.ap_materno + '</h4> <h5>' + value.profesion + '</h5> </div> </a> <a href="/perfil/' + value.perfil_route + '" class="btn-suggestions-go">Ver</a> </div>');
                         });
 
