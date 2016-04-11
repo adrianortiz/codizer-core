@@ -19,6 +19,7 @@ use App\Tienda;
 use App\User;
 use App\UserHasPerfil;
 use App\UsuarioEmpleadoInfo;
+use App\Venta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -540,6 +541,37 @@ class Core
         return DB::table('tienda')
             ->where('id', '=' ,$tiendaId)
             ->first();
+    }
+
+    public function saveVenta($storeRoute) {
+        $subtotal = 0;
+        $cart = \Session::get($storeRoute);
+        $shipping = 100;
+
+        foreach( $cart as $item ) {
+            $subtotal += $item->final_price * $item->quantity;
+        }
+
+        $venta = new Venta([
+            'coden_code'        => 'asdasdda',
+            'sistema_pago_id'   => 1,
+            'users_id'          => \Auth::user()->id,
+            'contact_address_id'=> 1,
+            'empresa_id'        => 1,
+            'tienda_id'         => 1,
+            'estado'            => "pagado"
+        ]);
+
+        $venta->save();
+
+        foreach( $cart as $item) {
+            $this->saveOrdenDetalle($venta->id, $item);
+        }
+
+    }
+
+    protected function saveOrdenDetalle($ventaId, $item) {
+
     }
 
 }

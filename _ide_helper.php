@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.1.29 (LTS) on 2016-03-03.
+ * Generated for Laravel 5.1.33 (LTS) on 2016-04-11.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -3399,6 +3399,52 @@ namespace {
          */
         public static function findOrFail($id, $columns = array()){
             return \Illuminate\Database\Eloquent\Builder::findOrFail($id, $columns);
+        }
+        
+        /**
+         * Find a model by its primary key or return fresh model instance.
+         *
+         * @param mixed $id
+         * @param array $columns
+         * @return \Illuminate\Database\Eloquent\Model 
+         * @static 
+         */
+        public static function findOrNew($id, $columns = array()){
+            return \Illuminate\Database\Eloquent\Builder::findOrNew($id, $columns);
+        }
+        
+        /**
+         * Get the first record matching the attributes or instantiate it.
+         *
+         * @param array $attributes
+         * @return \Illuminate\Database\Eloquent\Model 
+         * @static 
+         */
+        public static function firstOrNew($attributes){
+            return \Illuminate\Database\Eloquent\Builder::firstOrNew($attributes);
+        }
+        
+        /**
+         * Get the first record matching the attributes or create it.
+         *
+         * @param array $attributes
+         * @return \Illuminate\Database\Eloquent\Model 
+         * @static 
+         */
+        public static function firstOrCreate($attributes){
+            return \Illuminate\Database\Eloquent\Builder::firstOrCreate($attributes);
+        }
+        
+        /**
+         * Create or update a record matching the attributes, and fill it with values.
+         *
+         * @param array $attributes
+         * @param array $values
+         * @return \Illuminate\Database\Eloquent\Model 
+         * @static 
+         */
+        public static function updateOrCreate($attributes, $values = array()){
+            return \Illuminate\Database\Eloquent\Builder::updateOrCreate($attributes, $values);
         }
         
         /**
@@ -13033,6 +13079,17 @@ namespace {
         }
         
         /**
+         * Valida que la ruta de la tienda exista
+         * de lo contrario muestra el error 404
+         *
+         * @param $tiendaRoute
+         * @static 
+         */
+        public static function isTiendaRouteValid($tiendaRoute){
+            return \App\Components\Core::isTiendaRouteValid($tiendaRoute);
+        }
+        
+        /**
          * Getter para obtener el perfil de una cuenta
          *
          * @param $nameFirstName
@@ -13075,6 +13132,15 @@ namespace {
         }
         
         /**
+         * Get users data where they are not user login
+         *
+         * @static 
+         */
+        public static function getUsersAreNotYou(){
+            return \App\Components\Core::getUsersAreNotYou();
+        }
+        
+        /**
          * Get all users, profiles and contacts
          * Where the name or last-name is
          * equals to $searh
@@ -13083,8 +13149,344 @@ namespace {
          * @return mixed 
          * @static 
          */
-        public static function searchGlobal($searh){
-            return \App\Components\Core::searchGlobal($searh);
+        public static function searchGlobalUser($searh){
+            return \App\Components\Core::searchGlobalUser($searh);
+        }
+        
+        /**
+         * Serch items by name item, limited by 5 result
+         * Where name is between $search
+         *
+         * @param $searh
+         * @return mixed 
+         * @static 
+         */
+        public static function searchGlobalItem($searh){
+            return \App\Components\Core::searchGlobalItem($searh);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function searchGlobalStore($searh){
+            return \App\Components\Core::searchGlobalStore($searh);
+        }
+        
+        /**
+         * Get all contacts that one user has inserted
+         *
+         * @return mixed 
+         * @static 
+         */
+        public static function getContactos($idUser){
+            return \App\Components\Core::getContactos($idUser);
+        }
+        
+        /**
+         * Get all information of one specific contact
+         *
+         * @return mixed 
+         * @static 
+         */
+        public static function getContactInfo($id){
+            return \App\Components\Core::getContactInfo($id);
+        }
+        
+        /**
+         * Get all address that a contact has
+         *
+         * @param $id
+         * @static 
+         */
+        public static function getContactAddress($id){
+            return \App\Components\Core::getContactAddress($id);
+        }
+        
+        /**
+         * Get all phones that a contact has
+         *
+         * @param $id
+         * @static 
+         */
+        public static function getContactPhone($id){
+            return \App\Components\Core::getContactPhone($id);
+        }
+        
+        /**
+         * Get all emails that a contact has
+         *
+         * @param $id
+         * @static 
+         */
+        public static function getContactMail($id){
+            return \App\Components\Core::getContactMail($id);
+        }
+        
+        /**
+         * Get all social network that a contact has
+         *
+         * @param $id
+         * @static 
+         */
+        public static function getContactSocial($id){
+            return \App\Components\Core::getContactSocial($id);
+        }
+        
+        /**
+         * Get all friends that one user has added
+         *
+         * @param $contacto
+         * @return mixed 
+         * @static 
+         */
+        public static function getAmigos($userId){
+            return \App\Components\Core::getAmigos($userId);
+        }
+        
+        /**
+         * Get all followers that one user has added
+         *
+         * @param $contacto
+         * @return mixed 
+         * @static 
+         */
+        public static function getFollowers($contacto){
+            return \App\Components\Core::getFollowers($contacto);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function hasEmpresa(){
+            return \App\Components\Core::hasEmpresa();
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function getOfertas($empresaId){
+            return \App\Components\Core::getOfertas($empresaId);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function getFabricantes($empresaId){
+            return \App\Components\Core::getFabricantes($empresaId);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function getCategorias($empresaId){
+            return \App\Components\Core::getCategorias($empresaId);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function getCategoriasByIdProduct($idProduct){
+            return \App\Components\Core::getCategoriasByIdProduct($idProduct);
+        }
+        
+        /**
+         * Validar que la ruta de la tienda sea unica
+         * Si es 0 significa que no existe y es valida
+         *
+         * @param $tiendaRoute
+         * @return mixed 
+         * @static 
+         */
+        public static function existTiendaRoute($tiendaRoute){
+            return \App\Components\Core::existTiendaRoute($tiendaRoute);
+        }
+        
+        /**
+         * Validar que no exista esa configuración de empleado en la BD
+         * Si es 0 significa que no existe esa configuración
+         *
+         * @param \App\Components\Request $request
+         * @return integer 
+         * @static 
+         */
+        public static function existEmployeeConfig($request){
+            return \App\Components\Core::existEmployeeConfig($request);
+        }
+        
+        /**
+         * Obtener todos los empleados de una empresa
+         * en base al id de la empresa
+         *
+         * @param $empresaId
+         * @return mixed 
+         * @static 
+         */
+        public static function getAllEmployeesByEmpresaId($empresaId){
+            return \App\Components\Core::getAllEmployeesByEmpresaId($empresaId);
+        }
+        
+        /**
+         * Obtener un empleado especifico, en base al id del empleado
+         *
+         * @param $employeeId
+         * @return mixed 
+         * @static 
+         */
+        public static function getEmployeeById($employeeId){
+            return \App\Components\Core::getEmployeeById($employeeId);
+        }
+        
+        /**
+         * Obtener los empleos que tiene asignado un empleado
+         * en base al id de usuario
+         *
+         * @param $userId
+         * @return mixed 
+         * @static 
+         */
+        public static function getAllEmpleosDeEmpleadoByUserId($userId){
+            return \App\Components\Core::getAllEmpleosDeEmpleadoByUserId($userId);
+        }
+        
+        /**
+         * Obtener Fabricantes de una empresa
+         *
+         * @param $empresaId
+         * @return mixed 
+         * @static 
+         */
+        public static function getFabricantesByIdEmpresa($empresaId){
+            return \App\Components\Core::getFabricantesByIdEmpresa($empresaId);
+        }
+        
+        /**
+         * 
+         *
+         * @param $empresaId
+         * @return mixed 
+         * @static 
+         */
+        public static function getOfertasByIdEmpresa($empresaId){
+            return \App\Components\Core::getOfertasByIdEmpresa($empresaId);
+        }
+        
+        /**
+         * 
+         *
+         * @param $empresaId
+         * @return mixed 
+         * @static 
+         */
+        public static function getCategoriasByIdEmpresa($empresaId){
+            return \App\Components\Core::getCategoriasByIdEmpresa($empresaId);
+        }
+        
+        /**
+         * Permite obtener los productos de una tienda en base a su store_route
+         * Los productos solo pueden ser productos activos o inactivos
+         *
+         * @param $storeRoute
+         * @param $estadoProduct
+         * @return mixed 
+         * @static 
+         */
+        public static function getAllProductosByTiendaRoute($storeRoute, $estadoProduct){
+            return \App\Components\Core::getAllProductosByTiendaRoute($storeRoute, $estadoProduct);
+        }
+        
+        /**
+         * Obtener todos los productos de una tienda y listarlos
+         * en el administrador de productos. Estos productos
+         * pueden o no estar activos para editar
+         *
+         * @param $idTienda
+         * @return mixed 
+         * @static 
+         */
+        public static function getAllProductosByIdTienda($idTienda){
+            return \App\Components\Core::getAllProductosByIdTienda($idTienda);
+        }
+        
+        /**
+         * Obtener un producto en base al id del producto y id de la tienda
+         * Solo retorna un producto activo
+         * con su imagen activa
+         *
+         * @param $storeRoute
+         * @param $idProduct
+         * @return mixed 
+         * @static 
+         */
+        public static function getProductoById($idTienda, $idProduct){
+            return \App\Components\Core::getProductoById($idTienda, $idProduct);
+        }
+        
+        /**
+         * Obtener el precio final de un producto, aplicando su porcentaje de descuento
+         * o acumulación del mismo.
+         *
+         * @param $price
+         * @param $incrementDecrement '+' or '-'
+         * @param $rulePercent
+         * @return float 
+         * @static 
+         */
+        public static function getFinalPriceByProduct($price, $incrementDecrement, $rulePercent){
+            return \App\Components\Core::getFinalPriceByProduct($price, $incrementDecrement, $rulePercent);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function getEmpresaById($empresaId){
+            return \App\Components\Core::getEmpresaById($empresaId);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function getTiendaById($tiendaId){
+            return \App\Components\Core::getTiendaById($tiendaId);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function saveVenta(){
+            return \App\Components\Core::saveVenta();
+        }
+        
+    }
+
+
+    class Data extends \App\Facades\Data{
+        
+        /**
+         * Show all data from DB
+         *
+         * @return string 
+         * @static 
+         */
+        public static function showData(){
+            return \App\Components\Data::showData();
         }
         
     }
