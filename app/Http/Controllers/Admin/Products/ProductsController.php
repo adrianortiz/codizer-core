@@ -170,6 +170,7 @@ class ProductsController extends Controller
 
             $tiendaHasProduct = TiendaHasProducto::where('producto_id', $request['id'])->first();
             $tienda = Tienda::findOrFail($tiendaHasProduct->tienda_id);
+            $tiendaGetName = Core::getTiendaById($tiendaHasProduct->tienda_id);
 
             $product = Core::getProductoById( $tienda->id, $request['id'] );
             $imgsProduct = ImgProduct::where('producto_id', $request['id'])->get();
@@ -183,7 +184,8 @@ class ProductsController extends Controller
                 'imgsProduct'       => $imgsProduct,
                 'finalPrice'        => $finalPrice,
                 'productCategories' => $productCategories,
-                'url'               => $url
+                'url'               => $url,
+                'tiendaGetName'     => $tiendaGetName
             ]);
         }
 
