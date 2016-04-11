@@ -43,21 +43,21 @@
                         <div class="col-xs-6 col-md-6">
                             <img id="core-img-2-up" src="{{ asset('/media/icon/upload-img-icon.png') }}" />
                             <div class="form-group">
-                                {!! Form::file('img[]', ['accept' => 'image/jpg,image/png', 'id' => 'core-file-img-2', 'class' => 'form-control form-with-100']) !!}
+                                {!! Form::file('img[]', ['accept' => 'image/jpg,image/png', 'id' => 'core-file-img-2-up', 'class' => 'form-control form-with-100']) !!}
                             </div>
                         </div>
 
                         <div class="col-xs-6 col-md-6">
                             <img id="core-img-3-up" src="{{ asset('/media/icon/upload-img-icon.png') }}" />
                             <div class="form-group">
-                                {!! Form::file('img[]', ['accept' => 'image/jpg,image/png', 'id' => 'core-file-img-3', 'class' => 'form-control form-with-100']) !!}
+                                {!! Form::file('img[]', ['accept' => 'image/jpg,image/png', 'id' => 'core-file-img-3-up', 'class' => 'form-control form-with-100']) !!}
                             </div>
                         </div>
 
                         <div class="col-xs-6 col-md-6">
                             <img id="core-img-4-up" src="{{ asset('/media/icon/upload-img-icon.png') }}" />
                             <div class="form-group">
-                                {!! Form::file('img[]', ['accept' => 'image/jpg,image/png', 'id' => 'core-file-img-4', 'class' => 'form-control form-with-100']) !!}
+                                {!! Form::file('img[]', ['accept' => 'image/jpg,image/png', 'id' => 'core-file-img-4-up', 'class' => 'form-control form-with-100']) !!}
                             </div>
                         </div>
 
@@ -103,7 +103,7 @@
                             <div class="form-group">
                                 {!! Form::label('oferta_id', 'Oferta del producto') !!}
                                 {!! Form::select('oferta_id-up', $ofertasList,Input::old('oferta_id'),
-                                array('id'=>'oferta_id  -up','class'=> 'form-control form-with-100 form-group-validate-up val_num'))  !!}
+                                array('id'=>'oferta_id-up','class'=> 'form-control form-with-100 form-group-validate-up val_num'))  !!}
                             </div>
                         </div>
 

@@ -57,9 +57,8 @@
             </div>
 
             <div id="btn-group-to-product" class="btn-group right" role="group" aria-label="...">
-                <button type="button" id="btn-view-product" class="btn btn-default btn-sm core-hidden" data-toggle="modal">
-                    Ver en tienda
-                </button>
+                <!--<button type="button" id="btn-view-product" class="btn btn-default btn-sm core-hidden" data-toggle="modal">Ver en tienda</button>-->
+                <a href="" id="ver-product-store" class="btn btn-default btn-sm core-hidden" target="_blank ">Ver en tienda</a>
             </div>
 
             <div id="btn-group-to-product" class="btn-group right" role="group" aria-label="...">
