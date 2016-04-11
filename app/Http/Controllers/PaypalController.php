@@ -40,13 +40,13 @@ class PaypalController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function postPayment()
+    public function postPayment($tiendaRoute)
     {
         $payer = new Payer();
         $payer->setPaymentMethod('paypal');
         $items = array();
         $subtotal = 0;
-        $cart = \Session::get('cart');
+        $cart = \Session::get($tiendaRoute);
         $currency = 'MXN';
 
         foreach($cart as $producto) {

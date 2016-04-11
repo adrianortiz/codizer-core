@@ -151,7 +151,7 @@ Route::group(['middleware' => 'auth'], function () {
      */
 
     // Enviamos nuestro pedido a Paypal
-    Route::get('payment', [
+    Route::get('payment/{tiendaRoute}', [
        'uses'   => 'PaypalController@postPayment',
         'as'    => 'payment'
     ]);

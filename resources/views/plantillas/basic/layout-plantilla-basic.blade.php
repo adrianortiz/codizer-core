@@ -24,15 +24,16 @@
 
         <ul class="nav navbar-nav navbar-right">
 
+            <li>
+                <a href="{{ route('store.front.product.orden.show', [$tienda->store_route]) }}">
+                    <div><i class="fa fa-shopping-basket"> </i> <span class="txt-carrito">Carrito</span></div>
+                </a>
+            </li>
+
             @if (Auth::guest())
                 <li><a href="{{ route('login') }}">@lang('core.login')</a></li>
                 <li><a href="{{ route('register') }}">@lang('core.register')</a></li>
             @else
-                <li>
-                    <a href="{{ route('store.front.product.orden.show', [$tienda->store_route]) }}">
-                        <div><i class="fa fa-shopping-basket"> </i> <span class="txt-carrito">Carrito</span></div>
-                    </a>
-                </li>
 
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle tool-margin-right" data-toggle="dropdown" role="button" aria-expanded="false">

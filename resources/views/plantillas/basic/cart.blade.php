@@ -7,7 +7,8 @@
             <h3>
                 Carrito
 
-                {!! Form::open(['route' => 'store.front.product.orden.trash', 'method' => 'DELETE', 'class' => 'right']) !!}
+                {!! Form::open(['route' => ['store.front.product.orden.trash'], 'method' => 'DELETE', 'class' => 'right']) !!}
+                {!! Form::hidden('route', $tienda->store_route) !!}
                 <button type="submit" class="btn btn-sm">Vaciar carrito</button>
                 {!! Form::close() !!}
 
