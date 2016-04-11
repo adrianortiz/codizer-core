@@ -36,7 +36,7 @@
                         <div class="col-xs-6 col-md-12">
                             <img id="core-img-principal-up" src="{{ asset('/media/icon/upload-img-icon.png') }}" />
                             <div class="form-group">
-                                {!! Form::file('img[]', ['accept' => 'image/jpg,image/png', 'id' => 'core-file-img-principal', 'class' => 'form-control form-with-100 form-group-validate-up val_img', 'required']) !!}
+                                {!! Form::file('img[]', ['accept' => 'image/jpg,image/png', 'id' => 'core-file-img-principal-up', 'class' => 'form-control form-with-100 form-group-validate-up val_img', 'required']) !!}
                             </div>
                         </div>
 
@@ -103,7 +103,7 @@
                             <div class="form-group">
                                 {!! Form::label('oferta_id', 'Oferta del producto') !!}
                                 {!! Form::select('oferta_id-up', $ofertasList,Input::old('oferta_id'),
-                                array('id'=>'oferta-up','class'=> 'form-control form-with-100 form-group-validate-up val_num'))  !!}
+                                array('id'=>'oferta_id  -up','class'=> 'form-control form-with-100 form-group-validate-up val_num'))  !!}
                             </div>
                         </div>
 
