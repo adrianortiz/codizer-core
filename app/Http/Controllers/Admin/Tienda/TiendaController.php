@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin\Tienda;
 use App\Empresa;
 use App\Facades\Core;
 use App\ImgProduct;
-use App\Oferta;
 use App\Tienda;
 use App\TiendaHasProducto;
 use App\User;
@@ -41,7 +40,7 @@ class TiendaController extends Controller
         $contacts = Core::getContactos($user->id);
         $friends = Core::getAmigos($userView->id);
         $followers = Core::getFollowers($contacto);
-        
+
 
         // Nos aseguramos de que la ruta sea la del usuario logueado
         if ( $nameFirstName != $userPerfil[0]->perfil_route)
