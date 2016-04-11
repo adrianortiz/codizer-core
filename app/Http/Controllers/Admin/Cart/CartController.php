@@ -24,8 +24,12 @@ class CartController extends Controller
      */
     public function __construct()
     {
-        if(!Session::has('cart'))
-            Session::put('cart', array());
+
+        foreach (Tienda::all('store_route') as $tienda) {
+            if(!Session::has($tienda->store_route))
+                Session::put($tienda->store_route, array());
+        }
+
     }
 
     /**
@@ -34,8 +38,8 @@ class CartController extends Controller
      */
     public function show($tiendaRoute)
     {
-        $cart = Session::get('cart');
-        $total = $this->total();
+        $cart = Session::get($tiendaRoute);
+        $total = $this->total($tiendaRoute);
 
         Core::isTiendaRouteValid($tiendaRoute);
 
@@ -73,7 +77,7 @@ class CartController extends Controller
             $tienda = Tienda::findOrFail($tiendaHasProduct->tienda_id);
             $product = Core::getProductoById( $tienda->id, $request['id'] );
 
-            $cart = Session::get('cart');
+            $cart = Session::get($tienda->store_route);
 
             if (array_key_exists($product->product_id, $cart))
                 $product->quantity = ($cart[$product->product_id]->quantity + $request['cantidad']);
@@ -84,7 +88,7 @@ class CartController extends Controller
 
 
             $cart[$product->product_id] = $product;
-            Session::put('cart', $cart);
+            Session::put($tienda->store_route, $cart);
 
             return response()->json([
                 'message' => 'Se añadio a su carrito'
@@ -106,9 +110,9 @@ class CartController extends Controller
         $tienda = Tienda::findOrFail($tiendaHasProduct->tienda_id);
         $product = Core::getProductoById( $tienda->id, $request['id'] );
 
-        $cart = Session::get('cart');
+        $cart = Session::get($tienda->store_route);
         $cart[$product->product_id]->quantity = $request['cantidad'];
-        Session::put('cart', $cart);
+        Session::put($tienda->store_route, $cart);
 
         return Redirect::back()->with('message','Cantidad del Item actualizado.');
     }
@@ -119,18 +123,12 @@ class CartController extends Controller
      */
     public function delete(Request $request)
     {
-
-
-        /*
         $tiendaHasProduct = TiendaHasProducto::where('producto_id', $request['id'])->first();
         $tienda = Tienda::findOrFail($tiendaHasProduct->tienda_id);
-        $product = Core::getProductoById( $tienda->id, $request['id'] );
 
-        */
-
-        $cart = Session::get('cart');
+        $cart = Session::get($tienda->store_route);
         unset($cart[$request['id']]);
-        Session::put('cart', $cart);
+        Session::put($tienda->store_route, $cart);
 
         return Redirect::back()->with('message','Item eliminado de la lista.');
     }
@@ -138,11 +136,10 @@ class CartController extends Controller
     /**
      * Elimina el carrito de compra de una sessión
      */
-    public function trash()
+    public function trash(Request $request)
     {
-        Session::forget('cart');
-
-        return Redirect::back()->with('message','Item eliminado de la lista.');
+        Session::forget($request->route);
+        return Redirect::back()->with('message','Items eliminados de la lista.');
     }
 
     /**
@@ -152,9 +149,9 @@ class CartController extends Controller
      *
      * @return int
      */
-    private function total()
+    private function total($tiendaRoute)
     {
-        $cart = Session::get('cart');
+        $cart = Session::get($tiendaRoute);
         $total = 0;
         foreach( $cart as $item ) {
             $total += $item->final_price * $item->quantity;
@@ -167,13 +164,13 @@ class CartController extends Controller
 
     public function orderDetail($tiendaRoute)
     {
-        if(count(Session::get('cart')) <= 0 ) {
+        if(count(Session::get($tiendaRoute)) <= 0 ) {
             abort(404);
         }
 
-        $cart = Session::get('cart');
+        $cart = Session::get($tiendaRoute);
         // dd($cart);
-        $total = $this->total();
+        $total = $this->total($tiendaRoute);
 
         Core::isTiendaRouteValid($tiendaRoute);
 

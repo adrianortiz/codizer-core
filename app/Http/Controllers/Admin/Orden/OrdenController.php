@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin\Orden;
 
 use App\Facades\Core;
 use App\OrdenDetalle;
-use App\OrdenDetalleGeneral;
 use App\Producto;
 use App\TiendaHasProducto;
 use Illuminate\Http\Request;
@@ -35,12 +34,7 @@ class OrdenController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    /*
     public function store(Request $request)
     {
         if ( $request->ajax() ) {
@@ -107,7 +101,7 @@ class OrdenController extends Controller
 
 
         abort(404);
-    }
+    } */
 
     /**
      * Display the specified resource.
