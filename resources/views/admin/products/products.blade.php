@@ -55,9 +55,18 @@
             <div id="btn-group-to-product" class="btn-group left" role="group" aria-label="...">
                 <button type="button" id="btn-new-product" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modalNewProduct">Nuevo producto</button>
             </div>
+
+            <div id="btn-group-to-product" class="btn-group right" role="group" aria-label="...">
+                <button type="button" id="btn-view-product" class="btn btn-default btn-sm core-hidden" data-toggle="modal">
+                    Ver en tienda
+                </button>
+            </div>
+
             <div id="btn-group-to-product" class="btn-group right" role="group" aria-label="...">
                 <button type="button" id="btn-edit-product" class="btn btn-default btn-sm core-hidden" data-toggle="modal" data-target="#modalUpdateProduct">Editar</button>
             </div>
+
+
 
         </div>
     </div>

@@ -346,7 +346,7 @@ Route::group(['middleware' => 'auth'], function () {
         'as'    => 'products.show'
         ]);
 
-        // UPDATE COMPANY
+        // UPDATE product
         Route::post('admin/{nameFirstName}/products/update', [
         'uses'   => 'Admin\Products\ProductsController@update',
         'as'    => 'products.update'
