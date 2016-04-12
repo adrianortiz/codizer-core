@@ -23,6 +23,7 @@
 
                     {!! Form::hidden('empresa_id', $idEmpresa, ['id' => 'empresa_id_up', 'class' => 'form-group-validate-up val_num']) !!}
                     {!! Form::hidden('tienda_id', $idTienda, ['id' => 'tienda_id_up', 'class' => 'form-group-validate-up val_num']) !!}
+                    {!! Form::hidden('producto_id', null, ['id' => 'producto_id_up']) !!}
 
 
                     <div class="row col-md-6">
@@ -37,6 +38,7 @@
                             <img id="core-img-principal-up" src="{{ asset('/media/icon/upload-img-icon.png') }}" />
                             <div class="form-group">
                                 {!! Form::file('img[]', ['accept' => 'image/jpg,image/png', 'id' => 'core-file-img-principal-up', 'class' => 'form-control form-with-100', 'required']) !!}
+                                {!! Form::hidden('photo_id[]', null, ['id' => 'photo_id_up-1']) !!}
                             </div>
                         </div>
 
@@ -44,6 +46,7 @@
                             <img id="core-img-2-up" src="{{ asset('/media/icon/upload-img-icon.png') }}" />
                             <div class="form-group">
                                 {!! Form::file('img[]', ['accept' => 'image/jpg,image/png', 'id' => 'core-file-img-2-up', 'class' => 'form-control form-with-100']) !!}
+                                {!! Form::hidden('photo_id[]', null, ['id' => 'photo_id_up-2']) !!}
                             </div>
                         </div>
 
@@ -51,6 +54,7 @@
                             <img id="core-img-3-up" src="{{ asset('/media/icon/upload-img-icon.png') }}" />
                             <div class="form-group">
                                 {!! Form::file('img[]', ['accept' => 'image/jpg,image/png', 'id' => 'core-file-img-3-up', 'class' => 'form-control form-with-100']) !!}
+                                {!! Form::hidden('photo_id[]', null, ['id' => 'photo_id_up-3']) !!}
                             </div>
                         </div>
 
@@ -58,6 +62,7 @@
                             <img id="core-img-4-up" src="{{ asset('/media/icon/upload-img-icon.png') }}" />
                             <div class="form-group">
                                 {!! Form::file('img[]', ['accept' => 'image/jpg,image/png', 'id' => 'core-file-img-4-up', 'class' => 'form-control form-with-100']) !!}
+                                {!! Form::hidden('photo_id[]', null, ['id' => 'photo_id_up-4']) !!}
                             </div>
                         </div>
 

@@ -265,7 +265,8 @@ function productCreateUpdate(result) {
                        );
 
                         $('#core-img-principal-up').attr('src', '/media/photo-product/' + result.product.img);
-
+                        $('#photo_id_up-1').val(result.imgsProduct[0].id);
+                        $('#producto_id_up').val(result.product.id);
                         $('#nombre-up').val(result.product.nombre);
                         $('#codigo_producto-up').val(result.product.codigo_producto);
                         $('#cantidad_disponible-up').val(result.product.cantidad_disponible);
@@ -280,6 +281,9 @@ function productCreateUpdate(result) {
                             console.log(index);
                             $('#'+item.categoria_id).attr('checked','checked');
                         });
+                            $('#photo_id_up-2').val(result.imgsProduct[1].id);
+                            $('#photo_id_up-3').val(result.imgsProduct[2].id);
+                            $('#photo_id_up-4').val(result.imgsProduct[3].id);
 
                         if(result.imgsProduct != null){
                             $('#core-img-2-up').attr('src', '/media/photo-product/' + result.imgsProduct[1].img);
@@ -350,7 +354,8 @@ function productCreateUpdate(result) {
                         } else {
                             hideShowAlert('msj-success', result.message);
                             $('#msg-list-vacio').hide();
-                            containerProducts.prepend(productCreateUpdate(result));
+                            //containerProducts.prepend(productCreateUpdate(result));
+                            window.location.reload(true);
                             $('#cancel').click();
 
                         }

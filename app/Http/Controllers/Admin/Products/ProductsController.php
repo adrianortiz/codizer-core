@@ -237,13 +237,12 @@ return response()->json([
 }*/
     public function update(Request $request){
 
-        //dd($request->all());
+        dd($request->all());
         if ($request->ajax()) {
 
             DB::beginTransaction();
             try {
-
-                $producto =Producto::findOrFail($request->id);
+                $producto = Producto::findOrFail($request->producto_id);
                 $producto->fill($request->all());
                 $producto->users_id = \Auth::user()->id;
                 $producto->slug = Str::slug($request['nombre']);
@@ -251,57 +250,55 @@ return response()->json([
 
 
 
-                for ($i = 0; $i < count($request->file('img')); $i++) {
-
-                    $filePhotoProduct = $request->file('img')[$i];
-
+                for ($i = 0; $i < count($request->photo_id); $i++) {
                     // Validate if object selected has data
-                    if ($filePhotoProduct != null) {
+                    if ($request->file('img')[$i]) {
+                        $photoProducto = ImgProduct::findOrFail($request->photo_id[$i]);
+                        $photoProducto->fill($request->all());
 
-                        $namePhotoProduct = 'product-' . \Auth::user()->id . Carbon::now()->second . $filePhotoProduct->getClientOriginalName();
-                        \Storage::disk('photo_product')->put($namePhotoProduct, \File::get($filePhotoProduct));
+                        $namePhotoProduct = 'product-' . \Auth::user()->id . Carbon::now()->second . $request->file('img')[$i]->getClientOriginalName();
+                        \Storage::disk('photo_product')->put($namePhotoProduct, \File::get($request->file('img')[$i]));
 
-                        $photoProducto =ImgProduct::findOrFail($request->id[$i]);
-                        $photoProducto->img = $namePhotoProduct;
                         $photoProducto->producto_id = $producto->id;
                         $photoProducto->principal = $i == 0 ? '1' : '0';
-
+                        $photoProducto->img = $namePhotoProduct;
                         $photoProducto->save();
                     }
-
                 }
 
-                $empresa_has_producto = EmpresaHasProducto::findOrFail($request->id);
+                /*
+                $empresa_has_producto = EmpresaHasProducto::findOrFail($request->empresa_id);
                 $empresa_has_producto->empresa_id = $request['empresa_id'];
                 $empresa_has_producto->producto_id = $producto->id;
-
                 $empresa_has_producto->save();
 
-                $tienda_has_producto = TiendaHasProducto::findOrFail($request->id);
+                $tienda_has_producto = TiendaHasProducto::findOrFail($request->tienda_id);
                 $tienda_has_producto->tienda_id = $request['tienda_id'];
-                $tienda_has_producto->producto_id = $producto->id;
+                $tienda_has_producto->producto_id = $request->producto_id;
 
                 $tienda_has_producto->save();
 
                 // Save one or more categories
                 foreach ($request['categoria'] as $categoria) {
-                    $producto_has_categoria = ProductoHasCategoria::findOrFail($request->id);
-                    $producto_has_categoria->categoria_id = $categoria;
-                    $producto_has_categoria->producto_id = $producto->id;
+                    $producto_has_categoria = ProductoHasCategoria::findOrFail($request->producto_id);
+                    $producto_has_categoria->categoria_id = $request->categoria;
+                    $producto_has_categoria->producto_id = $request->producto_id;
 
                     $producto_has_categoria->save();
                 }
 
 
-                $fullProduct = Core::getProductoById($request['tienda_id'], $producto->id);
+                $fullProduct = Core::getProductoById($request['tienda_id'], $producto->producto_id);
                 $fullProduct->img = URL::to('/') . '/media/photo-product/' . $fullProduct->img;
+                */
+
 
                 DB::commit();
                 return response()->json([
                     'message' => 'Producto Actualizado.',
-                    'producto' => $fullProduct
+                    'producto' => $producto
+                    //'fullProducto' => $fullProduct
                 ]);
-
             } catch (\Exception $e) {
                 DB::rollback();
 
