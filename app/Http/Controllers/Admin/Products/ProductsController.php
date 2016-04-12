@@ -235,10 +235,9 @@ return response()->json([
 } else {
     abort(404);
 }*/
-    public function update(Request $request)
+    public function update(Request $request){
 
-    {
-
+        //dd($request->all());
         if ($request->ajax()) {
 
             DB::beginTransaction();
@@ -250,12 +249,14 @@ return response()->json([
                 $producto->slug = Str::slug($request['nombre']);
                 $producto->save();
 
+
+
                 for ($i = 0; $i < count($request->file('img')); $i++) {
 
                     $filePhotoProduct = $request->file('img')[$i];
 
                     // Validate if object selected has data
-                    if ($request->file('img')[$i]) {
+                    if ($filePhotoProduct != null) {
 
                         $namePhotoProduct = 'product-' . \Auth::user()->id . Carbon::now()->second . $filePhotoProduct->getClientOriginalName();
                         \Storage::disk('photo_product')->put($namePhotoProduct, \File::get($filePhotoProduct));
@@ -310,8 +311,6 @@ return response()->json([
                 ]);
             }
         }
-
-
         abort(404);
     }
 
