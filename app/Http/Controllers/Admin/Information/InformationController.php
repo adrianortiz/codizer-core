@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Information;
 
 use App\Facades\Core;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -28,7 +29,15 @@ class InformationController extends Controller
         $friends    = Core::getAmigos($userView->id);
         $followers  = Core::getFollowers($contacto);
 
+        $contactoInfo = Core::getContactInfo($contacto[0]->id);
+        $contactoAddress = Core::getContactAddress($contacto[0]->id);
+        $contactoPhone = Core::getContactPhone($contacto[0]->id);
+        $contactoMail = Core::getContactMail($contacto[0]->id);
+        $contactoSocial = Core::getContactSocial($contacto[0]->id);
+
         return view('admin.information.information',
-            compact('perfil', 'contacto', 'userPerfil', 'userContacto', 'contacts', 'friends', 'followers'));
+            compact('perfil', 'contacto', 'userPerfil', 'userContacto', 'contacts', 'friends', 'followers', 'contactoInfo', 'contactoAddress', 'contactoPhone', 'contactoMail', 'contactoSocial'));
     }
+
+
 }

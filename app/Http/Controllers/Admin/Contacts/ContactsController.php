@@ -257,6 +257,7 @@ class ContactsController extends Controller
                         DB::commit();
                         return response()->json([
                             'message' => "Dirección actualizada.",
+                            'address' => Core::getContactAddress($request->contacto_id)
                         ]);
                         break;
                     case 3:
@@ -279,6 +280,7 @@ class ContactsController extends Controller
                         DB::commit();
                         return response()->json([
                             'message' => "Teléfono actualizado.",
+                            'phone' => Core::getContactPhone($request->contacto_id)
                         ]);
                         break;
                     case 4:
@@ -301,6 +303,7 @@ class ContactsController extends Controller
                         DB::commit();
                         return response()->json([
                             'message' => "Correo actualizado.",
+                            'mail' => Core::getContactMail($request->contacto_id)
                         ]);
                         break;
                     case 5:
@@ -323,6 +326,7 @@ class ContactsController extends Controller
                         DB::commit();
                         return response()->json([
                             'message' => "Red social actualizada.",
+                            'social' => Core::getContactSocial($request->contacto_id)
                         ]);
                         break;
                     default:

@@ -42,6 +42,13 @@ function productCreateUpdate(result) {
     $('#empresa_id_new').val( idEmpresa );
     $('#tienda_id_new').val( idTienda);
 
+
+    var idEmpresaUp = $('#empresa_id_up').val();
+    var idTiendaUp = $('#tienda_id_up').val();
+    document.getElementById("form-products-store-update").reset();
+    $('#empresa_id_up').val( idEmpresaUp );
+    $('#tienda_id_up').val( idTiendaUp);
+
     return '<tr class="data-product-tr" data-product="' + result.producto.product_id + '">' +
         '<td class="container-list-photo-user">' +
         '<img src="' + result.producto.img + '"></td>' +
@@ -253,8 +260,9 @@ function productCreateUpdate(result) {
 
                        $('#ver-product-store').show();
                        $('#ver-product-store').attr("href",
-                          '//localhost:8000/tienda/' + result.tiendaGetName.store_route + '/producto/' + result.product.product_id + '/' + result.product.slug
-                        );
+                          //'//localhost:8000/tienda/' + result.tiendaGetName.store_route + '/producto/' + result.product.product_id + '/' + result.product.slug
+                           result.urlVerEnStore
+                       );
 
                         $('#core-img-principal-up').attr('src', '/media/photo-product/' + result.product.img);
 
@@ -306,7 +314,7 @@ function productCreateUpdate(result) {
                 // Agregar irformación del sourceCode del editor al textarea de desc
                 $('textarea#desc_producto-up').val(tinymce.get('desc_producto-up').getContent());
 
-                if (validateGroup('.form-group-validate') == -1) {
+                if (validateGroup('.form-group-validate-up') == -1) {
                     initUpdateProduct();
                 }
             });

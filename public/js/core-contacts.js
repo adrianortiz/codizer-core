@@ -53,19 +53,14 @@ function emptyAndRefillFieldsToUpdate(contacto) {
     var fecha = new Date(contacto.f_nacimiento);
     if(fecha == 'Invalid Date'){
         $('#f_nacimiento-ud').val(null);
-        $('#f_nacimiento-ud').attr('min', $('#f_nacimiento').attr('min'));
-        $('#f_nacimiento-ud').attr('max', $('#f_nacimiento').attr('max'));
     } else {
         $('#f_nacimiento-ud').val(fecha.toISOString().slice(0, 10));
-        $('#f_nacimiento-ud').attr('min', $('#f_nacimiento').attr('min'));
-        $('#f_nacimiento-ud').attr('max', $('#f_nacimiento').attr('max'));
     }
 
     $('#profesion-ud').val(contacto.profesion);
     $('#estado_civil-ud').val(contacto.estado_civil).attr('selected', 'selected');
     $('#desc_contacto-ud').val(contacto.desc_contacto);
 }
-
 
 function emptyAndRefillPhoneFieldsToUpdate(phone) {
     $('#core-content-form-phone').empty();
@@ -159,90 +154,96 @@ function emptyAndRefillFieldsToShow(result){
     $('#show-contact-desc-info').append(result.contacto[0].desc_contacto);
 
     $('#core-content-address').empty();
-    if(!result.address.length){
-        $('#btn-edit-address').fadeOut();
-    } else {
-        $('#btn-edit-address').fadeIn();
-        $.each(result.address, function (index, item) {
+    $('#core-content-address').append('<div class="core-show-title-blue">Dirección</div>');
+    $.each(result.address, function (index, item) {
+        if(item.desc_dir == "" &&
+            item.calle == "" &&
+            item.numero_dir == "" &&
+            item.piso_edificio == "" &&
+            item.ciudad == "" &&
+            item.cp == "" &&
+            item.estado_dir == "" &&
+            item.pais == "") {
             $('#core-content-address').append(
-                '<div class="core-show-title-blue">Dirección ' + item.desc_dir + '</div>' +
-                '<div><div>Descripción</div><div class="show-info-contact" id="show-info-contact-desc-dir">' + item.desc_dir + '</div></div>' +
-                '<div><div>Calle</div><div class="show-info-contact" id="show-info-contact-calle">' + item.calle + '</div></div>' +
-                '<div><div>Número</div><div class="show-info-contact" id="show-info-contact-num-dir">' + item.numero_dir + '</div></div>' +
-                '<div><div>Piso/Edificio</div><div class="show-info-contact" id="show-info-contact-p-e">' + item.piso_edificio + '</div></div>' +
-                '<div><div>Ciudad</div><div class="show-info-contact" id="show-info-contact-cd">' + item.ciudad + '</div></div>' +
-                '<div><div>Código Postal</div><div class="show-info-contact" id="show-info-contact-cp">' + item.cp + '</div></div>' +
-                '<div><div>Estado</div><div class="show-info-contact" id="show-info-contact-edo">' + item.estado_dir + '</div></div>' +
-                '<div><div>País</div><div class="show-info-contact" id="show-info-contact-pais">' + item.pais + '</div></div>'
+                '<div><div class="show-info-contact">' +
+                '<div id="show-info-contact-desc-dir">Descripcion: <b>Aun no has agregado una descripcion</b></div>' +
+                '<div id="show-info-contact-calle">Calle: <b>Aun no has agregado una calle</b></div>' +
+                '<div id="show-info-contact-num-dir">Número: <b>Aun no has agregado un numero</b></div>' +
+                '<div id="show-info-contact-p-e">Piso/Edificio: <b>Aun no has agregado piso/edificio</b></div>' +
+                '<div id="show-info-contact-cd">Ciudad: <b>Aun no has agregado ciudad</b></div>' +
+                '<div id="show-info-contact-cp">Código Postal: <b>Aun no has agegado codigo postal</b></dv>' +
+                '<div id="show-info-contact-edo">Estado: <b>Aun no has agregado estado</b></div>' +
+                '<div id="show-info-contact-pais">País: <b>Aun no has agregado pais</b></div>' +
+                '</div></div>'
             );
-        });
-    }
+        } else {
+            $('#core-content-address').append(
+                '<div><div class="show-info-contact">' +
+                '<div id="show-info-contact-desc-dir">Descripcion: <b> ' + item.desc_dir + '</b></div>' +
+                '<div id="show-info-contact-calle">Calle: <b> ' + item.calle + '</b></div>' +
+                '<div id="show-info-contact-num-dir">Número: <b> ' + item.numero_dir + '</b></div>' +
+                '<div id="show-info-contact-p-e">Piso/Edificio: <b> ' + item.piso_edificio + '</b></div>' +
+                '<div id="show-info-contact-cd">Ciudad: <b> ' + item.ciudad + '</b></div>' +
+                '<div id="show-info-contact-cp">Código Postal: <b> ' + item.cp + '</b></dv>' +
+                '<div id="show-info-contact-edo">Estado: <b> ' + item.estado_dir + '</b></div>' +
+                '<div id="show-info-contact-pais">País: <b> ' + item.pais + '</b></div>' +
+                '</div></div>'
+            );
+        }
+    });
 
     $('#core-content-phone').empty();
-    if(!result.phone.length) {
-        $('#btn-edit-phone').fadeOut();
-    } else {
-        $('#btn-edit-phone').fadeIn();
-        $.each(result.phone, function (index, item) {
-            if (item.desc_tel == "" && item.numero_tel == "") {
-                $('#core-content-phone').append(
-                    '<div class="core-show-title-blue">Teléfono</div>' +
-                    '<div><div>Descripción</div><div class="show-info-contact" id="show-info-contact-desc-tel">Aun no has añadido ninguna descripción</div></div>' +
-                    '<div><div>Número</div><div class="show-info-contact" id="show-info-contact-num-tel">Aun no has añadido ningun teléfono</div></div>'
-                );
-            } else {
-                $('#core-content-phone').append(
-                    '<div class="core-show-title-blue">Teléfono ' + item.desc_tel + '</div>' +
-                    '<div><div>Descripción</div><div class="show-info-contact" id="show-info-contact-desc-tel">' + item.desc_tel + '</div></div>' +
-                    '<div><div>Número</div><div class="show-info-contact" id="show-info-contact-num-tel">' + item.numero_tel + '</div></div>'
-                );
-            }
-        });
-    }
+    $('#core-content-phone').append('<div class="core-show-title-blue">Teléfono</div>');
+    $.each(result.phone, function (index, item) {
+        if (item.desc_tel == "" && item.numero_tel == "") {
+            $('#core-content-phone').append(
+                '<div><div>Descripción</div><div class="show-info-contact" id="show-info-contact-desc-tel">Aun no has añadido ninguna descripción</div></div>' +
+                '<div><div>Número</div><div class="show-info-contact" id="show-info-contact-num-tel">Aun no has añadido ningun teléfono</div></div>'
+            );
+        } else {
+            $('#core-content-phone').append(
+                '<div><div>' + item.desc_tel + '</div>' +
+                '<div class="show-info-contact" id="show-info-contact-num-tel">' + item.numero_tel + '</div></div>'
+            );
+        }
+    });
 
     $('#core-content-mail').empty();
-    if(!result.mail.length) {
-        $('#btn-edit-mail').fadeOut();
-    } else {
-        $('#btn-edit-mail').fadeIn();
+        $('#core-content-mail').append('<div class="core-show-title-blue">Correo</div>');
         $.each(result.mail, function (index, item) {
             if (item.desc_mail == "" && item.email == "") {
                 $('#core-content-mail').append(
-                    '<div class="core-show-title-blue">Correo</div>' +
                     '<div><div>Descripción</div><div class="show-info-contact" id="show-info-contact-desc-mail">Aun no has añadido ninguna descripcion</div></div>' +
                     '<div><div>Correo</div><div class="show-info-contact" id="show-info-contact-mail">Aun no has añadido ningun correo</div></div>'
                 );
             } else {
+
                 $('#core-content-mail').append(
-                    '<div class="core-show-title-blue">Correo ' + item.desc_mail + '</div>' +
-                    '<div><div>Descripción</div><div class="show-info-contact" id="show-info-contact-desc-mail">' + item.desc_mail + '</div></div>' +
-                    '<div><div>Correo</div><div class="show-info-contact" id="show-info-contact-mail">' + item.email + '</div></div>'
+                    '<div><div>' + item.desc_mail + '</div>' +
+                    '<div class="show-info-contact" id="show-info-contact-mail">' + item.email + '</div></div>'
                 );
             }
         });
-    }
 
     $('#core-content-social').empty();
-    if(!result.social.length) {
-        $('#btn-edit-social').fadeOut();
-    } else {
-        $('#btn-edit-social').fadeIn();
+    //$('#social-nets').empty();
+    $('#core-content-social').append('<div class="core-show-title-blue">Redes sociales</div>');
         $.each(result.social, function (index, item) {
-            if (item.red_social_nombre == "" && item.url == "") {
+            if (item.url == "") {
                 $('#core-content-social').append(
-                    '<div class="core-show-title-blue">Redes sociales</div>' +
-                    '<div><div>Red social</div><div class="show-info-contact" id="show-info-contact-social">Aun no has añadido ninguna red social</div></div>' +
-                    '<div><div>URL</div><div class="show-info-contact" id="show-info-contact-url">Aun no has añadido ninguna url</div></div>'
+                    '<div><div>' + item.red_social_nombre + '</div>' +
+                    '<div class="show-info-contact" id="show-info-contact-url">Aun no has añadido ninguna url</div></div>'
                 );
             } else {
+                //$('#social-nets').append(
+                //    '<a href="' +item.url+ '" target="_blank" class="btn btn-social-radius btn-shadow-white"><i class="fa fa-' +item.red_social_nombre+ '"></i></a>'
+                //);
                 $('#core-content-social').append(
-                    '<div class="core-show-title-blue">Red social ' + item.red_social_nombre + '</div>' +
-                    '<div><div>Red social</div><div class="show-info-contact" id="show-info-contact-social">' + item.red_social_nombre + '</div></div>' +
-                    '<div><div>URL</div><div class="show-info-contact" id="show-info-contact-url">' + item.url + '</div></div>'
+                    '<div><div>' + item.red_social_nombre + '</div>' +
+                    '<div class="show-info-contact" id="show-info-contact-url">' + item.url + '</div></div>'
                 );
             }
         });
-    }
 }
 
 /**
@@ -256,7 +257,6 @@ function hideElements(){
     $('#mail-edit').hide();
     $('#social-edit').hide();
     $('#info-contact').hide();
-    $('#btn-edit-contact').show();
     $('#btns-group-to-contact').hide();
     document.getElementById("form-contact-to-create").reset();
     document.getElementById("form-contact-to-update").reset();
@@ -445,7 +445,6 @@ $(document).ready(function() {
                         $('#btn-edit-contact').click(function(){
                             hideElements();
                             $('#btns-group-to-contact').show();
-                            $('#btn-edit-contact').hide();
                             $('#form-edit').show();
                             emptyAndRefillFieldsToUpdate(result.contacto[0]);
                         });
@@ -456,7 +455,6 @@ $(document).ready(function() {
                         $('#btn-edit-address').click(function () {
                             hideElements();
                             $('#btns-group-to-contact').show();
-                            $('#btn-edit-contact').hide();
                             $('#address-edit').show();
                             emptyAndRefillAddressFieldsToUpdate(result.address);
                         });
@@ -467,7 +465,6 @@ $(document).ready(function() {
                         $('#btn-edit-phone').click(function () {
                             hideElements();
                             $('#btns-group-to-contact').show();
-                            $('#btn-edit-contact').hide();
                             $('#phone-edit').show();
                             emptyAndRefillPhoneFieldsToUpdate(result.phone);
                         });
@@ -475,7 +472,6 @@ $(document).ready(function() {
                         $('#btn-edit-mail').click(function () {
                             hideElements();
                             $('#btns-group-to-contact').show();
-                            $('#btn-edit-contact').hide();
                             $('#mail-edit').show();
                             emptyAndRefillMailFieldsToUpdate(result.mail);
                         });
@@ -483,7 +479,6 @@ $(document).ready(function() {
                         $('#btn-edit-social').click(function () {
                             hideElements();
                             $('#btns-group-to-contact').show();
-                            $('#btn-edit-contact').hide();
                             $('#social-edit').show();
                             emptyAndRefillSocialFieldsToUpdate(result.social);
                         });
