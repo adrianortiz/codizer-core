@@ -138,11 +138,12 @@
 
                         <div class="col-md-12">
                             <div class="form-group">
-                                <div class="checkbox">
+
+                                <div id="check-up" class="checkbox">
 
                                     @foreach( $categoriasList as $categoria )
                                         <label class="core-checkbox">
-                                            {!! Form::checkbox('categoria[]', $categoria->id, ['id'=>'categoria-up','class'=> 'form-group-validate-up val_num'])  !!}
+                                            {!! Form::checkbox('categoria[]', $categoria->id,  false ,  ['id' => $categoria->id,'class'=> 'form-group-validate-up val_num'])  !!}
                                             <span>{{ $categoria->nombre }}</span>
                                         </label>
                                     @endforeach
