@@ -58,6 +58,10 @@ class CartController extends Controller
                 return view('plantillas.basic.cart', compact('tienda', 'userContacto', 'userPerfil', 'cart', 'total'));
             }
 
+            if ($tienda->store_route_platilla == 'pro') {
+                return view('plantillas.pro.cart', compact('tienda', 'userContacto', 'userPerfil', 'cart', 'total'));
+            }
+
         }
 
     }
@@ -189,6 +193,10 @@ class CartController extends Controller
 
             if ($tienda->store_route_platilla == 'basic') {
                 return view('plantillas.basic.order-detail', compact('tienda', 'userContacto', 'userPerfil', 'cart', 'total', 'pago'));
+            }
+
+            if ($tienda->store_route_platilla == 'pro') {
+                return view('plantillas.pro.order-detail', compact('tienda', 'userContacto', 'userPerfil', 'cart', 'total', 'pago'));
             }
 
         }

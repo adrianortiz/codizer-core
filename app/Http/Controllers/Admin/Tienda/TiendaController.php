@@ -223,6 +223,10 @@ class TiendaController extends Controller
                 return view('plantillas.basic.index', compact('tienda', 'userContacto', 'userPerfil', 'productos'));
             }
 
+            if ($tienda->store_route_platilla == 'pro') {
+                return view('plantillas.pro.index', compact('tienda', 'userContacto', 'userPerfil', 'productos'));
+            }
+
         }
 
     }
@@ -255,6 +259,10 @@ class TiendaController extends Controller
             if ($tienda->store_route_platilla == 'basic') {
                 return view('plantillas.basic.info-plantilla', compact('tienda', 'empresa', 'userContacto', 'userPerfil'));
             }
+
+            if ($tienda->store_route_platilla == 'pro') {
+                return view('plantillas.pro.info-plantilla', compact('tienda', 'empresa', 'userContacto', 'userPerfil'));
+            }
         }
 
 
@@ -282,6 +290,10 @@ class TiendaController extends Controller
 
             if ($tienda->store_route_platilla == 'basic') {
                 return view('plantillas.basic.product', compact('tienda', 'product', 'imgsProduct', 'finalPrice', 'productCategories', 'userContacto', 'userPerfil'));
+            }
+
+            if ($tienda->store_route_platilla == 'pro') {
+                return view('plantillas.pro.product', compact('tienda', 'product', 'imgsProduct', 'finalPrice', 'productCategories', 'userContacto', 'userPerfil'));
             }
 
         }
