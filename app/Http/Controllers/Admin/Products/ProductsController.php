@@ -237,7 +237,7 @@ return response()->json([
 }*/
     public function update(Request $request){
 
-//        dd($request->all());
+        dd($request->all());
         if ($request->ajax()) {
 
             DB::beginTransaction();
@@ -247,6 +247,8 @@ return response()->json([
                 $producto->users_id = \Auth::user()->id;
                 $producto->slug = Str::slug($request['nombre']);
                 $producto->save();
+
+
 
                 for ($i = 0; $i < count($request->photo_id); $i++) {
                     // Validate if object selected has data
@@ -264,10 +266,38 @@ return response()->json([
                     }
                 }
 
+                /*
+                $empresa_has_producto = EmpresaHasProducto::findOrFail($request->empresa_id);
+                $empresa_has_producto->empresa_id = $request['empresa_id'];
+                $empresa_has_producto->producto_id = $producto->id;
+                $empresa_has_producto->save();
+
+                $tienda_has_producto = TiendaHasProducto::findOrFail($request->tienda_id);
+                $tienda_has_producto->tienda_id = $request['tienda_id'];
+                $tienda_has_producto->producto_id = $request->producto_id;
+
+                $tienda_has_producto->save();
+
+                // Save one or more categories
+                foreach ($request['categoria'] as $categoria) {
+                    $producto_has_categoria = ProductoHasCategoria::findOrFail($request->producto_id);
+                    $producto_has_categoria->categoria_id = $request->categoria;
+                    $producto_has_categoria->producto_id = $request->producto_id;
+
+                    $producto_has_categoria->save();
+                }
+
+
+                $fullProduct = Core::getProductoById($request['tienda_id'], $producto->producto_id);
+                $fullProduct->img = URL::to('/') . '/media/photo-product/' . $fullProduct->img;
+                */
+
+
                 DB::commit();
                 return response()->json([
                     'message' => 'Producto Actualizado.',
                     'producto' => $producto
+                    //'fullProducto' => $fullProduct
                 ]);
             } catch (\Exception $e) {
                 DB::rollback();
@@ -292,36 +322,3 @@ return response()->json([
         //
     }
 }
-/*
-
-    $empresa_has_producto = EmpresaHasProducto::findOrFail($request->id);
-    $empresa_has_producto->empresa_id = $request['empresa_id'];
-    $empresa_has_producto->producto_id = $producto->id;
-
-    $empresa_has_producto->save();
-
-    $tienda_has_producto = TiendaHasProducto::findOrFail($request->id);
-    $tienda_has_producto->tienda_id = $request['tienda_id'];
-    $tienda_has_producto->producto_id = $producto->id;
-
-    $tienda_has_producto->save();
-
-    // Save one or more categories
-    foreach ($request['categoria'] as $categoria) {
-        $producto_has_categoria = ProductoHasCategoria::findOrFail($request->id);
-        $producto_has_categoria->categoria_id = $categoria;
-        $producto_has_categoria->producto_id = $producto->id;
-
-        $producto_has_categoria->save();
-    }
-
-
-    $fullProduct = Core::getProductoById($request['tienda_id'], $producto->id);
-    $fullProduct->img = URL::to('/') . '/media/photo-product/' . $fullProduct->img;
-
-    DB::commit();
-    return response()->json([
-        'message' => 'Producto Actualizado.',
-        'producto' => $fullProduct
-    ]);
- * */

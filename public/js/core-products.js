@@ -354,7 +354,8 @@ function productCreateUpdate(result) {
                         } else {
                             hideShowAlert('msj-success', result.message);
                             $('#msg-list-vacio').hide();
-                            containerProducts.prepend(productCreateUpdate(result));
+                            //containerProducts.prepend(productCreateUpdate(result));
+                            window.location.reload(true);
                             $('#cancel').click();
 
                         }
