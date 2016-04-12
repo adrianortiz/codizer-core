@@ -347,7 +347,7 @@ Route::group(['middleware' => 'auth'], function () {
         ]);
 
         // UPDATE product
-        Route::post('admin/{nameFirstName}/products/update', [
+        Route::post('perfil/{nameFirstName}/products/update', [
         'uses'   => 'Admin\Products\ProductsController@update',
         'as'    => 'products.update'
     ]);

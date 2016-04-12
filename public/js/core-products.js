@@ -301,7 +301,7 @@ function productCreateUpdate(result) {
          * @constructor
          */
         UpdateProduct: function () {
-            $('#store-update-product').click(function () {
+            $('#btn-update-product').click(function () {
 
                 // Agregar irformación del sourceCode del editor al textarea de desc
                 $('textarea#desc_producto-up').val(tinymce.get('desc_producto-up').getContent());

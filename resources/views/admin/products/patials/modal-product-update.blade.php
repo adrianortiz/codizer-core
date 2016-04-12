@@ -21,8 +21,8 @@
                 {!! Form::open(['route' => 'products.update', 'method' => 'POST', 'id' => 'form-products-store-update']) !!}
                 <div class="form-group">
 
-                    {!! Form::hidden('empresa_id', $idEmpresa, ['id' => 'empresa_id_new', 'class' => 'form-group-validate-up val_num']) !!}
-                    {!! Form::hidden('tienda_id', $idTienda, ['id' => 'tienda_id_new', 'class' => 'form-group-validate-up val_num']) !!}
+                    {!! Form::hidden('empresa_id_up', $idEmpresa, ['id' => 'empresa_id_up', 'class' => 'form-group-validate-up val_num']) !!}
+                    {!! Form::hidden('tienda_id_up', $idTienda, ['id' => 'tienda_id_up', 'class' => 'form-group-validate-up val_num']) !!}
 
 
                     <div class="row col-md-6">
@@ -173,7 +173,7 @@
                 </div>
                 <div class="modal-footer">
                     <button id="cancel" type="button" class="btn btn-default btn-sm btn-sm-radius" data-dismiss="modal">Cancelar</button>
-                    <button id="store-update-product" type="button" class="btn btn-primary btn-sm btn-sm-radius btn-shadow-blue">Actualizar</button>
+                    <button id="btn-update-product" type="button" class="btn btn-primary btn-sm btn-sm-radius btn-shadow-blue">Actualizar</button>
                 </div>
             </div>
         </div>
