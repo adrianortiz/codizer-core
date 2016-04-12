@@ -257,6 +257,7 @@ function productCreateUpdate(result) {
                         );
 
                         $('#core-img-principal-up').attr('src', '/media/photo-product/' + result.product.img);
+
                         $('#nombre-up').val(result.product.nombre);
                         $('#codigo_producto-up').val(result.product.codigo_producto);
                         $('#cantidad_disponible-up').val(result.product.cantidad_disponible);
@@ -271,6 +272,13 @@ function productCreateUpdate(result) {
                             console.log(index);
                             $('#'+item.categoria_id).attr('checked','checked');
                         });
+
+                        if(result.imgsProduct != null){
+                            $('#core-img-2-up').attr('src', '/media/photo-product/' + result.imgsProduct[1].img);
+                            $('#core-img-3-up').attr('src', '/media/photo-product/' + result.imgsProduct[2].img);
+                            $('#core-img-4-up').attr('src', '/media/photo-product/' + result.imgsProduct[3].img);
+
+                        }
 
                     }
 
