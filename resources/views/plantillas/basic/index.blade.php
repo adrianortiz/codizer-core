@@ -2,6 +2,14 @@
 
 @section('cotent')
 
+    @if (session('status'))
+
+        <div class="alert alert-success alert-dismissible fade in" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+            <strong>¡Gracias!</strong> {{ session('status') }}
+        </div>
+
+    @endif
+
     <section class="slider">
         <article>
             <div class="message">

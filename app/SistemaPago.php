@@ -8,6 +8,6 @@ class SistemaPago extends Model
 {
     protected $table = 'sistema_pago';
     protected $primaryKey = 'id';
-    protected $fillable = ['nombre'];
+    protected $fillable = ['card'];
     public $timestamps = false;
 }

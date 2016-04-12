@@ -77,13 +77,27 @@
                         </tr>
                 </tbody>
             </table>
-                <br/>
-            <a href="{{ route('store.front.product.orden.detail', [$tienda->store_route]) }}" class="btn btn-sm btn-border-yellow">Iniciar pago</a>
 
             @endif
 
         </article>
     </section>
+
+    @if( !(count($cart) === 0))
+    <section class="form-basic-section">
+        <article>
+            <div class="row col-sm-12" style="text-align: center">
+                {!! Form::open(['route' => ['store.front.product.orden.detail', $tienda->store_route], 'method' => 'GET', 'id' => 'form-products-to-show']) !!}
+                    <label class="radio-inline"><input type="radio" name="pago" value="1" checked><img src="{{ asset('/media/icon/card-icon.png') }}"></label>
+                    <label class="radio-inline"><input type="radio" name="pago" value="2"><img src="{{ asset('/media/icon/paypal-icon.png') }}"></label>
+                    <br/>
+                    <br/>
+                    <button type="submit" class="btn btn-sm btn-border-yellow">Iniciar pago</button>
+                {!! Form::close() !!}
+            </div>
+    </article>
+    </section>
+    @endif
 
 @endsection
 
