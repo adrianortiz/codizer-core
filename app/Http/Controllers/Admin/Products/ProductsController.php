@@ -178,6 +178,9 @@ class ProductsController extends Controller
             $productCategories = Core::getCategoriasByIdProduct($product->product_id);
 
             $url = URL::to('/') . '/media/photo-product/';
+            //'//localhost:8000/tienda/' + result.tiendaGetName.store_route + '/producto/' + result.product.product_id + '/' + result.product.slug
+            $urlVerEnStore =
+                URL::to('/').'/tienda/'.$tiendaGetName->store_route.'/producto/'.$product->product_id.'/'.$product->slug;
 
             return response()->json([
                 'product'           => $product,
@@ -185,6 +188,7 @@ class ProductsController extends Controller
                 'finalPrice'        => $finalPrice,
                 'productCategories' => $productCategories,
                 'url'               => $url,
+                'urlVerEnStore'     => $urlVerEnStore,
                 'tiendaGetName'     => $tiendaGetName
             ]);
         }
@@ -232,13 +236,15 @@ return response()->json([
     abort(404);
 }*/
     public function update(Request $request)
+
     {
+
         if ($request->ajax()) {
 
             DB::beginTransaction();
             try {
 
-                $producto =Producto::findOrFail($request['id']);
+                $producto =Producto::findOrFail($request->id);
                 $producto->fill($request->all());
                 $producto->users_id = \Auth::user()->id;
                 $producto->slug = Str::slug($request['nombre']);
@@ -249,39 +255,39 @@ return response()->json([
                     $filePhotoProduct = $request->file('img')[$i];
 
                     // Validate if object selected has data
-                    if ($filePhotoProduct != null) {
+                    if ($request->file('img')[$i]) {
 
                         $namePhotoProduct = 'product-' . \Auth::user()->id . Carbon::now()->second . $filePhotoProduct->getClientOriginalName();
                         \Storage::disk('photo_product')->put($namePhotoProduct, \File::get($filePhotoProduct));
 
-                        $photoProducto =ImgProduct::findOrFail([
-                            'img' => $namePhotoProduct,
-                            'producto_id' => $producto->id,
-                            'principal' => $i == 0 ? '1' : '0'
-                        ]);
+                        $photoProducto =ImgProduct::findOrFail($request->id[$i]);
+                        $photoProducto->img = $namePhotoProduct;
+                        $photoProducto->producto_id = $producto->id;
+                        $photoProducto->principal = $i == 0 ? '1' : '0';
+
                         $photoProducto->save();
                     }
 
                 }
 
-                $empresa_has_producto = EmpresaHasProducto::findOrFail([
-                    'empresa_id' => $request['empresa_id'],
-                    'producto_id' => $producto->id
-                ]);
+                $empresa_has_producto = EmpresaHasProducto::findOrFail($request->id);
+                $empresa_has_producto->empresa_id = $request['empresa_id'];
+                $empresa_has_producto->producto_id = $producto->id;
+
                 $empresa_has_producto->save();
 
-                $tienda_has_producto = TiendaHasProducto::findOrFail([
-                    'tienda_id' => $request['tienda_id'],
-                    'producto_id' => $producto->id
-                ]);
+                $tienda_has_producto = TiendaHasProducto::findOrFail($request->id);
+                $tienda_has_producto->tienda_id = $request['tienda_id'];
+                $tienda_has_producto->producto_id = $producto->id;
+
                 $tienda_has_producto->save();
 
                 // Save one or more categories
                 foreach ($request['categoria'] as $categoria) {
-                    $producto_has_categoria = ProductoHasCategoria::findOrFail([
-                        'categoria_id' => $categoria,
-                        'producto_id' => $producto->id
-                    ]);
+                    $producto_has_categoria = ProductoHasCategoria::findOrFail($request->id);
+                    $producto_has_categoria->categoria_id = $categoria;
+                    $producto_has_categoria->producto_id = $producto->id;
+
                     $producto_has_categoria->save();
                 }
 
