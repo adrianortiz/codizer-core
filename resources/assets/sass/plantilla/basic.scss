@@ -17,6 +17,13 @@
 @import "../librerias/normalize";
 @import "../librerias/ed-grid/ed-grid";
 
+.line-bottom {
+  border-bottom: solid 2px $gris-250;
+  margin-bottom: 20px;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
 ul {
   padding-left: 5px;
 
@@ -226,6 +233,23 @@ nav {
 
     h3 {
       text-transform: uppercase;
+    }
+  }
+}
+
+.form-basic-section {
+  width: 100%;
+  text-align: center;
+  article {
+    width: 900px;
+    height: auto;
+    margin: 0 auto;
+    padding: 0 auto;
+    display: inline-block;
+    text-align: left;
+
+    input {
+      width: 90% !important;
     }
   }
 }

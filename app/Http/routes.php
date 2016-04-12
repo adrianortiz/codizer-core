@@ -113,6 +113,7 @@ Route::put('tienda/product/orden/update', [
     'as'    => 'store.front.product.orden.update'
 ]);
 
+// delete a item
 Route::delete('tienda/product/orden/delete', [
     'uses'  => 'Admin\Cart\CartController@delete',
     'as'    => 'store.front.product.orden.delete'
@@ -160,6 +161,15 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('payment/status', [
         'uses'  => 'PaypalController@getPaymentStatus',
         'as'    => 'payment.status'
+    ]);
+
+
+    /**
+     * PAY CARD
+     */
+    Route::post('payment/card/{tiendaRoute}', [
+        'uses'   => 'Admin\Orden\OrdenController@postPaymentCard',
+        'as'    => 'payment.card'
     ]);
 
 

@@ -120,7 +120,7 @@ function fillModalProduct(result)
                     data:       data,
 
                     beforeSend: function(){
-                        $('.core-loader').show();
+                        // $('.core-loader').show();
                     },
 
                     success: function (result) {
@@ -130,7 +130,7 @@ function fillModalProduct(result)
                         else
                             alert(result.message);
 
-                        $('.core-loader').hide();
+                        $('.close').click();
 
                     }
 

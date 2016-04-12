@@ -11,17 +11,23 @@ use App\ContactAddress;
 use App\ContactMail;
 use App\ContactPhone;
 use App\ContactSocial;
+use App\DireccionFactura;
 use App\Empresa;
+use App\OrdenDetalle;
 use App\Perfil;
 use App\Contacto;
+use App\Producto;
 use App\ProductoHasCategoria;
 use App\Tienda;
 use App\User;
 use App\UserHasPerfil;
 use App\UsuarioEmpleadoInfo;
 use App\Venta;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 
 class Core
 {
@@ -558,34 +564,66 @@ class Core
             ->first();
     }
 
-    public function saveVenta($storeRoute) {
+    /**
+     * Almacena una venta
+     *
+     * @param Request $request
+     * @param $storeRoute
+     */
+    public function saveVenta(Request $request, $storeRoute) {
         $subtotal = 0;
-        $cart = \Session::get($storeRoute);
+        $cart = Session::get($storeRoute);
         $shipping = 0;
 
         foreach( $cart as $item ) {
             $subtotal += $item->final_price * $item->quantity;
         }
 
-        $venta = new Venta([
-            'coden_code'        => 'asdasdda',
-            'sistema_pago_id'   => 1,
-            'users_id'          => \Auth::user()->id,
-            'contact_address_id'=> 1,
-            'empresa_id'        => 1,
-            'tienda_id'         => 1,
-            'estado'            => "pagado"
-        ]);
+        $direccionFactura = new DireccionFactura();
+        $direccionFactura->fill($request->all());
+        $direccionFactura->save();
 
+        $venta = new Venta([
+            'coden_code'        => Carbon::createFromTimestamp(0)->diffInSeconds(),
+            'sistema_pago_id'   => $request['card'],
+            'users_id'          => \Auth::user()->id,
+            'direccion_factura_id'=> $direccionFactura->id,
+            'empresa_id'        => $request['idEmpresa'],
+            'tienda_id'         => $request['idTienda'],
+            'estado'            => "Pagado"
+        ]);
         $venta->save();
 
         foreach( $cart as $item) {
             $this->saveOrdenDetalle($venta->id, $item);
         }
 
+        Session::forget($storeRoute);
     }
 
+    /**
+     * Almacena una orden
+     *
+     * @param $ventaId
+     * @param $item
+     */
     protected function saveOrdenDetalle($ventaId, $item) {
+
+        // Se decrementa la cantidad del producto sobre la cantidad que se pidio
+        Producto::where('id', $item->producto_id)->decrement('cantidad_disponible', $item->quantity);
+
+        $ordenDetalle = new OrdenDetalle([
+            'ventas_id'             => $ventaId,
+            'producto_id'           => $item->producto_id,
+            'producto_nombre'       => $item->nombre,
+            'producto_precio_base'  => $item->precio,
+            'producto_precio_final' => Core::getFinalPriceByProduct($item->precio, $item->tipo_oferta, $item->regla_porciento),
+            'producto_precio_final_por_cantidad' => $item->quantity * Core::getFinalPriceByProduct($item->precio, $item->tipo_oferta, $item->regla_porciento),
+            'cantidad'              => $item->quantity,
+            'regla_porciento_orden' => $item->regla_porciento,
+            'tipo_oferta_orden'     => $item->tipo_oferta
+        ]);
+        $ordenDetalle->save();
 
     }
 

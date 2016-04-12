@@ -147,4 +147,21 @@ class OrdenController extends Controller
     {
         //
     }
+
+    public function postPaymentCard(Request $request, $tiendaRoute) {
+
+        DB::beginTransaction();
+        try {
+
+            Core::saveVenta($request, $tiendaRoute);
+
+            DB::commit();
+            return redirect()->route('store.front', [$tiendaRoute])->with('status', 'Tu compra se ha realizado!');
+
+        } catch (\Exception $e ) {
+            DB::rollback();
+            return redirect()->route('store.front', [$tiendaRoute])->with('status', 'Lo sentimos. Pero ocurrio un error.');
+
+        }
+    }
 }

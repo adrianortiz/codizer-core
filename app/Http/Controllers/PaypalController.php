@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 // APIS DE PAYPAL
+use Illuminate\Support\Facades\Session;
 use PayPal\Rest\ApiContext;
 use PayPal\Auth\OAuthTokenCredential;
 use PayPal\Api\Amount;
@@ -32,6 +33,13 @@ class PaypalController extends Controller
         $paypal_conf = \Config::get('paypal');
         $this->_api_context = new ApiContext(new OAuthTokenCredential($paypal_conf['client_id'], $paypal_conf['secret']));
         $this->_api_context->setConfig($paypal_conf['settings']);
+
+        // Mis variables de sesión
+        if(!Session::has('myRoute'))
+            Session::put('myRoute', array());
+
+        if(!Session::has('myRequest'))
+            Session::put('myRequest', array());
     }
 
     /**
@@ -40,8 +48,18 @@ class PaypalController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function postPayment($tiendaRoute)
+    public function postPayment(Request $request, $tiendaRoute)
     {
+
+        $myRoute = Session::get('myRoute');
+        $myRoute['myRoute'] = $tiendaRoute;
+        Session::put('myRoute', $myRoute);
+
+        $myRequest = Session::get('myRequest');
+        $myRequest['myRequest'] = $request;
+        Session::put('myRequest', $myRequest);
+
+
         $payer = new Payer();
         $payer->setPaymentMethod('paypal');
         $items = array();
@@ -164,10 +182,26 @@ class PaypalController extends Controller
         //echo '<pre>';print_r($result);echo '</pre>';exit; // DEBUG RESULT, remove it later
         if ($result->getState() == 'approved') { // payment made
 
-            // LOGICA PARA ALMACENAR LOS DATOS DEL PEDIDO EN LA BD
+            DB::beginTransaction();
+            try {
 
-            return \Redirect::route('home')
-                ->with('message', 'Compra realizada de forma correcta');
+                $myRoute = Session::get('myRoute');
+                $myRequest = Session::get('myRequest');
+
+                Core::saveVenta($myRequest['myRequest'], $myRoute['myRoute']);
+                $tiendaRoute = $myRoute['myRoute'];
+
+                Session::forget('myRoute');
+                Session::forget('myRequest');
+
+                DB::commit();
+                return redirect()->route('store.front', [$tiendaRoute])->with('status', 'Tu compra se ha realizado!');
+
+            } catch (\Exception $e ) {
+                DB::rollback();
+                return redirect()->route('store.front', [$tiendaRoute])->with('status', 'Lo sentimos. Pero ocurrio un error.');
+
+            }
         }
 
         return \Redirect::route('home')

@@ -162,11 +162,13 @@ class CartController extends Controller
 
 
 
-    public function orderDetail($tiendaRoute)
+    public function orderDetail(Request $request, $tiendaRoute)
     {
         if(count(Session::get($tiendaRoute)) <= 0 ) {
             abort(404);
         }
+
+        $pago = $request['pago'];
 
         $cart = Session::get($tiendaRoute);
         // dd($cart);
@@ -186,7 +188,7 @@ class CartController extends Controller
         } else {
 
             if ($tienda->store_route_platilla == 'basic') {
-                return view('plantillas.basic.order-detail', compact('tienda', 'userContacto', 'userPerfil', 'cart', 'total'));
+                return view('plantillas.basic.order-detail', compact('tienda', 'userContacto', 'userPerfil', 'cart', 'total', 'pago'));
             }
 
         }

@@ -1,4 +1,4 @@
-input, select, textarea {
+input[type=text], input[type=number], select, textarea {
   width: 115px !important;
   height: 36px !important;
   background-color: transparent !important;
@@ -9,4 +9,14 @@ input, select, textarea {
 
 input:focus, select:focus, textarea:focus {
   border: solid 2px $amarillo-300 !important;
+}
+
+input[type=submit] {
+  padding:5px 60px;
+  background:#ccc;
+  border:0 none;
+  cursor:pointer;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  border: solid 2px;
 }
