@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class InformationController extends Controller
 {
@@ -34,9 +35,10 @@ class InformationController extends Controller
         $contactoPhone = Core::getContactPhone($contacto[0]->id);
         $contactoMail = Core::getContactMail($contacto[0]->id);
         $contactoSocial = Core::getContactSocial($contacto[0]->id);
+        $user = User::findOrFail(\Auth::user()->id);
 
         return view('admin.information.information',
-            compact('perfil', 'contacto', 'userPerfil', 'userContacto', 'contacts', 'friends', 'followers', 'contactoInfo', 'contactoAddress', 'contactoPhone', 'contactoMail', 'contactoSocial'));
+            compact('perfil', 'contacto', 'userPerfil', 'userContacto', 'contacts', 'friends', 'followers', 'contactoInfo', 'contactoAddress', 'contactoPhone', 'contactoMail', 'contactoSocial', 'user'));
     }
 
 

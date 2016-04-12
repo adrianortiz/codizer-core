@@ -31,7 +31,6 @@ class EditUserRequest extends Request
     public function rules()
     {
         return [
-            'name' => 'required|max:255',
             'email' => 'required|max:255|unique:users,email,'.$this->route->getParameter('id'),
             'password' => 'confirmed|min:6',
         ];

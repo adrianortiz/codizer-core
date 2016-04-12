@@ -229,6 +229,7 @@ $('#foto-ud').change(function (e) {
 (function($){
 
     var App = { init: function() {
+        App.UpdateUser();
         App.UpdateContact();
         App.UpdateAddress();
         App.UpdatePhone();
@@ -381,6 +382,61 @@ $('#foto-ud').change(function (e) {
                 });
             });
 
+        },
+
+        /**
+         * Actualizar usuario
+         * @constructor
+         */
+        UpdateUser: function()
+        {
+            $('#btn-update-user').click( function()
+            {
+                var form = $('#form-user-to-update');
+                var route = form.attr('action');
+                var datos = form.serializeArray();
+
+                $.ajax({
+                    url:        route,
+                    type:       'POST',
+                    dataType:   'json',
+                    data:       datos,
+
+                    success: function( result )
+                    {
+
+                        if (result.error) {
+                            hideShowAlert('msj-danger', result.error);
+                        } else {
+                            hideShowAlert('msj-success', result.message);
+                        }
+                    }
+
+                }).fail(function( jqXHR, textStatus ) {
+                    $('#msj-danger-state').empty();
+                    var message = "";
+
+                    if(jqXHR.responseJSON.password && jqXHR.responseJSON.email){
+                        var i = 0;
+                        for(i; i < jqXHR.responseJSON.email.length; i++){
+                            message = jqXHR.responseJSON.email[i] + '<br>';
+                        }
+                        for(i; i < jqXHR.responseJSON.password.length; i++){
+                            message += jqXHR.responseJSON.password[i] + '<br>';
+                        }
+                        hideShowAlert('msj-danger', 'Ocurrio un problema.<br>' + message);
+
+                    } else if(jqXHR.responseJSON.password){
+                        for(var i = 0; i < jqXHR.responseJSON.password.length; i++){
+                            message += jqXHR.responseJSON.password[i] + '<br>';
+                        }
+                        hideShowAlert('msj-danger', 'Ocurrio un problema.<br>' + message);
+                    } else {
+                        hideShowAlert('msj-danger', 'Ocurrio un problema.<br>' + jqXHR.responseJSON.email);
+                    }
+
+                });
+            });
         },
 
         UpdateAddress: function()

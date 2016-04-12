@@ -266,10 +266,16 @@ Route::group(['middleware' => 'auth'], function () {
         ]);
 
 
-        /*
-         * ======= Notes ======
-         * List notes
-         */
+        Route::post('perfil/{nameFirstName}/contacts/updateUser', [
+            'uses' => 'AdminController@update',
+            'as' => 'user.update'
+        ]);
+
+
+    /*
+     * ======= Notes ======
+     * List notes
+     */
         Route::get('perfil/{nameFirstName}/notes', [
             'uses'  => 'Admin\Notes\NotesController@index',
             'as'    => 'notes'
@@ -551,11 +557,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('admin/{id}/editar', [
         'uses' => 'AdminController@edit',
         'as' => 'admin.edit'
-    ]);
-
-    Route::put('admin/{id}/update', [
-        'uses' => 'AdminController@update',
-        'as' => 'admin.update'
     ]);
 
 

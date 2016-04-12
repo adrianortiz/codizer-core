@@ -24,6 +24,7 @@
     <div class="core-tags-container">
 
             <ul class="nav nav-tabs" data-tabs="tabs">
+                @if( $userPerfil[0]->perfil_route == $perfil[0]->perfil_route )
                 <li class="active">
                     <a href="#user-info-general" data-toggle="tab">
                         <div class="companies-icon"></div>
@@ -35,6 +36,10 @@
                 </li>
                 <li>
                     <a href="#info" data-toggle="tab">
+                @else
+                <li class="active">
+                    <a href="#info" data-toggle="tab">
+                @endif
                         <div class="companies-icon"></div>
                         <div class="companies-desc">
                             <div class="companies-title">Información</div>
@@ -88,6 +93,7 @@
 
     <div class="tab-content">
 
+        @if( $userPerfil[0]->perfil_route == $perfil[0]->perfil_route )
         <div class="form-group tab-pane active" id="user-info-general">
             <div class="container-show-info-contact-a">
                 <div id="show-info-contact-empresa" class="core-show-sub-title">Información</div>
@@ -95,15 +101,34 @@
             </div>
 
             <div class="container-list-something">
-                @for($i = 0; $i <= 10; $i++)
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis iaculis, ante non molestie sagittis, felis turpis vulputate dui, et laoreet quam felis ut odio. Quisque ullamcorper consectetur dolor. Phasellus interdum consequat tortor quis egestas. Curabitur mattis urna a iaculis volutpat. Duis facilisis lorem vel viverra ultricies. Morbi semper venenatis neque, eget rhoncus enim. Morbi in malesuada sem.</p>
-                @endfor
+
+                <div id="form-edit-user">
+                    {!! Form::model($user, ['route' => ['user.update', $user], 'method' => 'POST', 'id' => 'form-user-to-update']) !!}
+                    {!! Form::hidden('id', $user->id, ['id' => 'user-id']) !!}
+
+                        <label for="email">@lang('validation.attributes.email')</label>
+                        {!! Form::email('email', old('email'), ['id' => 'email', 'class' => 'form-control']) !!}
+
+                        <label for="password">@lang('validation.attributes.password')</label>
+                        {!! Form::password('password', ['id' => 'password', 'class' => 'form-control']) !!}
+
+                        <label for="password_confirmation">@lang('validation.attributes.password_confirmation')</label>
+                        {!! Form::password('password_confirmation', ['id' => 'password_confirmation', 'class' => 'form-control']) !!}
+
+                    {!! Form::close() !!}
+                    <div class="container-list-something" id="show-info-contact-desc">
+                        <button id="btn-update-user" type="button" class="btn btn-primary btn-sm btn-sm-radius btn-shadow-blue right">Actualizar</button>
+                    </div>
+                </div>
             </div>
 
         </div>
 
 
         <div class="form-group tab-pane" id="info">
+        @else
+        <div class="form-group tab-pane active" id="info">
+        @endif
             <div class="container-show-info-contact-a">
                 <div id="show-info-contact-empresa" class="core-show-sub-title">Información</div>
                 <div id="show-info-contact-nombre-completo" class="core-show-title-blue">General</div>

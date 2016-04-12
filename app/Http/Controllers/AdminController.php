@@ -7,7 +7,7 @@ use App\User;
 use App\UserHasPerfil;
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 
 class AdminController extends Controller
@@ -82,15 +82,32 @@ class AdminController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
-    public function update(Requests\EditUserRequest $request, $id)
+    public function update(Requests\EditUserRequest $request)
     {
-        $user = User::findOrFail($id);
-        $user->fill($request->all());
-        $user->save();
-        return redirect('admin');
+        if ($request->ajax()) {
+            DB::beginTransaction();
+            try {
+                $user = User::findOrFail($request->id);
+                $user->fill($request->all());
+                $user->save();
+
+                DB::commit();
+                return response()->json([
+                    'message' => "Cuenta actualizada.",
+                    'user' => $user->email
+                ]);
+
+            } catch (\Exception $e) {
+                DB::rollback();
+
+                return response()->json([
+                    'error' => 'Ocurrio un error.',
+                    'case' => $e
+                ]);
+            }
+        }
+        abort(404);
     }
 
     /**
