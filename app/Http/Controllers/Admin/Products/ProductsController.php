@@ -210,9 +210,103 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+/*
+if ($request->ajax()) {
+
+$note = Note::findOrFail($request['id']);
+$note->fill($request->all());
+
+$msg = "";
+if( $note->save() )
+$msg = "Nota actualizada";
+else
+$msg = "Ocurrio un error";
+
+$note->content = substr($note->content, 0, 41).'...';
+
+return response()->json([
+'message' => $msg,
+'note'    => $note
+]);
+} else {
+    abort(404);
+}*/
     public function update(Request $request, $id)
     {
-        //
+        if ($request->ajax()) {
+
+            DB::beginTransaction();
+            try {
+
+                $producto =Producto::findOrFail($request['id']);
+                $producto->fill($request->all());
+                $producto->users_id = \Auth::user()->id;
+                $producto->slug = Str::slug($request['nombre']);
+                $producto->save();
+
+                for ($i = 0; $i < count($request->file('img')); $i++) {
+
+                    $filePhotoProduct = $request->file('img')[$i];
+
+                    // Validate if object selected has data
+                    if ($filePhotoProduct != null) {
+
+                        $namePhotoProduct = 'product-' . \Auth::user()->id . Carbon::now()->second . $filePhotoProduct->getClientOriginalName();
+                        \Storage::disk('photo_product')->put($namePhotoProduct, \File::get($filePhotoProduct));
+
+                        $photoProducto = new ImgProduct([
+                            'img' => $namePhotoProduct,
+                            'producto_id' => $producto->id,
+                            'principal' => $i == 0 ? '1' : '0'
+                        ]);
+                        $photoProducto->save();
+                    }
+
+                }
+
+                $empresa_has_producto = new EmpresaHasProducto([
+                    'empresa_id' => $request['empresa_id'],
+                    'producto_id' => $producto->id
+                ]);
+                $empresa_has_producto->save();
+
+                $tienda_has_producto = new TiendaHasProducto([
+                    'tienda_id' => $request['tienda_id'],
+                    'producto_id' => $producto->id
+                ]);
+                $tienda_has_producto->save();
+
+                // Save one or more categories
+                foreach ($request['categoria'] as $categoria) {
+                    $producto_has_categoria = new ProductoHasCategoria([
+                        'categoria_id' => $categoria,
+                        'producto_id' => $producto->id
+                    ]);
+                    $producto_has_categoria->save();
+                }
+
+
+                $fullProduct = Core::getProductoById($request['tienda_id'], $producto->id);
+                $fullProduct->img = URL::to('/') . '/media/photo-product/' . $fullProduct->img;
+
+                DB::commit();
+                return response()->json([
+                    'message' => 'Producto Actualizado.',
+                    'producto' => $fullProduct
+                ]);
+
+            } catch (\Exception $e) {
+                DB::rollback();
+
+                return response()->json([
+                    'error' => 'Ocurrio un error.',
+                    'case'  => $e
+                ]);
+            }
+        }
+
+
+        abort(404);
     }
 
     /**

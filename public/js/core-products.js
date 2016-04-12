@@ -47,7 +47,7 @@ function productCreateUpdate(result) {
         '<img src="' + result.producto.img + '"></td>' +
         '<td>' +
         '<div class="list-product-title">' + result.producto.nombre + ' ' + '</div>' +
-        '<span class="list-product-tags">' + result.producto.tipo_oferta + result.producto.regla_porciento + '%' + '</span>' + '<br/>' +
+        '<span class="list-product-tags">'+'Oferta:' + result.producto.tipo_oferta + result.producto.regla_porciento + '%' + '</span>' + '<br/>' +
         '<div class="list-product-pz">' + result.producto.cantidad_disponible + 'pz' + '</div>' +
         '<div class="list-product-price">' + '$' + result.producto.precio + '</div>' +
         '</td>' +
