@@ -231,7 +231,7 @@ return response()->json([
 } else {
     abort(404);
 }*/
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         if ($request->ajax()) {
 
@@ -254,7 +254,7 @@ return response()->json([
                         $namePhotoProduct = 'product-' . \Auth::user()->id . Carbon::now()->second . $filePhotoProduct->getClientOriginalName();
                         \Storage::disk('photo_product')->put($namePhotoProduct, \File::get($filePhotoProduct));
 
-                        $photoProducto = new ImgProduct([
+                        $photoProducto =ImgProduct::findOrFail([
                             'img' => $namePhotoProduct,
                             'producto_id' => $producto->id,
                             'principal' => $i == 0 ? '1' : '0'
@@ -264,13 +264,13 @@ return response()->json([
 
                 }
 
-                $empresa_has_producto = new EmpresaHasProducto([
+                $empresa_has_producto = EmpresaHasProducto::findOrFail([
                     'empresa_id' => $request['empresa_id'],
                     'producto_id' => $producto->id
                 ]);
                 $empresa_has_producto->save();
 
-                $tienda_has_producto = new TiendaHasProducto([
+                $tienda_has_producto = TiendaHasProducto::findOrFail([
                     'tienda_id' => $request['tienda_id'],
                     'producto_id' => $producto->id
                 ]);
@@ -278,7 +278,7 @@ return response()->json([
 
                 // Save one or more categories
                 foreach ($request['categoria'] as $categoria) {
-                    $producto_has_categoria = new ProductoHasCategoria([
+                    $producto_has_categoria = ProductoHasCategoria::findOrFail([
                         'categoria_id' => $categoria,
                         'producto_id' => $producto->id
                     ]);

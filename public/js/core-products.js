@@ -294,15 +294,22 @@ function productCreateUpdate(result) {
          */
         UpdateProduct: function () {
             $('#btn-edit-product').click(function () {
-                if (validateGroup(".form-group-validate-update") == -1)
+
+                // Agregar irformación del sourceCode del editor al textarea de desc
+                $('textarea#desc_producto').val(tinymce.get('desc_producto-up').getContent());
+
+                if (validateGroup('.form-group-validate') == -1) {
                     initUpdateProduct();
+                }
             });
 
             function initUpdateProduct() {
                 var form = $('#form-products-store-update');
+                var datos = form.serializeArray();
                 var route = form.attr('action');
 
                 $.ajax({
+
                     url: route,
                     type: 'POST',
                     dataType: 'json',
@@ -317,16 +324,24 @@ function productCreateUpdate(result) {
                     },
 
                     success: function (result) {
-                        $('.core-loader').hide();
-                        $('.close').click();
-                        document.getElementById("form-products-store-update").reset();
+                        // console.log(result);
 
-                        tableTrTouched.hide();
+                        $('.core-loader').hide();
+
+                        if (result.error) {
+                            console.log(result);
+                            hideShowAlert('msj-danger', result.error);
+                        } else {
+                            hideShowAlert('msj-success', result.message);
+                            $('#msg-list-vacio').hide();
+                            containerProducts.prepend(productCreateUpdate(result));
+                            $('#cancel').click();
+
+                        }
                     }
 
                 }).fail(function (jqXHR, textStatus) {
                     $('.core-loader').hide();
-
                     $('#msj-danger-state').empty();
 
                     $(jqXHR).each(function (key, error) {
@@ -335,7 +350,6 @@ function productCreateUpdate(result) {
 
                 });
             }
-
         },
 
 
