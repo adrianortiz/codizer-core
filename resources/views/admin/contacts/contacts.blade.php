@@ -44,7 +44,6 @@
                     <button type="button" id="btn-new-contact" class="btn btn-default btn-sm">Nuevo contacto</button> <!-- data-toggle="modal" data-target="#modalNewContact" -->
                 </div>
                 <div id="btns-group-to-contact" class="btn-group right core-hidden" role="group" aria-label="...">
-                    <button type="button" id="btn-edit-contact" class="btn btn-default btn-sm">Editar</button>
                     <button type="button" id="btn-delete-contact" class="btn btn-default btn-sm">Eliminar Contacto</button>
                 </div>
 
@@ -83,12 +82,14 @@
 
             <div class="container-show-info-contact-img-b">
                 <img id="show-info-contact-foto" src="{{ asset('/media/photo-perfil/unknow.png') }}">
-                <a id="show-perfil-contact-link" href="#" class="btn btn-sm-radius btn-shadow-blue">Ver perfil</a>
+                <a id="show-perfil-contact-link" href="#" target="_top" class="btn btn-sm-radius btn-shadow-blue">Enviar Correo</a>
 
                 <!-- USA UN FOR PARA IMPRIMIR LAS REDES SOCIALES QUE TIENE CADA CONTACTO -->
-                <a id="UsaElIDQueMasTeGuste" href="#" class="btn btn-social-radius btn-shadow-white"><i class="fa fa-facebook"></i></a>
-                <a id="UsaElIDQueMasTeGuste" href="#" class="btn btn-social-radius btn-shadow-white"><i class="fa fa-linkedin"></i></a>
-                <a id="UsaElIDQueMasTeGuste" href="#" class="btn btn-social-radius btn-shadow-white"><i class="fa fa-twitter"></i></a>
+               <div id="social-nets">
+                <a id="fb" href="#" target="_blank" class="btn btn-social-radius btn-shadow-white"><i class="fa fa-facebook"></i></a>
+                <a id="in" href="#" class="btn btn-social-radius btn-shadow-white"><i class="fa fa-linkedin"></i></a>
+                <a id="tw" href="#" class="btn btn-social-radius btn-shadow-white"><i class="fa fa-twitter"></i></a>
+               </div>
             </div>
 
             <div class="container-show-info-contact-list-c">
@@ -117,6 +118,12 @@
                    <div>Descripción</div>
                    <div  class="show-info-contact" id="show-contact-desc-info"></div>
                </div>
+
+                <div class="col-md-12" id="show-info-contact-desc">
+                    <div class="form-group" id="group-edit-address">
+                        <button type="button" id="btn-edit-contact" class="btn btn-primary btn-sm btn-sm-radius btn-shadow-blue right">Editar Información</button>
+                    </div>
+                </div>
             </div>
 
             <div id="core-info-contact-address">

@@ -26,7 +26,7 @@
                 {!! Form::select('sexo', ['Masculino' => 'Masculino', 'Femenino' => 'Femenino'], null, ['id' => 'sexo-ud', 'class' => 'form-control']) !!}
 
                 <label for="f_nacimiento">Fecha de nacimiento</label>
-                <div class="show-info-contact">{!! Form::date('f_nacimiento', old('f_nacimiento'), ['id' => 'f_nacimiento-ud', 'class' => 'form-control']) !!}</div>
+                <div class="show-info-contact">{!! Form::date('f_nacimiento', old('f_nacimiento'), ['id' => 'f_nacimiento-ud', 'class' => 'form-control', 'min' => \Carbon\Carbon::createFromDate(null, 1, 1)->subYear(80)->toDateString(), 'max' => \Carbon\Carbon::createFromDate(null, 12, 31)->subYear(18)->toDateString()]) !!}</div>
 
                 <label for="profesion">Profesión</label>
                 <div class="show-info-contact">{!! Form::text('profesion', old('profesion'), ['id' => 'profesion-ud', 'class' => 'form-control']) !!}</div>
