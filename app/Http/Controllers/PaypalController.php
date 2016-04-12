@@ -66,9 +66,9 @@ class PaypalController extends Controller
         // Agregar un costo de envio + 100
         $details = new Details();
         $details->setSubtotal($subtotal)
-            ->setShipping(100);
+            ->setShipping(0);
 
-        $total = $subtotal + 100;
+        $total = $subtotal + 0;
         $amount = new Amount();
         $amount->setCurrency($currency)
             ->setTotal($total)

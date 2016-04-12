@@ -445,6 +445,21 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 
+    /**
+     * ========= PRODUCTOS - administración  ========
+     */
+
+    Route::get('admin/{nameFirstName}/products', [
+        'uses'  => 'Admin\Products\ProductsAdminController@index',
+        'as'    => 'product.admin.index'
+    ]);
+
+    Route::get('admin/products/by/store', [
+        'uses'  => 'Admin\Products\ProductsAdminController@showByStore',
+        'as'    => 'product.admin.by.store'
+    ]);
+
+
         /**
          * ========= EXTRAS - Categorias, Ofertas y Fabricantes ========
          */

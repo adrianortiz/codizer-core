@@ -510,6 +510,21 @@ class Core
             ->first();
     }
 
+
+    public function getProductosByTiendaId( $idTienda )
+    {
+        return DB::table('tienda')
+            ->join('tienda_has_producto', 'tienda.id', '=', 'tienda_has_producto.tienda_id')
+            ->join('producto', 'producto.id', '=', 'tienda_has_producto.producto_id')
+            ->join('oferta', 'producto.oferta_id', '=', 'oferta.id')
+            ->join('fabricante', 'producto.fabricante_id', '=', 'fabricante.id')
+            ->join('img_producto', 'producto.id', '=', 'img_producto.producto_id')
+            ->where('tienda_has_producto.tienda_id', $idTienda)
+            ->where('img_producto.principal', '1')
+            ->select('producto.*', 'oferta.*', 'img_producto.*', 'fabricante.nombre AS nombre_fabricante', 'producto.id AS product_id')
+            ->get();
+    }
+
     /**
      * Obtener el precio final de un producto, aplicando su porcentaje de descuento
      * o acumulación del mismo.
@@ -546,7 +561,7 @@ class Core
     public function saveVenta($storeRoute) {
         $subtotal = 0;
         $cart = \Session::get($storeRoute);
-        $shipping = 100;
+        $shipping = 0;
 
         foreach( $cart as $item ) {
             $subtotal += $item->final_price * $item->quantity;

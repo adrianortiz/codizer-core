@@ -23,11 +23,11 @@
         </div>
     </a>
 
-    <a href="#" id="productos-tag">
+    <a href="{{ route('product.admin.index', $userPerfil[0]->perfil_route) }}" id="productos-tag">
         <div class="companies-icon"></div>
         <div class="companies-desc">
             <div class="companies-title">Productos</div>
-            <div class="companies-tittle-tag">34 Producto (s)</div>
+            <div class="companies-tittle-tag">Producto (s) Tienda</div>
         </div>
     </a>
 
