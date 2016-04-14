@@ -3,10 +3,18 @@
   span {
     opacity: 1;
     color: $blanco;
-    padding: 0px 8px;
-    border-radius: 20px;
+    border-radius: 15px;
     border: solid 2px $blanco;
-    margin-left: 10px;
+    margin-left: 4px;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    padding: 0 !important;
+    margin-top: -5px;
+
+    li {
+      color: $blanco !important;
+    }
   }
 }
 

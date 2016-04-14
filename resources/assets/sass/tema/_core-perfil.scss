@@ -204,7 +204,7 @@ Contenido del menu lateral
     height: 28px !important;
     background-color: $blanco !important;
     border-bottom: solid 0 $gris-100 !important;
-    border-radius: 100% !important;
+    border-radius: 6px !important;
     font-size: 12px;
     margin-top: 4px;
     margin-left: 5px;
@@ -217,8 +217,8 @@ Contenido del menu lateral
   button {
     margin-top: 5px;
     margin-right: 5px;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 16px;
+    padding-right: 16px;
     float: right;
     font-size: 12px;
     height: 28px;

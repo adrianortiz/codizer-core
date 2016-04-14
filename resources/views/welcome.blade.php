@@ -4,6 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 
     <title>{{ trans('welcome.title') }}</title>
 
@@ -11,6 +12,7 @@
     <link href="{{ asset('/css/welcome.slider.min.css') }}" rel="stylesheet">
     <link href="{{ asset('/css/welcome.index.min.css') }}" rel="stylesheet">
     <link href="{{ asset('/css/welcome.animate.min.css') }}" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="{{ asset('/css/font-awesome.min.css') }}">
 
 
     {{-- {!! Htlm::style('css/index.css') !!} --}}
