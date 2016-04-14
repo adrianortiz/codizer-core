@@ -112,23 +112,18 @@ input:focus, select:focus, textarea:focus {
 
 .core-checkbox {
   background-color: $gris-100;
-  // padding: 5px !important;
-  // margin: 0 10px 10px 0 !important;
   border-radius: 6px;
+  padding: 5px !important;
 
-  input {
-    //padding: 0 !important;
-    //margin: 0 !important;
-    // margin-top: -8px !important;
-    //margin-top: 2px !important;
-    //display: inline-block;
-    //margin-left: 1px !important;
+  input[type=checkbox] {
+    display: inline-block !important;
+    margin-top: 2px !important;
+    margin-left: 3px !important;
   }
 
   span {
-    display: inline-block;
-    padding: 1px;
-    // margin-left: 5px;
+    display: inline-block !important;
+    margin-left: 22px !important;
   }
 }
 
