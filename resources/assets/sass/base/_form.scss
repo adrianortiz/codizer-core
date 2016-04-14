@@ -69,7 +69,7 @@
 }
 
 // input, select, textarea {
-input[type=text], input[type=number], select, textarea {
+input[type=text], input[type=password], input[type=email], input[type=number], select, textarea {
   width: 235px !important;
   height: 36px !important;
   @include prefixer(background, transparent !important);
