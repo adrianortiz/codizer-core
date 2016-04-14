@@ -13,7 +13,7 @@
 
 <div id="container-panel-left">
     <img src="{{ asset('/images/logo-data.svg') }}" width="97" height="97">
-    <h1>Codizer data</h1>
+    <h1>Codizer Shop</h1>
 
     @yield('msn-boton')
 

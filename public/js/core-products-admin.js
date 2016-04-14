@@ -64,6 +64,10 @@ function addAllItemToList(result, url) {
                         $('#empresa_id_new').val(result.idEmpresa);
                         $('#tienda_id_new').val(result.idTienda);
 
+                        // Asignar los ID
+                        $('#empresa_id_up').val(result.idEmpresa);
+                        $('#tienda_id_up').val(result.idTienda);
+
                     }
 
                 }).fail(function (jqXHR, textStatus) {
