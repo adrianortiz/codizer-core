@@ -120,7 +120,7 @@
             <div class="container-show-info-product-list-c">
 
                 <div>
-                    <div>Codigo del producto</div>
+                    <div>Código del producto</div>
                     <div id="show-info-product-codigo" class="show-info-product"></div>
                 </div>
 
@@ -142,7 +142,7 @@
 
 
                 <div>
-                    <div>Categorias</div>
+                    <div>Categorías</div>
                     <div id="show-info-product-categorias" class="show-info-product">
                         <!-- USA UN FOR PARA IMPRIMIR LAS CATEGORIAS A LAS QUE PERTENECE UN PRODUCTO -->
                         <span class="list-product-tags"></span>
@@ -163,7 +163,7 @@
 
 
 
-        <div id="description-text-title">Descripcion del producto</div>
+        <div id="description-text-title">Descripción del producto</div>
         <div id="show-info-product-desc">
         </div>
 
