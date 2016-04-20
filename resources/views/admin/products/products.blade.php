@@ -31,7 +31,7 @@
 
         </div></a>
 
-    <a href="#" class="core-menu-list"><div>Categorias <span>{{ count($categoriasList) }}</span></div></a>
+    <a href="#" class="core-menu-list"><div>Categorías <span>{{ count($categoriasList) }}</span></div></a>
 
 
 @endsection

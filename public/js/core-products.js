@@ -7,6 +7,12 @@ var tableTrTouched = null;
 var containerProducts = $('#list-products');
 // Contenedor del lado derecho
 var continaerProductShow = $('#continaer-product-shows');
+function limpiarInputfile() {
+    var input = $('#core-file-img-principal');
+    var clon = input.clone();  // Creamos un clon del elemento original
+    input.replaceWith(clon);   // Y sustituimos el original por el clon
+}
+
 
 function fillModalProduct(result) {
     $('#show-info-product-title').text(result.product.nombre);
@@ -39,6 +45,8 @@ function productCreateUpdate(result) {
     var idEmpresa = $('#empresa_id_new').val();
     var idTienda = $('#tienda_id_new').val();
     document.getElementById("form-products-store").reset();
+    limpiarInputfile();
+
     $('#empresa_id_new').val( idEmpresa );
     $('#tienda_id_new').val( idTienda);
 
@@ -202,6 +210,7 @@ function productCreateUpdate(result) {
                             hideShowAlert('msj-success', result.message);
                             $('#msg-list-vacio').hide();
                             containerProducts.prepend(productCreateUpdate(result));
+                            limpiarInputfile();
                             $('#cancel').click();
 
                         }

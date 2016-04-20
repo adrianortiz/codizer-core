@@ -80,8 +80,8 @@
 
                         <div class="col-xs-12 col-sm-6 col-md-12">
                             <div class="form-group">
-                                {!! Form::label('codigo_producto', 'Codigo producto') !!}
-                                {!! Form::text('codigo_producto','', array('class'=> 'form-control form-with-100 form-group-validate val_text_num', 'placeholder' => 'Codigo del producto')) !!}
+                                {!! Form::label('codigo_producto', 'Código producto') !!}
+                                {!! Form::text('codigo_producto','', array('class'=> 'form-control form-with-100 form-group-validate val_text_num', 'placeholder' => 'Código del producto')) !!}
                             </div>
                         </div>
 
@@ -118,7 +118,7 @@
                         <div class="col-xs-12 col-sm-6 col-md-12">
                             <div class="form-group">
                                 {!! Form::label('estado', 'Estado del producto') !!}
-                                {!! Form::select('estado', array('1' => 'Disponible para el publico', '0' => 'No disponible para el publico'),
+                                {!! Form::select('estado', array('1' => 'Disponible para el público', '0' => 'No disponible para el público'),
                                  'Elige un estado', array('class'=> 'form-control form-with-100 form-group-validate val_num'))  !!}
                             </div>
                         </div>
