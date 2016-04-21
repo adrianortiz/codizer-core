@@ -1,5 +1,5 @@
 <div class="modal fade" id="modalNewProduct" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog"  role="document">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
 
@@ -34,28 +34,32 @@
                         </div>
 
                         <div class="col-xs-6 col-md-12">
-                            <img id="core-img-principal" src="{{ asset('/media/icon/upload-img-icon.png') }}" />
+                            <img id="core-img-principal" src="{{ asset('/media/icon/upload-img-icon.png') }}"/>
+
                             <div class="form-group">
                                 {!! Form::file('img[]', ['accept' => 'image/jpg,image/png', 'id' => 'core-file-img-principal', 'class' => 'form-control form-with-100 form-group-validate val_img', 'required']) !!}
                             </div>
                         </div>
 
                         <div class="col-xs-6 col-md-6">
-                            <img id="core-img-2" src="{{ asset('/media/icon/upload-img-icon.png') }}" />
+                            <img id="core-img-2" src="{{ asset('/media/icon/upload-img-icon.png') }}"/>
+
                             <div class="form-group">
                                 {!! Form::file('img[]', ['accept' => 'image/jpg,image/png', 'id' => 'core-file-img-2', 'class' => 'form-control form-with-100']) !!}
                             </div>
                         </div>
 
                         <div class="col-xs-6 col-md-6">
-                            <img id="core-img-3" src="{{ asset('/media/icon/upload-img-icon.png') }}" />
+                            <img id="core-img-3" src="{{ asset('/media/icon/upload-img-icon.png') }}"/>
+
                             <div class="form-group">
                                 {!! Form::file('img[]', ['accept' => 'image/jpg,image/png', 'id' => 'core-file-img-3', 'class' => 'form-control form-with-100']) !!}
                             </div>
                         </div>
 
                         <div class="col-xs-6 col-md-6">
-                            <img id="core-img-4" src="{{ asset('/media/icon/upload-img-icon.png') }}" />
+                            <img id="core-img-4" src="{{ asset('/media/icon/upload-img-icon.png') }}"/>
+
                             <div class="form-group">
                                 {!! Form::file('img[]', ['accept' => 'image/jpg,image/png', 'id' => 'core-file-img-4', 'class' => 'form-control form-with-100']) !!}
                             </div>
@@ -124,7 +128,6 @@
                         </div>
 
 
-
                     </div>
 
 
@@ -171,8 +174,12 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button id="cancel" type="button" class="btn btn-default btn-sm btn-sm-radius" data-dismiss="modal">Cancelar</button>
-                    <button id="store-new-product" type="button" class="btn btn-primary btn-sm btn-sm-radius btn-shadow-blue">Guardar</button>
+                    <button id="cancel" type="button" class="btn btn-default btn-sm btn-sm-radius" data-dismiss="modal">
+                        Cancelar
+                    </button>
+                    <button id="store-new-product" type="button"
+                            class="btn btn-primary btn-sm btn-sm-radius btn-shadow-blue">Guardar
+                    </button>
                 </div>
             </div>
         </div>

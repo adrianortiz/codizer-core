@@ -8,9 +8,10 @@ var containerProducts = $('#list-products');
 // Contenedor del lado derecho
 var continaerProductShow = $('#continaer-product-shows');
 function limpiarInputfile() {
-    var input = $('#core-file-img-principal');
-    var clon = input.clone();  // Creamos un clon del elemento original
-    input.replaceWith(clon);   // Y sustituimos el original por el clon
+    $('#core-img-principal').attr('src','/media/icon/upload-img-icon.png');
+    $('#core-img-2').attr('src','/media/icon/upload-img-icon.png');
+    $('#core-img-3').attr('src','/media/icon/upload-img-icon.png');
+    $('#core-img-4').attr('src','/media/icon/upload-img-icon.png');
 }
 
 

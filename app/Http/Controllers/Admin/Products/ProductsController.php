@@ -42,25 +42,23 @@ class ProductsController extends Controller
 
 
         // Obtener todos los fabricantes de la empresa N
-        $fabricantesList  = Core::getFabricantesByIdEmpresa( $idEmpresa );
-        $ofertasList    =   Core::getOfertasByIdEmpresa($idEmpresa);
-        $categoriasList =   Core::getCategoriasByIdEmpresa($idEmpresa);
-        $products  = Core::getAllProductosByIdTienda($idTienda);
+        $fabricantesList = Core::getFabricantesByIdEmpresa($idEmpresa);
+        $ofertasList = Core::getOfertasByIdEmpresa($idEmpresa);
+        $categoriasList = Core::getCategoriasByIdEmpresa($idEmpresa);
+        $products = Core::getAllProductosByIdTienda($idTienda);
         $empresa = Core::getEmpresaById($idEmpresa);
-        $tienda=Core::getTiendaById($idTienda);
-
-
+        $tienda = Core::getTiendaById($idTienda);
 
 
         // Nos aseguramos de que la ruta sea la del usuario logueado
-        if ( $nameFirstName != $userPerfil[0]->perfil_route)
+        if ($nameFirstName != $userPerfil[0]->perfil_route)
             return \Redirect::route('events', $userPerfil[0]->perfil_route);
 
         Core::isRouteValid($userPerfil[0]->perfil_route);
 
         return view('admin.products.products',
-            compact('tienda','empresa','products', 'perfil', 'contacto', 'userPerfil', 'userContacto','fabricantesList',
-                'ofertasList','categoriasList', 'idEmpresa', 'idTienda'));
+            compact('tienda', 'empresa', 'products', 'perfil', 'contacto', 'userPerfil', 'userContacto', 'fabricantesList',
+                'ofertasList', 'categoriasList', 'idEmpresa', 'idTienda'));
     }
 
     /**
@@ -76,10 +74,10 @@ class ProductsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request )
+    public function store(Request $request)
     {
 
         if ($request->ajax()) {
@@ -149,7 +147,7 @@ class ProductsController extends Controller
 
                 return response()->json([
                     'error' => 'Ocurrio un error.',
-                    'case'  => $e
+                    'case' => $e
                 ]);
             }
         }
@@ -161,18 +159,18 @@ class ProductsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show(Request $request)
     {
-        if ($request->ajax() ) {
+        if ($request->ajax()) {
 
             $tiendaHasProduct = TiendaHasProducto::where('producto_id', $request['id'])->first();
             $tienda = Tienda::findOrFail($tiendaHasProduct->tienda_id);
             $tiendaGetName = Core::getTiendaById($tiendaHasProduct->tienda_id);
 
-            $product = Core::getProductoById( $tienda->id, $request['id'] );
+            $product = Core::getProductoById($tienda->id, $request['id']);
             $imgsProduct = ImgProduct::where('producto_id', $request['id'])->get();
             $finalPrice = Core::getFinalPriceByProduct($product->precio, $product->tipo_oferta, $product->regla_porciento);
             $productCategories = Core::getCategoriasByIdProduct($product->product_id);
@@ -180,16 +178,16 @@ class ProductsController extends Controller
             $url = URL::to('/') . '/media/photo-product/';
             //'//localhost:8000/tienda/' + result.tiendaGetName.store_route + '/producto/' + result.product.product_id + '/' + result.product.slug
             $urlVerEnStore =
-                URL::to('/').'/tienda/'.$tiendaGetName->store_route.'/producto/'.$product->product_id.'/'.$product->slug;
+                URL::to('/') . '/tienda/' . $tiendaGetName->store_route . '/producto/' . $product->product_id . '/' . $product->slug;
 
             return response()->json([
-                'product'           => $product,
-                'imgsProduct'       => $imgsProduct,
-                'finalPrice'        => $finalPrice,
+                'product' => $product,
+                'imgsProduct' => $imgsProduct,
+                'finalPrice' => $finalPrice,
                 'productCategories' => $productCategories,
-                'url'               => $url,
-                'urlVerEnStore'     => $urlVerEnStore,
-                'tiendaGetName'     => $tiendaGetName
+                'url' => $url,
+                'urlVerEnStore' => $urlVerEnStore,
+                'tiendaGetName' => $tiendaGetName
             ]);
         }
 
@@ -199,7 +197,7 @@ class ProductsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -210,32 +208,33 @@ class ProductsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-/*
-if ($request->ajax()) {
+    /*
+    if ($request->ajax()) {
 
-$note = Note::findOrFail($request['id']);
-$note->fill($request->all());
+    $note = Note::findOrFail($request['id']);
+    $note->fill($request->all());
 
-$msg = "";
-if( $note->save() )
-$msg = "Nota actualizada";
-else
-$msg = "Ocurrio un error";
+    $msg = "";
+    if( $note->save() )
+    $msg = "Nota actualizada";
+    else
+    $msg = "Ocurrio un error";
 
-$note->content = substr($note->content, 0, 41).'...';
+    $note->content = substr($note->content, 0, 41).'...';
 
-return response()->json([
-'message' => $msg,
-'note'    => $note
-]);
-} else {
-    abort(404);
-}*/
-    public function update(Request $request){
+    return response()->json([
+    'message' => $msg,
+    'note'    => $note
+    ]);
+    } else {
+        abort(404);
+    }*/
+    public function update(Request $request)
+    {
 
         dd($request->all());
         if ($request->ajax()) {
@@ -247,7 +246,6 @@ return response()->json([
                 $producto->users_id = \Auth::user()->id;
                 $producto->slug = Str::slug($request['nombre']);
                 $producto->save();
-
 
 
                 for ($i = 0; $i < count($request->photo_id); $i++) {
@@ -304,7 +302,7 @@ return response()->json([
 
                 return response()->json([
                     'error' => 'Ocurrio un error.',
-                    'case'  => $e
+                    'case' => $e
                 ]);
             }
         }
@@ -314,7 +312,7 @@ return response()->json([
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
