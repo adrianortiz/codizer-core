@@ -5,6 +5,11 @@ namespace App;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Dvarchar
+ *
+ * @mixin \Eloquent
+ */
 class Dvarchar extends Model
 {
     /**

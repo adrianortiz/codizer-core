@@ -4,6 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\ContactAddress
+ *
+ * @mixin \Eloquent
+ */
 class ContactAddress extends Model
 {
     protected $table = 'contact_address';

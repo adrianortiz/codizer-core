@@ -4,6 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\ImgProduct
+ *
+ * @mixin \Eloquent
+ */
 class ImgProduct extends Model
 {
     protected $table = 'img_producto';

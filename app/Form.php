@@ -4,6 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Form
+ *
+ * @property-read mixed $title
+ * @property-read mixed $title_and_desc
+ * @mixin \Eloquent
+ */
 class Form extends Model
 {
     /**

@@ -4,6 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\UserHasFollowerUser
+ *
+ * @mixin \Eloquent
+ */
 class UserHasFollowerUser extends Model
 {
     protected $table = 'users_has_follower_users';

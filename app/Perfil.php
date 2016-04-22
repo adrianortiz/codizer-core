@@ -4,6 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Perfil
+ *
+ * @mixin \Eloquent
+ */
 class Perfil extends Model
 {
     protected $table = 'perfil';

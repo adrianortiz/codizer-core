@@ -4,6 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Input
+ *
+ * @mixin \Eloquent
+ */
 class Input extends Model
 {
     /**

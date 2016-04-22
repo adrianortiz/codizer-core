@@ -15,7 +15,7 @@ h1 {
   float:left;
   @include box-sizing(border-box);
   @include transition(.3s ease);
-  
+
 
   &:hover {
     background-color: $gris-200;

@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.1.33 (LTS) on 2016-04-11.
+ * Generated for Laravel 5.1.34 (LTS) on 2016-04-22.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -13434,6 +13434,15 @@ namespace {
         }
         
         /**
+         * 
+         *
+         * @static 
+         */
+        public static function getProductosByTiendaId($idTienda){
+            return \App\Components\Core::getProductosByTiendaId($idTienda);
+        }
+        
+        /**
          * Obtener el precio final de un producto, aplicando su porcentaje de descuento
          * o acumulación del mismo.
          *
@@ -13466,12 +13475,14 @@ namespace {
         }
         
         /**
-         * 
+         * Almacena una venta
          *
+         * @param \App\Components\Request $request
+         * @param $storeRoute
          * @static 
          */
-        public static function saveVenta(){
-            return \App\Components\Core::saveVenta();
+        public static function saveVenta($request, $storeRoute){
+            return \App\Components\Core::saveVenta($request, $storeRoute);
         }
         
     }

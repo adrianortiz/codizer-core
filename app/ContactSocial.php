@@ -4,6 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\ContactSocial
+ *
+ * @mixin \Eloquent
+ */
 class ContactSocial extends Model
 {
     protected $table = 'contact_social';

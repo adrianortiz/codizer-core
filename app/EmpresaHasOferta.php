@@ -4,6 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\EmpresaHasOferta
+ *
+ * @mixin \Eloquent
+ */
 class EmpresaHasOferta extends Model
 {
     protected $table = 'empresa_has_oferta';

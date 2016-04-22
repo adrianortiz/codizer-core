@@ -6,28 +6,27 @@
  */
 
 namespace App\Components;
-
-use App\ContactAddress;
-use App\ContactMail;
-use App\ContactPhone;
-use App\ContactSocial;
-use App\DireccionFactura;
-use App\Empresa;
-use App\OrdenDetalle;
-use App\Perfil;
-use App\Contacto;
-use App\Producto;
-use App\ProductoHasCategoria;
-use App\Tienda;
 use App\User;
-use App\UserHasPerfil;
-use App\UsuarioEmpleadoInfo;
 use App\Venta;
+use App\Tienda;
+use App\Perfil;
+use App\Empresa;
+use App\Producto;
+use App\Contacto;
+use App\ContactMail;
+use App\OrdenDetalle;
+use App\ContactPhone;
+use App\UserHasPerfil;
+use App\ContactSocial;
+use App\ContactAddress;
+use App\DireccionFactura;
+use App\UsuarioEmpleadoInfo;
+use App\ProductoHasCategoria;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Redirect;
 
 class Core
 {
@@ -626,5 +625,4 @@ class Core
         $ordenDetalle->save();
 
     }
-
 }

@@ -10,6 +10,14 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
+/**
+ * App\User
+ *
+ * @property-read \App\Form $collectionsForm
+ * @property-write mixed $password
+ * @property-read \App\Empresa $empresaId
+ * @mixin \Eloquent
+ */
 class User extends Model implements AuthenticatableContract,
                                     AuthorizableContract,
                                     CanResetPasswordContract
