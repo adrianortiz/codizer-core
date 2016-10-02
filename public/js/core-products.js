@@ -39,7 +39,7 @@ function fillModalProduct(result) {
 }
 
 
-// Retorna la fila de una notra creada o actulizada
+// Retorna la fila de un producto creado o actulizada
 function productCreateUpdate(result) {
     console.log(result.product);
 
@@ -274,7 +274,7 @@ function productCreateUpdate(result) {
                            result.urlVerEnStore
                        );
 
-                        $('#core-img-principal-up').attr('src', '/media/photo-product/' + result.product.img);
+                        $('#core-img-principal-up').attr('src', result.url + result.product.img);
                         $('#photo_id_up-1').val(result.imgsProduct[0].id);
                         $('#producto_id_up').val(result.product.id);
                         $('#nombre-up').val(result.product.nombre);
@@ -291,17 +291,18 @@ function productCreateUpdate(result) {
                             console.log(index);
                             $('#'+item.categoria_id).attr('checked','checked');
                         });
-                            $('#photo_id_up-2').val(result.imgsProduct[1].id);
-                            $('#photo_id_up-3').val(result.imgsProduct[2].id);
-                            $('#photo_id_up-4').val(result.imgsProduct[3].id);
 
-                        if(result.imgsProduct != null){
-                            $('#core-img-2-up').attr('src', '/media/photo-product/' + result.imgsProduct[1].img);
-                            $('#core-img-3-up').attr('src', '/media/photo-product/' + result.imgsProduct[2].img);
-                            $('#core-img-4-up').attr('src', '/media/photo-product/' + result.imgsProduct[3].img);
 
-                        }
+                        var controlImg = 2;
 
+                        $.each(result.imgsProduct, function(index, imgItem) {
+                            console.log(index);
+                            if (index > 0 ) {
+                                $('#photo_id_up-' + controlImg).val(result.imgsProduct[index].id);
+                                $('#core-img-'+controlImg+'-up').attr('src', result.url + result.imgsProduct[index].img);
+                                controlImg = controlImg + 1;
+                            }
+                        });
                     }
 
                 }).fail(function (jqXHR, textStatus) {

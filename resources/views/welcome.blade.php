@@ -63,7 +63,7 @@
 <div class="slider-img">
     <div id="slider-mac-codizer">
         <div id="mac-icon">
-            <video src="{{ asset('/media/slider/demo.mp4') }}" poster="{{ asset('/media/slider/cover2.png') }}" loop controls> {{-- controls --}}
+            <video src="{{ asset('/media/slider/view.mp4') }}" poster="{{ asset('/media/slider/cover2.png') }}" loop controls> {{-- controls --}}
                 Tu navegador no implementa el elemento <code>video</code>.
             </video>
         </div>

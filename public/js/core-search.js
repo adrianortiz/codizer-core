@@ -77,8 +77,9 @@
                         tableStoresSuggestions.empty();
 
                         // Add users
-                            $($users).each(function(key, value) {
-                            tablaUserSuggestions.append('<div class="suggestion"> <a href="/perfil/' + value.perfil_route + '"> <img src="' + result.urlImgUser + value.foto +'" /> <div> <h4>' + value.nombre + ' ' + value.ap_paterno + ' ' + value.ap_materno + '</h4> <h5>' + value.profesion + '</h5> </div> </a> <a href="/perfil/' + value.perfil_route + '" class="btn-suggestions-go">Ver</a> </div>');
+                        $($users).each(function(key, value) {
+                            var urlUser = result.url + '/perfil/' + value.perfil_route;
+                            tablaUserSuggestions.append('<div class="suggestion"> <a href="' + urlUser + '"> <img src="' + result.urlImgUser + value.foto +'" /> <div> <h4>' + value.nombre + ' ' + value.ap_paterno + ' ' + value.ap_materno + '</h4> <h5>' + value.profesion + '</h5> </div> </a> <a href="' + urlUser + '" class="btn-suggestions-go">Ver</a> </div>');
                         });
 
                         if (txtSearch.val() == "" || $users.length == 0)
@@ -86,7 +87,8 @@
 
                         // Add items
                         $($items).each( function(key, value) {
-                            tableItemsSuggestions.append('<div class="suggestion"><a href="' + result.url + '/tienda/' + value.store_route + '/producto/'+ value.producto_id +'/'+ value.slug +'/" target="_blank"><img src="'+ result.urlImgItem + value.img +'" /><div><h4>' + value.product_name + '</h4><h5>'+ value.nombre +' - <span>$'+ value.precio + ' ' + value.tipo_oferta + ' ' + value.regla_porciento + '%</span></h5></div></a><a href="#" class="btn-suggestions-go">Ver</a></div>');
+                            var urlItem = result.url + '/tienda/' + value.store_route + '/producto/'+ value.producto_id +'/'+ value.slug;
+                            tableItemsSuggestions.append('<div class="suggestion"><a href="' + urlItem +'" target="_blank"><img src="'+ result.urlImgItem + value.img +'" /><div><h4>' + value.product_name + '</h4><h5>'+ value.nombre +' - <span>$'+ value.precio + ' ' + value.tipo_oferta + ' ' + value.regla_porciento + '%</span></h5></div></a><a href="' + urlItem + '" target="_blank" class="btn-suggestions-go">Ver</a></div>');
                         });
 
                         if (txtSearch.val() == "" || $items.length == 0)
@@ -94,7 +96,8 @@
 
                         // Add stores
                         $($stores).each( function(key, value) {
-                            tableStoresSuggestions.append('<div class="suggestion"> <a href="' + result.url + '/tienda/' + value.store_route +'/" target="_blank"> <img src="' + result.urlImgStore + value.foto + '" /> <div> <h4>' + value.nombre + '</h4> <h5>Official Store</h5> </div> </a> <a href="#" class="btn-suggestions-go">Ver</a> </div>');
+                            var urlStore = result.url + '/tienda/' + value.store_route;
+                            tableStoresSuggestions.append('<div class="suggestion"> <a href="' + urlStore +'" target="_blank"> <img src="' + result.urlImgStore + value.foto + '" /> <div> <h4>' + value.nombre + '</h4> <h5>Official Store</h5> </div> </a> <a href="' + urlStore + '" target="_blank" class="btn-suggestions-go">Ver</a> </div>');
                         });
 
                         if (txtSearch.val() == "" || $stores.length == 0)
