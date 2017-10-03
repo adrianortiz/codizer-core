@@ -24,27 +24,28 @@ Actualmente Codizer Core no esta terminado y posiblemente presente anomalias en 
 
 ### ¿Cómo instalar?
 
-   * Descargar proyecto dentro de un directorio especifico
+   * Descargar el proyecto dentro de un directorio especifico
    * Entrar al directorio del proyecto desde el Explorador de Archivos/Finder
 
         - Copiar archivo **.env.example** y renombrar a **.env**
-        - Crear una Base de Datos en MySQL
-        - Agregar la configuración de la conexión de la BD al archivo **.env**
+        - Crear una Base de Datos en MySQL (**core**)
+        - Añadir la configuración de la conexión de la BD al archivo **.env**
 
     
    * Entrar al directorio del proyecto desde Consola/Terminal
-        - Instalar dependencias `composer install`
-        - Generar clave del proyecto  `php artisan key:generate `
-        - Crear tablas con registros en la BD con el comando  `php artisan migrate --seed `
+   
+        - Instalar dependencias: `composer install`
+        - Generar clave del proyecto:  `php artisan key:generate`
+        - Cargar Script/Base de Datos: [`DB.sql - /database/BD.sql`](https://github.com/adrianortiz/codizer-core/blob/master/database/DB.sql)
     
    * Iniciar proyecto
 
 
-### Vistanos en
+### Visitanos en
 [Codizer Dev](http://codizer.com)
 
 
-## Imagenes
+## Imagenes del proyecto
 ![Codizer Core Social Network](http://codizer.com/git-hub-img/codizer-core-01.png)
 
 ![Codizer Core Store](http://codizer.com/git-hub-img/codizer-core-02.png)
