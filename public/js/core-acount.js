@@ -408,6 +408,7 @@ $('#foto-ud').change(function (e) {
                         if (result.error) {
                             hideShowAlert('msj-danger', result.error);
                         } else {
+                            form[0].reset();
                             hideShowAlert('msj-success', result.message);
                         }
                     }
