@@ -127,15 +127,15 @@ class AuthController extends Controller
     }
 
 
-    /**
-     * Get the path to the login route.
-     *
-     * @return string
-     */
-    public function loginPath()
-    {
-        return route('login');
-    }
+//    /**
+//     * Get the path to the login route.
+//     *
+//     * @return string
+//     */
+//    public function loginPath()
+//    {
+//        return route('login');
+//    }
 
 
     /**
