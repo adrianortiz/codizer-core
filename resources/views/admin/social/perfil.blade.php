@@ -62,7 +62,8 @@
             <!-- Comprobar que el perfil pertenece al usuario logueado -->
             <div id="form-cover-perfil-store">
                 <!-- FORMULARIO CAMBIAR COVER -->
-                {!! Form::open(['route' => 'cover.store', 'method' => 'POST', 'files' => true, 'id' => 'form-cover-to-store', 'class' => 'form-inline']) !!}
+                <!-- Todo: Agregar parametros correspondientes -->
+                {!! Form::open(['route' => ['cover.store', 'name'], 'method' => 'POST', 'files' => true, 'id' => 'form-cover-to-store', 'class' => 'form-inline']) !!}
                     {!! Form::hidden('id', $userPerfil[0]->id) !!}
                     <div class="upload-cover">
                         {!! Form::file('file', ['id' => 'btn-file-cover-store', 'class' => 'form-control', 'required', 'accept' => 'image/jpg,image/png']) !!}
@@ -125,7 +126,8 @@
 
             <div id="form-posts-add">
                 <div class="form-group">
-                    {!! Form::open(['route' => ['admin.colecciones.form.data.store'], 'method' => 'GET', 'id'=>'save-data']) !!}
+                    <!-- Todo: Agregar parametros correspondientes -->
+                    {!! Form::open(['route' => ['admin.colecciones.form.data.store', 'id'], 'method' => 'GET', 'id'=>'save-data']) !!}
                     <label for="estado">Publicar Estado</label>
                     <textarea id="estado" class="form-control" rows="3" placeholder="¡Escribe algo genial!"></textarea>
                     <div id="box-create-post">
