@@ -43,7 +43,7 @@ Actualmente Codizer Core no esta terminado y posiblemente presente anomalias en 
 
 
 ## Imagenes del proyecto
-![Codizer Core Social Network](https://github.com/adrianortiz/codizer-core/blob/main/public/media/git-hub-img/codizer-core-01.png)
+![Codizer Core Social Network](https://github.com/adrianortiz/codizer-core/blob/master/public/media/git-hub-img/codizer-core-00.png)
 
 ![Codizer Core Account](http://codizer.com/git-hub-img/codizer-core-00.png)
 
