@@ -43,9 +43,9 @@ Actualmente Codizer Core no esta terminado y posiblemente presente anomalias en 
 
 
 ## Imagenes del proyecto
-![Codizer Core Social Network](https://github.com/adrianortiz/codizer-core/blob/master/public/media/git-hub-img/codizer-core-00.png)
+![Codizer Core Social Network](https://github.com/adrianortiz/codizer-core/blob/master/public/media/git-hub-img/codizer-core-01.png)
 
-![Codizer Core Account](http://codizer.com/git-hub-img/codizer-core-00.png)
+![Codizer Core Account](https://github.com/adrianortiz/codizer-core/blob/master/public/media/git-hub-img/codizer-core-00.png)
 
 ![Codizer Core Store](http://codizer.com/git-hub-img/codizer-core-02.png)
 
@@ -57,11 +57,11 @@ Actualmente Codizer Core no esta terminado y posiblemente presente anomalias en 
 
 ![Codizer Core Item](http://codizer.com/git-hub-img/codizer-core-06.png)
 
-![Codizer Core Contact](http://codizer.com/git-hub-img/codizer-core-07.png)
+![Codizer Core Contact](https://github.com/adrianortiz/codizer-core/blob/master/public/media/git-hub-img/codizer-core-07.png)
 
-![Codizer Core global search](http://codizer.com/git-hub-img/codizer-core-08.png)
+![Codizer Core global search](https://github.com/adrianortiz/codizer-core/blob/master/public/media/git-hub-img/codizer-core-08.png)
 
-![Codizer Core App](http://codizer.com/git-hub-img/codizer-core-09.png)
+![Codizer Core App](https://github.com/adrianortiz/codizer-core/blob/master/public/media/git-hub-img/codizer-core-09.png)
 
 
 
