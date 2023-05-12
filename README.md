@@ -41,12 +41,11 @@ Actualmente Codizer Core no esta terminado y posiblemente presente anomalias en 
    * Iniciar proyecto
 
 
-### Visitanos en
-[Codizer Dev](http://codizer.com)
-
 
 ## Imagenes del proyecto
-![Codizer Core Social Network](http://codizer.com/git-hub-img/codizer-core-01.png)
+![Codizer Core Social Network](https://github.com/adrianortiz/codizer-core/public/media/git-hub-img/codizer-core-01.png)
+
+![Codizer Core Account](http://codizer.com/git-hub-img/codizer-core-00.png)
 
 ![Codizer Core Store](http://codizer.com/git-hub-img/codizer-core-02.png)
 
